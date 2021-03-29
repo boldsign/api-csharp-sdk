@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30428.66
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoldSign.Examples", "BoldSign.Examples.csproj", "{784E6782-202A-45B2-B80D-EB5B39388B2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoldSign", "..\src\BoldSign\BoldSign.csproj", "{B1281DA9-823E-4863-93ED-12A8BEA426F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{784E6782-202A-45B2-B80D-EB5B39388B2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784E6782-202A-45B2-B80D-EB5B39388B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784E6782-202A-45B2-B80D-EB5B39388B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784E6782-202A-45B2-B80D-EB5B39388B2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1281DA9-823E-4863-93ED-12A8BEA426F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1281DA9-823E-4863-93ED-12A8BEA426F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1281DA9-823E-4863-93ED-12A8BEA426F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1281DA9-823E-4863-93ED-12A8BEA426F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99B4AFA0-2349-4F58-9033-63273C252421}
+	EndGlobalSection
+EndGlobal
