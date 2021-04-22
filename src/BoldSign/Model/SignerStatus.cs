@@ -15,7 +15,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Defines SignerStatus
+    ///     Defines SignerStatus.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SignerStatus

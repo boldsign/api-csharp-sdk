@@ -10,15 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\BoldSign\BoldSign.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="doc-1.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="doc-2.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\src\BoldSign\BoldSign.csproj" />
   </ItemGroup>
 </Project>

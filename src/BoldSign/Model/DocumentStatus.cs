@@ -15,7 +15,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Defines DocumentStatus
+    ///     Defines DocumentStatus as completed, declined, draft, expired, in progress or revoked.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum DocumentStatus

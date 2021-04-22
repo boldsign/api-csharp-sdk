@@ -15,7 +15,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Represents FieldType.
+    ///     Represents FieldType in the document.
     /// </summary>
     /// <value>Represents FieldType.</value>
     [JsonConverter(typeof(StringEnumConverter))]
@@ -54,25 +54,13 @@ namespace BoldSign.Model
         /// <summary>
         ///     Enum DatePicker for value: DatePicker
         /// </summary>
-        [EnumMember(Value = "DatePicker")]
-        DatePicker = 6,
+        [EnumMember(Value = "DateSigned")]
+        DateSigned = 6,
 
         /// <summary>
         ///     Enum RadioButton for value: RadioButton
         /// </summary>
         [EnumMember(Value = "RadioButton")]
         RadioButton = 7,
-
-        /// <summary>
-        ///     Enum RadioButton for value: Name
-        /// </summary>
-        [EnumMember(Value = "Name")]
-        Name = 8,
-
-        /// <summary>
-        ///     Enum RadioButton for value: Name
-        /// </summary>
-        [EnumMember(Value = "Email")]
-        Email = 9,
     }
 }

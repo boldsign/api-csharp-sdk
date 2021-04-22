@@ -24,7 +24,7 @@ namespace BoldSign.Model
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// The document form fields.
+    /// The document form fields properties include, font, font color, font size and so on.
     /// </summary>
     [DataContract]
     public partial class DocumentFormFields
@@ -61,7 +61,7 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        /// Gets or sets the id.
+        /// Gets or sets the Id.
         /// </summary>
         /// <value>Gets or sets the id.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
@@ -89,7 +89,7 @@ namespace BoldSign.Model
         public string Value { get; set; }
 
         /// <summary>
-        /// Gets or sets the element type.
+        /// Gets or sets the Font type among the three available types courier, helvetica, times new roman.
         /// </summary>
         /// <value>Gets or sets the element type.</value>
         [DataMember(Name = "font", EmitDefaultValue = false)]
@@ -103,7 +103,7 @@ namespace BoldSign.Model
         public bool? IsRequired { get; set; }
 
         /// <summary>
-        /// Gets or sets the line height.
+        /// Gets or sets the line height for the content in form fields such as text box.
         /// </summary>
         /// <value>Gets or sets the line height.</value>
         [DataMember(Name = "lineHeight", EmitDefaultValue = false)]
@@ -145,7 +145,7 @@ namespace BoldSign.Model
         public bool? IsBold { get; set; }
 
         /// <summary>
-        ///     Gets or sets the name.
+        ///     Gets or sets the group name of a radio field.
         /// </summary>
         /// <value>Gets or sets the name.</value>
         [DataMember(Name = "groupName", EmitDefaultValue = true)]

@@ -63,7 +63,7 @@ namespace BoldSign.Model
         public int Order { get; set; }
 
         /// <summary>
-        ///     Gets or Sets signer justification for reassign.
+        ///     Gets or Sets signer justification message for reassign.
         /// </summary>
         /// <value>Gets or Sets signer justification for reassign.</value>
         [DataMember(Name = "message", EmitDefaultValue = true)]

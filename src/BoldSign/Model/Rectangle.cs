@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The rectangle.
+    ///     The rectangle properties are height, width, and so on.
     /// </summary>
     [DataContract]
     public class Rectangle
@@ -88,14 +88,14 @@ namespace BoldSign.Model
         public float Y { get; set; }
 
         /// <summary>
-        ///     Gets or sets the width.
+        ///     Gets or sets the width of rectangle.
         /// </summary>
         /// <value>Gets or sets the width.</value>
         [DataMember(Name = "width", EmitDefaultValue = false)]
         public float Width { get; set; }
 
         /// <summary>
-        ///     Gets or sets the height.
+        ///     Gets or sets the height of rectangle.
         /// </summary>
         /// <value>Gets or sets the height.</value>
         [DataMember(Name = "height", EmitDefaultValue = false)]

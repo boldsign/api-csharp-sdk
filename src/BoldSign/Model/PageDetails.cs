@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The page details.
+    ///     The page details properties include page size, total number pages, and so on.
     /// </summary>
     [DataContract]
     public class PageDetails

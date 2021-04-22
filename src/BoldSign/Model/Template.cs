@@ -45,7 +45,7 @@ namespace BoldSign.Model
         ///     template shared to..
         /// </param>
         /// <param name="isTemplate"> Gets or sets a value indicating whether get or Set the isTemplate. (default to false).</param>
-        public Template(string documentId = default, TemplateSenderDetails senderDetail = default, List<TemplateCC> ccDetails = default, DateTime createdDate = default, DateTime? activityDate = default, string activityBy = default, string messageTitle = default, DocumentStatus? status = default, List<TemplateSignerDetails> signerDetails = default, bool enableSigningOrder = default, string templateName = default, string templateDescription = default, TemplateAccessType? accessType = default, string accessTid = default, bool isTemplate = false)
+        public Template(string documentId = default, TemplateSenderDetails senderDetail = default, List<TemplateCC> ccDetails = default, long createdDate = default, long? activityDate = default, string activityBy = default, string messageTitle = default, DocumentStatus? status = default, List<TemplateSignerDetails> signerDetails = default, bool enableSigningOrder = default, string templateName = default, string templateDescription = default, TemplateAccessType? accessType = default, string accessTid = default, bool isTemplate = false)
         {
             this.DocumentId = documentId;
             this.CcDetails = ccDetails;
@@ -83,13 +83,13 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///      Gets or sets Status
+        ///      Gets or sets the document status.
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public DocumentStatus? Status { get; set; }
 
         /// <summary>
-        ///      Gets or sets temlate access type
+        ///     Gets or sets template access type.
         /// </summary>
         [DataMember(Name = "accessType", EmitDefaultValue = false)]
         public TemplateAccessType? AccessType { get; set; }
@@ -119,17 +119,17 @@ namespace BoldSign.Model
         /// </summary>
         /// <value> Gets or sets the createdDate.</value>
         [DataMember(Name = "createdDate", EmitDefaultValue = false)]
-        public DateTime CreatedDate { get; set; }
+        public long CreatedDate { get; set; }
 
         /// <summary>
-        ///      Gets or sets the activity date.
+        ///      Gets or sets the activity date which is the date of any particular action by user on a document.
         /// </summary>
         /// <value> Gets or sets the activityDate.</value>
         [DataMember(Name = "activityDate", EmitDefaultValue = true)]
-        public DateTime? ActivityDate { get; set; }
+        public long? ActivityDate { get; set; }
 
         /// <summary>
-        ///      Gets or sets the name of the user who performed action.
+        ///      Gets or sets the name of the user who performed an action on a document.
         /// </summary>
         /// <value> Gets or sets the activityBy.</value>
         [DataMember(Name = "activityBy", EmitDefaultValue = true)]

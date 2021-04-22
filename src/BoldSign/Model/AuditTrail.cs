@@ -19,7 +19,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     AuditTrail
+    ///     AuditTrail collects the log of all actions that has happened on a document. The properties include action, ipaddress, name and so on.
     /// </summary>
     [DataContract]
     public class AuditTrail
@@ -46,7 +46,7 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        /// Gets or sets id of the audit trail.
+        /// Gets or sets Id of the audit trail.
         /// </summary>
         /// <value>Gets or sets id of the audit trail.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
@@ -60,7 +60,7 @@ namespace BoldSign.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets the email ID of the user who acted on a document.
         /// </summary>
         /// <value>Gets or sets the username.</value>
         [DataMember(Name = "email", EmitDefaultValue = false)]
@@ -88,7 +88,7 @@ namespace BoldSign.Model
         public string Ipaddress { get; set; }
 
         /// <summary>
-        /// Gets or Sets Action
+        /// Gets or Sets Action taken on a document.
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public AuditAction Action { get; set; }

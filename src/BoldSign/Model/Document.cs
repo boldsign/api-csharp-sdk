@@ -19,7 +19,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The documents.
+    ///     The documents properties include users who acted on it, activity date, cc details, created date, and so on.
     /// </summary>
     [DataContract]
     public class Document
@@ -61,20 +61,20 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///  Gets or Sets document status
+        ///  Gets or Sets document status.
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public DocumentStatus? Status { get; set; }
 
         /// <summary>
-        ///  Gets or sets the document id.
+        ///  Gets or sets the document Id.
         /// </summary>
-        /// <value>Gets or sets the document id.</value>
+        /// <value>Gets or sets the document Id.</value>
         [DataMember(Name = "documentId", EmitDefaultValue = true)]
         public string DocumentId { get; set; }
 
         /// <summary>
-        ///  Gets or Sets sender detail
+        ///  Gets or sets sender detail of a document.
         /// </summary>
         [DataMember(Name = "senderDetail", EmitDefaultValue = false)]
         public DocumentSenderDetail SenderDetail { get; set; }
@@ -115,7 +115,7 @@ namespace BoldSign.Model
         public string MessageTitle { get; set; }
 
         /// <summary>
-        ///  Gets or sets the signer details.
+        ///  Gets or sets the signer details for a document.
         /// </summary>
         /// <value>Gets or sets the signerDetails.</value>
         [DataMember(Name = "signerDetails", EmitDefaultValue = true)]

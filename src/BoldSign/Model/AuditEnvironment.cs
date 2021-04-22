@@ -40,19 +40,19 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///     Gets or Sets Browser
+        ///     Gets or Sets Browser.
         /// </summary>
         [DataMember(Name = "browser", EmitDefaultValue = true)]
         public string Browser { get; set; }
 
         /// <summary>
-        ///     Gets or Sets Platform
+        ///     Gets or Sets Platform.
         /// </summary>
         [DataMember(Name = "platform", EmitDefaultValue = true)]
         public string Platform { get; set; }
 
         /// <summary>
-        ///     Gets or Sets Device
+        ///     Gets or Sets Device.
         /// </summary>
         [DataMember(Name = "device", EmitDefaultValue = true)]
         public string Device { get; set; }

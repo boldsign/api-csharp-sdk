@@ -110,5 +110,12 @@ namespace BoldSign.Model.Webhook
         /// <value>&lt;br&gt;Gets or sets document revoked message by the sender.  &lt;br&gt;Available only when the document is revoked.</value>
         [DataMember(Name = "revokeMessage", EmitDefaultValue = false)]
         public string RevokeMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the error message.Available only when the send document is failed.
+        /// </summary>
+        /// <value>Gets or sets the error message.Available only when the send document is failed.</value>
+        [DataMember(Name = "errorMessage", EmitDefaultValue = false)]
+        public string ErrorMessage { get; set; }
     }
 }

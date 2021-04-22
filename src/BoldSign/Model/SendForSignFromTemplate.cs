@@ -19,7 +19,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     return send for signature template details.
+    ///     Return send for signature template details in which the document is in the form of.
     /// </summary>
     [DataContract]
     public class SendForSignFromTemplate
@@ -31,7 +31,8 @@ namespace BoldSign.Model
         /// <param name="title">Gets or sets the title..</param>
         /// <param name="message">Gets or sets the message..</param>
         /// <param name="roles">Gets or sets the roles..</param>
-        public SendForSignFromTemplate(string templateId = default, string title = default, string message = default, List<Roles> roles = default)
+        /// <param name="brandId">Gets or sets the brandId..</param>
+        public SendForSignFromTemplate(string templateId = default, string title = default, string message = default, List<Roles> roles = default, string brandId = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -41,10 +42,11 @@ namespace BoldSign.Model
             this.Title = title;
             this.Message = message;
             this.Roles = roles;
+            this.BrandId = brandId;
         }
 
         /// <summary>
-        ///     Gets or sets the template id.
+        ///     Gets or sets the template Id.
         /// </summary>
         /// <value>Gets or sets the document id.</value>
         [DataMember(Name = "documentId", EmitDefaultValue = true)]
@@ -65,11 +67,17 @@ namespace BoldSign.Model
         public string Message { get; set; }
 
         /// <summary>
-        ///     Gets or sets the signer roles.
+        ///     Gets or sets the signer roles in a template of the document.
         /// </summary>
         /// <value>Gets or sets the roles.</value>
         [DataMember(Name = "roles", EmitDefaultValue = true)]
         public List<Roles> Roles { get; set; }
+
+        /// <summary>
+        /// Gets or sets the brand id.
+        /// </summary>
+        [DataMember(Name = "brandId", EmitDefaultValue = true)]
+        public string BrandId { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

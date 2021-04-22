@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+        <FileVersion>1.0.4-beta</FileVersion>
+        <ProductVersion>1.0.4-beta</ProductVersion>
+        <Copyright>Copyright 2001-2021 Syncfusion Inc</Copyright>
+        <AssemblyName>BoldSign.Api</AssemblyName>
+        <RootNamespace>BoldSign.Api</RootNamespace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+        <DocumentationFile>BoldSign.Api.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JsonSubTypes" Version="1.2.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Include="RestSharp" Version="106.11.7" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+        <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    </ItemGroup>
+</Project>

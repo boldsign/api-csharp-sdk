@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    /// The reminder settings.
+    /// The reminder settings have properties include enabling auto reminder, reminder recurring count, and so on.
     /// </summary>
     [DataContract]
     public partial class ReminderSettings
