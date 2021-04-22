@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The document cc details.
+    ///     The document cc details properties are email address, user Id.
     /// </summary>
     [DataContract]
     public class DocumentCcDetails
@@ -48,21 +48,21 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///     Gets or sets the email address.
+        ///     Gets or sets the email address of the cc recipient.
         /// </summary>
         /// <value>Gets or sets the email address.</value>
         [DataMember(Name = "emailAddress", EmitDefaultValue = true)]
         public string EmailAddress { get; set; }
 
         /// <summary>
-        ///     Gets or sets the user id.
+        ///     Gets or sets the user Id of the cc recipient.
         /// </summary>
         /// <value>Gets or sets the user id.</value>
         [DataMember(Name = "userId", EmitDefaultValue = true)]
         public string UserId { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether is viewed.
+        ///     Gets or sets a value indicating whether document is viewed by the cc recipient.
         /// </summary>
         /// <value>Gets or sets a value indicating whether is viewed.</value>
         [DataMember(Name = "isViewed", EmitDefaultValue = false)]

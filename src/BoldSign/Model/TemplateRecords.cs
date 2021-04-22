@@ -37,13 +37,13 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///  Gets or sets template page details
+        /// Gets or sets template page details for the template records page.
         /// </summary>
         [DataMember(Name = "pageDetails", EmitDefaultValue = false)]
         public PageDetails PageDetails { get; set; }
 
         /// <summary>
-        ///  Gets or sets the documents result.
+        ///  Gets or sets the documents result for all templates records.
         /// </summary>
         /// <value> Gets or sets the documents result.</value>
         [DataMember(Name = "result", EmitDefaultValue = true)]

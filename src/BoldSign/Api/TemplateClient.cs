@@ -14,13 +14,12 @@ namespace BoldSign.Api
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading.Tasks;
-    using BoldSign.Client;
+    using System.Threading.Tasks;    
     using BoldSign.Model;
     using RestSharp;
 
     /// <summary>
-    ///     Represents a collection of functions to interact with the API endpoints
+    ///    Represents a collection of functions to interact with the API endpoints. The functions perform actions such as sending document sign request from template, deleting a template, listing the templates and so on.
     /// </summary>
     public class TemplateClient : ITemplateClient
     {
@@ -38,7 +37,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TemplateClient" /> class
+        ///     Initializes a new instance of the <see cref="TemplateClient" /> class.
         /// </summary>
         /// <returns></returns>
         public TemplateClient()
@@ -50,7 +49,7 @@ namespace BoldSign.Api
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TemplateClient" /> class
-        ///     using Configuration object
+        ///     using Configuration object.
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
@@ -61,7 +60,7 @@ namespace BoldSign.Api
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TemplateApi" /> class
-        ///     using Configuration object
+        ///     using Configuration object.
         /// </summary>
         /// <param name="apiClient">An instance of ApiClient</param>
         /// <returns></returns>
@@ -81,7 +80,7 @@ namespace BoldSign.Api
         public string GetBasePath() => this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
 
         /// <summary>
-        ///     Gets or sets the configuration object
+        ///     Gets or sets the configuration object.
         /// </summary>
         /// <value>An instance of the Configuration</value>
         public Configuration Configuration { get; set; }
@@ -104,7 +103,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Deletes a template.
+        ///     Deletes a template with the given template ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
@@ -115,7 +114,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Deletes a template.
+        ///    Deletes a template with the given template ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
@@ -184,7 +183,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Deletes a template.
+        ///    Deletes a template with the given template ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
@@ -195,7 +194,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Deletes a template.
+        ///    Deletes a template with the given template ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
@@ -264,27 +263,27 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     List all the templates.
+        ///     List all the templates created.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <returns>TemplateRecords</returns>
-        public TemplateRecords ListTemplates(int page, int? pageSize = default)
+        public TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default)
         {
-            var localVarResponse = this.ListTemplatesWithHttpInfo(page, pageSize);
+            var localVarResponse = this.ListTemplatesWithHttpInfo(page, pageSize, searchKey);
 
             return localVarResponse.Data;
         }
 
         /// <summary>
-        ///     List all the templates.
+        ///     List all the templates created.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <returns>ApiResponse of TemplateRecords</returns>
-        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default)
+        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default)
         {
             // verify the required parameter 'page' is set
             if (page < 1)
@@ -324,6 +323,11 @@ namespace BoldSign.Api
             }
 
             localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "Page", page)); // query parameter
+
+            if (searchKey != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "SearchKey", searchKey)); // query parameter
+            }
 
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
@@ -353,27 +357,27 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     List all the templates.
+        ///     List all the templates created.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <returns>Task of TemplateRecords</returns>
-        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default)
+        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default)
         {
-            var localVarResponse = await this.ListTemplatesAsyncWithHttpInfo(page, pageSize);
+            var localVarResponse = await this.ListTemplatesAsyncWithHttpInfo(page, pageSize, searchKey);
 
             return localVarResponse.Data;
         }
 
         /// <summary>
-        ///     List all the templates.
+        ///     List all the templates created.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <returns>Task of ApiResponse (TemplateRecords)</returns>
-        public async Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default)
+        public async Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default)
         {
             // verify the required parameter 'page' is set
             if (page < 1)
@@ -413,6 +417,11 @@ namespace BoldSign.Api
             }
 
             localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "Page", page)); // query parameter
+
+            if (searchKey != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "SearchKey", searchKey)); // query parameter
+            }
 
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
@@ -445,7 +454,7 @@ namespace BoldSign.Api
         ///     Send a document for signature using a Template.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sendForSignFromTemplate">it contains page,page size and status details. (optional)</param>
+        /// <param name="sendForSignFromTemplate">It contains page,page size and status details. (optional)</param>
         /// <returns>DocumentCreated</returns>
         public DocumentCreated SendUsingTemplate(SendForSignFromTemplate sendForSignFromTemplate = default)
         {
@@ -458,7 +467,7 @@ namespace BoldSign.Api
         ///     Send a document for signature using a Template.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sendForSignFromTemplate">it contains page,page size and status details. (optional)</param>
+        /// <param name="sendForSignFromTemplate">It contains page,page size and status details. (optional)</param>
         /// <returns>ApiResponse of DocumentCreated</returns>
         public ApiResponse<DocumentCreated> SendUsingTemplateWithHttpInfo(SendForSignFromTemplate sendForSignFromTemplate = default)
         {
@@ -551,7 +560,7 @@ namespace BoldSign.Api
         ///     Send a document for signature using a Template.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sendForSignFromTemplate">it contains page,page size and status details. (optional)</param>
+        /// <param name="sendForSignFromTemplate">It contains page,page size and status details. (optional)</param>
         /// <returns>Task of DocumentCreated</returns>
         public async Task<DocumentCreated> SendUsingTemplateAsync(SendForSignFromTemplate sendForSignFromTemplate = default)
         {
@@ -564,7 +573,7 @@ namespace BoldSign.Api
         ///     Send a document for signature using a Template.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sendForSignFromTemplate">it contains page,page size and status details. (optional)</param>
+        /// <param name="sendForSignFromTemplate">It contains page,page size and status details. (optional)</param>
         /// <returns>Task of ApiResponse (DocumentCreated)</returns>
         public async Task<ApiResponse<DocumentCreated>> SendUsingTemplateAsyncWithHttpInfo(SendForSignFromTemplate sendForSignFromTemplate = default)
         {

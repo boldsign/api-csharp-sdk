@@ -23,7 +23,7 @@ namespace BoldSign.Model
     public class SendForSign
     {
         /// <summary>
-        ///  Gets or sets files to be uploaded.
+        ///  Gets or sets the files to be uploaded.
         /// </summary>
         [Required]
         [JsonProperty("files")]
@@ -60,10 +60,10 @@ namespace BoldSign.Model
         public bool EnableSigningOrder { get; set; }
 
         /// <summary>
-        ///  No of days after which the document will expire.
+        ///  Number of days after which the document will expire.
         /// </summary>
         [JsonProperty("expiryDays")]
-        public int? ExpiryDays { get; set; }
+        public int ExpiryDays { get; set; }
 
         /// <summary>
         /// Gets or sets the reminder settings for the signature request.
@@ -77,5 +77,11 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("enableEmbeddedSigning")]
         public bool EnableEmbeddedSigning { get; set; }
+
+        /// <summary>
+        /// Gets or sets the brand id.
+        /// </summary>
+        [JsonProperty("brandId")]
+        public string BrandId { get; set; }
     }
 }

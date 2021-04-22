@@ -15,13 +15,12 @@ namespace BoldSign.Api
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
-    using BoldSign.Client;
+    using System.Threading.Tasks;    
     using BoldSign.Model;
     using RestSharp;
 
     /// <summary>
-    ///     Represents a collection of functions to interact with the API endpoints
+    ///  Represents a collection of functions to interact with the API endpoints. The functions perform actions such as sending document to sign, getting document list, deleting a document, downloading audit log, downloading a document, changing access code of the desired signer and so on.
     /// </summary>
     public class DocumentClient : IDocumentClient
     {
@@ -39,7 +38,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DocumentClient" /> class
+        ///     Initializes a new instance of the <see cref="DocumentClient" /> class.
         /// </summary>
         /// <returns></returns>
         public DocumentClient()
@@ -51,7 +50,7 @@ namespace BoldSign.Api
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DocumentClient" /> class
-        ///     using Configuration object
+        ///     using Configuration object.
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
@@ -65,7 +64,7 @@ namespace BoldSign.Api
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DocumentApi" /> class
-        ///     using Configuration object
+        ///     using Configuration object.
         /// </summary>
         /// <param name="apiClient">An instance of ApiClient</param>
         /// <returns></returns>
@@ -85,7 +84,7 @@ namespace BoldSign.Api
         public string GetBasePath() => this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
 
         /// <summary>
-        ///     Gets or sets the configuration object
+        ///     Gets or sets the configuration object.
         /// </summary>
         /// <value>An instance of the Configuration</value>
         public Configuration Configuration { get; set; }
@@ -108,7 +107,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets the document id.</param>
@@ -125,7 +124,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///    Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets the document id.</param>
@@ -262,7 +261,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///    Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets the document id.</param>
@@ -279,7 +278,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///    Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets the document id.</param>
@@ -415,7 +414,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Delete the document.
+        ///     Delete the document when a particular document’s ID is given as input.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -426,7 +425,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Delete the document.
+        ///    Delete the document when a particular document’s ID is given as input.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -510,7 +509,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Delete the document.
+        ///     Delete the document when a particular document’s ID is given as input.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -521,7 +520,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Delete the document.
+        ///     Delete the document when a particular document’s ID is given as input.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -605,7 +604,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///    Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -618,7 +617,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///     Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -702,7 +701,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///     Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -715,7 +714,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///    Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -799,7 +798,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the document.
+        ///    Download the document for given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -812,7 +811,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the document.
+        ///    Download the document for given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -896,7 +895,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the document.
+        ///     Download the document for given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -909,7 +908,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Download the document.
+        ///     Download the document for given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -993,7 +992,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///     Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
@@ -1009,7 +1008,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///    Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
@@ -1113,7 +1112,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///    Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
@@ -1129,7 +1128,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///     Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
@@ -1233,7 +1232,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get summary of the document.
+        ///    Get summary of the document for the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1246,7 +1245,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get summary of the document.
+        ///     Get summary of the document for the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1315,7 +1314,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get summary of the document.
+        ///    Get summary of the document for the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1328,7 +1327,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Get summary of the document.
+        ///    Get summary of the document for the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1397,7 +1396,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     List user documents.
+        ///     List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
@@ -1417,7 +1416,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     List user documents.
+        ///    List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
@@ -1524,7 +1523,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     List user documents.
+        ///     List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
@@ -1544,7 +1543,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     List user documents.
+        ///    List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
@@ -1651,7 +1650,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///     Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1664,7 +1663,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1780,7 +1779,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///     Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1793,7 +1792,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///     Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1909,7 +1908,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Revoke the document.
+        ///     Revoke the document with the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -1921,7 +1920,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Revoke the document.
+        ///     Revoke the document with the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -2023,7 +2022,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Revoke the document.
+        ///     Revoke the document with the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
@@ -2035,7 +2034,7 @@ namespace BoldSign.Api
         }
 
         /// <summary>
-        ///     Revoke the document.
+        ///     Revoke the document with the given document ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>

@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The template document sender user details.
+    ///     The template document sender user details have functions that define the email address, name of user ID of the recipient.
     /// </summary>
     [DataContract]
     public class TemplateSenderDetails

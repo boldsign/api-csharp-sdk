@@ -15,26 +15,26 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Represents FieldType.
+    ///     Represents FontFamily.
     /// </summary>
     /// <value>Represents FieldType.</value>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum FontFamily
     {
         /// <summary>
-        ///     Enum Signature for value: Signature
+        ///     Enum Helvetica for value: Helvetica
         /// </summary>
         [EnumMember(Value = "Helvetica")]
         Helvetica = 1,
 
         /// <summary>
-        ///     Enum Initial for value: Initial
+        ///     Enum Courier for value: Courier
         /// </summary>
         [EnumMember(Value = "Courier")]
         Courier = 2,
 
         /// <summary>
-        ///     Enum CheckBox for value: CheckBox
+        ///     Enum TimesRoman for value: Times new roman
         /// </summary>
         [EnumMember(Value = "TimesRoman")]
         TimesRoman = 3,

@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The document sender detail.
+    ///     The document sender detail includes Email ID, name and so on.
     /// </summary>
     [DataContract]
     public class DocumentSenderDetail
@@ -65,14 +65,14 @@ namespace BoldSign.Model
         public string EmailAddress { get; set; }
 
         /// <summary>
-        ///     Gets or sets the user id.
+        ///     Gets or sets the user ID.
         /// </summary>
         /// <value>Gets or sets the user id.</value>
         [DataMember(Name = "userId", EmitDefaultValue = true)]
         public string UserId { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether is viewed.
+        ///    Gets or sets a value indicating whether document is viewed.
         /// </summary>
         /// <value>Gets or sets a value indicating whether is viewed.</value>
         [DataMember(Name = "isViewed", EmitDefaultValue = false)]

@@ -3,19 +3,18 @@ namespace BoldSign.Api
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Threading.Tasks;
-    using BoldSign.Client;
+    using System.Threading.Tasks;    
     using BoldSign.Model;
 
     /// <summary>
-    ///     Represents a collection of functions to interact with the API endpoints
+    ///  Represents a collection of functions to interact with the API endpoints. The functions perform actions such as sending document to sign, getting document list, deleting a document, downloading audit log, downloading a document, changing access code of the desired signer and so on.
     /// </summary>
     public interface IDocumentClient : IApiAccessor
     {
         #region Synchronous Operations
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -31,7 +30,7 @@ namespace BoldSign.Api
         void ChangeAccessCode(string documentId, string emailId, string newAccessCode, int? signerOrder = default);
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -47,7 +46,7 @@ namespace BoldSign.Api
         ApiResponse<object> ChangeAccessCodeWithHttpInfo(string documentId, string emailId, string newAccessCode, int? zOrder = default);
 
         /// <summary>
-        ///     Delete the document.
+        ///     Delete the document when a particular document’s ID is given as input.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -57,7 +56,7 @@ namespace BoldSign.Api
         void DeleteDocument(string documentId);
 
         /// <summary>
-        ///     Delete the document.
+        ///     Delete the document when a particular document’s ID is given as input.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -67,7 +66,7 @@ namespace BoldSign.Api
         ApiResponse<object> DeleteDocumentWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///     Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -77,7 +76,7 @@ namespace BoldSign.Api
         Stream DownloadAuditLog(string documentId);
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///     Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -87,7 +86,7 @@ namespace BoldSign.Api
         ApiResponse<Stream> DownloadAuditLogWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     Download the document.
+        ///     Download the document for given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -97,7 +96,7 @@ namespace BoldSign.Api
         Stream DownloadDocument(string documentId);
 
         /// <summary>
-        ///     Download the document.
+        ///    Download the document for given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -107,7 +106,7 @@ namespace BoldSign.Api
         ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///    Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -120,7 +119,7 @@ namespace BoldSign.Api
         EmbeddedSigningLink GetEmbeddedSignLink(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///    Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -133,7 +132,7 @@ namespace BoldSign.Api
         ApiResponse<EmbeddedSigningLink> GetEmbeddedSignLinkWithHttpInfo(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
 
         /// <summary>
-        ///     Get summary of the document.
+        ///     Get summary of the document for the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -143,7 +142,7 @@ namespace BoldSign.Api
         DocumentProperties GetProperties(string documentId);
 
         /// <summary>
-        ///     Get summary of the document.
+        ///     Get summary of the document for the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -153,7 +152,7 @@ namespace BoldSign.Api
         ApiResponse<DocumentProperties> GetPropertiesWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     List user documents.
+        ///     List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -170,7 +169,7 @@ namespace BoldSign.Api
         DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default);
 
         /// <summary>
-        ///     List user documents.
+        ///    List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -187,7 +186,7 @@ namespace BoldSign.Api
         ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default);
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -199,7 +198,7 @@ namespace BoldSign.Api
         void RemindDocument(string documentId, List<string> receiverEmails, ReminderMessage reminderMessage = default);
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///     Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -211,7 +210,7 @@ namespace BoldSign.Api
         ApiResponse<object> RemindDocumentWithHttpInfo(string documentId, List<string> receiverEmails, ReminderMessage reminderMessage = default);
 
         /// <summary>
-        ///     Revoke the document.
+        ///    Revoke the document with the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -222,7 +221,7 @@ namespace BoldSign.Api
         void RevokeDocument(string documentId, string revokeMessage);
 
         /// <summary>
-        ///     Revoke the document.
+        ///     Revoke the document with the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -255,7 +254,7 @@ namespace BoldSign.Api
         #region Asynchronous Operations
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///      Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -271,7 +270,7 @@ namespace BoldSign.Api
         Task ChangeAccessCodeAsync(string documentId, string emailId, string newAccessCode, int? signerOrder = default);
 
         /// <summary>
-        ///     Changes the access code for the given document signer.
+        ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -307,7 +306,7 @@ namespace BoldSign.Api
         Task<ApiResponse<object>> DeleteDocumentAsyncWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///    Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -317,7 +316,7 @@ namespace BoldSign.Api
         Task<Stream> DownloadAuditLogAsync(string documentId);
 
         /// <summary>
-        ///     Download the audit trail document.
+        ///     Download the audit trail document for a particular document with given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -327,7 +326,7 @@ namespace BoldSign.Api
         Task<ApiResponse<Stream>> DownloadAuditLogAsyncWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     Download the document.
+        ///    Download the document for given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -337,7 +336,7 @@ namespace BoldSign.Api
         Task<Stream> DownloadDocumentAsync(string documentId);
 
         /// <summary>
-        ///     Download the document.
+        ///     Download the document for given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -347,7 +346,7 @@ namespace BoldSign.Api
         Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///     Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -360,7 +359,7 @@ namespace BoldSign.Api
         Task<EmbeddedSigningLink> GetEmbeddedSignLinkAsync(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
 
         /// <summary>
-        ///     Get sign link for Embedded Sign.
+        ///     Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -373,7 +372,7 @@ namespace BoldSign.Api
         Task<ApiResponse<EmbeddedSigningLink>> GetEmbeddedSignLinkAsyncWithHttpInfo(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
 
         /// <summary>
-        ///     Get summary of the document.
+        ///     Get summary of the document for the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -383,7 +382,7 @@ namespace BoldSign.Api
         Task<DocumentProperties> GetPropertiesAsync(string documentId);
 
         /// <summary>
-        ///     Get summary of the document.
+        ///    Get summary of the document for the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -393,7 +392,7 @@ namespace BoldSign.Api
         Task<ApiResponse<DocumentProperties>> GetPropertiesAsyncWithHttpInfo(string documentId);
 
         /// <summary>
-        ///     List user documents.
+        ///     List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -410,7 +409,7 @@ namespace BoldSign.Api
         Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default);
 
         /// <summary>
-        ///     List user documents.
+        ///    List all user documents which can be filtered by date, time, sender, status, and so on.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -427,7 +426,7 @@ namespace BoldSign.Api
         Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default);
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -439,7 +438,7 @@ namespace BoldSign.Api
         Task RemindDocumentAsync(string documentId, List<string> receiverEmails, ReminderMessage reminderMessage = default);
 
         /// <summary>
-        ///     Send reminder to pending signers.
+        ///     Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -451,7 +450,7 @@ namespace BoldSign.Api
         Task<ApiResponse<object>> RemindDocumentAsyncWithHttpInfo(string documentId, List<string> receiverEmails, ReminderMessage reminderMessage = default);
 
         /// <summary>
-        ///     Revoke the document.
+        ///     Revoke the document with the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -462,7 +461,7 @@ namespace BoldSign.Api
         Task RevokeDocumentAsync(string documentId, string revokeMessage);
 
         /// <summary>
-        ///     Revoke the document.
+        ///     Revoke the document with the given document ID.
         /// </summary>
         /// <remarks>
         /// </remarks>

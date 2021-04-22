@@ -20,7 +20,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The signer.
+    ///    The signer properties include the authentication code for the singer, email address, name, role, and so on.
     /// </summary>
     [DataContract]
     public class DocumentSigner
@@ -106,7 +106,7 @@ namespace BoldSign.Model
         public string AuthenticationCode { get; set; }
 
         /// <summary>
-        ///     Gets or sets the order in which the signer needs to be signed.
+        ///     Gets or sets the order in which the signers needs to sign the document.
         /// </summary>
         /// <value>Gets or sets the signer order.</value>
         [DataMember(Name = "signerOrder", EmitDefaultValue = false)]

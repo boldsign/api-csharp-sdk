@@ -83,6 +83,13 @@ namespace BoldSign.Model.Webhook
         /// Enum Verification for value: Verification
         /// </summary>
         [EnumMember(Value = "Verification")]
-        Verification = 11
+        Verification = 11,
+
+        /// <summary>
+        /// Enum SendFailed for value: SendFailed
+        /// </summary>
+        [EnumMember(Value = "SendFailed")]
+        SendFailed = 12
+
     }
 }

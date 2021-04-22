@@ -34,7 +34,7 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///     Gets or sets document ID.
+        ///     Gets or sets document ID for a created document.
         /// </summary>
         /// <value>Gets or sets document ID.</value>
         [DataMember(Name = "documentId", EmitDefaultValue = true)]

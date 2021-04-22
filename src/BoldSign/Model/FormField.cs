@@ -19,7 +19,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The form field.
+    ///     The form field properties include character limit, font, font size, and so on.
     /// </summary>
     [DataContract]
     public class FormField
@@ -41,9 +41,8 @@ namespace BoldSign.Model
         /// <param name="bounds">bounds (required).</param>
         /// <param name="isRequired">Gets or sets a value indicating whether is required..</param>
         /// <param name="value">Gets or sets the value..</param>
-        public FormField(string name = default, FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string groupName = default)
+        public FormField(string name = default, FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica,  int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string groupName = default)
         {
-            this.Name = name;
 
             // to ensure "fieldType" is required (not null)
             if (type == null)
@@ -72,7 +71,6 @@ namespace BoldSign.Model
             this.Value = value;
             this.Name = name;
             this.IsRequired = isRequired;
-            this.Value = value;
             this.FontHexColor = fontHexColor;
             this.IsBoldFont = isBoldFont;
             this.IsItalicFont = isItalicFont;
@@ -80,6 +78,8 @@ namespace BoldSign.Model
             this.LineHeight = lineHeight;
             this.CharacterLimit = characterLimit;
             this.GroupName = groupName;
+            this.Font = font;
+            this.FontSize = fontSize;
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace BoldSign.Model
         public string Value { get; set; }
 
         /// <summary>
-        ///     Gets or sets the line height for the contents in form field..
+        ///     Gets or sets the line height for the contents in form field.
         /// </summary>
         /// <value>Gets or sets the page number.</value>
         [DataMember(Name = "lineHeight", EmitDefaultValue = true)]
@@ -174,12 +174,12 @@ namespace BoldSign.Model
         /// <summary>
         ///     Gets or sets the character limit.
         /// </summary>
-        /// <value>Gets or sets the page number.</value>
+        /// <value>Gets or sets the line height.</value>
         [DataMember(Name = "characterLimit", EmitDefaultValue = true)]
         public int CharacterLimit { get; set; }
 
         /// <summary>
-        ///     Gets or sets the group name for the field.
+        ///     Gets or sets the group name for the radio field.
         /// </summary>
         /// <value>Gets or sets the name.</value>
         [DataMember(Name = "groupName", EmitDefaultValue = true)]

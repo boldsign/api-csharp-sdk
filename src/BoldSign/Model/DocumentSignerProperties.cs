@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The document signer properties.
+    ///     The document signer properties include authentication, order of signers, signer status, and so on.
     /// </summary>
     [DataContract]
     public class DocumentSignerProperties
@@ -74,7 +74,7 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///     Gets or Sets Status
+        ///     Gets or Sets signer status.
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public SignerStatus? Status { get; set; }
@@ -107,7 +107,7 @@ namespace BoldSign.Model
         public bool? IsAuthenticationFailed { get; set; }
 
         /// <summary>
-        ///     Gets or sets the signer order.
+        ///     Gets or sets the signer order for a document or a template.
         /// </summary>
         /// <value>Gets or sets the signer order.</value>
         [DataMember(Name = "order", EmitDefaultValue = false)]

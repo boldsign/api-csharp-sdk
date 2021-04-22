@@ -15,31 +15,31 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Defines ReminderType
+    ///     Defines ReminderType that can be set as per need.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum ReminderType
     {
         /// <summary>
-        ///     Enum EveryDay for value: EveryDay
+        ///     Send reminder for every day
         /// </summary>
         [EnumMember(Value = "EveryDay")]
         EveryDay = 1,
 
         /// <summary>
-        ///     Enum EveryTwoDays for value: EveryTwoDays
+        ///     Send reminder for every three days
         /// </summary>
         [EnumMember(Value = "EveryTwoDays")]
         EveryTwoDays = 2,
 
         /// <summary>
-        ///     Enum EveryThreeDays for value: EveryThreeDays
+        ///     Send reminder for every two days
         /// </summary>
         [EnumMember(Value = "EveryThreeDays")]
         EveryThreeDays = 3,
 
         /// <summary>
-        ///     Enum EveryWeek for value: EveryWeek
+        ///     Send reminder for every week
         /// </summary>
         [EnumMember(Value = "EveryWeek")]
         EveryWeek = 4,

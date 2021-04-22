@@ -15,7 +15,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Defines AuditAction
+    ///     Defines AuditAction to be recorded in audit trail.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum AuditAction

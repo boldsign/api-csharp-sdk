@@ -19,7 +19,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The CC Details.
+    ///     The CC Details has the property email address.
     /// </summary>
     [DataContract]
     public class DocumentCC

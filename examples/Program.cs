@@ -1,7 +1,6 @@
 ﻿namespace BoldSign.Examples
 {
-    using BoldSign.Api;
-    using BoldSign.Client;
+    using BoldSign.Api;    
     using System.Threading.Tasks;
 
     internal class Program

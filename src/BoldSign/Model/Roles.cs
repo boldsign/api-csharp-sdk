@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     return roles details.
+    ///     Return roles details for a particular document or template.
     /// </summary>
     [DataContract]
     public class Roles
@@ -69,7 +69,7 @@ namespace BoldSign.Model
         public string SignerName { get; set; }
 
         /// <summary>
-        ///     Gets or sets the signer email.
+        ///     Gets or sets the signer email address.
         /// </summary>
         /// <value>Gets or sets the signerEmail.</value>
         [DataMember(Name = "signerEmail", EmitDefaultValue = true)]

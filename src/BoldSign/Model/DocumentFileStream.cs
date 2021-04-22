@@ -6,7 +6,7 @@ using System.Text;
 namespace BoldSign.Model
 {
     /// <summary>
-    /// The document file stream.
+    /// The document file stream result.
     /// </summary>
     public class DocumentFileStream : IDocumentFile
     {
@@ -16,7 +16,7 @@ namespace BoldSign.Model
         public Stream FileData { get; set; }
 
         /// <summary>
-        ///     Gets or sets filename.
+        ///     Gets or sets filename of the document.
         /// </summary>
         public string FileName { get; set; }
 

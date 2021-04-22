@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The template signer details.
+    ///     The template signer details have functions to perform actions like enabling access code for the signer, setting up the host’s email, name and user ID, defining the value for the order of the signers, and so on.
     /// </summary>
     [DataContract]
     public class TemplateSignerDetails
@@ -62,13 +62,13 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///     Gets or Sets Status
+        ///     Gets or Sets Status of a signer.
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public SignerStatus? Status { get; set; }
 
         /// <summary>
-        ///     Gets or Sets SignerType
+        ///     Gets or Sets SignerType.
         /// </summary>
         [DataMember(Name = "signerType", EmitDefaultValue = false)]
         public SignerType? SignerType { get; set; }
@@ -109,16 +109,16 @@ namespace BoldSign.Model
         public bool EnableEmailOTP { get; set; }
 
         /// <summary>
-        ///     Gets or sets the user id.
+        ///     Gets or sets the user Id.
         /// </summary>
         /// <value>Gets or sets the user id.</value>
         [DataMember(Name = "userId", EmitDefaultValue = true)]
         public string UserId { get; set; }
 
         /// <summary>
-        ///     Gets or sets the value is used to define the siging order of the signer.
+        ///     Gets or sets the value is used to define the siging order of the signers.
         /// </summary>
-        /// <value>Gets or sets the value is used to define the siging order of the signer.</value>
+        /// <value>Gets or sets the value is used to define the signing order of the signer.</value>
         [DataMember(Name = "order", EmitDefaultValue = false)]
         public int Order { get; set; }
 
@@ -137,7 +137,7 @@ namespace BoldSign.Model
         public string HostName { get; set; }
 
         /// <summary>
-        ///     Gets or sets the host user id.
+        ///     Gets or sets the host user an ID.
         /// </summary>
         /// <value>Gets or sets the host user id.</value>
         [DataMember(Name = "hostUserId", EmitDefaultValue = true)]

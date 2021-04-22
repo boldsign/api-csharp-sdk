@@ -29,14 +29,25 @@ namespace BoldSign.Model
     [DataContract]
     public class ExistingFormField
     {
+        public ExistingFormField()
+        {
+
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExistingFormField" /> class.
         /// </summary>
         /// <param name="index">Gets or sets the signer order..</param>
         /// <param name="value">Gets or sets the signer role..</param>
-        public ExistingFormField(int? index = default(int?), string value = default(string))
+        public ExistingFormField(int index = default, string value = default)
         {
             this.Index = index;
+            this.Value = value;
+        }
+
+        public ExistingFormField(string name = default, string value = default)
+        {
+            this.Name = name;
             this.Value = value;
         }
 
@@ -45,7 +56,14 @@ namespace BoldSign.Model
         /// </summary>
         /// <value>Gets or sets the signer order.</value>
         [DataMember(Name = "index", EmitDefaultValue = false)]
-        public int? Index { get; set; }
+        public int Index { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>Gets or sets the name.</value>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the signer role.

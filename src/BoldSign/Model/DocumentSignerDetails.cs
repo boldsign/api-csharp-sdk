@@ -19,7 +19,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The document signer details.
+    ///     The document signer details have properties that shows if the document delivery failed, reassigned, viewed, and so on.
     /// </summary>
     [DataContract]
     public class DocumentSignerDetails
@@ -111,7 +111,7 @@ namespace BoldSign.Model
         public string SignerEmail { get; set; }
 
         /// <summary>
-        /// Gets or Sets Status
+        /// Gets or Sets signer status.
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public SignerStatus Status { get; set; }
@@ -145,41 +145,41 @@ namespace BoldSign.Model
         public bool? IsDeliveryFailed { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is viewed.
+        /// Gets or sets a value indicating whether document is viewed.
         /// </summary>
         /// <value>Gets or sets a value indicating whether is viewed.</value>
         [DataMember(Name = "isViewed", EmitDefaultValue = false)]
         public bool? IsViewed { get; set; }
 
         /// <summary>
-        /// Gets or sets the order of the signer.
+        /// Gets or sets the order of the signers.
         /// </summary>
         /// <value>Gets or sets the order of the signer.</value>
         [DataMember(Name = "order", EmitDefaultValue = false)]
         public int? Order { get; set; }
 
         /// <summary>
-        /// Gets or Sets SignerType
+        /// Gets or Sets SignerType.
         /// </summary>
         [DataMember(Name = "signerType", EmitDefaultValue = false)]
         public SignerType SignerType { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is reassigned.
+        /// Gets or sets a value indicating whether document signer is reassigned.
         /// </summary>
         /// <value>Gets or sets a value indicating whether is reassigned.</value>
         [DataMember(Name = "isReassigned", EmitDefaultValue = false)]
         public bool? IsReassigned { get; set; }
 
         /// <summary>
-        /// &lt;br&gt;Gets or sets private message for the current signer.  &lt;br&gt;Available only when the user is signer and have a privateMessage from sender.
+        /// &lt;br&gt;Gets or sets private message for the current signer.  &lt;br&gt;Available only when the user is signer and has a privateMessage from sender.
         /// </summary>
-        /// <value>&lt;br&gt;Gets or sets private message for the current signer.  &lt;br&gt;Available only when the user is signer and have a privateMessage from sender.</value>
+        /// <value>&lt;br&gt;Gets or sets private message for the current signer.  &lt;br&gt;Available only when the user is signer and have a private message from sender.</value>
         [DataMember(Name = "privateMessage", EmitDefaultValue = false)]
         public string PrivateMessage { get; set; }
 
         /// <summary>
-        /// Gets or sets the form fields.
+        /// Gets or sets the form fields in the document.
         /// </summary>
         /// <value>Gets or sets the form fields.</value>
         [DataMember(Name = "formFields", EmitDefaultValue = false)]

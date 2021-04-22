@@ -15,7 +15,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Represents SignerType.  Defaults to Signer.
+    ///     Represents SignerType. The default type is Signer but there is another type, Reviewer. A signer will have to sign on a document received. If the SignerType is reviewer then they don’t have to sign but only can view the document.
     /// </summary>
     /// <value>Represents SignerType.  Defaults to Signer.</value>
     [JsonConverter(typeof(StringEnumConverter))]

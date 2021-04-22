@@ -24,7 +24,7 @@ namespace BoldSign.Model
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Defines ActivityAction
+    /// Defines ActivityAction.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum ActivityAction

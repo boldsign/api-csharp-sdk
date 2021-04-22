@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     AuditTrailRecipients
+    ///     AuditTrailRecipients are users who requested audit trail for a document and the properties can be such as recipient email, name.
     /// </summary>
     [DataContract]
     public class AuditTrailRecipients
@@ -39,13 +39,13 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///     Gets or Sets RecipientName
+        ///     Gets or Sets RecipientName.
         /// </summary>
         [DataMember(Name = "recipientName", EmitDefaultValue = true)]
         public string RecipientName { get; set; }
 
         /// <summary>
-        ///     Gets or Sets RecipientEmail
+        ///     Gets or Sets RecipientEmail.
         /// </summary>
         [DataMember(Name = "recipientEmail", EmitDefaultValue = true)]
         public string RecipientEmail { get; set; }

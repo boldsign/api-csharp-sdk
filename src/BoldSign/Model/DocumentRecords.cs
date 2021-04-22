@@ -37,7 +37,7 @@ namespace BoldSign.Model
         }
 
         /// <summary>
-        ///  Gets or Sets page details
+        ///  Gets or Sets page details.
         /// </summary>
         [DataMember(Name = "pageDetails", EmitDefaultValue = false)]
         public PageDetails PageDetails { get; set; }

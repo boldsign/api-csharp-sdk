@@ -15,7 +15,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Represents user document status.
+    ///   Represents user’s different document status.
     /// </summary>
     /// <value>Represents user document status.</value>
     [JsonConverter(typeof(StringEnumConverter))]

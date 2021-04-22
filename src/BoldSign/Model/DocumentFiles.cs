@@ -18,7 +18,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     The document files.
+    ///     The document files properties include document name, page count.
     /// </summary>
     [DataContract]
     public class DocumentFiles
@@ -44,14 +44,14 @@ namespace BoldSign.Model
         public string DocumentName { get; set; }
 
         /// <summary>
-        /// Gets or Sets Order.
+        /// Gets or Sets Order of signers.
         /// </summary>
         /// <value>Gets or Sets Order.</value>
         [DataMember(Name = "order", EmitDefaultValue = false)]
         public int? Order { get; set; }
 
         /// <summary>
-        /// Gets or Sets PageCount.
+        /// Gets or Sets PageCount for a document file.
         /// </summary>
         /// <value>Gets or Sets PageCount.</value>
         [DataMember(Name = "pageCount", EmitDefaultValue = false)]
