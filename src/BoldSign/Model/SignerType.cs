@@ -32,5 +32,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Reviewer")]
         Reviewer = 2,
+
+        /// <summary>
+        ///     Enum InPersonSigner for value: InPersonSigner
+        /// </summary>
+        [EnumMember(Value = "InPersonSigner")]
+        InPersonSigner = 3,
     }
 }

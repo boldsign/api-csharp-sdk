@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace BoldSign.Model
@@ -24,5 +25,12 @@ namespace BoldSign.Model
         ///     <para>Please refer documentation for the supported content type.</para>
         /// </summary>
         public string ContentType { get; set; }
+
+        public long Filesize()
+        {
+           
+            long _fileSize = FileData.Length;
+            return _fileSize;
+        }
     }
 }

@@ -34,11 +34,20 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.CC.ToList(), nameof(signRequestDetails.CC));
             }
 
+            if (signRequestDetails.Labels != null)
+            {
+                var i = -1;
+                foreach (var tag in signRequestDetails.Labels)
+                {
+                    localVarFormParams.Add($"{nameof(signRequestDetails.Labels)}[{++i}]", tag.ToString());
+                }
+            }
+
             if (signRequestDetails.BrandId != null)
             {
                 localVarFormParams.Add(nameof(signRequestDetails.BrandId), signRequestDetails.BrandId);
             }
-            
+
             if (signRequestDetails.ReminderSettings != null)
             {
                 localVarFormParams.Add($"{nameof(signRequestDetails.ReminderSettings)}.{nameof(signRequestDetails.ReminderSettings.EnableAutoReminder)}", signRequestDetails.ReminderSettings.EnableAutoReminder.ToString());
@@ -47,7 +56,7 @@ namespace BoldSign.Api
             }
 
             localVarFormParams.Add(nameof(signRequestDetails.EnableSigningOrder), signRequestDetails.EnableSigningOrder ? "true" : "false");
-            localVarFormParams.Add(nameof(signRequestDetails.EnableEmbeddedSigning), signRequestDetails.EnableEmbeddedSigning ? "true" : "false");
+            localVarFormParams.Add(nameof(signRequestDetails.DisableEmails), signRequestDetails.DisableEmails || signRequestDetails.EnableEmbeddedSigning ? "true" : "false");
 
             return localVarFormParams;
         }

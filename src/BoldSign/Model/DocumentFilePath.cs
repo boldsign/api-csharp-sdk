@@ -19,5 +19,11 @@ namespace BoldSign.Model
         /// Gets or sets the file path.
         /// </summary>
         public string FilePath { get; set; }
+
+        public long Filesize()
+        {
+            long _fileSize = new System.IO.FileInfo(FilePath).Length;
+            return _fileSize;
+        }
     }
 }

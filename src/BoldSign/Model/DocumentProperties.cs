@@ -48,7 +48,7 @@ namespace BoldSign.Model
         /// <param name="isDeleted">Gets or sets a value indicating whether the document is deleted..</param>
         /// <param name="revokeMessage">&lt;br&gt;Gets or Sets document revoked message by the sender.  &lt;br&gt;Available only when the document is revoked..</param>
         /// <param name="declineMessage">&lt;br&gt;Gets or Sets document declined message by the signer.  &lt;br&gt;Available only when any one of the signer have declined the document..</param>
-        public DocumentProperties(string documentId = default(string), string messageTitle = default(string), string documentDescription = default(string), DocumentStatus status = default(DocumentStatus), List<DocumentFiles> files = default(List<DocumentFiles>), DocumentSenderDetail senderDetail = default(DocumentSenderDetail), List<DocumentSignerDetails> signerDetails = default(List<DocumentSignerDetails>), List<DocumentCcDetails> ccDetails = default(List<DocumentCcDetails>), ReminderSettings reminderSettings = default(ReminderSettings), List<DocumentReassign> reassign = default(List<DocumentReassign>), List<AuditTrail> documentHistory = default(List<AuditTrail>), string activityBy = default(string), long? activityDate = default(long?), ActivityAction activityAction = default(ActivityAction), long? createdDate = default(long?), int? expiryDays = default(int?), long? expiryDate = default(long?), bool? enableSigningOrder = default(bool?), bool? isDeleted = default(bool?), string revokeMessage = default(string), string declineMessage = default(string), string brandId = default(string))
+        public DocumentProperties(string documentId = default(string), string messageTitle = default(string), string documentDescription = default(string), DocumentStatus status = default(DocumentStatus), List<DocumentFiles> files = default(List<DocumentFiles>), DocumentSenderDetail senderDetail = default(DocumentSenderDetail), List<DocumentSignerDetails> signerDetails = default(List<DocumentSignerDetails>), List<DocumentCcDetails> ccDetails = default(List<DocumentCcDetails>), ReminderSettings reminderSettings = default(ReminderSettings), List<DocumentReassign> reassign = default(List<DocumentReassign>), List<AuditTrail> documentHistory = default(List<AuditTrail>), string activityBy = default(string), long? activityDate = default(long?), ActivityAction activityAction = default(ActivityAction), long? createdDate = default(long?), int? expiryDays = default(int?), long? expiryDate = default(long?), bool? enableSigningOrder = default(bool?), bool? isDeleted = default(bool?), string revokeMessage = default(string), string declineMessage = default(string), string brandId = default(string), List<string> labels = default, string applicationId = default(string))
         {
             this.DocumentId = documentId;
             this.MessageTitle = messageTitle;
@@ -72,6 +72,8 @@ namespace BoldSign.Model
             this.RevokeMessage = revokeMessage;
             this.DeclineMessage = declineMessage;
             this.BrandId = brandId;
+            this.ApplicationId = applicationId;
+            this.Labels = labels;
         }
 
         /// <summary>
@@ -223,6 +225,27 @@ namespace BoldSign.Model
         /// <value>Gets or sets the brand id.</value>
         [DataMember(Name = "brandId", EmitDefaultValue = false)]
         public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
+        /// <value>Gets or sets the labels.</value>
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
+        public List<string> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets a GUID value that used to identify the application client ID.
+        /// </summary>
+        /// <value>Gets or sets a GUID value that used to identify the application client ID.</value>
+        [DataMember(Name = "applicationId", EmitDefaultValue = false)]
+        public string ApplicationId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the disableEmails.
+        /// </summary>
+        /// <value>When DisableEmails is enabled, Reminder is automatically ignored</value>
+        [DataMember(Name = "disableEmails", EmitDefaultValue = false)]
+        public bool DisableEmails { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

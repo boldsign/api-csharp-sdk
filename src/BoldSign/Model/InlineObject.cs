@@ -51,11 +51,11 @@ namespace BoldSign.Model
         /// <param name="enablePrintAndSign">Gets or sets a value indicating whether to enable Print and Sign mode..</param>
         /// <param name="reminderDate">Gets or sets the reminder date..</param>
         /// <param name="reminderFrequency">reminderFrequency.</param>
-        /// <param name="enableEmbeddedSigning">
+        /// <param name="disableEmails">
         ///     Gets or sets a value indicating whether to enable embedded signing.  When
         ///     EmbeddedSigning is enabled, Reminder is automatically ignored..
         /// </param>
-        public InlineObject(List<Stream> files = default, string title = default, string message = default, List<DocumentSigner> signers = default, List<DocumentCC> cC = default, List<FormField> formFields = default, bool enableSigningOrder = default, bool enableDigitalSignature = default, int? expiryDays = default, bool enablePrintAndSign = default, DateTime? reminderDate = default, ReminderType? reminderFrequency = default, bool enableEmbeddedSigning = default)
+        public InlineObject(List<Stream> files = default, string title = default, string message = default, List<DocumentSigner> signers = default, List<DocumentCC> cC = default, List<FormField> formFields = default, bool enableSigningOrder = default, bool enableDigitalSignature = default, int? expiryDays = default, bool enablePrintAndSign = default, DateTime? reminderDate = default, ReminderType? reminderFrequency = default, bool disableEmails = default)
         {
             // to ensure "files" is required (not null)
             if (files == null)
@@ -103,7 +103,7 @@ namespace BoldSign.Model
             this.EnablePrintAndSign = enablePrintAndSign;
             this.ReminderDate = reminderDate;
             this.ReminderFrequency = reminderFrequency;
-            this.EnableEmbeddedSigning = enableEmbeddedSigning;
+            this.DisableEmails = disableEmails;
         }
 
         /// <summary>
@@ -197,8 +197,8 @@ namespace BoldSign.Model
         ///     Gets or sets a value indicating whether to enable embedded signing.  When EmbeddedSigning is enabled, Reminder
         ///     is automatically ignored.
         /// </value>
-        [DataMember(Name = "EnableEmbeddedSigning", EmitDefaultValue = false)]
-        public bool EnableEmbeddedSigning { get; set; }
+        [DataMember(Name = "DisableEmails", EmitDefaultValue = false)]
+        public bool DisableEmails { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

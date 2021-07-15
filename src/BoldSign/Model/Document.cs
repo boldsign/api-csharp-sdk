@@ -38,7 +38,8 @@ namespace BoldSign.Model
         /// <param name="signerDetails">Gets or sets the signerDetails..</param>
         /// <param name="expiryDate">Gets or sets the expiryDate..</param>
         /// <param name="enableSigningOrder">Gets or sets a value indicating whether to enable signing order..</param>
-        public Document(string documentId = default, DocumentSenderDetail senderDetail = default, List<DocumentCcDetails> ccDetails = default, long createdDate = default, long? activityDate = default, string activityBy = default, string messageTitle = default, DocumentStatus? status = default, List<DocumentSignerDetails> signerDetails = default, long? expiryDate = default, bool enableSigningOrder = default)
+        /// <param name="labels">Gets or sets the labels.</param>
+        public Document(string documentId = default, DocumentSenderDetail senderDetail = default, List<DocumentCcDetails> ccDetails = default, long createdDate = default, long? activityDate = default, string activityBy = default, string messageTitle = default, DocumentStatus? status = default, List<DocumentSignerDetails> signerDetails = default, long? expiryDate = default, bool enableSigningOrder = default, List<string> labels = default)
         {
             this.DocumentId = documentId;
             this.CcDetails = ccDetails;
@@ -58,6 +59,7 @@ namespace BoldSign.Model
             this.SignerDetails = signerDetails;
             this.ExpiryDate = expiryDate;
             this.EnableSigningOrder = enableSigningOrder;
+            this.Labels = labels;
         }
 
         /// <summary>
@@ -134,6 +136,12 @@ namespace BoldSign.Model
         /// <value>Gets or sets a value indicating whether to enable signing order.</value>
         [DataMember(Name = "enableSigningOrder", EmitDefaultValue = false)]
         public bool EnableSigningOrder { get; set; }
+
+        /// <summary>
+        /// Gets or sets a labels.
+        /// </summary>
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
+        public List<string> Labels { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object
