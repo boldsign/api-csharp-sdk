@@ -101,8 +101,8 @@ namespace BoldSign.Model.Webhook
         /// Gets or sets a value indicating whether enable embedded signing.
         /// </summary>
         /// <value>Gets or sets a value indicating whether enable embedded signing.</value>
-        [DataMember(Name = "enableEmbeddedSigning", EmitDefaultValue = false)]
-        public bool? EnableEmbeddedSigning { get; set; }
+        [DataMember(Name = "disableEmails", EmitDefaultValue = false)]
+        public bool? DisableEmails { get; set; }
 
         /// <summary>
         /// &lt;br&gt;Gets or sets document revoked message by the sender.  &lt;br&gt;Available only when the document is revoked.

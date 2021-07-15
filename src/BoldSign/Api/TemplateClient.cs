@@ -14,7 +14,8 @@ namespace BoldSign.Api
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading.Tasks;    
+    using System.Threading.Tasks;
+    using BoldSign.Api.Resources;
     using BoldSign.Model;
     using RestSharp;
 
@@ -471,6 +472,18 @@ namespace BoldSign.Api
         /// <returns>ApiResponse of DocumentCreated</returns>
         public ApiResponse<DocumentCreated> SendUsingTemplateWithHttpInfo(SendForSignFromTemplate sendForSignFromTemplate = default)
         {
+            // verify the title length
+            if (sendForSignFromTemplate.Title != null && sendForSignFromTemplate.Title.Length > 256)
+            {
+                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
+            }
+
+            // verify the message length
+            if (sendForSignFromTemplate.Message != null && sendForSignFromTemplate.Message.Length > 5000)
+            {
+                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
+            }
+
             var localVarPath = "/v1/template/send";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
@@ -577,6 +590,19 @@ namespace BoldSign.Api
         /// <returns>Task of ApiResponse (DocumentCreated)</returns>
         public async Task<ApiResponse<DocumentCreated>> SendUsingTemplateAsyncWithHttpInfo(SendForSignFromTemplate sendForSignFromTemplate = default)
         {
+
+            // verify the title length
+            if (sendForSignFromTemplate.Title != null && sendForSignFromTemplate.Title.Length > 256)
+            {
+                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
+            }
+
+            // verify the message length
+            if (sendForSignFromTemplate.Message != null && sendForSignFromTemplate.Message.Length > 5000)
+            {
+                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
+            }
+
             var localVarPath = "/v1/template/send";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();

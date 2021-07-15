@@ -72,16 +72,30 @@ namespace BoldSign.Model
         public ReminderSettings ReminderSettings { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether to enable embedded signing.
-        ///     When EmbeddedSigning is enabled, Reminder is automatically ignored.
+        ///     Gets or sets a value indicating whether to enable EnableEmbeddedSigning.
+        ///     When EnableEmbeddedSigning is enabled, Reminder is automatically ignored.
         /// </summary>
-        [JsonProperty("enableEmbeddedSigning")]
+        [Obsolete("EnableEmbeddedSigning is deprecated, please use DisableEmails instead")]
+        [JsonProperty("EnableEmbeddedSigning")]
         public bool EnableEmbeddedSigning { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether to enable DisableEmails.
+        ///     When DisableEmails is enabled, Reminder is automatically ignored.
+        /// </summary>
+        [JsonProperty("disableEmails")]
+        public bool DisableEmails { get; set; }
 
         /// <summary>
         /// Gets or sets the brand id.
         /// </summary>
         [JsonProperty("brandId")]
         public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the lables.
+        /// </summary>
+        [JsonProperty("lables")]
+        public List<string> Labels { get; set; }
     }
 }

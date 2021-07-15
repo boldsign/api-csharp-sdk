@@ -44,11 +44,14 @@ namespace BoldSign.Model
         /// <param name="isUnderline">Gets or sets a value indicating whether isUnderline..</param>
         /// <param name="isItalic">Gets or sets a value indicating whether isItalic..</param>
         /// <param name="isBold">Gets or sets a value indicating whether isBold..</param>
-        public DocumentFormFields(string id = default(string), string type = default(string), string label = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?))
+        /// <param name="placeholder">Gets or sets the placeHolder value..</param>
+        /// <param name="dateFormat">Gets or sets the dateFormat value..</param>
+        /// <param name="validationType">Gets or sets the textbox ValidationType value..</param>
+        /// <param name="validationCustomRegex">Gets or sets the textbox ValidationCustomRegex value..</param>
+        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string))
         {
             this.Id = id;
             this.Type = type;
-            this.Label = label;
             this.Value = value;
             this.Font = font;
             this.IsRequired = isRequired;
@@ -58,6 +61,10 @@ namespace BoldSign.Model
             this.IsUnderline = isUnderline;
             this.IsItalic = isItalic;
             this.IsBold = isBold;
+            this.Placeholder = placeholder;
+            this.DateFormat = dateFormat;
+            this.ValidationType = validationType;
+            this.ValidationCustomRegex = validationCustomRegex;
         }
 
         /// <summary>
@@ -73,13 +80,6 @@ namespace BoldSign.Model
         /// <value>Gets or sets the element type.</value>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
-
-        /// <summary>
-        /// Gets or sets the element type.
-        /// </summary>
-        /// <value>Gets or sets the element type.</value>
-        [DataMember(Name = "label", EmitDefaultValue = false)]
-        public string Label { get; set; }
 
         /// <summary>
         /// Gets or sets the element type.
@@ -150,6 +150,32 @@ namespace BoldSign.Model
         /// <value>Gets or sets the name.</value>
         [DataMember(Name = "groupName", EmitDefaultValue = true)]
         public string GroupName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the placeHolder value.
+        /// </summary>
+        /// <value>Gets or sets the element type.</value>
+        [DataMember(Name = "placeholder", EmitDefaultValue = false)]
+        public string Placeholder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DateFormat value.
+        /// </summary>
+        /// <value>Gets or sets the DateFormat value.</value>
+        [DataMember(Name = "dateFormat", EmitDefaultValue = false)]
+        public string DateFormat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the textbox ValidationType value.
+        /// </summary>
+        [DataMember(Name = "validationType", EmitDefaultValue = false)]
+        public ValidationType ValidationType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the text ValidationCustomRegex value.
+        /// </summary>
+        [DataMember(Name = "validationCustomRegex", EmitDefaultValue = false)]
+        public string ValidationCustomRegex { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

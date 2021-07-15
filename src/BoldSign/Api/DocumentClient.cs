@@ -15,7 +15,8 @@ namespace BoldSign.Api
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;    
+    using System.Threading.Tasks;
+    using BoldSign.Api.Resources;
     using BoldSign.Model;
     using RestSharp;
 
@@ -1408,9 +1409,9 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>DocumentRecords</returns>
-        public DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default)
+        public DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
         {
-            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey);
+            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels);
 
             return localVarResponse.Data;
         }
@@ -1428,7 +1429,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default)
+        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
         {
             // verify the required parameter 'page' is set
 
@@ -1499,6 +1500,11 @@ namespace BoldSign.Api
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
                 localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            if (labels != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
             }
 
             // make the HTTP request
@@ -1535,9 +1541,9 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>Task of DocumentRecords</returns>
-        public async Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default)
+        public async Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
         {
-            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey);
+            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels);
 
             return localVarResponse.Data;
         }
@@ -1555,7 +1561,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>Task of ApiResponse (DocumentRecords)</returns>
-        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default)
+        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
         {
             // verify the required parameter 'page' is set
 
@@ -1626,6 +1632,11 @@ namespace BoldSign.Api
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
                 localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            if (labels != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
             }
 
             // make the HTTP request
@@ -2160,6 +2171,14 @@ namespace BoldSign.Api
                 throw new ApiException(400, "Missing required parameter 'files' when calling DocumentApi->SendDocument");
             }
 
+            //verify the Filesize is within 100MB
+             const long MaxFileSize = 104857600;
+            if (signRequestDetails.Files.Sum(x => x.Filesize()) > MaxFileSize)
+            {
+                throw new ApiException(413, "Document's size exceeds the limit of 100 MB. Please replace it. (all files combined)");
+            }
+
+
             // verify the required parameter 'title' is set
             if (signRequestDetails.Title == null)
             {
@@ -2170,6 +2189,18 @@ namespace BoldSign.Api
             if (signRequestDetails.Signers == null)
             {
                 throw new ApiException(400, "Missing required parameter 'signers' when calling DocumentApi->SendDocument");
+            }
+
+            // verify the title length
+            if (signRequestDetails.Title != null && signRequestDetails.Title.Length > 256)
+            {
+                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
+            }
+
+            // verify the message length
+            if (signRequestDetails.Message != null && signRequestDetails.Message.Length > 5000)
+            {
+                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
             }
 
             var localVarPath = "/v1/document/send";
@@ -2266,6 +2297,18 @@ namespace BoldSign.Api
                 throw new ApiException(400, "Missing required parameter 'signers' when calling DocumentApi->SendDocument");
             }
 
+            // verify the title length
+            if (signRequestDetails.Title != null && signRequestDetails.Title.Length > 256)
+            {
+                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
+            }
+
+            // verify the message length
+            if (signRequestDetails.Message != null && signRequestDetails.Message.Length > 5000)
+            {
+                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
+            }
+
             var localVarPath = "/v1/document/send";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
@@ -2309,7 +2352,6 @@ namespace BoldSign.Api
                 localVarPathParams, localVarHttpContentType);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
-
             var exception = this.ExceptionFactory?.Invoke("SendDocument", localVarResponse);
 
             if (exception != null)

@@ -32,7 +32,7 @@ namespace BoldSign.Model
         /// <param name="message">Gets or sets the message..</param>
         /// <param name="roles">Gets or sets the roles..</param>
         /// <param name="brandId">Gets or sets the brandId..</param>
-        public SendForSignFromTemplate(string templateId = default, string title = default, string message = default, List<Roles> roles = default, string brandId = default)
+        public SendForSignFromTemplate(string templateId = default, string title = default, string message = default, List<Roles> roles = default, string brandId = default, List<string> labels = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -43,6 +43,7 @@ namespace BoldSign.Model
             this.Message = message;
             this.Roles = roles;
             this.BrandId = brandId;
+            this.Labels = labels;
         }
 
         /// <summary>
@@ -78,6 +79,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "brandId", EmitDefaultValue = true)]
         public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
+        [DataMember(Name = "labels", EmitDefaultValue = true)]
+        public List<string> Labels { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

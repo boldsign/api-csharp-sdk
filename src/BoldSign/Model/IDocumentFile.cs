@@ -6,5 +6,7 @@ namespace BoldSign.Model
 {
     public interface IDocumentFile
     {
+        public long Filesize();
+
     }
 }
