@@ -39,7 +39,7 @@ namespace BoldSign.Api
                 var i = -1;
                 foreach (var tag in signRequestDetails.Labels)
                 {
-                    localVarFormParams.Add($"{nameof(signRequestDetails.Labels)}[{++i}]", tag.ToString());
+                    localVarFormParams.Add($"{nameof(signRequestDetails.Labels)}[{++i}]", tag?.ToString());
                 }
             }
 

@@ -86,7 +86,7 @@ namespace BoldSign.Model
         /// <summary>
         ///     Gets the form field type.
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "fieldType", EmitDefaultValue = true)]
         public virtual FieldType Type
         {
             get { return m_type; }

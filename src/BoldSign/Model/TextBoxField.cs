@@ -85,7 +85,7 @@ namespace BoldSign.Model
         /// <summary>
         /// Gets the form field type.It is a read only property.
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "fieldType", EmitDefaultValue = true)]
         public override FieldType Type
         {
             get => base.m_type;
