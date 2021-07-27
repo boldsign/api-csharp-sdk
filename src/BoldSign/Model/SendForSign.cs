@@ -93,9 +93,9 @@ namespace BoldSign.Model
         public string BrandId { get; set; }
 
         /// <summary>
-        /// Gets or sets the lables.
+        /// Gets or sets the labels.
         /// </summary>
-        [JsonProperty("lables")]
+        [JsonProperty("labels")]
         public List<string> Labels { get; set; }
     }
 }

@@ -121,5 +121,12 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "AuthenticationRemoved")]
         AuthenticationRemoved = 17,
+
+        /// <summary>
+        /// Enum DownloadedAuditTrail for value: DownloadedAuditTrail.
+        /// </summary>
+        [EnumMember(Value = "DownloadedAuditTrail")]
+        DownloadedAuditTrail = 18,
+
     }
 }
