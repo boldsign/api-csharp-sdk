@@ -34,7 +34,8 @@ namespace BoldSign.Model
         /// <param name="toEmail">Gets or sets the to email..</param>
         /// <param name="ipaddress">Gets or sets the IP address of the current request..</param>
         /// <param name="action">action.</param>
-        public AuditTrail(string id = default(string), string name = default(string), string email = default(string), string toName = default(string), string toEmail = default(string), string ipaddress = default(string), AuditAction action = default(AuditAction))
+        /// <param name="timestamp">timestamp.</param>
+        public AuditTrail(string id = default(string), string name = default(string), string email = default(string), string toName = default(string), string toEmail = default(string), string ipaddress = default(string), AuditAction action = default(AuditAction), long timestamp = default(long))
         {
             this.Id = id;
             this.Name = name;
@@ -43,6 +44,7 @@ namespace BoldSign.Model
             this.ToEmail = toEmail;
             this.Ipaddress = ipaddress;
             this.Action = action;
+            this.Timestamp = timestamp;
         }
 
         /// <summary>
@@ -92,6 +94,13 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public AuditAction Action { get; set; }
+
+        /// <summary>
+        /// Gets or Sets timestamp of the event.
+        /// </summary>
+        /// <value>Gets the timestamp of the event.</value>
+        [DataMember(Name = "timestamp", EmitDefaultValue = false)]
+        public long Timestamp { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

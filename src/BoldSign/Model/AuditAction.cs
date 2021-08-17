@@ -128,5 +128,64 @@ namespace BoldSign.Model
         [EnumMember(Value = "DownloadedAuditTrail")]
         DownloadedAuditTrail = 18,
 
+        /// <summary>
+        /// Enum Cloned for value: Cloned.
+        /// </summary>
+        [EnumMember(Value = "Cloned")]
+        Cloned = 19,
+
+        /// <summary>
+        /// Enum Deleted for value: Deleted.
+        /// </summary>
+        [EnumMember(Value = "Deleted")]
+        Deleted = 20,
+
+        /// <summary>
+        /// Enum MovedToTrash for value: MovedToTrash.
+        /// </summary>
+        [EnumMember(Value = "MovedToTrash")]
+        MovedToTrash = 21,
+
+        /// <summary>
+        /// Enum Restored for value: Restored.
+        /// </summary>
+        [EnumMember(Value = "Restored")]
+        Restored = 22,
+
+        /// <summary>
+        /// Enum AutoReminder for value: AutoReminder.
+        /// </summary>
+        [EnumMember(Value = "AutoReminder")]
+        AutoReminder = 23,
+
+        /// <summary>
+        /// Enum Resend for value: Resend.
+        /// </summary>
+        [EnumMember(Value = "Resend")]
+        Resend = 24,
+
+        /// <summary>
+        /// Enum Reviewed for value: Reviewed.
+        /// </summary>
+        [EnumMember(Value = "Reviewed")]
+        Reviewed = 25,
+
+        /// <summary>
+        /// Enum InitiatePrintSign for value: InitiatePrintSign.
+        /// </summary>
+        [EnumMember(Value = "InitiatePrintSign")]
+        InitiatePrintSign = 26,
+
+        /// <summary>
+        /// Enum CancelPrintSign for value: CancelPrintSign.
+        /// </summary>
+        [EnumMember(Value = "CancelPrintSign")]
+        CancelPrintSign = 27,
+
+        /// <summary>
+        /// Enum CompletePrintSign for value: CompletePrintSign.
+        /// </summary>
+        [EnumMember(Value = "CompletePrintSign")]
+        CompletePrintSign = 28,
     }
 }
