@@ -87,6 +87,12 @@ namespace BoldSign.Model
         public List<string> Labels { get; set; }
 
         /// <summary>
+        ///  Gets or sets a value indicating whether to enable or disable emails.When disable emails is set to true, all the status emails and completed document email will be stopped, and reminder is also automatically ignored.
+        /// </summary>
+        [DataMember(Name = "disableEmails", EmitDefaultValue = true)]
+        public bool DisableEmails { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
