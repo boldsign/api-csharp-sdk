@@ -1,8 +1,10 @@
 ﻿namespace BoldSign.Examples
 {
+    using System;
     using BoldSign.Api;
     using BoldSign.Model;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     The template examples.
@@ -45,7 +47,7 @@
         /// <returns>A DocumentCreated.</returns>
         public DocumentCreated CreateDocumentUsingTemplate()
         {
-            // This is an example document id, add your own document id upon usage.
+            // This is an example document id, add your own template id created from the web app upon usage.
             var templateId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
 
             var templateDetails = new SendForSignFromTemplate(
@@ -65,7 +67,7 @@
         /// <returns>A DocumentCreated.</returns>
         public DocumentCreated CreateDocumentWithCustomRoles()
         {
-            // This is an example document id, add your own document id upon usage.
+            // This is an example document id, add your own template id created from the web app upon usage.
             var templateId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
 
             var roles = new List<Roles>
@@ -85,6 +87,37 @@
                 roles: roles);
 
             var documentCreated = this.templateApi.SendUsingTemplate(templateDetails);
+
+            return documentCreated;
+        }
+
+        /// <summary>
+        ///     Send embedded document using template without any customization.
+        /// </summary>
+        /// <returns>A DocumentCreated.</returns>
+        public async Task<EmbeddedSendCreated> CreateEmbeddedDocumentUsingTemplate()
+        {
+            // This is an example document id, add your own template id created from the web app upon usage.
+            var templateId = "0992eb79-ea24-4e95-887a-10aa82b30957";
+
+            var templateRequest = new EmbeddedTemplateRequest(
+                templateId: templateId,
+                title: "Document from Template",
+                message: "This document description")
+            {
+                // customize page options
+                SendViewOption = PageViewOption.PreparePage,
+                ShowToolbar = true,
+                ShowNavigationButtons = false,
+                ShowSaveButton = false,
+                ShowPreviewButton = true,
+                ShowSendButton = false,
+            };
+
+            var documentCreated = await this.templateApi.CreateEmbeddedRequestUrlAsync(templateRequest);
+
+            // url to send the document from your web application
+            var sendUrl = documentCreated.SendUrl;
 
             return documentCreated;
         }

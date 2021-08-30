@@ -472,17 +472,7 @@ namespace BoldSign.Api
         /// <returns>ApiResponse of DocumentCreated</returns>
         public ApiResponse<DocumentCreated> SendUsingTemplateWithHttpInfo(SendForSignFromTemplate sendForSignFromTemplate = default)
         {
-            // verify the title length
-            if (sendForSignFromTemplate.Title != null && sendForSignFromTemplate.Title.Length > 256)
-            {
-                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
-            }
-
-            // verify the message length
-            if (sendForSignFromTemplate.Message != null && sendForSignFromTemplate.Message.Length > 5000)
-            {
-                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
-            }
+            ValidateTemplateProperties(sendForSignFromTemplate);
 
             var localVarPath = "/v1/template/send";
             var localVarPathParams = new Dictionary<string, string>();
@@ -526,14 +516,9 @@ namespace BoldSign.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (string.IsNullOrEmpty(sendForSignFromTemplate.TemplateId))
-            {
-                throw new ArgumentException($"Parameter {nameof(sendForSignFromTemplate.TemplateId)} should be null or empty");
-            }
-
             localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "TemplateId", sendForSignFromTemplate.TemplateId)); // query parameter
 
-            if (sendForSignFromTemplate != null && sendForSignFromTemplate.GetType() != typeof(byte[]))
+            if (sendForSignFromTemplate.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(sendForSignFromTemplate); // http body (model) parameter
             }
@@ -591,17 +576,7 @@ namespace BoldSign.Api
         public async Task<ApiResponse<DocumentCreated>> SendUsingTemplateAsyncWithHttpInfo(SendForSignFromTemplate sendForSignFromTemplate = default)
         {
 
-            // verify the title length
-            if (sendForSignFromTemplate.Title != null && sendForSignFromTemplate.Title.Length > 256)
-            {
-                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
-            }
-
-            // verify the message length
-            if (sendForSignFromTemplate.Message != null && sendForSignFromTemplate.Message.Length > 5000)
-            {
-                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
-            }
+            ValidateTemplateProperties(sendForSignFromTemplate);
 
             var localVarPath = "/v1/template/send";
             var localVarPathParams = new Dictionary<string, string>();
@@ -645,14 +620,9 @@ namespace BoldSign.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (string.IsNullOrEmpty(sendForSignFromTemplate.TemplateId))
-            {
-                throw new ArgumentException($"Parameter {nameof(sendForSignFromTemplate.TemplateId)} should be null or empty");
-            }
-
             localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "TemplateId", sendForSignFromTemplate.TemplateId)); // query parameter
 
-            if (sendForSignFromTemplate != null && sendForSignFromTemplate.GetType() != typeof(byte[]))
+            if (sendForSignFromTemplate.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(sendForSignFromTemplate); // http body (model) parameter
             }
@@ -686,6 +656,210 @@ namespace BoldSign.Api
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        /// <inheritdoc/>
+        public EmbeddedSendCreated CreateEmbeddedRequestUrl(EmbeddedTemplateRequest send = default)
+        {
+            var localVarResponse = this.CreateEmbeddedRequestUrlWithHttpInfo(send);
+
+            return localVarResponse.Data;
+    }
+
+        /// <inheritdoc/>
+        public ApiResponse<EmbeddedSendCreated> CreateEmbeddedRequestUrlWithHttpInfo(EmbeddedTemplateRequest send = default)
+        {
+            if (send == null)
+            {
+                throw new ArgumentNullException(nameof(send));
+}
+
+            ValidateTemplateProperties(send);
+
+            var localVarPath = "/v1-beta/template/createEmbeddedRequestUrl";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes =
+            {
+                "application/json",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TemplateId", send.TemplateId)); // query parameter
+
+            if (send.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(send); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = send; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+                    localVarPath,
+                    Method.POST,
+                    localVarQueryParams,
+                    localVarPostBody,
+                    localVarHeaderParams,
+                    localVarFormParams,
+                    localVarFileParams,
+                    localVarPathParams,
+                    localVarHttpContentType);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("CreateEmbeddedRequestUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedSendCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
+        }
+
+        /// <inheritdoc/>
+        public async Task<EmbeddedSendCreated> CreateEmbeddedRequestUrlAsync(EmbeddedTemplateRequest send = default)
+        {
+            var localVarResponse = await this.CreateEmbeddedRequestUrlAsyncWithHttpInfo(send).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<EmbeddedSendCreated>> CreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedTemplateRequest send = default)
+        {
+            if (send == null)
+            {
+                throw new ArgumentNullException(nameof(send));
+            }
+
+            ValidateTemplateProperties(send);
+
+            var localVarPath = "/v1-beta/template/createEmbeddedRequestUrl";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes =
+            {
+                "application/json",
+                "application/xml",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TemplateId", send.TemplateId)); // query parameter
+
+            if (send.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(send); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = send; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+                    localVarPath,
+                    Method.POST,
+                    localVarQueryParams,
+                    localVarPostBody,
+                    localVarHeaderParams,
+                    localVarFormParams,
+                    localVarFileParams,
+                    localVarPathParams,
+                    localVarHttpContentType)
+                .ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("CreateEmbeddedRequestUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedSendCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
+        }
+
+        private static void ValidateTemplateProperties(SendForSignFromTemplate send)
+        {
+            if (string.IsNullOrEmpty(send.TemplateId))
+            {
+                throw new ArgumentException(ApiValidationMessages.TemplateIdNull);
+            }
+
+            // verify the title length
+            if (send.Title != null && send.Title.Length > 256)
+            {
+                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
+            }
+
+            // verify the message length
+            if (send.Message != null && send.Message.Length > 5000)
+            {
+                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
+            }
         }
     }
 }

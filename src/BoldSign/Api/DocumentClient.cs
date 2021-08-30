@@ -25,6 +25,9 @@ namespace BoldSign.Api
     /// </summary>
     public class DocumentClient : IDocumentClient
     {
+        // verify the Filesize is within 100MB
+        private const long MaxFileSize = 104857600;
+
         private ExceptionFactory exceptionFactory = (name, response) => null;
 
         /// <summary>
@@ -2165,43 +2168,7 @@ namespace BoldSign.Api
         /// <returns>ApiResponse of DocumentCreated</returns>
         public ApiResponse<DocumentCreated> SendDocumentWithHttpInfo(SendForSign signRequestDetails)
         {
-            // verify the required parameter 'files' is set
-            if (signRequestDetails.Files == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'files' when calling DocumentApi->SendDocument");
-            }
-
-            //verify the Filesize is within 100MB
-             const long MaxFileSize = 104857600;
-            if (signRequestDetails.Files.Sum(x => x.Filesize()) > MaxFileSize)
-            {
-                throw new ApiException(413, "Document's size exceeds the limit of 100 MB. Please replace it. (all files combined)");
-            }
-
-
-            // verify the required parameter 'title' is set
-            if (signRequestDetails.Title == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'title' when calling DocumentApi->SendDocument");
-            }
-
-            // verify the required parameter 'signers' is set
-            if (signRequestDetails.Signers == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'signers' when calling DocumentApi->SendDocument");
-            }
-
-            // verify the title length
-            if (signRequestDetails.Title != null && signRequestDetails.Title.Length > 256)
-            {
-                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
-            }
-
-            // verify the message length
-            if (signRequestDetails.Message != null && signRequestDetails.Message.Length > 5000)
-            {
-                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
-            }
+            ValidateSendProperties(signRequestDetails);
 
             var localVarPath = "/v1/document/send";
             var localVarPathParams = new Dictionary<string, string>();
@@ -2279,35 +2246,7 @@ namespace BoldSign.Api
         /// <returns>Task of ApiResponse (DocumentCreated)</returns>
         public async Task<ApiResponse<DocumentCreated>> SendDocumentAsyncWithHttpInfo(SendForSign signRequestDetails)
         {
-            // verify the required parameter 'files' is set
-            if (signRequestDetails.Files == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'files' when calling DocumentApi->SendDocument");
-            }
-
-            // verify the required parameter 'title' is set
-            if (signRequestDetails.Title == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'title' when calling DocumentApi->SendDocument");
-            }
-
-            // verify the required parameter 'signers' is set
-            if (signRequestDetails.Signers == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'signers' when calling DocumentApi->SendDocument");
-            }
-
-            // verify the title length
-            if (signRequestDetails.Title != null && signRequestDetails.Title.Length > 256)
-            {
-                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
-            }
-
-            // verify the message length
-            if (signRequestDetails.Message != null && signRequestDetails.Message.Length > 5000)
-            {
-                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
-            }
+            ValidateSendProperties(signRequestDetails);
 
             var localVarPath = "/v1/document/send";
             var localVarPathParams = new Dictionary<string, string>();
@@ -2363,6 +2302,205 @@ namespace BoldSign.Api
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        /// <inheritdoc/>
+        public EmbeddedSendCreated CreateEmbeddedRequestUrl(EmbeddedDocumentRequest sendRequest)
+        {
+            var localVarResponse = this.CreateEmbeddedRequestUrlWithHttpInfo(sendRequest);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public ApiResponse<EmbeddedSendCreated> CreateEmbeddedRequestUrlWithHttpInfo(EmbeddedDocumentRequest sendRequest)
+        {
+            if (sendRequest == null)
+            {
+                throw new ArgumentNullException(nameof(sendRequest));
+            }
+
+            ValidateSendProperties(sendRequest);
+
+            var localVarPath = "/v1-beta/document/createEmbeddedRequestUrl";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarFileParams.Add("Files", sendRequest.Files);
+            localVarFormParams = FromRequestHelper.ConvertToFormRequest(sendRequest, localVarFormParams);
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                Method.POST,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarPathParams,
+                localVarHttpContentType);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("CreateEmbeddedRequestUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedSendCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
+        }
+
+        /// <inheritdoc/>
+        public async Task<EmbeddedSendCreated> CreateEmbeddedRequestUrlAsync(EmbeddedDocumentRequest sendRequest)
+        {
+            var localVarResponse = await this.CreateEmbeddedRequestUrlAsyncWithHttpInfo(sendRequest).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<EmbeddedSendCreated>> CreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedDocumentRequest sendRequest)
+        {
+            if (sendRequest == null)
+            {
+                throw new ArgumentNullException(nameof(sendRequest));
+            }
+
+            ValidateSendProperties(sendRequest);
+
+            var localVarPath = "/v1-beta/document/createEmbeddedRequestUrl";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarFileParams.Add("Files", sendRequest.Files);
+            localVarFormParams = FromRequestHelper.ConvertToFormRequest(sendRequest, localVarFormParams);
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                Method.POST,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarPathParams,
+                localVarHttpContentType).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("CreateEmbeddedRequestUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedSendCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
+        }
+
+        private static void ValidateSendProperties(SendForSign sendRequest)
+        {
+            // verify the required parameter 'files' is set
+            if (sendRequest.Files == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.FilesIsSet);
+            }
+
+            if (sendRequest.Files.Sum(x => x.Filesize()) > MaxFileSize)
+            {
+                throw new ApiException(413, ApiValidationMessages.FilesizesWithin100MB);
+            }
+
+            // verify the required parameter 'title' is set
+            if (sendRequest.Title == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.TitleIsSet);
+            }
+
+            // verify the required parameter 'signers' is set
+            if (sendRequest.Signers == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.SignersIsSet);
+            }
+
+            // verify the title length
+            if (sendRequest.Title != null && sendRequest.Title.Length > 256)
+            {
+                throw new ApiException(422, ApiValidationMessages.TitleLengthExceeds);
+            }
+
+            // verify the message length
+            if (sendRequest.Message != null && sendRequest.Message.Length > 5000)
+            {
+                throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
+            }
         }
     }
 }
