@@ -32,7 +32,18 @@ namespace BoldSign.Model
         /// <param name="message">Gets or sets the message..</param>
         /// <param name="roles">Gets or sets the roles..</param>
         /// <param name="brandId">Gets or sets the brandId..</param>
-        public SendForSignFromTemplate(string templateId = default, string title = default, string message = default, List<Roles> roles = default, string brandId = default, List<string> labels = default)
+        /// <param name="labels">Gets or sets the labels.</param>
+        /// <param name="disableEmails">Gets or sets the disableEmails.</param>
+        /// <param name="hideDocumentId">Gets or sets the hideDocumentId.</param>
+        public SendForSignFromTemplate(
+            string templateId = default,
+            string title = default,
+            string message = default,
+            List<Roles> roles = default,
+            string brandId = default,
+            List<string> labels = default,
+            bool disableEmails = default,
+            bool hideDocumentId = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -44,6 +55,8 @@ namespace BoldSign.Model
             this.Roles = roles;
             this.BrandId = brandId;
             this.Labels = labels;
+            this.DisableEmails = disableEmails;
+            this.HideDocumentId = hideDocumentId;
         }
 
         /// <summary>
@@ -87,7 +100,20 @@ namespace BoldSign.Model
         public List<string> Labels { get; set; }
 
         /// <summary>
-        ///     Returns the JSON string presentation of the object
+        ///  Gets or sets a value indicating whether to enable or disable emails.When disable emails is set to true, all the status emails and completed document email will be stopped, and reminder is also automatically ignored.
+        /// </summary>
+        [DataMember(Name = "disableEmails", EmitDefaultValue = true)]
+        public bool DisableEmails { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to remove the document ID watermark from all the PDF pages of the document.
+        /// Default is false.
+        /// </summary>
+        [DataMember(Name = "hideDocumentId", EmitDefaultValue = true)]
+        public bool HideDocumentId { get; set; }
+
+        /// <summary>
+        ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson() => JsonConvert.SerializeObject(this, Formatting.Indented);

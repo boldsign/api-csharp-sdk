@@ -1,3 +1,7 @@
+﻿// <copyright file="EmbeddedSendCreated.cs" company="Syncfusion Inc">
+// Copyright (c) Syncfusion Inc. All rights reserved.
+// </copyright>
+
 /*
  * BoldSign API
  *
@@ -18,16 +22,16 @@ namespace BoldSign.Model
     using Newtonsoft.Json;
 
     /// <summary>
-    ///     Document Created Action Result.
+    ///     Embedded send document created result.
     /// </summary>
     [DataContract]
-    public class DocumentCreated
+    public class EmbeddedSendCreated
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DocumentCreated" /> class.
+        ///     Initializes a new instance of the <see cref="EmbeddedSendCreated" /> class.
         /// </summary>
         /// <param name="documentId">Gets or sets document ID..</param>
-        public DocumentCreated(string documentId = default)
+        public EmbeddedSendCreated(string documentId = default)
         {
             this.DocumentId = documentId;
         }
@@ -39,11 +43,17 @@ namespace BoldSign.Model
         [DataMember(Name = "documentId", EmitDefaultValue = true)]
         public string DocumentId { get; set; }
 
+        /// <summary>
+        ///     Gets or sets document send url.
+        /// </summary>
+        /// <value>Gets or sets document ID.</value>
+        [DataMember(Name = "sendUrl", EmitDefaultValue = true)]
+        public Uri SendUrl { get; set; }
 
         /// <summary>
-        ///     Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object.
         /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
+        /// <returns>JSON string presentation of the object.</returns>
         public virtual string ToJson() => JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 }

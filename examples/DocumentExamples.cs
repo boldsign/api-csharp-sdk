@@ -5,6 +5,7 @@ namespace BoldSign.Examples
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
 
@@ -199,13 +200,16 @@ namespace BoldSign.Examples
         /// </summary>
         public async Task<DocumentCreated> CreateDocument()
         {
-            List<FormField> formFeilds = new List<FormField>();
-            formFeilds.Add(new FormField(
-                        name: "Sign",
-                        type: FieldType.Signature,
-                        pageNumber: 1,
-                        isRequired: true,
-                        bounds: new Rectangle(x: 50, y: 50, width: 200, height: 30)));
+            List<FormField> formFields = new List<FormField>
+            {
+                new FormField(
+                    name: "Sign",
+                    type: FieldType.Signature,
+                    pageNumber: 1,
+                    isRequired: true,
+                    bounds: new Rectangle(x: 50, y: 50, width: 200, height: 30)),
+            };
+
             var documentDetails = new SendForSign
             {
                 Title = "Sent from API SDK",
@@ -220,7 +224,7 @@ namespace BoldSign.Examples
                         authenticationCode: "123",
                         signerType: SignerType.Signer,
                         privateMessage: "This is private message for signer",
-                        formFields:formFeilds),
+                        formFields:formFields),
                 },
             };
 
@@ -255,6 +259,63 @@ namespace BoldSign.Examples
             var documentCreated = this.DocumentClient.SendDocument(documentDetails);
 
             return documentCreated;
+        }
+
+        /// <summary>
+        ///     Embedded sends the document and generates a URL to embedded that document into iframe.
+        /// </summary>
+        public async Task EmbeddedSendDocument()
+        {
+            List<FormField> formFields = new List<FormField>
+            {
+                new FormField(
+                    name: "Sign",
+                    type: FieldType.Signature,
+                    pageNumber: 1,
+                    isRequired: true,
+                    bounds: new Rectangle(x: 50, y: 50, width: 200, height: 30)),
+            };
+
+            var documentRequest = new EmbeddedDocumentRequest
+            {
+                Title = "Sent from API SDK",
+                Message = "This is document message sent from API SDK",
+                EnableSigningOrder = true,
+                Signers = new List<DocumentSigner>
+                {
+                    new DocumentSigner(
+                        name: "Signer Name 1",
+                        emailAddress: "signer1@email.com",
+                        signerOrder: 1,
+                        authenticationCode: "123",
+                        signerType: SignerType.Signer,
+                        privateMessage: "This is private message for signer",
+                        formFields: formFields),
+                },
+                Files = new List<IDocumentFile>
+                {
+                    new DocumentFilePath
+                    {
+                        ContentType = "application/pdf",
+
+                        // directly provide file path
+                        FilePath = "doc-1.pdf",
+                    },
+                },
+
+                // customize page options
+                SendViewOption = PageViewOption.PreparePage,
+                ShowToolbar = true,
+                ShowNavigationButtons = true,
+                ShowSaveButton = true,
+                ShowPreviewButton = false,
+                ShowSendButton = true,
+            };
+
+            var documentCreated =  await this.DocumentClient.CreateEmbeddedRequestUrlAsync(documentRequest);
+
+            // url to send the document from your web application
+            var documentSendUrl = documentCreated.SendUrl;
         }
     }
 }

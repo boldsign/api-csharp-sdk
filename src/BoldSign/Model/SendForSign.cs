@@ -97,5 +97,12 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("labels")]
         public List<string> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to remove the document ID watermark from all the PDF pages of the document.
+        /// Default is false.
+        /// </summary>
+        [JsonProperty("hideDocumentId")]
+        public bool HideDocumentId { get; set; }
     }
 }
