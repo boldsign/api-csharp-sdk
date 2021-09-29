@@ -3,7 +3,7 @@ namespace BoldSign.Api
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Threading.Tasks;
+    using System.Threading.Tasks;    
     using BoldSign.Model;
 
     /// <summary>
@@ -488,38 +488,6 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (DocumentCreated)</returns>
         Task<ApiResponse<DocumentCreated>> SendDocumentAsyncWithHttpInfo(SendForSign signRequestDetails);
-
-        /// <summary>
-        ///     Embedded sends the document and generates a URL to embedded that document into iframe.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <param name="sendRequest">The signRequestDetails.</param>
-        /// <returns>EmbeddedSendCreated.</returns>
-        EmbeddedSendCreated CreateEmbeddedRequestUrl(EmbeddedDocumentRequest sendRequest);
-
-        /// <summary>
-        ///     Embedded sends the document and generates a URL to embedded that document into iframe.
-        /// </summary>
-        /// <param name="sendRequest">The signRequestDetails.</param>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <returns>ApiResponse of EmbeddedSendCreated.</returns>
-        ApiResponse<EmbeddedSendCreated> CreateEmbeddedRequestUrlWithHttpInfo(EmbeddedDocumentRequest sendRequest);
-
-        /// <summary>
-        ///     Generates a send URL which embeds document sending process into your application.
-        /// </summary>
-        /// <param name="sendRequest">The signRequestDetails.</param>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <returns>Task of EmbeddedSendCreated.</returns>
-        Task<EmbeddedSendCreated> CreateEmbeddedRequestUrlAsync(EmbeddedDocumentRequest sendRequest);
-
-        /// <summary>
-        ///     Embedded sends the document and generates a URL to embedded that document into iframe.
-        /// </summary>
-        /// <param name="sendRequest">The signRequestDetails.</param>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <returns>Task of ApiResponse (EmbeddedSendCreated).</returns>
-        Task<ApiResponse<EmbeddedSendCreated>> CreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedDocumentRequest sendRequest);
 
         #endregion Asynchronous Operations
     }

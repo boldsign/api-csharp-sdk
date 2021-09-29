@@ -10,7 +10,6 @@
 
 namespace BoldSign.Model
 {
-    using System.ComponentModel;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
@@ -69,11 +68,5 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Expired")]
         Expired = 8,
-
-        /// <summary>
-        /// Represents Draft.
-        /// </summary>
-        [EnumMember(Value = "Draft")]
-        Draft = 9,
     }
 }

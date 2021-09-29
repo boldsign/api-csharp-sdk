@@ -117,127 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessCodeDetails" xml:space="preserve">
-    <value>Missing required parameter 'accessCodeDetails' when calling DocumentApi-&gt;ChangeAccessCode</value>
-  </data>
-  <data name="AccessCodeRequired" xml:space="preserve">
-    <value>accessCode is a required property for AccessCodeDetails and cannot be null</value>
-  </data>
-  <data name="ApiKey" xml:space="preserve">
-    <value>ApiKey collection may not be null</value>
-  </data>
-  <data name="ApiKeyPrefix" xml:space="preserve">
-    <value>ApiKeyPrefix collection may not be null</value>
-  </data>
-  <data name="BasePath" xml:space="preserve">
-    <value>basePath cannot be empty</value>
-  </data>
-  <data name="BasePathInvalid" xml:space="preserve">
-    <value>The provided basePath is invalid.</value>
-  </data>
   <data name="BoundsRequired" xml:space="preserve">
     <value>bounds is a required property for FormField and cannot be null</value>
-  </data>
-  <data name="DocumentIdAccessCode" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;ChangeAccessCode</value>
-  </data>
-  <data name="DocumentIdDelete" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;DeleteDocument</value>
-  </data>
-  <data name="DocumentIdDownload" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;DownloadDocument</value>
-  </data>
-  <data name="DocumentIdDownloadAudit" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;DownloadAuditLog</value>
-  </data>
-  <data name="DocumentIdIsSet" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;GetProperties</value>
-  </data>
-  <data name="DocumentIdIsSetEmbeddedSignLink" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;GetEmbeddedSignLink</value>
-  </data>
-  <data name="DocumentIdRemind" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;RemindDocument</value>
-  </data>
-  <data name="DocumentIdRevoke" xml:space="preserve">
-    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;RevokeDocument</value>
-  </data>
-  <data name="EmailAddressRequired" xml:space="preserve">
-    <value>emailAddress is a required property for DocumentCC and cannot be null</value>
-  </data>
-  <data name="EmailIdAccessCode" xml:space="preserve">
-    <value>Missing required parameter 'emailId' when calling DocumentApi-&gt;ChangeAccessCode</value>
-  </data>
-  <data name="EmailRequired" xml:space="preserve">
-    <value>emailAddress is a required property for DocumentSigner and cannot be null</value>
-  </data>
-  <data name="ExceptionFactoryUnsupported" xml:space="preserve">
-    <value>Multicast delegate for ExceptionFactory is unsupported</value>
-  </data>
-  <data name="FieldType" xml:space="preserve">
-    <value>Read only</value>
   </data>
   <data name="FieldTypeRequired" xml:space="preserve">
     <value>fieldType is a required property for FormField and cannot be null</value>
   </data>
-  <data name="FilesIsSet" xml:space="preserve">
-    <value>Missing required parameter 'files' when calling DocumentApi-&gt;SendDocument</value>
-  </data>
-  <data name="FilesizesWithin100MB" xml:space="preserve">
-    <value>Document's size exceeds the limit of 100 MB. Please replace it. (all files combined)</value>
-  </data>
-  <data name="FilesRequired" xml:space="preserve">
-    <value>files is a required property for InlineObject and cannot be null</value>
-  </data>
-  <data name="FormFieldsRequired" xml:space="preserve">
-    <value>formFields is a required property for InlineObject and cannot be null</value>
-  </data>
-  <data name="IDocumentFile" xml:space="preserve">
-    <value>{nameof(IDocumentFile)} is not parameter is not any of the actual derived type</value>
-  </data>
   <data name="MessageLengthExceeds" xml:space="preserve">
     <value>The message exceeds the limit of 5000 characters</value>
-  </data>
-  <data name="MessageRequired" xml:space="preserve">
-    <value>message is a required property for RevokeDocument and cannot be null</value>
-  </data>
-  <data name="NameRequired" xml:space="preserve">
-    <value>name is a required property for DocumentSigner and cannot be null</value>
-  </data>
-  <data name="NewAccessCode" xml:space="preserve">
-    <value>Missing required parameter 'newAccessCode' when calling DocumentApi-&gt;ChangeAccessCode</value>
-  </data>
-  <data name="PageListRequired" xml:space="preserve">
-    <value>Missing required parameter 'page' when calling TemplateApi-&gt;ListTemplates</value>
   </data>
   <data name="PageNumberRquired" xml:space="preserve">
     <value>pageNumber is a required property for FormField and cannot be null</value>
   </data>
-  <data name="RevokeMessageRevoke" xml:space="preserve">
-    <value>Missing required parameter 'revokeMessage' when calling DocumentApi-&gt;RevokeDocument</value>
-  </data>
-  <data name="SignerEmailIsSet" xml:space="preserve">
-    <value>Missing required parameter 'signerEmail' when calling DocumentApi-&gt;GetEmbeddedSignLink</value>
-  </data>
-  <data name="SignersIsSet" xml:space="preserve">
-    <value>Missing required parameter 'signers' when calling DocumentApi-&gt;SendDocument</value>
-  </data>
-  <data name="SignersRequired" xml:space="preserve">
-    <value>signers is a required property for InlineObject and cannot be null</value>
-  </data>
-  <data name="TemplateIdDelete" xml:space="preserve">
-    <value>Missing required parameter 'templateId' when calling TemplateApi-&gt;DeleteTemplate</value>
-  </data>
-  <data name="TemplateIdNull" xml:space="preserve">
-    <value>Parameter {nameof(sendForSignFromTemplate.TemplateId)} should be null or empty</value>
-  </data>
-  <data name="TitleIsSet" xml:space="preserve">
-    <value>Missing required parameter 'title' when calling DocumentApi-&gt;SendDocument</value>
-  </data>
   <data name="TitleLengthExceeds" xml:space="preserve">
     <value>The title exceeds the limit of 256 characters</value>
-  </data>
-  <data name="TitleRequired" xml:space="preserve">
-    <value>title is a required property for InlineObject and cannot be null</value>
   </data>
 </root>
