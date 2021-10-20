@@ -29,6 +29,16 @@ namespace BoldSign.Api
     /// </summary>
     public class ApiClient
     {
+        #region Constants
+
+        /// <summary>
+        ///     X-API-KEY for ApiKey.
+        /// </summary>
+        /// <value>X-API-KEY for ApiKey.</value>
+        public const string XApiKey = "X-API-KEY";
+
+        #endregion Constants
+
         private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
@@ -55,6 +65,43 @@ namespace BoldSign.Api
 
             this.RestClient = new RestClient(this.Configuration.BasePath);
         }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ApiClient" /> class
+        ///     with default base path and api key. <see cref="Client.Configuration.ApiBaseUrl"/>.
+        /// </summary>
+        /// <param name="config">An instance of Configuration.</param>
+        public ApiClient(string basePath, string apiKey)
+        {
+            if (string.IsNullOrEmpty(basePath))
+            {
+                throw new ArgumentException("basePath cannot be empty");
+            }
+            this.RestClient = new RestClient(basePath);
+            this.Configuration = Api.Configuration.Default;
+            this.Configuration.DefaultHeader.Remove(XApiKey);
+            this.Configuration.DefaultHeader.Add(XApiKey, apiKey);
+        }
+
+        private string m_apiKey;
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ApiClient" /> class
+        /// </summary>
+        /// <param name="apiKey">An instance of Configuration.</param>
+        public string ApiKey
+        {
+            get => m_apiKey;
+            set
+            {
+                if (m_apiKey != value)
+                {
+                    this.m_apiKey = value;
+                    this.Configuration.DefaultHeader.Remove(XApiKey);
+                    this.Configuration.DefaultHeader.Add(XApiKey, m_apiKey);
+                }
+            }
+        }
+
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ApiClient" /> class
