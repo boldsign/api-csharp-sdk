@@ -1,6 +1,5 @@
 ﻿namespace BoldSign.Examples
 {
-    using System;
     using BoldSign.Api;
     using BoldSign.Model;
     using System.Collections.Generic;
@@ -47,7 +46,7 @@
         /// <returns>A DocumentCreated.</returns>
         public DocumentCreated CreateDocumentUsingTemplate()
         {
-            // This is an example document id, add your own template id created from the web app upon usage.
+            // This is an example document id, add your own document id upon usage.
             var templateId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
 
             var templateDetails = new SendForSignFromTemplate(
@@ -67,7 +66,7 @@
         /// <returns>A DocumentCreated.</returns>
         public DocumentCreated CreateDocumentWithCustomRoles()
         {
-            // This is an example document id, add your own template id created from the web app upon usage.
+            // This is an example document id, add your own document id upon usage.
             var templateId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
 
             var roles = new List<Roles>

@@ -80,6 +80,12 @@ namespace BoldSign.Model
         public bool EnableEmbeddedSigning { get; set; }
 
         /// <summary>
+        /// Gets or sets the File URLs to be uploaded.
+        /// </summary>
+        [JsonProperty("fileUrls")]
+        public List<Uri> FileUrls { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether to enable DisableEmails.
         ///     When DisableEmails is enabled, Reminder is automatically ignored.
         /// </summary>

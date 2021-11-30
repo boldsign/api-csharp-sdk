@@ -35,6 +35,9 @@ namespace BoldSign.Model
         /// <param name="labels">Gets or sets the labels.</param>
         /// <param name="disableEmails">Gets or sets the disableEmails.</param>
         /// <param name="hideDocumentId">Gets or sets the hideDocumentId.</param>
+        /// <param name="reminderSettings">Gets or sets the reminderSettings.</param>
+        /// <param name="cc">Gets or sets the cc.</param>
+        /// <param name="expiryDays">Gets or sets the expiryDays.</param>
         public SendForSignFromTemplate(
             string templateId = default,
             string title = default,
@@ -43,7 +46,10 @@ namespace BoldSign.Model
             string brandId = default,
             List<string> labels = default,
             bool disableEmails = default,
-            bool hideDocumentId = default)
+            bool hideDocumentId = default,
+            ReminderSettings reminderSettings = default,
+            IEnumerable<DocumentCC> cc = default,
+            int expiryDays = 60)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -57,6 +63,9 @@ namespace BoldSign.Model
             this.Labels = labels;
             this.DisableEmails = disableEmails;
             this.HideDocumentId = hideDocumentId;
+            this.ReminderSettings = reminderSettings;
+            this.CC = cc;
+            this.ExpiryDays = expiryDays;
         }
 
         /// <summary>
@@ -111,6 +120,24 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "hideDocumentId", EmitDefaultValue = true)]
         public bool HideDocumentId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the reminder settings for the signature request.
+        /// </summary>
+        [DataMember(Name = "reminderSettings", EmitDefaultValue = true)]
+        public ReminderSettings ReminderSettings { get; set; }
+
+        /// <summary>
+        ///     Gets or sets document CC details.
+        /// </summary>
+        [DataMember(Name = "cc", EmitDefaultValue = true)]
+        public IEnumerable<DocumentCC> CC { get; set; }
+
+        /// <summary>
+        ///  Gets or sets number of days after which the document will expire.
+        /// </summary>
+        [DataMember(Name = "expiryDays", EmitDefaultValue = true)]
+        public int ExpiryDays { get; set; } = 60;
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

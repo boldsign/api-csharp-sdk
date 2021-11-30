@@ -1,10 +1,11 @@
-﻿// <copyright file="PageViewOption.cs" company="Syncfusion Inc">
+// <copyright file="PageViewOption.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
 namespace BoldSign.Model
 {
     using System.Runtime.Serialization;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
