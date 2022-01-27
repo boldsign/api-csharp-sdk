@@ -166,6 +166,7 @@ namespace BoldSign.Api
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var accessCodeDetails = new AccessCodeDetails(newAccessCode);
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -247,7 +248,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -320,6 +321,7 @@ namespace BoldSign.Api
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var accessCodeDetails = new AccessCodeDetails(newAccessCode);
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -400,7 +402,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -448,6 +450,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -495,7 +498,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -543,6 +546,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -590,7 +594,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -640,6 +644,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -687,7 +692,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -737,6 +742,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -784,7 +790,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -834,6 +840,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -881,7 +888,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -931,6 +938,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -978,7 +986,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1040,6 +1048,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1098,7 +1107,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1160,6 +1169,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1218,7 +1228,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1268,6 +1278,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1300,7 +1311,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1350,6 +1361,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1382,7 +1394,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1442,6 +1454,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1514,7 +1527,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1574,6 +1587,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1646,7 +1660,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1698,6 +1712,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -1775,7 +1790,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1827,6 +1842,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -1904,7 +1920,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1960,6 +1976,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             var revokeDocument = new RevokeDocument(revokeMessage);
             object localVarPostBody;
 
@@ -2018,7 +2035,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2074,6 +2091,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             var revokeDocument = new RevokeDocument(revokeMessage);
             object localVarPostBody;
 
@@ -2132,7 +2150,7 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2176,6 +2194,7 @@ namespace BoldSign.Api
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -2197,8 +2216,18 @@ namespace BoldSign.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            localVarFileParams.Add("Files", signRequestDetails.Files);
+            if (signRequestDetails.Files?.Count > 0)
+            {
+                localVarFileParams.Add("Files", signRequestDetails.Files);
+            }
+
             localVarFormParams = FromRequestHelper.ConvertToFormRequest(signRequestDetails, localVarFormParams);
+
+            if (signRequestDetails.FileUrls?.Count > 0)
+            {
+                localVarFileUrlParams = FromRequestHelper.ToFormParameter(localVarFileUrlParams, signRequestDetails.FileUrls, nameof(signRequestDetails.FileUrls));
+            }
+
 
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
@@ -2210,87 +2239,10 @@ namespace BoldSign.Api
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
                 localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
-            var exception = this.ExceptionFactory?.Invoke("SendDocument", localVarResponse);
-
-            if (exception != null)
-            {
-                throw exception;
-            }
-
-            return new ApiResponse<DocumentCreated>(
-                localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
-        }
-
-        /// <summary>
-        ///     Sends the document for sign.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of DocumentCreated</returns>
-        public async Task<DocumentCreated> SendDocumentAsync(SendForSign signRequestDetails)
-        {
-            var localVarResponse = await this.SendDocumentAsyncWithHttpInfo(signRequestDetails);
-
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        ///     Sends the document for sign.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (DocumentCreated)</returns>
-        public async Task<ApiResponse<DocumentCreated>> SendDocumentAsyncWithHttpInfo(SendForSign signRequestDetails)
-        {
-            ValidateSendProperties(signRequestDetails);
-
-            var localVarPath = "/v1/document/send";
-            var localVarPathParams = new Dictionary<string, string>();
-            var localVarQueryParams = new List<KeyValuePair<string, string>>();
-            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<string, string>();
-            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
-            object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            var localVarHttpContentTypes = new[]
-            {
-                "multipart/form-data",
-            };
-            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            var localVarHttpHeaderAccepts = new[]
-            {
-                "application/json",
-            };
-            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-
-            if (localVarHttpHeaderAccept != null)
-            {
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            }
-
-            localVarFileParams.Add("Files", signRequestDetails.Files);
-            localVarFormParams = FromRequestHelper.ConvertToFormRequest(signRequestDetails, localVarFormParams);
-
-            // authentication (Bearer) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
-            }
-
-            // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
-                localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            var localVarStatusCode = (int)localVarResponse.StatusCode;
             var exception = this.ExceptionFactory?.Invoke("SendDocument", localVarResponse);
 
             if (exception != null)
@@ -2322,12 +2274,13 @@ namespace BoldSign.Api
 
             ValidateSendProperties(sendRequest);
 
-            var localVarPath = "/v1-beta/document/createEmbeddedRequestUrl";
+            var localVarPath = "/v1/document/createEmbeddedRequestUrl";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -2368,7 +2321,8 @@ namespace BoldSign.Api
                 localVarFormParams,
                 localVarFileParams,
                 localVarPathParams,
-                localVarHttpContentType);
+                localVarHttpContentType,
+                localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2403,12 +2357,13 @@ namespace BoldSign.Api
 
             ValidateSendProperties(sendRequest);
 
-            var localVarPath = "/v1-beta/document/createEmbeddedRequestUrl";
+            var localVarPath = "/v1/document/createEmbeddedRequestUrl";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -2449,7 +2404,8 @@ namespace BoldSign.Api
                 localVarFormParams,
                 localVarFileParams,
                 localVarPathParams,
-                localVarHttpContentType).ConfigureAwait(false);
+                localVarHttpContentType,
+                localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
             var exception = this.ExceptionFactory?.Invoke("CreateEmbeddedRequestUrl", localVarResponse);
@@ -2465,17 +2421,118 @@ namespace BoldSign.Api
                 (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
         }
 
-        private static void ValidateSendProperties(SendForSign sendRequest)
+        /// <summary>
+        ///     Sends the document for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of DocumentCreated</returns>
+        public async Task<DocumentCreated> SendDocumentAsync(SendForSign signRequestDetails)
         {
-            // verify the required parameter 'files' is set
-            if (sendRequest.Files == null)
+            var localVarResponse = await this.SendDocumentAsyncWithHttpInfo(signRequestDetails);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///     Sends the document for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (DocumentCreated)</returns>
+        public async Task<ApiResponse<DocumentCreated>> SendDocumentAsyncWithHttpInfo(SendForSign signRequestDetails)
+        {
+            ValidateSendProperties(signRequestDetails);
+
+            var localVarPath = "/v1/document/send";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
             {
-                throw new ApiException(400, ApiValidationMessages.FilesIsSet);
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (sendRequest.Files.Sum(x => x.Filesize()) > MaxFileSize)
+            if (signRequestDetails.Files?.Count > 0)
             {
-                throw new ApiException(413, ApiValidationMessages.FilesizesWithin100MB);
+                localVarFileParams.Add("Files", signRequestDetails.Files);
+            }
+
+            if (signRequestDetails.FileUrls?.Count > 0)
+            {
+                localVarFileUrlParams = FromRequestHelper.ToFormParameter(localVarFileUrlParams, signRequestDetails.FileUrls, nameof(signRequestDetails.FileUrls));
+            }
+
+            localVarFormParams = FromRequestHelper.ConvertToFormRequest(signRequestDetails, localVarFormParams);
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("SendDocument", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        private static void ValidateSendProperties(SendForSign sendRequest)
+        {
+            // verify the only files or fileUrls is set.
+            if ((sendRequest.Files?.Count > 0 && sendRequest.FileUrls?.Count > 0) || (sendRequest.Files?.Count < 0 && sendRequest.FileUrls?.Count < 0))
+            {
+                throw new ApiException(400, ApiValidationMessages.FileOrFileUrl);
+            }
+
+            if (sendRequest.Files?.Count > 0)
+            {
+                if (sendRequest.Files.Sum(x => x.Filesize()) > MaxFileSize)
+                {
+                    throw new ApiException(413, ApiValidationMessages.FilesizesWithin100MB);
+                }
+            }
+
+            if (sendRequest.FileUrls?.Count > 0)
+            {
+                foreach (var fileUrl in sendRequest.FileUrls)
+                {
+                    if (!Uri.IsWellFormedUriString(fileUrl.ToString(), UriKind.Absolute))
+                    {
+                        throw new ApiException(413, ApiValidationMessages.ValidUrl);
+                    }
+                }
             }
 
             // verify the required parameter 'title' is set
@@ -2501,6 +2558,19 @@ namespace BoldSign.Api
             {
                 throw new ApiException(422, ApiValidationMessages.MessageLengthExceeds);
             }
+
+            if (!string.IsNullOrEmpty(sendRequest.BrandId) && !Guid.TryParse(sendRequest.BrandId, out _))
+            {
+                throw new ApiException(422, ApiValidationMessages.InvalidBrandId);
+            }
         }
+
+        private static bool ValidateUri(string uri)
+        {
+            return uri == null
+                || (Uri.TryCreate(uri, UriKind.Absolute, out var result)
+                    && (result.Scheme == Uri.UriSchemeHttp || result.Scheme == Uri.UriSchemeHttps));
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="EmbeddedTemplateRequest.cs" company="Syncfusion Inc">
+// <copyright file="EmbeddedTemplateRequest.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -7,6 +7,7 @@ namespace BoldSign.Model
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+
     using Newtonsoft.Json;
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿// <copyright file="EmbeddedSendCreated.cs" company="Syncfusion Inc">
+// <copyright file="EmbeddedSendCreated.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -19,6 +19,7 @@ namespace BoldSign.Model
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
     using System.Text;
+
     using Newtonsoft.Json;
 
     /// <summary>

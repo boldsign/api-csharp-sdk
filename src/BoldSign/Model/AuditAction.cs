@@ -187,5 +187,29 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "CompletePrintSign")]
         CompletePrintSign = 28,
+
+        /// <summary>
+        /// Enum Generated embedded sign link for value:Generated embedded sign link.
+        /// </summary>
+        [EnumMember(Value = "GeneratedEmbeddedSignLink")]
+        GeneratedEmbeddedSignLink = 29,
+
+        /// <summary>
+        ///  Enum Embedded signed for value: Embedded signed.
+        /// </summary>
+        [EnumMember(Value = "EmbeddedSigned")]
+        EmbeddedSigned = 30,
+
+        /// <summary>
+        ///  Enum Embedded reviewed for value: Embedded reviewed.
+        /// </summary>
+        [EnumMember(Value = "EmbeddedReviewed")]
+        EmbeddedReviewed = 31,
+
+        /// <summary>
+        /// Enum ExpiryDateExtended for value: ExpiryDateExtended.
+        /// </summary>
+        [EnumMember(Value = "ExpiryDateExtended")]
+        ExpiryDateExtended = 32,
     }
 }

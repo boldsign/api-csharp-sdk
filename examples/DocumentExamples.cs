@@ -5,7 +5,6 @@ namespace BoldSign.Examples
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
 
@@ -200,16 +199,13 @@ namespace BoldSign.Examples
         /// </summary>
         public async Task<DocumentCreated> CreateDocument()
         {
-            List<FormField> formFields = new List<FormField>
-            {
-                new FormField(
-                    name: "Sign",
-                    type: FieldType.Signature,
-                    pageNumber: 1,
-                    isRequired: true,
-                    bounds: new Rectangle(x: 50, y: 50, width: 200, height: 30)),
-            };
-
+            List<FormField> formFeilds = new List<FormField>();
+            formFeilds.Add(new FormField(
+                        name: "Sign",
+                        type: FieldType.Signature,
+                        pageNumber: 1,
+                        isRequired: true,
+                        bounds: new Rectangle(x: 50, y: 50, width: 200, height: 30)));
             var documentDetails = new SendForSign
             {
                 Title = "Sent from API SDK",
@@ -224,7 +220,7 @@ namespace BoldSign.Examples
                         authenticationCode: "123",
                         signerType: SignerType.Signer,
                         privateMessage: "This is private message for signer",
-                        formFields:formFields),
+                        formFields:formFeilds),
                 },
             };
 
@@ -256,6 +252,49 @@ namespace BoldSign.Examples
                 },
             };
 
+            var documentCreated = this.DocumentClient.SendDocument(documentDetails);
+
+            return documentCreated;
+        }
+
+        /// <summary>
+        ///  Creates the document with File urls.
+        /// </summary>
+        public async Task<DocumentCreated> CreateDocumentWithFileUrl()
+        {
+            List<FormField> formFields = new List<FormField>
+            {
+                new FormField(
+                    name: "Sign",
+                    type: FieldType.Signature,
+                    pageNumber: 1,
+                    isRequired: true,
+                    bounds: new Rectangle(x: 50, y: 50, width: 200, height: 30)),
+            };
+
+            var documentDetails = new SendForSign
+            {
+                Title = "Sent from API SDK",
+                Message = "This is document message sent from API SDK",
+                EnableSigningOrder = true,
+                Signers = new List<DocumentSigner>
+                {
+                    new DocumentSigner(
+                        name: "Signer Name 1",
+                        emailAddress: "signer1@email.com",
+                        signerOrder: 1,
+                        authenticationCode: "123",
+                        signerType: SignerType.Signer,
+                        privateMessage: "This is private message for signer",
+                        formFields:formFields),
+                },
+            };
+
+            documentDetails.FileUrls = new List<Uri>()
+            {
+                new Uri("https://documentmanipulatordev.blob.core.windows.net/dev-public/EBrochure.pdf"),
+                new Uri("https://documentmanipulatordev.blob.core.windows.net/dev-public/Brouchure2021.pdf")
+            };
             var documentCreated = this.DocumentClient.SendDocument(documentDetails);
 
             return documentCreated;
@@ -312,7 +351,7 @@ namespace BoldSign.Examples
                 ShowSendButton = true,
             };
 
-            var documentCreated =  await this.DocumentClient.CreateEmbeddedRequestUrlAsync(documentRequest);
+            var documentCreated = await this.DocumentClient.CreateEmbeddedRequestUrlAsync(documentRequest);
 
             // url to send the document from your web application
             var documentSendUrl = documentCreated.SendUrl;

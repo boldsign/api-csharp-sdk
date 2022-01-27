@@ -61,182 +61,11 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;accessCodeDetails&apos; when calling DocumentApi-&gt;ChangeAccessCode.
-        /// </summary>
-        internal static string AccessCodeDetails {
-            get {
-                return ResourceManager.GetString("AccessCodeDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to accessCode is a required property for AccessCodeDetails and cannot be null.
-        /// </summary>
-        internal static string AccessCodeRequired {
-            get {
-                return ResourceManager.GetString("AccessCodeRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ApiKey collection may not be null.
-        /// </summary>
-        internal static string ApiKey {
-            get {
-                return ResourceManager.GetString("ApiKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ApiKeyPrefix collection may not be null.
-        /// </summary>
-        internal static string ApiKeyPrefix {
-            get {
-                return ResourceManager.GetString("ApiKeyPrefix", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to basePath cannot be empty.
-        /// </summary>
-        internal static string BasePath {
-            get {
-                return ResourceManager.GetString("BasePath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The provided basePath is invalid..
-        /// </summary>
-        internal static string BasePathInvalid {
-            get {
-                return ResourceManager.GetString("BasePathInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to bounds is a required property for FormField and cannot be null.
         /// </summary>
         internal static string BoundsRequired {
             get {
                 return ResourceManager.GetString("BoundsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;ChangeAccessCode.
-        /// </summary>
-        internal static string DocumentIdAccessCode {
-            get {
-                return ResourceManager.GetString("DocumentIdAccessCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;DeleteDocument.
-        /// </summary>
-        internal static string DocumentIdDelete {
-            get {
-                return ResourceManager.GetString("DocumentIdDelete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;DownloadDocument.
-        /// </summary>
-        internal static string DocumentIdDownload {
-            get {
-                return ResourceManager.GetString("DocumentIdDownload", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;DownloadAuditLog.
-        /// </summary>
-        internal static string DocumentIdDownloadAudit {
-            get {
-                return ResourceManager.GetString("DocumentIdDownloadAudit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;GetProperties.
-        /// </summary>
-        internal static string DocumentIdIsSet {
-            get {
-                return ResourceManager.GetString("DocumentIdIsSet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;GetEmbeddedSignLink.
-        /// </summary>
-        internal static string DocumentIdIsSetEmbeddedSignLink {
-            get {
-                return ResourceManager.GetString("DocumentIdIsSetEmbeddedSignLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;RemindDocument.
-        /// </summary>
-        internal static string DocumentIdRemind {
-            get {
-                return ResourceManager.GetString("DocumentIdRemind", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;RevokeDocument.
-        /// </summary>
-        internal static string DocumentIdRevoke {
-            get {
-                return ResourceManager.GetString("DocumentIdRevoke", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to emailAddress is a required property for DocumentCC and cannot be null.
-        /// </summary>
-        internal static string EmailAddressRequired {
-            get {
-                return ResourceManager.GetString("EmailAddressRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;emailId&apos; when calling DocumentApi-&gt;ChangeAccessCode.
-        /// </summary>
-        internal static string EmailIdAccessCode {
-            get {
-                return ResourceManager.GetString("EmailIdAccessCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to emailAddress is a required property for DocumentSigner and cannot be null.
-        /// </summary>
-        internal static string EmailRequired {
-            get {
-                return ResourceManager.GetString("EmailRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Multicast delegate for ExceptionFactory is unsupported.
-        /// </summary>
-        internal static string ExceptionFactoryUnsupported {
-            get {
-                return ResourceManager.GetString("ExceptionFactoryUnsupported", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Read only.
-        /// </summary>
-        internal static string FieldType {
-            get {
-                return ResourceManager.GetString("FieldType", resourceCulture);
             }
         }
         
@@ -250,11 +79,11 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;files&apos; when calling DocumentApi-&gt;SendDocument.
+        ///   Looks up a localized string similar to Please use either Files parameter or FileUrls parameter, but not both.
         /// </summary>
-        internal static string FilesIsSet {
+        internal static string FileOrFileUrl {
             get {
-                return ResourceManager.GetString("FilesIsSet", resourceCulture);
+                return ResourceManager.GetString("FileOrFileUrl", resourceCulture);
             }
         }
         
@@ -268,29 +97,11 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to files is a required property for InlineObject and cannot be null.
+        ///   Looks up a localized string similar to Provide a valid brand ID.
         /// </summary>
-        internal static string FilesRequired {
+        internal static string InvalidBrandId {
             get {
-                return ResourceManager.GetString("FilesRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to formFields is a required property for InlineObject and cannot be null.
-        /// </summary>
-        internal static string FormFieldsRequired {
-            get {
-                return ResourceManager.GetString("FormFieldsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {nameof(IDocumentFile)} is not parameter is not any of the actual derived type.
-        /// </summary>
-        internal static string IDocumentFile {
-            get {
-                return ResourceManager.GetString("IDocumentFile", resourceCulture);
+                return ResourceManager.GetString("InvalidBrandId", resourceCulture);
             }
         }
         
@@ -304,42 +115,6 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to message is a required property for RevokeDocument and cannot be null.
-        /// </summary>
-        internal static string MessageRequired {
-            get {
-                return ResourceManager.GetString("MessageRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to name is a required property for DocumentSigner and cannot be null.
-        /// </summary>
-        internal static string NameRequired {
-            get {
-                return ResourceManager.GetString("NameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;newAccessCode&apos; when calling DocumentApi-&gt;ChangeAccessCode.
-        /// </summary>
-        internal static string NewAccessCode {
-            get {
-                return ResourceManager.GetString("NewAccessCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;page&apos; when calling TemplateApi-&gt;ListTemplates.
-        /// </summary>
-        internal static string PageListRequired {
-            get {
-                return ResourceManager.GetString("PageListRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to pageNumber is a required property for FormField and cannot be null.
         /// </summary>
         internal static string PageNumberRquired {
@@ -349,47 +124,11 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;revokeMessage&apos; when calling DocumentApi-&gt;RevokeDocument.
-        /// </summary>
-        internal static string RevokeMessageRevoke {
-            get {
-                return ResourceManager.GetString("RevokeMessageRevoke", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;signerEmail&apos; when calling DocumentApi-&gt;GetEmbeddedSignLink.
-        /// </summary>
-        internal static string SignerEmailIsSet {
-            get {
-                return ResourceManager.GetString("SignerEmailIsSet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Missing required parameter &apos;signers&apos; when calling DocumentApi-&gt;SendDocument.
         /// </summary>
         internal static string SignersIsSet {
             get {
                 return ResourceManager.GetString("SignersIsSet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to signers is a required property for InlineObject and cannot be null.
-        /// </summary>
-        internal static string SignersRequired {
-            get {
-                return ResourceManager.GetString("SignersRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;templateId&apos; when calling TemplateApi-&gt;DeleteTemplate.
-        /// </summary>
-        internal static string TemplateIdDelete {
-            get {
-                return ResourceManager.GetString("TemplateIdDelete", resourceCulture);
             }
         }
         
@@ -421,11 +160,11 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to title is a required property for InlineObject and cannot be null.
+        ///   Looks up a localized string similar to Please provide valid file URL.
         /// </summary>
-        internal static string TitleRequired {
+        internal static string ValidUrl {
             get {
-                return ResourceManager.GetString("TitleRequired", resourceCulture);
+                return ResourceManager.GetString("ValidUrl", resourceCulture);
             }
         }
     }

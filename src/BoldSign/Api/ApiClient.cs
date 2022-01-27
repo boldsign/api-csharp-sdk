@@ -29,6 +29,16 @@ namespace BoldSign.Api
     /// </summary>
     public class ApiClient
     {
+        #region Constants
+
+        /// <summary>
+        ///     X-API-KEY for ApiKey.
+        /// </summary>
+        /// <value>X-API-KEY for ApiKey.</value>
+        public const string XApiKey = "X-API-KEY";
+
+        #endregion Constants
+
         private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
@@ -55,6 +65,43 @@ namespace BoldSign.Api
 
             this.RestClient = new RestClient(this.Configuration.BasePath);
         }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ApiClient" /> class
+        ///     with default base path and api key. <see cref="Client.Configuration.ApiBaseUrl"/>.
+        /// </summary>
+        /// <param name="config">An instance of Configuration.</param>
+        public ApiClient(string basePath, string apiKey)
+        {
+            if (string.IsNullOrEmpty(basePath))
+            {
+                throw new ArgumentException("basePath cannot be empty");
+            }
+            this.RestClient = new RestClient(basePath);
+            this.Configuration = Api.Configuration.Default;
+            this.Configuration.DefaultHeader.Remove(XApiKey);
+            this.Configuration.DefaultHeader.Add(XApiKey, apiKey);
+        }
+
+        private string m_apiKey;
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ApiClient" /> class
+        /// </summary>
+        /// <param name="apiKey">An instance of Configuration.</param>
+        public string ApiKey
+        {
+            get => m_apiKey;
+            set
+            {
+                if (m_apiKey != value)
+                {
+                    this.m_apiKey = value;
+                    this.Configuration.DefaultHeader.Remove(XApiKey);
+                    this.Configuration.DefaultHeader.Add(XApiKey, m_apiKey);
+                }
+            }
+        }
+
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ApiClient" /> class
@@ -113,7 +160,7 @@ namespace BoldSign.Api
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType)
+            string contentType, Dictionary<string, Uri> fileUrlsParams)
         {
             var request = new RestRequest(path, method);
 
@@ -157,6 +204,13 @@ namespace BoldSign.Api
                     }
                 }
             }
+
+            // add file URL parameter, if any
+            foreach (var param in fileUrlsParams)
+            {
+                request.AddParameter(param.Key, param.Value);
+            }
+
 
             if (postBody != null) // http body (model or byte[]) parameter
             {
@@ -207,16 +261,17 @@ namespace BoldSign.Api
         /// <param name="fileParams">File parameters.</param>
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content Type of the request</param>
+        /// <param name="fileUrlParams">File Url parameter.</param>>
         /// <returns>Object</returns>
         internal object CallApi(
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType)
+            string contentType, Dictionary<string, Uri> fileUrlParams)
         {
             var request = this.PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType);
+                pathParams, contentType, fileUrlParams);
 
             // set timeout
 
@@ -243,16 +298,17 @@ namespace BoldSign.Api
         /// <param name="fileParams">File parameters.</param>
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content type.</param>
+        /// <param name="fileUrlsParams">File Urls parameter.</param>
         /// <returns>The Task instance.</returns>
         internal async Task<object> CallApiAsync(
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType)
+            string contentType, Dictionary<string, Uri> fileUrlsParams)
         {
             var request = this.PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType);
+                pathParams, contentType, fileUrlsParams);
             this.RestClient.UserAgent = this.Configuration.UserAgent;
             this.InterceptRequest(request);
             var response = await this.RestClient.ExecuteTaskAsync(request);

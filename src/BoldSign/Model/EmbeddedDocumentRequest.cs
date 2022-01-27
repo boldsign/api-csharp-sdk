@@ -1,4 +1,4 @@
-﻿// <copyright file="EmbeddedDocumentRequest.cs" company="Syncfusion Inc">
+// <copyright file="EmbeddedDocumentRequest.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -18,6 +18,7 @@ namespace BoldSign.Model
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
