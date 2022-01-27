@@ -57,7 +57,35 @@ namespace BoldSign.Model
         /// <param name="validationType">validationType.</param>
         /// <param name="validationCustomRegex">validationCustomRegex.</param>
         /// <param name="placeholder">placeHolder.</param>
+        [Obsolete("Name is deprecated, please use Id instead")]
         public TextBoxField(string name = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string placeholder = default(string)) : base(name: name, type: FieldType.TextBox, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, characterLimit: characterLimit)
+        {
+            this.ValidationType = validationType;
+            this.ValidationCustomRegex = validationCustomRegex;
+            this.Placeholder = placeholder;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextBoxField" /> class.
+        /// </summary>
+        /// <param name="pageNumber">pageNumber.</param>
+        /// <param name="bounds">bounds (required).</param>
+        /// <param name="isRequired">isRequired.</param>
+        /// <param name="value">value.</param>
+        /// <param name="fontSize">fontSize.</param>
+        /// <param name="font">font (required).</param>
+        /// <param name="fontHexColor">fontHexColor.</param>
+        /// <param name="isBoldFont">isBoldFont.</param>
+        /// <param name="isItalicFont">isItalicFont.</param>
+        /// <param name="isUnderLineFont">isUnderLineFont.</param>
+        /// <param name="lineHeight">lineHeight.</param>
+        /// <param name="characterLimit">characterLimit.</param>
+        /// <param name="validationType">validationType.</param>
+        /// <param name="validationCustomRegex">validationCustomRegex.</param>
+        /// <param name="placeholder">placeHolder.</param>
+        /// <param name="id">id.</param>
+        public TextBoxField(int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string placeholder = default(string), string id = default(string))
+            : base(type: FieldType.TextBox, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, characterLimit: characterLimit, id: id)
         {
             this.ValidationType = validationType;
             this.ValidationCustomRegex = validationCustomRegex;

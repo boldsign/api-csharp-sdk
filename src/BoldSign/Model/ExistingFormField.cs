@@ -45,9 +45,14 @@ namespace BoldSign.Model
             this.Value = value;
         }
 
-        public ExistingFormField(string name = default, string value = default)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExistingFormField"/> class.
+        /// </summary>
+        /// <param name="id">Gets oe sets the id.</param>
+        /// <param name="value">Gets or sets the signer role.</param>
+        public ExistingFormField(string id = default, string value = default)
         {
-            this.Name = name;
+            this.Id = id;
             this.Value = value;
         }
 
@@ -63,7 +68,15 @@ namespace BoldSign.Model
         /// </summary>
         /// <value>Gets or sets the name.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
+        [Obsolete("Name is deprecated, please use Id instead")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
+        /// <value>Gets the value of id.</value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the signer role.

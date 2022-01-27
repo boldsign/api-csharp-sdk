@@ -43,6 +43,7 @@ namespace BoldSign.Model
         /// <param name="bounds">bounds (required).</param>
         /// <param name="isRequired">Gets or sets a value indicating whether is required..</param>
         /// <param name="value">Gets or sets the value..</param>
+        [Obsolete("Name is deprecated, please use Id instead")]
         public FormField(string name = default, FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default)
         {
 
@@ -84,6 +85,61 @@ namespace BoldSign.Model
         }
 
         /// <summary>
+        ///     Initializes a new instance of the <see cref="FormField" /> class.
+        /// </summary>
+        /// <param name="type">fieldType (required).</param>
+        /// <param name="pageNumber">Gets or sets the page number. (required).</param>
+        /// <param name="bounds">bounds (required).</param>
+        /// <param name="isRequired">Gets or sets a value indicating whether is required..</param>
+        /// <param name="value">Gets or sets the value..</param>
+        /// <param name="font">Gets or sets the font.</param>
+        /// <param name="fontSize">Gets or sets the fontSize.</param>
+        /// <param name="fontHexColor">Gets or sets the fontHexColor.</param>
+        /// <param name="isBoldFont">Gets or sets the isBoldFont.</param>
+        /// <param name="isItalicFont">Gets or sets the isItalicFont.</param>
+        /// <param name="isUnderLineFont">Gets or sets the isUnderLineFont.</param>
+        /// <param name="lineHeight">Gets or sets the lineHeight.</param>
+        /// <param name="characterLimit">Gets or sets the characterLimit.</param>
+        /// <param name="id">Gets or sets the id.</param>
+        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default)
+        {
+            // to ensure "fieldType" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException(ApiValidationMessages.FieldTypeRequired);
+            }
+
+            this.m_type = type;
+
+            // to ensure "pageNumber" is required (not null)
+            if (pageNumber == null)
+            {
+                throw new InvalidDataException(ApiValidationMessages.PageNumberRquired);
+            }
+
+            this.PageNumber = pageNumber;
+
+            // to ensure "bounds" is required (not null)
+            if (bounds == null)
+            {
+                throw new InvalidDataException(ApiValidationMessages.BoundsRequired);
+            }
+
+            this.Bounds = bounds;
+            this.Value = value;
+            this.IsRequired = isRequired;
+            this.FontHexColor = fontHexColor;
+            this.IsBoldFont = isBoldFont;
+            this.IsItalicFont = isItalicFont;
+            this.IsUnderLineFont = isUnderLineFont;
+            this.LineHeight = lineHeight;
+            this.CharacterLimit = characterLimit;
+            this.Font = font;
+            this.FontSize = fontSize;
+            this.Id = id;
+        }
+
+        /// <summary>
         ///     Gets the form field type.
         /// </summary>
         [DataMember(Name = "fieldType", EmitDefaultValue = true)]
@@ -92,6 +148,12 @@ namespace BoldSign.Model
             get { return m_type; }
             set { m_type = value; }
         }
+
+        /// <summary>
+        ///     Gets or Sets id in form field.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = true)]
+        public string Id { get; set; }
 
         /// <summary>
         ///     Gets or Sets font name for the content in form field.
@@ -110,6 +172,7 @@ namespace BoldSign.Model
         ///     Gets or sets the form field name.
         /// </summary>
         /// <value>Gets or sets the name.</value>
+        [Obsolete("Name is deprecated, please use Id instead")]
         [DataMember(Name = "name", EmitDefaultValue = true)]
         public string Name { get; set; }
 
