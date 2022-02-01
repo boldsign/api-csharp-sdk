@@ -9,6 +9,11 @@ namespace BoldSign.Model
 {
     public interface IFormField
     {
+        /// <summary>
+        ///     Gets or Sets form field id.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = true)]
+        public string Id { get; set; }
 
         /// <summary>
         ///     Gets or Sets form field type.
@@ -33,6 +38,7 @@ namespace BoldSign.Model
         ///     Gets or sets the form field name.
         /// </summary>
         /// <value>Gets or sets the name.</value>
+        [Obsolete("Name is deprecated, please use Id instead")]
         [DataMember(Name = "name", EmitDefaultValue = true)]
         public string Name { get; set; }
 

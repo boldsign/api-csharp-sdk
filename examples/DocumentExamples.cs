@@ -201,7 +201,7 @@ namespace BoldSign.Examples
         {
             List<FormField> formFeilds = new List<FormField>();
             formFeilds.Add(new FormField(
-                        name: "Sign",
+                        id: "Sign_1",
                         type: FieldType.Signature,
                         pageNumber: 1,
                         isRequired: true,
@@ -265,7 +265,7 @@ namespace BoldSign.Examples
             List<FormField> formFields = new List<FormField>
             {
                 new FormField(
-                    name: "Sign",
+                    id: "Sign_1",
                     type: FieldType.Signature,
                     pageNumber: 1,
                     isRequired: true,
@@ -308,7 +308,7 @@ namespace BoldSign.Examples
             List<FormField> formFields = new List<FormField>
             {
                 new FormField(
-                    name: "Sign",
+                    id: "Sign_1",
                     type: FieldType.Signature,
                     pageNumber: 1,
                     isRequired: true,
