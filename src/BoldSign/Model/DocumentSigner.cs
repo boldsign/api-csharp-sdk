@@ -28,14 +28,6 @@ namespace BoldSign.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="DocumentSigner" /> class.
         /// </summary>
-        [JsonConstructor]
-        protected DocumentSigner()
-        {
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="DocumentSigner" /> class.
-        /// </summary>
         /// <param name="name">Gets or sets the name. (required).</param>
         /// <param name="emailAddress">Gets or sets the email address. (required).</param>
         /// <param name="privateMessage">Gets or sets the private message..</param>

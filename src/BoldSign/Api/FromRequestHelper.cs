@@ -34,6 +34,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.CC.ToList(), nameof(signRequestDetails.CC));
             }
 
+            if (signRequestDetails.TextTagDefinitions != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.TextTagDefinitions.ToList(), nameof(signRequestDetails.TextTagDefinitions));
+            }
+
             if (signRequestDetails.Labels != null)
             {
                 var i = -1;
@@ -55,7 +60,28 @@ namespace BoldSign.Api
                 localVarFormParams.Add($"{nameof(signRequestDetails.ReminderSettings)}.{nameof(signRequestDetails.ReminderSettings.ReminderCount)}", signRequestDetails.ReminderSettings.ReminderCount.ToString());
             }
 
+            if (signRequestDetails is IEmbeddedRequest embeddedRequest)
+            {
+                if (embeddedRequest.RedirectUrl != null)
+                {
+                    localVarFormParams.Add(nameof(embeddedRequest.RedirectUrl), embeddedRequest.RedirectUrl.ToString());
+                }
+
+                localVarFormParams.Add(nameof(embeddedRequest.ShowToolbar), embeddedRequest.ShowToolbar ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ShowSaveButton), embeddedRequest.ShowSaveButton ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ShowSendButton), embeddedRequest.ShowSendButton ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ShowPreviewButton), embeddedRequest.ShowPreviewButton ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ShowNavigationButtons), embeddedRequest.ShowNavigationButtons ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.SendViewOption), embeddedRequest.SendViewOption.ToString());
+
+                if (embeddedRequest.SendLinkValidTill.HasValue)
+                {
+                    localVarFormParams.Add(nameof(embeddedRequest.SendLinkValidTill), embeddedRequest.SendLinkValidTill.ToString());
+                }
+            }
+
             localVarFormParams.Add(nameof(signRequestDetails.EnableSigningOrder), signRequestDetails.EnableSigningOrder ? "true" : "false");
+            localVarFormParams.Add(nameof(signRequestDetails.UseTextTags), signRequestDetails.UseTextTags ? "true" : "false");
 
 #pragma warning disable CS0618 // Type or member is obsolete
             localVarFormParams.Add(

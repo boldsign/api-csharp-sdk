@@ -2563,6 +2563,11 @@ namespace BoldSign.Api
             {
                 throw new ApiException(422, ApiValidationMessages.InvalidBrandId);
             }
+
+            if (sendRequest.TextTagDefinitions != null && sendRequest.TextTagDefinitions.Any(x => (x.Size != null && (x.Size.Width <= 0 || x.Size.Height <= 0))))
+            {
+                throw new ApiException(422, ApiValidationMessages.InvalidTextTagSize);
+            }
         }
 
         private static bool ValidateUri(string uri)

@@ -25,13 +25,15 @@ namespace BoldSign.Model
         /// <param name="roles">Gets or sets the roles..</param>
         /// <param name="brandId">Gets or sets the brandId..</param>
         /// <param name="labels">Gets or sets the labels.</param>
+        /// <param name="sendLinkValidTill">Gets or sets the sendLinkValidTill.</param>
         public EmbeddedTemplateRequest(
             string templateId = default,
             string title = default,
             string message = default,
             List<Roles> roles = default,
             string brandId = default,
-            List<string> labels = default)
+            List<string> labels = default,
+            DateTime? sendLinkValidTill = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -43,6 +45,7 @@ namespace BoldSign.Model
             this.Roles = roles;
             this.BrandId = brandId;
             this.Labels = labels;
+            this.SendLinkValidTill = sendLinkValidTill;
         }
 
         /// <summary>
@@ -86,6 +89,14 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("showNavigationButtons")]
         public bool ShowNavigationButtons { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets a value send link valid till.
+        /// Maximum valid till is 180 days.
+        /// Default is 30 days.
+        /// </summary>
+        [JsonProperty("sendLinkValidTill")]
+        public DateTime? SendLinkValidTill { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.
