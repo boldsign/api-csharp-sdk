@@ -132,6 +132,9 @@
   <data name="InvalidBrandId" xml:space="preserve">
     <value>Provide a valid brand ID</value>
   </data>
+  <data name="InvalidTextTagSize" xml:space="preserve">
+    <value>Invalid field size. Field height and width should be greater then 0.</value>
+  </data>
   <data name="MessageLengthExceeds" xml:space="preserve">
     <value>The message exceeds the limit of 5000 characters</value>
   </data>

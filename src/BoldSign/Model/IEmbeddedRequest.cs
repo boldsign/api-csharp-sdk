@@ -45,5 +45,12 @@ namespace BoldSign.Model
         /// Gets or sets a value indicating whether to show navigation buttons.
         /// </summary>
         public bool ShowNavigationButtons { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value send link valid till.
+        /// Maximum valid till is 180 days.
+        /// Default is 30 days.
+        /// </summary>
+        public DateTime? SendLinkValidTill { get; set; }
     }
 }

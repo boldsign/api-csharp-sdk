@@ -106,6 +106,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid field size. Field height and width should be greater then 0..
+        /// </summary>
+        internal static string InvalidTextTagSize {
+            get {
+                return ResourceManager.GetString("InvalidTextTagSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The message exceeds the limit of 5000 characters.
         /// </summary>
         internal static string MessageLengthExceeds {

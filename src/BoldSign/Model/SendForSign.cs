@@ -14,6 +14,7 @@ namespace BoldSign.Model
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
+    using BoldSign.Api.Model;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -110,5 +111,17 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("hideDocumentId")]
         public bool HideDocumentId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to convert the text tags to form fields.
+        /// </summary>
+        [JsonProperty("useTextTags")]
+        public bool UseTextTags { get; set; }
+
+        /// <summary>
+        /// Gets or sets the text tags definitions declared in the list can be used in the document by using the definition ID.
+        /// </summary>
+        [JsonProperty("textTagDefinitions")]
+        public List<TextTagDefinition> TextTagDefinitions { get; set; }
     }
 }

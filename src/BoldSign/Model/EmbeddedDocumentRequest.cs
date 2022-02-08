@@ -71,6 +71,14 @@ namespace BoldSign.Model
         public bool ShowNavigationButtons { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets a value send link valid till.
+        /// Maximum valid till is 180 days.
+        /// Default is 30 days.
+        /// </summary>
+        [JsonProperty("sendLinkValidTill")]
+        public DateTime? SendLinkValidTill { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>
