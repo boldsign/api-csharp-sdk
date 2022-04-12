@@ -48,8 +48,8 @@ namespace BoldSign.Model
         /// <param name="dateFormat">Gets or sets the dateFormat value..</param>
         /// <param name="validationType">Gets or sets the textbox ValidationType value..</param>
         /// <param name="validationCustomRegex">Gets or sets the textbox ValidationCustomRegex value..</param>
-        /// <param name="validationCustomRegexDescription">Gets or sets the textbox ValidationCustomRegexDescription value..</param>
-        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexDescription = default(string))
+        /// <param name="validationCustomRegexMessage">Gets or sets the textbox ValidationCustomRegexMessage value..</param>
+        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string))
         {
             this.Id = id;
             this.Type = type;
@@ -66,7 +66,7 @@ namespace BoldSign.Model
             this.DateFormat = dateFormat;
             this.ValidationType = validationType;
             this.ValidationCustomRegex = validationCustomRegex;
-            this.ValidationCustomRegexDescription = validationCustomRegexDescription;
+            this.ValidationCustomRegexMessage = validationCustomRegexMessage;
         }
 
         /// <summary>
@@ -180,10 +180,10 @@ namespace BoldSign.Model
         public string ValidationCustomRegex { get; set; }
 
         /// <summary>
-        /// Gets or sets the text ValidationCustomRegexDescription value.
+        /// Gets or sets the text ValidationCustomRegexMessage value.
         /// </summary>
-        [DataMember(Name = "validationCustomRegexDescription", EmitDefaultValue = false)]
-        public string ValidationCustomRegexDescription { get; set; }
+        [DataMember(Name = "validationCustomRegexMessage", EmitDefaultValue = false)]
+        public string ValidationCustomRegexMessage { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object
