@@ -37,7 +37,8 @@ namespace BoldSign.Model
         /// <param name="signerType">signerType.</param>
         /// <param name="formFields">Gets or sets document Form fields such as Sign, Checkbox, Radio buttons etc..</param>
         /// <param name="existingFormFields">Gets or sets value for the existing Form fields..</param>
-        public Roles(int roleIndex = default, string signerName = default, string signerEmail = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>))
+        /// <param name="language">Gets or sets the Language.</param>
+        public Roles(int roleIndex = default, string signerName = default, string signerEmail = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Languages language = Languages.English)
         {
             this.SignerName = signerName;
             this.SignerEmail = signerEmail;
@@ -52,6 +53,7 @@ namespace BoldSign.Model
             this.SignerType = signerType;
             this.FormFields = formFields;
             this.ExistingFormFields = existingFormFields;
+            this.Language = language;
         }
 
         /// <summary>
@@ -130,6 +132,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets value for the existing Form fields.</value>
         [DataMember(Name = "existingFormFields", EmitDefaultValue = false)]
         public List<ExistingFormField> ExistingFormFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the signer language.
+        /// </summary>
+        /// <value>Gets or sets the language of the signer.</value>
+        [DataMember(Name = "language", EmitDefaultValue = true)]
+        public Languages Language { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

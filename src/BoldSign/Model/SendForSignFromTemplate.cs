@@ -38,6 +38,7 @@ namespace BoldSign.Model
         /// <param name="reminderSettings">Gets or sets the reminderSettings.</param>
         /// <param name="cc">Gets or sets the cc.</param>
         /// <param name="expiryDays">Gets or sets the expiryDays.</param>
+        /// <param name="documentInfo">Gets or sets the documentInfo.</param>
         public SendForSignFromTemplate(
             string templateId = default,
             string title = default,
@@ -49,7 +50,8 @@ namespace BoldSign.Model
             bool hideDocumentId = default,
             ReminderSettings reminderSettings = default,
             IEnumerable<DocumentCC> cc = default,
-            int expiryDays = 60)
+            int expiryDays = 60,
+            IEnumerable<DocumentInfo> documentInfo = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -66,6 +68,7 @@ namespace BoldSign.Model
             this.ReminderSettings = reminderSettings;
             this.CC = cc;
             this.ExpiryDays = expiryDays;
+            this.DocumentInfo = documentInfo;
         }
 
         /// <summary>
@@ -138,6 +141,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "expiryDays", EmitDefaultValue = true)]
         public int ExpiryDays { get; set; } = 60;
+
+        /// <summary>
+        /// Gets or sets a documentInfo.
+        /// </summary>
+        [JsonProperty("documentInfo")]
+        public IEnumerable<DocumentInfo> DocumentInfo { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

@@ -133,6 +133,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Both title and the document information cannot be present for a single document..
+        /// </summary>
+        internal static string SameProperty {
+            get {
+                return ResourceManager.GetString("SameProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing required parameter &apos;signers&apos; when calling DocumentApi-&gt;SendDocument.
         /// </summary>
         internal static string SignersIsSet {
@@ -151,20 +160,20 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;title&apos; when calling DocumentApi-&gt;SendDocument.
-        /// </summary>
-        internal static string TitleIsSet {
-            get {
-                return ResourceManager.GetString("TitleIsSet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The title exceeds the limit of 256 characters.
         /// </summary>
         internal static string TitleLengthExceeds {
             get {
                 return ResourceManager.GetString("TitleLengthExceeds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title or Document Information of the document is required..
+        /// </summary>
+        internal static string TitleOrDocumentInfoIsRequired {
+            get {
+                return ResourceManager.GetString("TitleOrDocumentInfoIsRequired", resourceCulture);
             }
         }
         

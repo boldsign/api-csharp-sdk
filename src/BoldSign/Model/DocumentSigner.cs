@@ -37,7 +37,8 @@ namespace BoldSign.Model
         /// <param name="signerType">signerType.</param>
         /// <param name="signerRole">Gets or sets the signer role..</param>
         /// <param name="formFields">Gets or sets the formFields..</param>
-        public DocumentSigner(string name, string emailAddress, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, SignerType signerType = BoldSign.Model.SignerType.Signer, List<FormField> formFields = default(List<FormField>))
+        /// <param name="language">Gets or sets the Language.</param>
+        public DocumentSigner(string name, string emailAddress, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, SignerType signerType = BoldSign.Model.SignerType.Signer, List<FormField> formFields = default(List<FormField>), Languages language = Languages.English)
         {
             // to ensure "name" is required (not null)
             if (string.IsNullOrEmpty(name))
@@ -61,6 +62,7 @@ namespace BoldSign.Model
             this.EnableEmailOTP = enableEmailOTP;
             this.SignerType = signerType;
             this.FormFields = formFields;
+            this.Language = language;
         }
 
         /// <summary>
@@ -117,6 +119,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets document Form fields such as Sign, Checkbox, Radio buttons etc.</value>
         [DataMember(Name = "formFields", EmitDefaultValue = false)]
         public List<FormField> FormFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the signer language.
+        /// </summary>
+        /// <value>Gets or sets the language of the signer.</value>
+        [DataMember(Name = "language", EmitDefaultValue = true)]
+        public Languages Language { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

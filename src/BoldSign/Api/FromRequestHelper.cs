@@ -34,6 +34,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.CC.ToList(), nameof(signRequestDetails.CC));
             }
 
+            if (signRequestDetails.DocumentInfo != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.DocumentInfo.ToList(), nameof(signRequestDetails.DocumentInfo));
+            }
+
             if (signRequestDetails.TextTagDefinitions != null)
             {
                 localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.TextTagDefinitions.ToList(), nameof(signRequestDetails.TextTagDefinitions));
