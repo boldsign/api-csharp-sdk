@@ -2536,9 +2536,14 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'title' is set
-            if (sendRequest.Title == null)
+            if (string.IsNullOrEmpty(sendRequest.Title) && (sendRequest.DocumentInfo == null || !sendRequest.DocumentInfo.Any()))
             {
-                throw new ApiException(400, ApiValidationMessages.TitleIsSet);
+                throw new ApiException(422, ApiValidationMessages.TitleOrDocumentInfoIsRequired);
+            }
+
+            if (!string.IsNullOrEmpty(sendRequest.Title) && sendRequest.DocumentInfo != null && sendRequest.DocumentInfo.Any())
+            {
+                throw new ApiException(422, ApiValidationMessages.SameProperty);
             }
 
             // verify the required parameter 'signers' is set

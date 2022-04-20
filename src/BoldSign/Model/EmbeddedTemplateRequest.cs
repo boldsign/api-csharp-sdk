@@ -26,6 +26,7 @@ namespace BoldSign.Model
         /// <param name="brandId">Gets or sets the brandId..</param>
         /// <param name="labels">Gets or sets the labels.</param>
         /// <param name="sendLinkValidTill">Gets or sets the sendLinkValidTill.</param>
+        /// <param name="documentInfo">Gets or sets the send documentInfo.</param>
         public EmbeddedTemplateRequest(
             string templateId = default,
             string title = default,
@@ -33,7 +34,8 @@ namespace BoldSign.Model
             List<Roles> roles = default,
             string brandId = default,
             List<string> labels = default,
-            DateTime? sendLinkValidTill = default)
+            DateTime? sendLinkValidTill = default,
+            IEnumerable<DocumentInfo> documentInfo = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -46,6 +48,7 @@ namespace BoldSign.Model
             this.BrandId = brandId;
             this.Labels = labels;
             this.SendLinkValidTill = sendLinkValidTill;
+            this.DocumentInfo = documentInfo;
         }
 
         /// <summary>

@@ -141,17 +141,20 @@
   <data name="PageNumberRquired" xml:space="preserve">
     <value>pageNumber is a required property for FormField and cannot be null</value>
   </data>
+  <data name="SameProperty" xml:space="preserve">
+    <value>Both title and the document information cannot be present for a single document.</value>
+  </data>
   <data name="SignersIsSet" xml:space="preserve">
     <value>Missing required parameter 'signers' when calling DocumentApi-&gt;SendDocument</value>
   </data>
   <data name="TemplateIdNull" xml:space="preserve">
     <value>Parameter {nameof(sendForSignFromTemplate.TemplateId)} should be null or empty</value>
   </data>
-  <data name="TitleIsSet" xml:space="preserve">
-    <value>Missing required parameter 'title' when calling DocumentApi-&gt;SendDocument</value>
-  </data>
   <data name="TitleLengthExceeds" xml:space="preserve">
     <value>The title exceeds the limit of 256 characters</value>
+  </data>
+  <data name="TitleOrDocumentInfoIsRequired" xml:space="preserve">
+    <value>Title or Document Information of the document is required.</value>
   </data>
   <data name="ValidUrl" xml:space="preserve">
     <value>Please provide valid file URL</value>

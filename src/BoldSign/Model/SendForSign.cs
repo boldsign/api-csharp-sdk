@@ -33,7 +33,6 @@ namespace BoldSign.Model
         /// <summary>
         ///  Gets or sets title for the signature request.
         /// </summary>
-        [Required]
         [JsonProperty("title")]
         public string Title { get; set; }
 
@@ -123,5 +122,11 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("textTagDefinitions")]
         public List<TextTagDefinition> TextTagDefinitions { get; set; }
+
+        /// <summary>
+        /// Gets or sets a documentInfo.
+        /// </summary>
+        [JsonProperty("documentInfo")]
+        public IEnumerable<DocumentInfo> DocumentInfo { get; set; }
     }
 }

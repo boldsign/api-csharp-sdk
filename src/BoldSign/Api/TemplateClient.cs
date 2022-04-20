@@ -889,6 +889,16 @@ namespace BoldSign.Api
                 throw new ArgumentException(ApiValidationMessages.TemplateIdNull);
             }
 
+            if (string.IsNullOrEmpty(send.Title) && (send.DocumentInfo == null || !send.DocumentInfo.Any()))
+            {
+                throw new ApiException(422, ApiValidationMessages.TitleOrDocumentInfoIsRequired);
+            }
+
+            if (!string.IsNullOrEmpty(send.Title) && send.DocumentInfo != null && send.DocumentInfo.Any())
+            {
+                throw new ApiException(422, ApiValidationMessages.SameProperty);
+            }
+
             // verify the title length
             if (send.Title != null && send.Title.Length > 256)
             {
