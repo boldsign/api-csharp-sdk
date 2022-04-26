@@ -101,7 +101,9 @@ namespace BoldSign.Model
         /// <param name="lineHeight">Gets or sets the lineHeight.</param>
         /// <param name="characterLimit">Gets or sets the characterLimit.</param>
         /// <param name="id">Gets or sets the id.</param>
-        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default)
+        /// <param name="attachmentInfo">Gets or sets the attachmentInfo.</param>
+        /// <param name="imageInfo">Gets or sets the imageInfo.</param>
+        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo))
         {
             // to ensure "fieldType" is required (not null)
             if (type == null)
@@ -137,6 +139,19 @@ namespace BoldSign.Model
             this.Font = font;
             this.FontSize = fontSize;
             this.Id = id;
+
+            if (type == FieldType.Attachment && attachmentInfo == null)
+            {
+                throw new InvalidDataException(ApiValidationMessages.AttachmentInformationRequired);
+            }
+
+            this.AttachmentInfo = attachmentInfo;
+            if (type == FieldType.Image && imageInfo == null)
+            {
+                throw new InvalidDataException(ApiValidationMessages.ImageInformationRequired);
+            }
+
+            this.ImageInfo = imageInfo;
         }
 
         /// <summary>
@@ -245,6 +260,20 @@ namespace BoldSign.Model
         /// <value>Gets or sets the line height.</value>
         [DataMember(Name = "characterLimit", EmitDefaultValue = true)]
         public int CharacterLimit { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the AttachmentInfo.
+        /// </summary>
+        /// <value>Gets or sets the Attachment Information.</value>
+        [DataMember(Name = "AttachmentInfo", EmitDefaultValue = true)]
+        public AttachmentInfo AttachmentInfo { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the ImageInfo.
+        /// </summary>
+        /// <value>Gets or sets the Image Information.</value>
+        [DataMember(Name = "ImageInfo", EmitDefaultValue = true)]
+        public ImageInfo ImageInfo { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

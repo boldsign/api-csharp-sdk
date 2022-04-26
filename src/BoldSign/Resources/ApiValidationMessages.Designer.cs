@@ -61,6 +61,24 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Attachment Information is required..
+        /// </summary>
+        internal static string AttachmentInformationRequired {
+            get {
+                return ResourceManager.GetString("AttachmentInformationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the Attachment Title..
+        /// </summary>
+        internal static string AttachmentTitleRequired {
+            get {
+                return ResourceManager.GetString("AttachmentTitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to bounds is a required property for FormField and cannot be null.
         /// </summary>
         internal static string BoundsRequired {
@@ -97,11 +115,56 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The File type for attachment required..
+        /// </summary>
+        internal static string FileTypeRequired {
+            get {
+                return ResourceManager.GetString("FileTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The supported format for the Image is required..
+        /// </summary>
+        internal static string ImageFormatRequired {
+            get {
+                return ResourceManager.GetString("ImageFormatRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Image Information is required..
+        /// </summary>
+        internal static string ImageInformationRequired {
+            get {
+                return ResourceManager.GetString("ImageInformationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the Image Title..
+        /// </summary>
+        internal static string ImageTitleRequired {
+            get {
+                return ResourceManager.GetString("ImageTitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provide a valid brand ID.
         /// </summary>
         internal static string InvalidBrandId {
             get {
                 return ResourceManager.GetString("InvalidBrandId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The given format is not valid..
+        /// </summary>
+        internal static string InvalidFormat {
+            get {
+                return ResourceManager.GetString("InvalidFormat", resourceCulture);
             }
         }
         

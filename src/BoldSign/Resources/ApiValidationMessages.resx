@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AttachmentInformationRequired" xml:space="preserve">
+    <value>The Attachment Information is required.</value>
+  </data>
+  <data name="AttachmentTitleRequired" xml:space="preserve">
+    <value>Please provide the Attachment Title.</value>
+  </data>
   <data name="BoundsRequired" xml:space="preserve">
     <value>bounds is a required property for FormField and cannot be null</value>
   </data>
@@ -129,8 +135,23 @@
   <data name="FilesizesWithin100MB" xml:space="preserve">
     <value>Document's size exceeds the limit of 100 MB. Please replace it. (all files combined)</value>
   </data>
+  <data name="FileTypeRequired" xml:space="preserve">
+    <value>The File type for attachment required.</value>
+  </data>
+  <data name="ImageFormatRequired" xml:space="preserve">
+    <value>The supported format for the Image is required.</value>
+  </data>
+  <data name="ImageInformationRequired" xml:space="preserve">
+    <value>The Image Information is required.</value>
+  </data>
+  <data name="ImageTitleRequired" xml:space="preserve">
+    <value>Please provide the Image Title.</value>
+  </data>
   <data name="InvalidBrandId" xml:space="preserve">
     <value>Provide a valid brand ID</value>
+  </data>
+  <data name="InvalidFormat" xml:space="preserve">
+    <value>The given format is not valid.</value>
   </data>
   <data name="InvalidTextTagSize" xml:space="preserve">
     <value>Invalid field size. Field height and width should be greater then 0.</value>
