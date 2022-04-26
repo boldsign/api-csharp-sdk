@@ -49,7 +49,9 @@ namespace BoldSign.Model
         /// <param name="validationType">Gets or sets the textbox ValidationType value..</param>
         /// <param name="validationCustomRegex">Gets or sets the textbox ValidationCustomRegex value..</param>
         /// <param name="validationCustomRegexMessage">Gets or sets the textbox ValidationCustomRegexMessage value..</param>
-        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string))
+        /// <param name="imageInfo">Gets or sets the imageField.</param>
+        /// <param name="attachmentInfo">Gets or sets the attachmentField.</param>
+        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), ImageInfo imageInfo = default(ImageInfo), AttachmentInfo attachmentInfo = default(AttachmentInfo))
         {
             this.Id = id;
             this.Type = type;
@@ -67,6 +69,8 @@ namespace BoldSign.Model
             this.ValidationType = validationType;
             this.ValidationCustomRegex = validationCustomRegex;
             this.ValidationCustomRegexMessage = validationCustomRegexMessage;
+            this.ImageInfo = imageInfo;
+            this.AttachmentInfo = attachmentInfo;
         }
 
         /// <summary>
@@ -184,6 +188,18 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "validationCustomRegexMessage", EmitDefaultValue = false)]
         public string ValidationCustomRegexMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Image Information. .
+        /// </summary>
+        [DataMember(Name = "imageInfo", EmitDefaultValue = false)]
+        public ImageInfo ImageInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Attachment Information. .
+        /// </summary>
+        [DataMember(Name = "attachmentInfo", EmitDefaultValue = false)]
+        public AttachmentInfo AttachmentInfo { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

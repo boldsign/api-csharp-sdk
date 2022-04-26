@@ -62,5 +62,17 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "RadioButton")]
         RadioButton = 7,
+
+        /// <summary>
+        ///     Enum Image for value: Image
+        /// </summary>
+        [EnumMember(Value = "Image")]
+        Image = 8,
+
+        /// <summary>
+        ///     Enum Attachment for value: Attachment
+        /// </summary>
+        [EnumMember(Value = "Attachment")]
+        Attachment = 9,
     }
 }
