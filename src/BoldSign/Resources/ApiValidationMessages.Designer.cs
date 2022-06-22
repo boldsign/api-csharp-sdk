@@ -61,6 +61,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MinDate and MaxDate value is required.
+        /// </summary>
+        internal static string BothFieldsRequired {
+            get {
+                return ResourceManager.GetString("BothFieldsRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The Attachment Information is required..
         /// </summary>
         internal static string AttachmentInformationRequired {
@@ -84,6 +93,69 @@ namespace BoldSign.Api.Resources {
         internal static string BoundsRequired {
             get {
                 return ResourceManager.GetString("BoundsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;brandId&apos; when calling BrandingApi-&amp;gt;DeleteBrand.
+        /// </summary>
+        internal static string BrandIdDelete {
+            get {
+                return ResourceManager.GetString("BrandIdDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;brandId&apos; when calling BrandingApi-&amp;gt;ResetDefaultBrand.
+        /// </summary>
+        internal static string BrandIdResetDefault {
+            get {
+                return ResourceManager.GetString("BrandIdResetDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Brand logo is required.
+        /// </summary>
+        internal static string BrandLogoRequired {
+            get {
+                return ResourceManager.GetString("BrandLogoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Brand name is required.
+        /// </summary>
+        internal static string BrandNameRequired {
+            get {
+                return ResourceManager.GetString("BrandNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document ID is required.
+        /// </summary>
+        internal static string DocumentIdRequired {
+            get {
+                return ResourceManager.GetString("DocumentIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email ID is a required property and cannot be null or empty.
+        /// </summary>
+        internal static string EmailIdRequired {
+            get {
+                return ResourceManager.GetString("EmailIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Label cannot be null or empty.
+        /// </summary>
+        internal static string EmptyLabels {
+            get {
+                return ResourceManager.GetString("EmptyLabels", resourceCulture);
             }
         }
         
@@ -160,6 +232,24 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provide a valid Email ID.
+        /// </summary>
+        internal static string InvalidEmailAddress {
+            get {
+                return ResourceManager.GetString("InvalidEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date should be greater or equal to start date..
+        /// </summary>
+        internal static string InValidEndDate {
+            get {
+                return ResourceManager.GetString("InValidEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The given format is not valid..
         /// </summary>
         internal static string InvalidFormat {
@@ -178,11 +268,65 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max date should be always greater than min date.
+        /// </summary>
+        internal static string MaxDateValidation {
+            get {
+                return ResourceManager.GetString("MaxDateValidation", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Labels cannot have more than 255 characters..
+        /// </summary>
+        internal static string LabelMaxLength {
+            get {
+                return ResourceManager.GetString("LabelMaxLength", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Any one of the given language is required..
+        /// </summary>
+        internal static string LanguageRequired {
+            get {
+                return ResourceManager.GetString("LanguageRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A document can only contain a maximum of 50 labels.
+        /// </summary>
+        internal static string MaxLabelsCount {
+            get {
+                return ResourceManager.GetString("MaxLabelsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The message exceeds the limit of 5000 characters.
         /// </summary>
         internal static string MessageLengthExceeds {
             get {
                 return ResourceManager.GetString("MessageLengthExceeds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New signer email address is required for changing the recipient details.
+        /// </summary>
+        internal static string NewSignerEmailAddressRequired {
+            get {
+                return ResourceManager.GetString("NewSignerEmailAddressRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old signer email is required for changing the recipient details.
+        /// </summary>
+        internal static string OldSignerEmailRequired {
+            get {
+                return ResourceManager.GetString("OldSignerEmailRequired", resourceCulture);
             }
         }
         
@@ -196,6 +340,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A reason is required for changing recipient details.
+        /// </summary>
+        internal static string ReasonRequired {
+            get {
+                return ResourceManager.GetString("ReasonRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Both title and the document information cannot be present for a single document..
         /// </summary>
         internal static string SameProperty {
@@ -205,11 +358,74 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Old and new emails should not be the same.
+        /// </summary>
+        internal static string SameSignerEmailNotAllowed {
+            get {
+                return ResourceManager.GetString("SameSignerEmailNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New signer name required for changing the recipient details.
+        /// </summary>
+        internal static string SignerNameRequired {
+            get {
+                return ResourceManager.GetString("SignerNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signer order should be a positive integer.
+        /// </summary>
+        internal static string SignerOrderPositiveValue {
+            get {
+                return ResourceManager.GetString("SignerOrderPositiveValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing required parameter &apos;signers&apos; when calling DocumentApi-&gt;SendDocument.
         /// </summary>
         internal static string SignersIsSet {
             get {
                 return ResourceManager.GetString("SignersIsSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;teamId&apos; when calling TeamApi-&amp;gt;GetTeamDetails.
+        /// </summary>
+        internal static string TeamIdIsSet {
+            get {
+                return ResourceManager.GetString("TeamIdIsSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;teamId&apos; when calling TeamApi-&amp;gt;Update.
+        /// </summary>
+        internal static string TeamIdrequired {
+            get {
+                return ResourceManager.GetString("TeamIdrequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;teamName&apos; when calling TeamApi-&amp;gt;Create.
+        /// </summary>
+        internal static string TeamNameIsSet {
+            get {
+                return ResourceManager.GetString("TeamNameIsSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;teamName&apos; when calling TeamApi-&amp;gt;Update.
+        /// </summary>
+        internal static string TeamNameRequired {
+            get {
+                return ResourceManager.GetString("TeamNameRequired", resourceCulture);
             }
         }
         
@@ -237,6 +453,37 @@ namespace BoldSign.Api.Resources {
         internal static string TitleOrDocumentInfoIsRequired {
             get {
                 return ResourceManager.GetString("TitleOrDocumentInfoIsRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The Date Format is required for Editable Date Field..
+        /// </summary>
+        internal static string EditableDateFormatRequired
+        {
+            get
+            {
+                return ResourceManager.GetString("EditableDateFormatRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to The Editable date field information is required.
+        /// </summary>
+        internal static string EditableDateInformationRequired
+        {
+            get
+            {
+                return ResourceManager.GetString("EditableDateInformationRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to User ID is a required property and cannot be null or empty.
+        /// </summary>
+        internal static string UserIdRequired {
+            get {
+                return ResourceManager.GetString("UserIdRequired", resourceCulture);
             }
         }
         

@@ -166,7 +166,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>DocumentRecords</returns>
-        DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default);
+        DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
 
         /// <summary>
         ///    List all user documents which can be filtered by date, time, sender, status, and so on.
@@ -183,7 +183,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default);
+        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
 
         /// <summary>
         ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
@@ -406,7 +406,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>Task of DocumentRecords</returns>
-        Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default);
+        Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
 
         /// <summary>
         ///    List all user documents which can be filtered by date, time, sender, status, and so on.
@@ -423,7 +423,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>Task of ApiResponse (DocumentRecords)</returns>
-        Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default);
+        Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
 
         /// <summary>
         ///    Send a reminder message to pending signers for a particular document to their respective email IDs.

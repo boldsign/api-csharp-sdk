@@ -16,6 +16,8 @@
 
             var documentExamples = new DocumentExamples(new DocumentClient(apiClient));
             var templateExamples = new TemplateExamples(new TemplateClient(apiClient));
+            var userExamples = new UserExamples(new UserClient(apiClient));
+            var brandingExamples = new BrandingExamples(new BrandingClient(apiClient));
             await documentExamples.CreateDocument().ConfigureAwait(false);
 
         }

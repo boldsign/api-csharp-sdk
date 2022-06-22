@@ -48,7 +48,11 @@ namespace BoldSign.Model
         /// <param name="isDeleted">Gets or sets a value indicating whether the document is deleted..</param>
         /// <param name="revokeMessage">&lt;br&gt;Gets or Sets document revoked message by the sender.  &lt;br&gt;Available only when the document is revoked..</param>
         /// <param name="declineMessage">&lt;br&gt;Gets or Sets document declined message by the signer.  &lt;br&gt;Available only when any one of the signer have declined the document..</param>
-        public DocumentProperties(string documentId = default(string), string messageTitle = default(string), string documentDescription = default(string), DocumentStatus status = default(DocumentStatus), List<DocumentFiles> files = default(List<DocumentFiles>), DocumentSenderDetail senderDetail = default(DocumentSenderDetail), List<DocumentSignerDetails> signerDetails = default(List<DocumentSignerDetails>), List<DocumentCcDetails> ccDetails = default(List<DocumentCcDetails>), ReminderSettings reminderSettings = default(ReminderSettings), List<DocumentReassign> reassign = default(List<DocumentReassign>), List<AuditTrail> documentHistory = default(List<AuditTrail>), string activityBy = default(string), long? activityDate = default(long?), ActivityAction activityAction = default(ActivityAction), long? createdDate = default(long?), int? expiryDays = default(int?), long? expiryDate = default(long?), bool? enableSigningOrder = default(bool?), bool? isDeleted = default(bool?), string revokeMessage = default(string), string declineMessage = default(string), string brandId = default(string), List<string> labels = default, string applicationId = default(string))
+        /// <param name="disableExpiryAlert">Gets or sets a value indicating whether Disableexpiryalert is true or false.</param>
+        /// <param name="enablePrintAndSign">Gets or sets a value indicating whether to Enable Print And Sign.</param>
+        /// <param name="enableReassign">Gets or sets a value indicating whether to Enable Reassign.By Default True.</param>
+        /// <param name="hideDocumentId">Gets or sets a value indicating whether HideDocumentId is true or false.</param>
+        public DocumentProperties(string documentId = default(string), string messageTitle = default(string), string documentDescription = default(string), DocumentStatus status = default(DocumentStatus), List<DocumentFiles> files = default(List<DocumentFiles>), DocumentSenderDetail senderDetail = default(DocumentSenderDetail), List<DocumentSignerDetails> signerDetails = default(List<DocumentSignerDetails>), List<DocumentCcDetails> ccDetails = default(List<DocumentCcDetails>), ReminderSettings reminderSettings = default(ReminderSettings), List<DocumentReassign> reassign = default(List<DocumentReassign>), List<AuditTrail> documentHistory = default(List<AuditTrail>), string activityBy = default(string), long? activityDate = default(long?), ActivityAction activityAction = default(ActivityAction), long? createdDate = default(long?), int? expiryDays = default(int?), long? expiryDate = default(long?), bool? enableSigningOrder = default(bool?), bool? isDeleted = default(bool?), string revokeMessage = default(string), string declineMessage = default(string), string brandId = default(string), List<string> labels = default, string applicationId = default(string), bool enablePrintAndSign = default(bool), bool enableReassign = default(bool), bool hideDocumentId = default(bool), bool disableExpiryAlert = default(bool))
         {
             this.DocumentId = documentId;
             this.MessageTitle = messageTitle;
@@ -74,6 +78,10 @@ namespace BoldSign.Model
             this.BrandId = brandId;
             this.ApplicationId = applicationId;
             this.Labels = labels;
+            this.DisableExpiryAlert = disableExpiryAlert;
+            this.EnablePrintAndSign = enablePrintAndSign;
+            this.EnableReassign = enableReassign;
+            this.HideDocumentId = hideDocumentId;
         }
 
         /// <summary>
@@ -246,6 +254,34 @@ namespace BoldSign.Model
         /// <value>When DisableEmails is enabled, Reminder is automatically ignored</value>
         [DataMember(Name = "disableEmails", EmitDefaultValue = false)]
         public bool DisableEmails { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether Disableexpiryalert is true or false.
+        /// </summary>
+        /// <value>This property will send the expiry alert email before the day of expiry for the pending signers.If the document expires in one day, the email will be sent before 2 hours of the expiry.</value>
+        [DataMember(Name = "disableExpiryAlert ", EmitDefaultValue = false)]
+        public bool DisableExpiryAlert { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether print and sign is enabled.
+        /// </summary>
+        /// <value>Gets or sets a value of indicating whether to enable print and sign mode.</value>
+        [DataMember(Name = "enablePrintAndSign", EmitDefaultValue = false)]
+        public bool EnablePrintAndSign { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether reassign is enabled.
+        /// </summary>
+        /// <value>Gets or sets a value of indicating whether to enable reassign mode.By Default True.</value>
+        [DataMember(Name = "enableReassign", EmitDefaultValue = false)]
+        public bool EnableReassign { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether HideDocumentId is true or false.
+        /// </summary>
+        /// <value>When HideDocumentId is enabled , the document Id in the documents is not visible.</value>
+        [DataMember(Name = "hideDocumentId ", EmitDefaultValue = false)]
+        public bool HideDocumentId { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

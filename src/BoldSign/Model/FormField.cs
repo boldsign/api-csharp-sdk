@@ -16,6 +16,7 @@ namespace BoldSign.Model
     using System.IO;
     using System.Runtime.Serialization;
     using System.Text;
+    using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using Newtonsoft.Json;
 
@@ -103,7 +104,8 @@ namespace BoldSign.Model
         /// <param name="id">Gets or sets the id.</param>
         /// <param name="attachmentInfo">Gets or sets the attachmentInfo.</param>
         /// <param name="imageInfo">Gets or sets the imageInfo.</param>
-        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo))
+        /// <param name="editableDateFieldSettings">Gets or sets the editableDateFieldSettings.</param>
+        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings))
         {
             // to ensure "fieldType" is required (not null)
             if (type == null)
@@ -139,7 +141,6 @@ namespace BoldSign.Model
             this.Font = font;
             this.FontSize = fontSize;
             this.Id = id;
-
             if (type == FieldType.Attachment && attachmentInfo == null)
             {
                 throw new InvalidDataException(ApiValidationMessages.AttachmentInformationRequired);
@@ -152,6 +153,12 @@ namespace BoldSign.Model
             }
 
             this.ImageInfo = imageInfo;
+            if (type == FieldType.EditableDate && editableDateFieldSettings == null)
+            {
+                throw new InvalidDataException(ApiValidationMessages.EditableDateInformationRequired);
+            }
+
+            this.EditableDateFieldSettings = editableDateFieldSettings;
         }
 
         /// <summary>
@@ -274,6 +281,12 @@ namespace BoldSign.Model
         /// <value>Gets or sets the Image Information.</value>
         [DataMember(Name = "ImageInfo", EmitDefaultValue = true)]
         public ImageInfo ImageInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the EditableDateFieldSettings Information. .
+        /// </summary>
+        [DataMember(Name = "editableDateFieldSettings", EmitDefaultValue = false)]
+        public EditableDateFieldSettings EditableDateFieldSettings { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

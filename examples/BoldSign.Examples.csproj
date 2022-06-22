@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="assets\sample.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="doc-1.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

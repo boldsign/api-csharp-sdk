@@ -37,8 +37,9 @@ namespace BoldSign.Model
         /// <param name="signerType">signerType.</param>
         /// <param name="signerRole">Gets or sets the signer role..</param>
         /// <param name="formFields">Gets or sets the formFields..</param>
+        /// <param name="hostEmail">Gets or sets the hostEmail.</param>
         /// <param name="language">Gets or sets the Language.</param>
-        public DocumentSigner(string name, string emailAddress, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, SignerType signerType = BoldSign.Model.SignerType.Signer, List<FormField> formFields = default(List<FormField>), Languages language = Languages.English)
+        public DocumentSigner(string name, string emailAddress, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, SignerType signerType = BoldSign.Model.SignerType.Signer, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Languages language = Languages.English)
         {
             // to ensure "name" is required (not null)
             if (string.IsNullOrEmpty(name))
@@ -62,6 +63,7 @@ namespace BoldSign.Model
             this.EnableEmailOTP = enableEmailOTP;
             this.SignerType = signerType;
             this.FormFields = formFields;
+            this.HostEmail = hostEmail;
             this.Language = language;
         }
 
@@ -70,6 +72,13 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "signerType", EmitDefaultValue = false)]
         public SignerType? SignerType { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the Host email address of the Host.
+        /// </summary>
+        /// <value>Gets or sets the Host email address.</value>
+        [DataMember(Name = "hostemail", EmitDefaultValue = false)]
+        public string HostEmail { get; set; }
 
         /// <summary>
         ///  Gets or sets the signer name.

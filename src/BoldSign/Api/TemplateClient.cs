@@ -271,10 +271,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>TemplateRecords</returns>
-        public TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default)
+        public TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default)
         {
-            var localVarResponse = this.ListTemplatesWithHttpInfo(page, pageSize, searchKey);
+            var localVarResponse = this.ListTemplatesWithHttpInfo(page, pageSize, searchKey, templateType);
 
             return localVarResponse.Data;
         }
@@ -285,8 +286,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>ApiResponse of TemplateRecords</returns>
-        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default)
+        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default)
         {
             // verify the required parameter 'page' is set
             if (page < 1)
@@ -331,6 +333,11 @@ namespace BoldSign.Api
             if (searchKey != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "SearchKey", searchKey)); // query parameter
+            }
+
+            if (templateType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TemplateType", templateType)); // query parameter
             }
 
             // authentication (Bearer) required
@@ -366,10 +373,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>Task of TemplateRecords</returns>
-        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default)
+        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default)
         {
-            var localVarResponse = await this.ListTemplatesAsyncWithHttpInfo(page, pageSize, searchKey);
+            var localVarResponse = await this.ListTemplatesAsyncWithHttpInfo(page, pageSize, searchKey, templateType);
 
             return localVarResponse.Data;
         }
@@ -380,8 +388,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>Task of ApiResponse (TemplateRecords)</returns>
-        public async Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default)
+        public async Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default)
         {
             // verify the required parameter 'page' is set
             if (page < 1)
@@ -426,6 +435,11 @@ namespace BoldSign.Api
             if (searchKey != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "SearchKey", searchKey)); // query parameter
+            }
+
+            if (templateType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TemplateType", templateType)); // query parameter
             }
 
             // authentication (Bearer) required

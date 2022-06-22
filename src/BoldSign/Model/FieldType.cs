@@ -74,5 +74,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Attachment")]
         Attachment = 9,
+        
+        /// <summary>
+        ///     Enum EditableDate for value: EditableDate
+        /// </summary>
+        [EnumMember(Value = "EditableDate")]
+        EditableDate = 10,
     }
 }

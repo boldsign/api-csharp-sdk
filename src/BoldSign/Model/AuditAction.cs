@@ -211,5 +211,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "ExpiryDateExtended")]
         ExpiryDateExtended = 32,
+
+        /// <summary>
+        /// Enum EditRecipient for value: EditRecipient
+        /// </summary>
+        [EnumMember(Value = "EditRecipient")]
+        EditRecipient = 33,
     }
 }

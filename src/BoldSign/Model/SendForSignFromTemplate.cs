@@ -38,6 +38,10 @@ namespace BoldSign.Model
         /// <param name="reminderSettings">Gets or sets the reminderSettings.</param>
         /// <param name="cc">Gets or sets the cc.</param>
         /// <param name="expiryDays">Gets or sets the expiryDays.</param>
+        /// <param name="disableExpiryAlert">Gets or sets the disableExpiryAlert.</param>
+        /// <param name="enablePrintAndSign">Gets or sets the enablePrintAndSign.</param>
+        /// <param name="enableReassign">Gets or sets the enableReassign.</param>
+        /// <param name="enableSigningOrder">Gets or sets the enableSigningOrder.</param>
         /// <param name="documentInfo">Gets or sets the documentInfo.</param>
         public SendForSignFromTemplate(
             string templateId = default,
@@ -51,6 +55,10 @@ namespace BoldSign.Model
             ReminderSettings reminderSettings = default,
             IEnumerable<DocumentCC> cc = default,
             int expiryDays = 60,
+            bool disableExpiryAlert = default,
+            bool enablePrintAndSign = default,
+            bool enableReassign = true,
+            bool? enableSigningOrder = default,
             IEnumerable<DocumentInfo> documentInfo = default)
         {
             this.TemplateId = templateId;
@@ -68,6 +76,10 @@ namespace BoldSign.Model
             this.ReminderSettings = reminderSettings;
             this.CC = cc;
             this.ExpiryDays = expiryDays;
+            this.DisableExpiryAlert = disableExpiryAlert;
+            this.EnablePrintAndSign = enablePrintAndSign;
+            this.EnableReassign = enableReassign;
+            this.EnableSigningOrder = enableSigningOrder;
             this.DocumentInfo = documentInfo;
         }
 
@@ -141,6 +153,33 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "expiryDays", EmitDefaultValue = true)]
         public int ExpiryDays { get; set; } = 60;
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether Disableexpiryalert is true or false.
+        ///  This property will send the expiry alert email before the day of expiry for the pending signers.
+        ///  If the document expires in one day, the email will be sent before 2 hours of the expiry.
+        /// </summary>
+        [DataMember(Name = "disableExpiryAlert", EmitDefaultValue = true)]
+        public bool DisableExpiryAlert { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether to enable print and sign mode.
+        /// </summary>
+        [DataMember(Name = "enablePrintAndSign", EmitDefaultValue = true)]
+        public bool EnablePrintAndSign { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether to enable reassign mode.
+        ///  By Default True.
+        /// </summary>
+        [DataMember(Name = "enableReassign", EmitDefaultValue = true)]
+        public bool EnableReassign { get; set; } = true;
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether to enable signing order for the document signer.
+        /// </summary>
+        [DataMember(Name = "enableSigningOrder", EmitDefaultValue = true)]
+        public bool? EnableSigningOrder { get; set; }
 
         /// <summary>
         /// Gets or sets a documentInfo.

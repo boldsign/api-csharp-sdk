@@ -160,7 +160,7 @@ namespace BoldSign.Api
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType, Dictionary<string, Uri> fileUrlsParams)
+            string contentType, Dictionary<string, Uri> fileUrlsParams, Dictionary<string, IDocumentFile> singleFileParam)
         {
             var request = new RestRequest(path, method);
 
@@ -202,6 +202,16 @@ namespace BoldSign.Api
                         var documentFile = GetDocumentFile(file);
                         request.AddFile(param.Key, documentFile.FileData, documentFile.FileName, documentFile.ContentType);
                     }
+                }
+            }
+
+            // add single file URL parameter, if any
+            if (singleFileParam != null)
+            {
+                foreach (var param in singleFileParam)
+                {
+                    var documentFile = GetDocumentFile(param.Value);
+                    request.AddFile(param.Key, documentFile.FileName, documentFile.ContentType);
                 }
             }
 
@@ -262,16 +272,17 @@ namespace BoldSign.Api
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content Type of the request</param>
         /// <param name="fileUrlParams">File Url parameter.</param>>
+        /// <param name="singleFileParam">Single file parameter.</param>
         /// <returns>Object</returns>
         internal object CallApi(
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType, Dictionary<string, Uri> fileUrlParams)
+            string contentType, Dictionary<string, Uri> fileUrlParams, Dictionary<string, IDocumentFile> singleFileParam = null)
         {
             var request = this.PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType, fileUrlParams);
+                pathParams, contentType, fileUrlParams, singleFileParam);
 
             // set timeout
 
@@ -299,16 +310,17 @@ namespace BoldSign.Api
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content type.</param>
         /// <param name="fileUrlsParams">File Urls parameter.</param>
+        /// <param name="singleFileParam">single file parameter.</param>
         /// <returns>The Task instance.</returns>
         internal async Task<object> CallApiAsync(
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType, Dictionary<string, Uri> fileUrlsParams)
+            string contentType, Dictionary<string, Uri> fileUrlsParams, Dictionary<string, IDocumentFile> singleFileParam = null)
         {
             var request = this.PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType, fileUrlsParams);
+                pathParams, contentType, fileUrlsParams, singleFileParam);
             this.RestClient.UserAgent = this.Configuration.UserAgent;
             this.InterceptRequest(request);
             var response = await this.RestClient.ExecuteTaskAsync(request);

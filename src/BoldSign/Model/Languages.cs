@@ -23,5 +23,10 @@ namespace BoldSign.Model
         /// German.
         /// </summary>
         German = 3,
+
+        /// <summary>
+        /// French.
+        /// </summary>
+        French = 4,
     }
 }

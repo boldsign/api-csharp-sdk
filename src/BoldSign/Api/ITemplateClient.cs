@@ -38,8 +38,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>TemplateRecords</returns>
-        TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default);
+        TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
 
         /// <summary>
         ///     List all the templates created.
@@ -49,8 +50,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>ApiResponse of TemplateRecords</returns>
-        ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default);
+        ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
 
         /// <summary>
         ///     Send a document for signature using a Template.
@@ -104,8 +106,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>Task of TemplateRecords</returns>
-        Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default);
+        Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
 
         /// <summary>
         ///    List all the templates created.
@@ -115,8 +118,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
+        /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
         /// <returns>Task of ApiResponse (TemplateRecords)</returns>
-        Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default);
+        Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
 
         /// <summary>
         ///     Send a document for signature using a Template.

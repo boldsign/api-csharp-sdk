@@ -13,6 +13,7 @@ namespace BoldSign.Api
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
 
     /// <summary>
@@ -68,6 +69,14 @@ namespace BoldSign.Api
                 return new ApiException(
                     status,
                     string.Format("Error calling {0}: {1}", methodName, response.ErrorMessage), response.ErrorMessage);
+            }
+
+            else if (status == 202)
+            {
+                return new ApiException(
+                   status,
+                   string.Format(CultureInfo.CurrentCulture, "Error calling {0}: {1}", methodName, response.Content),
+                   response.Content);
             }
 
             return null;

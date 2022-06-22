@@ -32,6 +32,16 @@ namespace BoldSign.Examples
         }
 
         /// <summary>
+        ///     Lists the team documents.
+        /// </summary>
+        public TeamDocumentRecords ListTeamDocuments()
+        {
+            var documents = this.DocumentClient.ListTeamDocuments(page: 1, pageSize: 20);
+
+            return documents;
+        }
+
+        /// <summary>
         ///     Lists the document by senders.
         /// </summary>
         public DocumentRecords ListDocumentBySenders()
@@ -142,6 +152,44 @@ namespace BoldSign.Examples
         }
 
         /// <summary>
+        ///Add the Tag.
+        /// </summary>
+        public void AddTags()
+        {
+            // This is an example document id, add your own document id upon usage.
+            DocumentTags addTags = new DocumentTags()
+            {
+                DocumentId = "0ab99f4e-6d03-415e-b7bb-0d4b7c083e17",
+                Tags = new List<string>
+                {
+                   "test",
+                   "test1"
+                }
+
+            };
+            this.DocumentClient.AddTag(addTags);
+
+        }
+
+        /// <summary>
+        ///Delete the Tag.
+        /// </summary>
+        public void DeleteTags()
+        {
+            // This is an example document id, add your own document id upon usage.
+            DocumentTags deletetags = new DocumentTags()
+            {
+                DocumentId = "0ab99f4e-6d03-415e-b7bb-0d4b7c083e17",
+                Tags = new List<string>
+                {
+                    "test",
+                   "test1"
+                },
+
+            };
+            this.DocumentClient.DeleteTag(deletetags);
+        }
+        /// <summary>
         ///     Sends the reminder.
         /// </summary>
         public void SendReminder()
@@ -163,6 +211,17 @@ namespace BoldSign.Examples
             var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
 
             this.DocumentClient.ChangeAccessCode(documentId, "signer1@email.com", "newAccessCodeHere");
+        }
+
+        /// <summary>
+        ///     chnages the recipient details.
+        /// </summary>
+        public void ChangeRecipient()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "1ace7c82-6770-4d03-b514-b593e20c4550";
+
+            this.DocumentClient.ChangeRecipient(documentId, "signer1@gmail.com", "wrong email", "signer2", "signer2@email.com");
         }
 
         /// <summary>
@@ -215,7 +274,7 @@ namespace BoldSign.Examples
                 {
                     new DocumentSigner(
                         name: "Signer Name 1",
-                        emailAddress: "signer1@email.com",
+                        emailAddress: "test@boldsign.dev",
                         signerOrder: 1,
                         authenticationCode: "123",
                         signerType: SignerType.Signer,
