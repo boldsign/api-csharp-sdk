@@ -3,6 +3,7 @@ namespace BoldSign.Api
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using BoldSign.Model;
 
@@ -95,6 +96,9 @@ namespace BoldSign.Api
 #pragma warning restore CS0618 // Type or member is obsolete
 
             localVarFormParams.Add(nameof(signRequestDetails.HideDocumentId), signRequestDetails.HideDocumentId ? "true" : "false");
+            localVarFormParams.Add(nameof(signRequestDetails.DisableExpiryAlert), signRequestDetails.DisableExpiryAlert ? "true" : "false");
+            localVarFormParams.Add(nameof(signRequestDetails.EnablePrintAndSign), signRequestDetails.EnablePrintAndSign ? "true" : "false");
+            localVarFormParams.Add(nameof(signRequestDetails.EnableReassign), signRequestDetails.EnableReassign ? "true" : "false");
 
             return localVarFormParams;
         }
@@ -162,6 +166,10 @@ namespace BoldSign.Api
                 else if (value is string || prop.PropertyType.IsPrimitive)
                 {
                     localVarFormParams.Add(name, value.ToString());
+                }
+                else if (value is DateTime)
+                {
+                    localVarFormParams.Add(name, ((DateTime)value).ToString(CultureInfo.CurrentCulture));
                 }
                 else if (value is IEnumerable)
                 {

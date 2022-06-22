@@ -2,7 +2,7 @@
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
-namespace BoldSign.Model
+namespace BoldSign.Api.Model
 {
     using System;
     using System.Collections.Generic;

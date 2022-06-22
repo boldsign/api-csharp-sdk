@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -126,6 +126,9 @@
   <data name="BoundsRequired" xml:space="preserve">
     <value>bounds is a required property for FormField and cannot be null</value>
   </data>
+  <data name="DocumentIdRequired" xml:space="preserve">
+    <value>Document ID is required</value>
+  </data>
   <data name="FieldTypeRequired" xml:space="preserve">
     <value>fieldType is a required property for FormField and cannot be null</value>
   </data>
@@ -156,14 +159,35 @@
   <data name="InvalidTextTagSize" xml:space="preserve">
     <value>Invalid field size. Field height and width should be greater then 0.</value>
   </data>
+  <data name="LanguageRequired" xml:space="preserve">
+    <value>Any one of the given language is required.</value>
+  </data>
   <data name="MessageLengthExceeds" xml:space="preserve">
     <value>The message exceeds the limit of 5000 characters</value>
+  </data>
+  <data name="NewSignerEmailAddressRequired" xml:space="preserve">
+    <value>New signer email address is required for changing the recipient details</value>
+  </data>
+  <data name="OldSignerEmailRequired" xml:space="preserve">
+    <value>Old signer email is required for changing the recipient details</value>
   </data>
   <data name="PageNumberRquired" xml:space="preserve">
     <value>pageNumber is a required property for FormField and cannot be null</value>
   </data>
+  <data name="ReasonRequired" xml:space="preserve">
+    <value>A reason is required for changing recipient details</value>
+  </data>
   <data name="SameProperty" xml:space="preserve">
     <value>Both title and the document information cannot be present for a single document.</value>
+  </data>
+  <data name="SameSignerEmailNotAllowed" xml:space="preserve">
+    <value>Old and new emails should not be the same</value>
+  </data>
+  <data name="SignerNameRequired" xml:space="preserve">
+    <value>New signer name required for changing the recipient details</value>
+  </data>
+  <data name="SignerOrderPositiveValue" xml:space="preserve">
+    <value>Signer order should be a positive integer</value>
   </data>
   <data name="SignersIsSet" xml:space="preserve">
     <value>Missing required parameter 'signers' when calling DocumentApi-&gt;SendDocument</value>
@@ -179,5 +203,62 @@
   </data>
   <data name="ValidUrl" xml:space="preserve">
     <value>Please provide valid file URL</value>
+  </data>
+  <data name="BothFieldsRequired" xml:space="preserve">
+    <value>MinDate and MaxDate value is required</value>
+  </data>
+  <data name="MaxDateValidation" xml:space="preserve">
+    <value>Max date should be always greater than min date</value>
+  </data>
+  <data name="EditableDateFormatRequired" xml:space="preserve">
+    <value>The Date Format is required for Editable Date Field.</value>
+  </data>
+  <data name="EditableDateInformationRequired" xml:space="preserve">
+    <value>EditableDateFieldSettings shouldn't be null</value>
+  </data>
+  <data name="EmailIdRequired" xml:space="preserve">
+    <value>Email ID is a required property and cannot be null or empty</value>
+  </data>
+  <data name="InvalidEmailAddress" xml:space="preserve">
+    <value>Provide a valid Email ID</value>
+  </data>
+  <data name="UserIdRequired" xml:space="preserve">
+    <value>User ID is a required property and cannot be null or empty</value>
+  </data>
+  <data name="TeamIdIsSet" xml:space="preserve">
+    <value>Missing required parameter 'teamId' when calling TeamApi-&amp;gt;GetTeamDetails</value>
+  </data>
+  <data name="TeamIdrequired" xml:space="preserve">
+    <value>Missing required parameter 'teamId' when calling TeamApi-&amp;gt;Update</value>
+  </data>
+  <data name="TeamNameIsSet" xml:space="preserve">
+    <value>Missing required parameter 'teamName' when calling TeamApi-&amp;gt;Create</value>
+  </data>
+  <data name="TeamNameRequired" xml:space="preserve">
+    <value>Missing required parameter 'teamName' when calling TeamApi-&amp;gt;Update</value>
+  </data>
+  <data name="BrandIdDelete" xml:space="preserve">
+      <value>Missing required parameter 'brandId' when calling BrandingApi-&amp;gt;DeleteBrand</value>
+  </data>
+  <data name="InValidEndDate" xml:space="preserve">
+      <value>End date should be greater or equal to start date.</value>
+  </data>
+  <data name="BrandIdResetDefault" xml:space="preserve">
+    <value>Missing required parameter 'brandId' when calling BrandingApi-&amp;gt;ResetDefaultBrand</value>
+  </data>
+  <data name="EmptyLabels" xml:space="preserve">
+    <value>Label cannot be null or empty</value>
+  </data>
+  <data name="LabelMaxLength" xml:space="preserve">
+    <value>Labels cannot have more than 255 characters.</value>
+  </data>
+  <data name="MaxLabelsCount" xml:space="preserve">
+    <value>A document can only contain a maximum of 50 labels</value>
+  </data>
+  <data name="BrandLogoRequired" xml:space="preserve">
+    <value>The Brand logo is required</value>
+  </data>
+  <data name="BrandNameRequired" xml:space="preserve">
+    <value>The Brand name is required</value>
   </data>
 </root>

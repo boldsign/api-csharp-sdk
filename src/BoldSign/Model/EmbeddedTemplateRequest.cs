@@ -26,6 +26,10 @@ namespace BoldSign.Model
         /// <param name="brandId">Gets or sets the brandId..</param>
         /// <param name="labels">Gets or sets the labels.</param>
         /// <param name="sendLinkValidTill">Gets or sets the sendLinkValidTill.</param>
+        /// <param name="disableExpiryAlert">Gets or sets the disableExpiryAlert.</param>
+        /// <param name="enablePrintAndSign">Gets or sets the enablePrintAndSign.</param>
+        /// <param name="enableReassign">Gets or sets the enableReassign.By Default True.</param>
+        /// <param name="enableSigningOrder">Gets or sets the enableSigningOrder.</param>
         /// <param name="documentInfo">Gets or sets the send documentInfo.</param>
         public EmbeddedTemplateRequest(
             string templateId = default,
@@ -35,6 +39,10 @@ namespace BoldSign.Model
             string brandId = default,
             List<string> labels = default,
             DateTime? sendLinkValidTill = default,
+            bool disableExpiryAlert = default,
+            bool enablePrintAndSign = default,
+            bool enableReassign = true,
+            bool? enableSigningOrder = default,
             IEnumerable<DocumentInfo> documentInfo = default)
         {
             this.TemplateId = templateId;
@@ -48,6 +56,10 @@ namespace BoldSign.Model
             this.BrandId = brandId;
             this.Labels = labels;
             this.SendLinkValidTill = sendLinkValidTill;
+            this.DisableExpiryAlert = disableExpiryAlert;
+            this.EnablePrintAndSign = enablePrintAndSign;
+            this.EnableReassign = enableReassign;
+            this.EnableSigningOrder = enableSigningOrder;
             this.DocumentInfo = documentInfo;
         }
 

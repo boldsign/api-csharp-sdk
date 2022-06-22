@@ -35,10 +35,11 @@ namespace BoldSign.Model
         /// <param name="authenticationCode">Gets or sets the authentication code..</param>
         /// <param name="enableEmailOTP">Gets or sets a value indicating whether to enable email OTP.  &lt;br&gt;Email OTP takes higher precedence over AuthenticationCode..</param>
         /// <param name="signerType">signerType.</param>
+        /// <param name="hostEmail">Gets or sets the hostEmail..</param>
         /// <param name="formFields">Gets or sets document Form fields such as Sign, Checkbox, Radio buttons etc..</param>
         /// <param name="existingFormFields">Gets or sets value for the existing Form fields..</param>
         /// <param name="language">Gets or sets the Language.</param>
-        public Roles(int roleIndex = default, string signerName = default, string signerEmail = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Languages language = Languages.English)
+        public Roles(int roleIndex = default, string signerName = default, string signerEmail = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Languages language = Languages.English)
         {
             this.SignerName = signerName;
             this.SignerEmail = signerEmail;
@@ -51,6 +52,7 @@ namespace BoldSign.Model
             this.AuthenticationCode = authenticationCode;
             this.EnableEmailOTP = enableEmailOTP;
             this.SignerType = signerType;
+            this.HostEmail = hostEmail;
             this.FormFields = formFields;
             this.ExistingFormFields = existingFormFields;
             this.Language = language;
@@ -104,6 +106,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets the signerEmail.</value>
         [DataMember(Name = "signerType", EmitDefaultValue = true)]
         public SignerType? SignerType { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the host email address.
+        /// </summary>
+        /// <value>Gets or sets the hostEmail.</value>
+        [DataMember(Name = "hostEmail", EmitDefaultValue = false)]
+        public string HostEmail { get; set; }
 
         /// <summary>
         ///    Gets or sets a value indicating whether to enable email OTP for signing.

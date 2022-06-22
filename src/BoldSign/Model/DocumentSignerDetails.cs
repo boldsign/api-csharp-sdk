@@ -40,7 +40,9 @@ namespace BoldSign.Model
         /// <param name="isReassigned">Gets or sets a value indicating whether is reassigned..</param>
         /// <param name="privateMessage">&lt;br&gt;Gets or sets private message for the current signer.  &lt;br&gt;Available only when the user is signer and have a privateMessage from sender..</param>
         /// <param name="formFields">Gets or sets the form fields..</param>
-        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>))
+        /// <param name="hostEmail">Gets or sets the host email.</param>
+        /// <param name="hostName">Gets or sets the host name.</param>
+        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>), string hostEmail = default(string), string hostName = default(string))
         {
             this.SignerName = signerName;
             this.SignerRole = signerRole;
@@ -87,6 +89,8 @@ namespace BoldSign.Model
             this.IsReassigned = isReassigned;
             this.PrivateMessage = privateMessage;
             this.FormFields = formFields;
+            this.HostEmail = hostEmail;
+            this.HostName = hostName;
         }
 
         /// <summary>
@@ -163,6 +167,20 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "signerType", EmitDefaultValue = false)]
         public SignerType SignerType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the host email.
+        /// </summary>
+        /// <value>Gets the value of host email.</value>
+        [DataMember(Name = "hostEmail", EmitDefaultValue = false)]
+        public string HostEmail { get; set; }
+
+        /// <summary>
+        /// Gets or sets the host name.
+        /// </summary>
+        /// <value>Gets the value of host name.</value>
+        [DataMember(Name = "hostName", EmitDefaultValue = false)]
+        public string HostName { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether document signer is reassigned.

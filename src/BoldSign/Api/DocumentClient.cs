@@ -16,6 +16,7 @@ namespace BoldSign.Api
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
     using RestSharp;
@@ -110,6 +111,255 @@ namespace BoldSign.Api
             set => this.exceptionFactory = value;
         }
 
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient.</param>
+        /// <param name="newSignerEmail">The new  email address of recipient.</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        public void ChangeRecipient(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = default)
+        {
+            this.ChangeRecipientWithHttpInfo(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder);
+        }
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient.</param>
+        /// <param name="newSignerEmail">The new email address of recipient.</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public ApiResponse<object> ChangeRecipientWithHttpInfo(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = default)
+        {
+            ValidationForChangeRecipient(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder);
+
+            var localVarPath = "/v1/document/ChangeRecipient";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var recipientDetails = new ChangeRecipient(newSignerName, reason, oldSignerEmail, newSignerEmail, signerOrder);
+            object localVarPostBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DocumentId", documentId)); // query parameter
+
+            if (recipientDetails.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(recipientDetails); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = recipientDetails; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("ChangeRecipient", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient .</param>
+        /// <param name="newSignerEmail">The new email address  of recipient .</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
+        public async Task ChangeRecipientasync(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = default)
+        {
+            await this.ChangeRecipientasyncWithHttpInfo(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder).ConfigureAwait(false);
+        }
+
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient .</param>
+        /// <param name="newSignerEmail">The new email address of recipient .</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public async Task<ApiResponse<object>> ChangeRecipientasyncWithHttpInfo(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = default)
+        {
+            ValidationForChangeRecipient(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder);
+
+            var localVarPath = "/v1/document/ChangeRecipient";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var recipientDetails = new ChangeRecipient(newSignerName, reason, oldSignerEmail, newSignerEmail, signerOrder);
+            object localVarPostBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DocumentId", documentId)); // query parameter
+
+            if (recipientDetails.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(recipientDetails); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = recipientDetails; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("ChangeRecipient", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
         /// <summary>
         ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
@@ -609,6 +859,399 @@ namespace BoldSign.Api
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 null);
+        }
+
+        /// <summary>
+        ///     Delete the document when a particular document’s ID is given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="addTags">contains DocumentId and Label Parameter.</param>
+        public void AddTag(DocumentTags addTags)
+        {
+            this.AddTagWithHttpInfo(addTags);
+        }
+
+        /// <summary>
+        ///    Adding the document's Label when a particular document’s ID and Tag Name is given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="addTags">contains DocumentId and Label Parameter.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public ApiResponse<object> AddTagWithHttpInfo(DocumentTags addTags)
+        {
+            // verify the required parameter 'addDeleteTag' is set
+            if (addTags == null)
+            {
+                throw new ArgumentNullException(nameof(addTags));
+            }
+
+            ValidationForAddDeleteTags(addTags.DocumentId, addTags.Tags);
+            var localVarPath = "v1/document/addTags";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (addTags.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(addTags); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = addTags; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("AddTag", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <summary>
+        ///     Add the Tag to the document when a particular document’s ID and TagNames are given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="addTags">contains DocumentId and Label Parameter.</param>
+        /// <returns>Task of void.</returns>
+        public async Task AddTagAsync(DocumentTags addTags)
+        {
+            await this.AddTagAsyncWithHttpInfo(addTags).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///     Adding the document's Label when a particular document’s ID and Tag Name is given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="addTags">contains DocumentId and Label Parameter.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public Task<ApiResponse<object>> AddTagAsyncWithHttpInfo(DocumentTags addTags)
+        {
+            // verify the required parameter 'addDeleteTag' is set
+            if (addTags == null)
+            {
+                throw new ArgumentNullException(nameof(addTags));
+            }
+
+            ValidationForAddDeleteTags(addTags.DocumentId, addTags.Tags);
+            var localVarPath = "/v1/document/addTags";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (addTags.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(addTags); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = addTags; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("AddTag", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return Task.FromResult(new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null));
+        }
+
+        /// <summary>
+        ///     Delete the document's Tag when a particular document’s ID and Tags Names is given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="deleteTags">contains DocumentId and Label Parameter.</param>
+        public void DeleteTag(DocumentTags deleteTags)
+        {
+            this.DeleteTagWithHttpInfo(deleteTags);
+        }
+
+        /// <summary>
+        ///    Delete the document when a particular document’s ID is given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="deleteTags">contains DocumentId and Label Parameter.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public ApiResponse<object> DeleteTagWithHttpInfo(DocumentTags deleteTags)
+        {
+            // verify the required parameter 'documentId' is set
+            if (deleteTags == null)
+            {
+                throw new ArgumentNullException(nameof(deleteTags));
+            }
+
+            ValidationForAddDeleteTags(deleteTags.DocumentId, deleteTags.Tags);
+            var localVarPath = "/v1/document/deleteTags";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            if (deleteTags.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(deleteTags); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = deleteTags; // byte array
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("DeleteTag", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <summary>
+        ///    Delete the document when a particular document’s ID is given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="deleteTags">contains DocumentId and Label Parameter.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public async Task DeleteTagAsync(DocumentTags deleteTags)
+        {
+            await this.DeleteTagAsyncWithHttpInfo(deleteTags).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///     Adding the document's Label when a particular document’s ID and Tag Name is given as input.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="deleteTags">contains DocumentId and Label Parameter.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public Task<ApiResponse<object>> DeleteTagAsyncWithHttpInfo(DocumentTags deleteTags)
+        {
+            // verify the required parameter 'addDeleteTag' is set
+            if (deleteTags == null)
+            {
+                throw new ArgumentNullException(nameof(deleteTags));
+            }
+
+            ValidationForAddDeleteTags(deleteTags.DocumentId, deleteTags.Tags);
+            var localVarPath = "/v1/document/deleteTags";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (deleteTags.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(deleteTags); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = deleteTags; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("deleteTag", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return Task.FromResult(new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null));
         }
 
         /// <summary>
@@ -1424,9 +2067,9 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>DocumentRecords</returns>
-        public DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
+        public DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
         {
-            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels);
+            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType);
 
             return localVarResponse.Data;
         }
@@ -1444,7 +2087,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
+        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
         {
             // verify the required parameter 'page' is set
 
@@ -1505,6 +2148,11 @@ namespace BoldSign.Api
             if (endDate != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "EndDate", endDate)); // query parameter
+            }
+
+            if (transmitType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
             }
 
             if (searchKey != null)
@@ -1557,9 +2205,9 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>Task of DocumentRecords</returns>
-        public async Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
+        public async Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
         {
-            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels);
+            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType);
 
             return localVarResponse.Data;
         }
@@ -1577,7 +2225,7 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <returns>Task of ApiResponse (DocumentRecords)</returns>
-        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default)
+        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
         {
             // verify the required parameter 'page' is set
 
@@ -1645,6 +2293,11 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "SearchKey", searchKey)); // query parameter
             }
 
+            if (transmitType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -1675,6 +2328,282 @@ namespace BoldSign.Api
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (DocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentRecords)));
+        }
+
+        /// <summary>
+        ///    List all user team documents which can be filtered by date, time, teamid, userid,  status, and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size. (optional, default to 10).</param>
+        /// <param name="startDate">Gets or sets the start date. (optional).</param>
+        /// <param name="status">Gets or sets the status. (optional).</param>
+        /// <param name="teamId">Gets or sets the teamId. (optional).</param>
+        /// <param name="userId">Gets or sets the userId. (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate. (optional).</param>
+        /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
+        /// <param name="labels">Gets or set the labels.</param>
+        /// <param name="transmitType">transmitType.</param>
+        /// <returns>ApiResponse of TeamDocumentRecords.</returns>
+        public TeamDocumentRecords ListTeamDocuments(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        {
+            var localVarResponse = this.ListTeamDocumentsWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    List all user team documents which can be filtered by date, time, teamid, userid, status, and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size. (optional, default to 10).</param>
+        /// <param name="startDate">Gets or sets the start date. (optional).</param>
+        /// <param name="status">Gets or sets the status. (optional).</param>
+        /// <param name="teamId">Gets or sets the teamId. (optional).</param>
+        /// <param name="userId">Gets or sets the userId. (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate. (optional).</param>
+        /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
+        /// <param name="labels">Gets or set the labels.</param>
+        /// <param name="transmitType">transmitType.</param>
+        /// <returns>ApiResponse of TeamDocumentRecords.</returns>
+        public ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        {
+            ValidationForEndDate(startDate, endDate);
+
+            // verify the required parameter 'page' is set
+            var localVarPath = "/v1/document/teamlist";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "Page", page)); // query parameter
+
+            if (pageSize != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "PageSize", pageSize)); // query parameter
+            }
+
+            if (startDate != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "StartDate", startDate)); // query parameter
+            }
+
+            if (status != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Status", status)); // query parameter
+            }
+
+            if (teamId != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "TeamId", teamId)); // query parameter
+            }
+
+            if (userId != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "UserId", userId)); // query parameter
+            }
+
+            if (endDate != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "EndDate", endDate)); // query parameter
+            }
+
+            if (transmitType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
+            }
+
+            if (searchKey != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "SearchKey", searchKey)); // query parameter
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            if (labels != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("ListTeamDocuments", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<TeamDocumentRecords>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (TeamDocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TeamDocumentRecords)));
+        }
+
+        /// <summary>
+        ///     List all user team documents which can be filtered by date, time, teamid, userid, status, and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size. (optional, default to 10).</param>
+        /// <param name="startDate">Gets or sets the start date. (optional).</param>
+        /// <param name="status">Gets or sets the status. (optional).</param>
+        /// <param name="teamId">Gets or sets the teamId. (optional).</param>
+        /// <param name="userId">Gets or sets the userId. (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate. (optional).</param>
+        /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
+        /// <param name="labels">Gets or set the labels.</param>
+        /// <param name="transmitType">transmitType.</param>
+        /// <returns>Task of TeamDocumentRecords.</returns>
+        public async Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        {
+            var localVarResponse = await this.ListTeamDocumentsAsyncWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    List all user team documents which can be filtered by date, time, teamid, userid, status, and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size. (optional, default to 10).</param>
+        /// <param name="startDate">Gets or sets the start date. (optional).</param>
+        /// <param name="status">Gets or sets the status. (optional).</param>
+        /// <param name="teamId">Gets or sets the teamId. (optional).</param>
+        /// <param name="userId">Gets or sets the userId. (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate. (optional).</param>
+        /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
+        /// <param name="labels">Gets or set the labels.</param>
+        /// <param name="transmitType">transmitType.</param>
+        /// <returns>Task of ApiResponse (TeamDocumentRecords).</returns>
+        public async Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        {
+            ValidationForEndDate(startDate, endDate);
+
+            // verify the required parameter 'page' is set
+            var localVarPath = "/v1/document/teamlist";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "Page", page)); // query parameter
+
+            if (pageSize != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "PageSize", pageSize)); // query parameter
+            }
+
+            if (startDate != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "StartDate", startDate)); // query parameter
+            }
+
+            if (status != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Status", status)); // query parameter
+            }
+
+            if (teamId != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "TeamId", teamId)); // query parameter
+            }
+
+            if (userId != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "UserId", userId)); // query parameter
+            }
+
+            if (endDate != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "EndDate", endDate)); // query parameter
+            }
+
+            if (searchKey != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "SearchKey", searchKey)); // query parameter
+            }
+
+            if (transmitType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            if (labels != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("ListTeamDocuments", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<TeamDocumentRecords>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (TeamDocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TeamDocumentRecords)));
         }
 
         /// <summary>
@@ -2547,7 +3476,7 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'signers' is set
-            if (sendRequest.Signers == null)
+            if (sendRequest.Signers == null && !(sendRequest is EmbeddedDocumentRequest embed && embed.SendViewOption == PageViewOption.FillingPage))
             {
                 throw new ApiException(400, ApiValidationMessages.SignersIsSet);
             }
@@ -2580,6 +3509,86 @@ namespace BoldSign.Api
             return uri == null
                 || (Uri.TryCreate(uri, UriKind.Absolute, out var result)
                     && (result.Scheme == Uri.UriSchemeHttp || result.Scheme == Uri.UriSchemeHttps));
+        }
+        private static void ValidationForChangeRecipient(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder)
+        {
+            // verify the required parameter 'documentId' is set
+            if (string.IsNullOrEmpty(documentId))
+            {
+                throw new ApiException(400, ApiValidationMessages.DocumentIdRequired);
+            }
+
+            // verify the required parameter 'oldSignerEmailAddress' is set
+            if (string.IsNullOrEmpty(oldSignerEmail))
+            {
+                throw new ApiException(400, ApiValidationMessages.OldSignerEmailRequired);
+            }
+
+            // verify the required parameter 'newSignerEmailAddress' is set
+            if (string.IsNullOrEmpty(newSignerEmail))
+            {
+                throw new ApiException(400, ApiValidationMessages.NewSignerEmailAddressRequired);
+            }
+
+            // to ensure "oldSignermail"and "newSignermail" are not as same
+            if (oldSignerEmail.ToUpperInvariant() == newSignerEmail.ToUpperInvariant())
+            {
+                throw new ApiException(400, ApiValidationMessages.SameSignerEmailNotAllowed);
+            }
+
+            // verify the required parameter 'new signer name' is set
+            if (string.IsNullOrEmpty(newSignerName))
+            {
+                throw new ApiException(400, ApiValidationMessages.SignerNameRequired);
+            }
+
+            // verify the required parameter 'reason' is set
+            if (string.IsNullOrEmpty(reason))
+            {
+                throw new ApiException(400, ApiValidationMessages.ReasonRequired);
+            }
+
+            // verify the  parameter 'signer order' is not null and positve number
+            if (signerOrder != null && signerOrder <= 0)
+            {
+                throw new InvalidDataException(ApiValidationMessages.SignerOrderPositiveValue);
+            }
+        }
+
+        private static void ValidationForAddDeleteTags(string documentId, List<string> labels)
+        {
+            // verify the required parameter 'documentId' is not null and in Guid format.
+            if (string.IsNullOrEmpty(documentId) && Guid.TryParse(documentId.ToString(), out _))
+            {
+                throw new ApiException(400, ApiValidationMessages.DocumentIdRequired);
+            }
+
+            // verify the required parameter 'labels' is not Empty
+            if (labels.Any(x => string.IsNullOrEmpty(x)))
+            {
+                throw new ApiException(400, ApiValidationMessages.EmptyLabels);
+            }
+
+            // verify the required parameter 'labels' is not having more than 255 characters
+            if (labels.Any(x => x.Length > 255))
+            {
+                throw new ApiException(400, ApiValidationMessages.LabelMaxLength);
+            }
+
+            // verify the required parameter 'labels' is not contains more than 50 tags.
+            if (labels.Count > 50)
+            {
+                throw new ApiException(400, ApiValidationMessages.MaxLabelsCount);
+            }
+        }
+
+        private static void ValidationForEndDate(DateTime? startDate, DateTime? endDate)
+        {
+            // verify the required parameter 'startDate' is not greated than endDate
+            if (startDate > endDate)
+            {
+                throw new ApiException(400, ApiValidationMessages.InValidEndDate);
+            }
         }
 
     }

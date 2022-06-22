@@ -124,6 +124,27 @@ namespace BoldSign.Model
         public List<TextTagDefinition> TextTagDefinitions { get; set; }
 
         /// <summary>
+        ///  Gets or sets a value indicating whether Disableexpiryalert is true or false.
+        ///  This property will send the expiry alert email before the day of expiry for the pending signers.
+        ///  If the document expires in one day, the email will be sent before 2 hours of the expiry.
+        /// </summary>
+        [JsonProperty("disableExpiryAlert")]
+        public bool DisableExpiryAlert { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether to enable print and sign mode.
+        /// </summary>
+        [JsonProperty("enablePrintAndSign")]
+        public bool EnablePrintAndSign { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether to enable reassign mode.
+        ///  By Default True.
+        /// </summary>
+        [JsonProperty("enableReassign")]
+        public bool EnableReassign { get; set; } = true;
+
+        /// <summary>
         /// Gets or sets a documentInfo.
         /// </summary>
         [JsonProperty("documentInfo")]
