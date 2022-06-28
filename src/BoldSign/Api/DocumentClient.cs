@@ -670,6 +670,270 @@ namespace BoldSign.Api
         }
 
         /// <summary>
+        ///     Removes the access code for the desired document signer by verifying the email ID of the signer.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Gets or sets the document id.</param>
+        /// <param name="emailId">Gets or sets the signer email.</param>
+        /// <param name="signerOrder">
+        ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
+        ///     used to target that particular order with given signer email. (optional).
+        /// </param>
+        public void RemoveAuthentication(string documentId, string emailId, int? signerOrder = default)
+        {
+            this.RemoveAuthenticationWithHttpInfo(documentId, emailId, signerOrder);
+        }
+
+        /// <summary>
+        ///    Removes the access code for the desired document signer by verifying the email ID of the signer.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Gets or sets the document id.</param>
+        /// <param name="emailId">Gets or sets the signer email.</param>
+        /// <param name="signerOrder">
+        ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
+        ///     used to target that particular order with given signer email. (optional).
+        /// </param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public ApiResponse<object> RemoveAuthenticationWithHttpInfo(string documentId, string emailId, int? signerOrder = default)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->RemoveAuthentication");
+            }
+
+            // verify the required parameter 'emailId' is set
+            if (emailId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'emailId' when calling DocumentApi->RemoveAuthentication");
+            }
+
+            var localVarPath = "/v1/document/RemoveAuthentication";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var bodyDetails = new RemoveAuthentication(emailId, signerOrder);
+            object localVarPatchBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DocumentId", documentId)); // query parameter
+
+            if (bodyDetails.GetType() != typeof(byte[]))
+            {
+                localVarPatchBody = this.Configuration.ApiClient.Serialize(bodyDetails); // http body (model) parameter
+            }
+            else
+            {
+                localVarPatchBody = bodyDetails; // byte array
+            }
+
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPatchBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("RemoveAuthentication", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <summary>
+        ///    Removes the access code for the desired document signer by verifying the email ID of the signer.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Gets or sets the document id.</param>
+        /// <param name="emailId">Gets or sets the signer email.</param>
+        /// <param name="signerOrder">
+        ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
+        ///     used to target that particular order with given signer email. (optional).
+        /// </param>
+        /// <returns>Task of void.</returns>
+        public async Task RemoveAuthenticationAsync(string documentId, string emailId, int? signerOrder = default)
+        {
+            await this.RemoveAuthenticationAsyncWithHttpInfo(documentId, emailId, signerOrder).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///    Changes the access code for the desired document signer by verifying the email ID of the signer.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Gets or sets the document id.</param>
+        /// <param name="emailId">Gets or sets the signer email.</param>
+        /// <param name="signerOrder">
+        ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
+        ///     used to target that particular order with given signer email. (optional).
+        /// </param>
+        /// <returns>Task of ApiResponse.</returns>
+        public async Task<ApiResponse<object>> RemoveAuthenticationAsyncWithHttpInfo(string documentId, string emailId, int? signerOrder = default)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->RemoveAuthentication");
+            }
+
+            // verify the required parameter 'emailId' is set
+            if (emailId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'emailId' when calling DocumentApi->RemoveAuthentication");
+            }
+
+            var localVarPath = "/v1/document/RemoveAuthentication";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var bodyDetails = new RemoveAuthentication(emailId, signerOrder);
+            object localVarPatchBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DocumentId", documentId)); // query parameter
+
+            if (bodyDetails.GetType() != typeof(byte[]))
+            {
+                localVarPatchBody = this.Configuration.ApiClient.Serialize(bodyDetails); // http body (model) parameter
+            }
+            else
+            {
+                localVarPatchBody = bodyDetails; // byte array
+            }
+
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.PATCH, localVarQueryParams, localVarPatchBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var exception = this.ExceptionFactory?.Invoke("RemoveAuthentication", localVarResponse);
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
+        /// <summary>
         ///     Delete the document when a particular document’s ID is given as input.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
@@ -3437,6 +3701,295 @@ namespace BoldSign.Api
                 (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
         }
 
+        /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        public void AddAuthentication(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "")
+        {
+            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode);
+        }
+
+        /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        public ApiResponse<object> AddAuthenticationWithHttpInfo(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "")
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.DocumentIdRequiredAPI);
+            }
+
+            // verify the required parameter 'emailId' is set
+            if (emailId == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.EmailIdRequiredAPI);
+            }
+
+            // verify the required parameter 'accessCodeDetails' is set
+            if (string.IsNullOrEmpty(newAccessCode) && authenticationType == AuthenticationType.AccessCode)
+            {
+                throw new ApiException(400, ApiValidationMessages.AccessCodePropertyRequired);
+            }
+
+            // verify the required parameter 'accessCodeDetails' is set
+            if (!string.IsNullOrEmpty(newAccessCode) && authenticationType == AuthenticationType.EmailOTP)
+            {
+                throw new ApiException(400, ApiValidationMessages.AccessCodePropertyNoRequired);
+            }
+
+            var localVarPath = "/v1/document/addAuthentication";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType);
+            object localVarPostBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DocumentId", documentId)); // query parameter
+
+            if (accessCodeDetails.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(accessCodeDetails); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = accessCodeDetails; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("AddAuthentication", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <returns>AddAuthentication.</returns>
+        public async Task AddAuthenticationAsync(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "")
+        {
+            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <returns>ApiResponse of Object(AddAuthentication).</returns>
+        public async Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "")
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.DocumentIdRequiredAPI);
+            }
+
+            // verify the required parameter 'emailId' is set
+            if (emailId == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.EmailIdRequiredAPI);
+            }
+
+            // verify the required parameter 'accessCodeDetails' is set
+            if (string.IsNullOrEmpty(newAccessCode) && authenticationType == AuthenticationType.AccessCode)
+            {
+                throw new ApiException(400, ApiValidationMessages.AccessCodePropertyRequired);
+            }
+
+            // verify the required parameter 'accessCodeDetails' is set
+            if (!string.IsNullOrEmpty(newAccessCode) && authenticationType == AuthenticationType.EmailOTP)
+            {
+                throw new ApiException(400, ApiValidationMessages.AccessCodePropertyNoRequired);
+            }
+
+            var localVarPath = "/v1/document/addAuthentication";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType);
+            object localVarPostBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DocumentId", documentId)); // query parameter
+
+            if (accessCodeDetails.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(accessCodeDetails); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = accessCodeDetails; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("AddAuthentication", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                null);
+        }
+
         private static void ValidateSendProperties(SendForSign sendRequest)
         {
             // verify the only files or fileUrls is set.
@@ -3501,6 +4054,14 @@ namespace BoldSign.Api
             if (sendRequest.TextTagDefinitions != null && sendRequest.TextTagDefinitions.Any(x => (x.Size != null && (x.Size.Width <= 0 || x.Size.Height <= 0))))
             {
                 throw new ApiException(422, ApiValidationMessages.InvalidTextTagSize);
+            }
+
+            if (sendRequest.UseTextTags
+                && sendRequest.TextTagDefinitions != null
+                && sendRequest.TextTagDefinitions
+                    .Any(texTag => !string.IsNullOrEmpty(texTag.Value) && !(texTag.Type == FieldType.Label || texTag.Type == FieldType.TextBox)))
+            {
+                throw new ApiException(422, ApiValidationMessages.TextTagValueNotSupported);
             }
         }
 

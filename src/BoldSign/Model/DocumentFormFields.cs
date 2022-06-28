@@ -53,7 +53,8 @@ namespace BoldSign.Model
         /// <param name="imageInfo">Gets or sets the imageField.</param>
         /// <param name="attachmentInfo">Gets or sets the attachmentField.</param>
         /// <param name="editableDateFieldSettings">Gets or sets the editableDateFieldSettings.</param>
-        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), ImageInfo imageInfo = default(ImageInfo), AttachmentInfo attachmentInfo = default(AttachmentInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings))
+        /// <param name="hyperlinkText">Gets or sets the hyperlinkText.</param>
+        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), ImageInfo imageInfo = default(ImageInfo), AttachmentInfo attachmentInfo = default(AttachmentInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default(string))
         {
             this.Id = id;
             this.Type = type;
@@ -74,6 +75,7 @@ namespace BoldSign.Model
             this.ImageInfo = imageInfo;
             this.AttachmentInfo = attachmentInfo;
             this.EditableDateFieldSettings = editableDateFieldSettings;
+            this.HyperlinkText = hyperlinkText;
         }
 
         /// <summary>
@@ -209,6 +211,13 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "editableDateFieldSettings", EmitDefaultValue = false)]
         public EditableDateFieldSettings EditableDateFieldSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the element HyperlinkText.
+        /// </summary>
+        /// <value>Gets the value of element HyperlinkText.</value>
+        [DataMember(Name = "hyperlinkText", EmitDefaultValue = false)]
+        public string HyperlinkText { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

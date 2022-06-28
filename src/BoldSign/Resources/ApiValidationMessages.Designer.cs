@@ -70,6 +70,24 @@ namespace BoldSign.Api.Resources {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to AccessCode must be null or empty when authentication type is EmailOTP.
+        /// </summary>
+        internal static string AccessCodePropertyNoRequired {
+            get {
+                return ResourceManager.GetString("AccessCodePropertyNoRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to AccessCode cannot be null or empty when authentication type is AccessCode.
+        /// </summary>
+        internal static string AccessCodePropertyRequired {
+            get {
+                return ResourceManager.GetString("AccessCodePropertyRequired", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The Attachment Information is required..
         /// </summary>
         internal static string AttachmentInformationRequired {
@@ -84,6 +102,15 @@ namespace BoldSign.Api.Resources {
         internal static string AttachmentTitleRequired {
             get {
                 return ResourceManager.GetString("AttachmentTitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Both HyperlinkText and value is required for Hyperlink FormField.
+        /// </summary>
+        internal static string BothHyperlinkFieldsRequired {
+            get {
+                return ResourceManager.GetString("BothHyperlinkFieldsRequired", resourceCulture);
             }
         }
         
@@ -160,6 +187,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Enter Valid URL.
+        /// </summary>
+        internal static string EnterValidURL {
+            get {
+                return ResourceManager.GetString("EnterValidURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to fieldType is a required property for FormField and cannot be null.
         /// </summary>
         internal static string FieldTypeRequired {
@@ -192,6 +228,24 @@ namespace BoldSign.Api.Resources {
         internal static string FileTypeRequired {
             get {
                 return ResourceManager.GetString("FileTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HyperlinkText is required for Hyperlink FormField.
+        /// </summary>
+        internal static string HyperlinkLabelFieldsRequired {
+            get {
+                return ResourceManager.GetString("HyperlinkLabelFieldsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value is required for Hyperlink FormField.
+        /// </summary>
+        internal static string HyperlinkValueFieldsRequired {
+            get {
+                return ResourceManager.GetString("HyperlinkValueFieldsRequired", resourceCulture);
             }
         }
         
@@ -311,6 +365,15 @@ namespace BoldSign.Api.Resources {
                 return ResourceManager.GetString("MessageLengthExceeds", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling DocumentApi-&gt;AddAuthentication.
+        /// </summary>
+        internal static string DocumentIdRequiredAPI {
+            get {
+                return ResourceManager.GetString("DocumentIdRequiredAPI", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to New signer email address is required for changing the recipient details.
@@ -363,6 +426,15 @@ namespace BoldSign.Api.Resources {
         internal static string SameSignerEmailNotAllowed {
             get {
                 return ResourceManager.GetString("SameSignerEmailNotAllowed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;emailId&apos; when calling DocumentApi-&gt;AddAuthentication.
+        /// </summary>
+        internal static string EmailIdRequiredAPI {
+            get {
+                return ResourceManager.GetString("EmailIdRequiredAPI", resourceCulture);
             }
         }
         
@@ -438,6 +510,15 @@ namespace BoldSign.Api.Resources {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to The Value property is supported for text tag definitions only for text box and label fields.
+        /// </summary>
+        internal static string TextTagValueNotSupported {
+            get {
+                return ResourceManager.GetString("TextTagValueNotSupported", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to The title exceeds the limit of 256 characters.
         /// </summary>
