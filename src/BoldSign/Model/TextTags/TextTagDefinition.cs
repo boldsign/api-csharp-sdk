@@ -40,6 +40,7 @@ namespace BoldSign.Api.Model
         /// <param name="size">Gets or sets the bounds.</param>
         /// <param name="dateFormat">Gets or sets the dateFormat.</param>
         /// <param name="radioGroupName">Gets or sets the radioGroupName.</param>
+        /// <param name="value">The form field value, applicable only for label and textbox fields.</param>
         public TextTagDefinition(
             string definitionId,
             FieldType type,
@@ -51,7 +52,8 @@ namespace BoldSign.Api.Model
             Validation validation = default,
             Size size = default,
             string dateFormat = default,
-            string radioGroupName = default)
+            string radioGroupName = default,
+            string value = default)
         {
             this.DefinitionId = definitionId;
             this.Type = type;
@@ -64,6 +66,7 @@ namespace BoldSign.Api.Model
             this.Size = size;
             this.DateFormat = dateFormat;
             this.RadioGroupName = radioGroupName;
+            this.Value = value;
         }
 
         /// <summary>
@@ -132,5 +135,12 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "radioGroupName", EmitDefaultValue = false)]
         public string RadioGroupName { get; set; }
+
+        /// <summary>
+        /// Gets or sets value for the text tag definition.
+        /// The value property is allowed only on the textbox and label fields.
+        /// </summary>
+        [DataMember(Name = "value", EmitDefaultValue = false)]
+        public string Value { get; set; }
     }
 }

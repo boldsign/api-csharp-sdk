@@ -450,6 +450,53 @@ namespace BoldSign.Api
         Task<ApiResponse<object>> RemindDocumentAsyncWithHttpInfo(string documentId, List<string> receiverEmails, ReminderMessage reminderMessage = default);
 
         /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        void AddAuthentication(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+
+        /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        ApiResponse<object> AddAuthenticationWithHttpInfo(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+
+        /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <returns>AddAuthentication.</returns>
+        Task AddAuthenticationAsync(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+
+        /// <summary>
+        /// Add Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="authenticationType">AuthenticationType.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <returns>ApiResponse of Object(AddAuthentication).</returns>
+        Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+
+        /// <summary>
         ///     Revoke the document with the given document ID.
         /// </summary>
         /// <remarks>
@@ -520,6 +567,60 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <returns>Task of ApiResponse (EmbeddedSendCreated).</returns>
         Task<ApiResponse<EmbeddedSendCreated>> CreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedDocumentRequest sendRequest);
+
+        /// <summary>
+        ///     Remove Authentication to user.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">DocumentId.</param>
+        /// <param name="emailId">EmailID.</param>
+        /// <param name="signerOrder">SignerOrder.</param>
+        void RemoveAuthentication(string documentId, string emailId, int? signerOrder = default);
+
+        /// <summary>
+        ///     Remove Authentication to user.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Gets or sets the document id.</param>
+        /// <param name="emailId">Gets or sets the signer email.</param>
+        /// <param name="zOrder">
+        ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
+        ///     used to target that particular order with given signer email. (optional)
+        /// </param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<object> RemoveAuthenticationWithHttpInfo(string documentId, string emailId, int? signerOrder = default);
+
+        /// <summary>
+        ///     Remove Authentication to user.
+        ///</summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Gets or sets the document id.</param>
+        /// <param name="emailId">Gets or sets the signer email.</param>
+        /// <param name="signerOrder">
+        ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
+        ///     used to target that particular order with given signer email. (optional)
+        /// </param>
+        /// <returns>Task of void</returns>
+        Task RemoveAuthenticationAsync(string documentId, string emailId, int? signerOrder = default);
+
+        /// <summary>
+        ///      Remove Authentication to user.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Gets or sets the document id.</param>
+        /// <param name="emailId">Gets or sets the signer email.</param>
+        /// <param name="signerOrder">
+        ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
+        ///     used to target that particular order with given signer email. (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse</returns>
+        Task<ApiResponse<object>> RemoveAuthenticationAsyncWithHttpInfo(string documentId, string emailId, int? signerOrder = default);
 
         #endregion Asynchronous Operations
     }

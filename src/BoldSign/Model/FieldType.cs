@@ -80,5 +80,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "EditableDate")]
         EditableDate = 10,
+
+        /// <summary>
+        ///     Enum Hyperlink for value: Hyperlink
+        /// </summary>
+        [EnumMember(Value = "Hyperlink")]
+        Hyperlink = 11,
     }
 }

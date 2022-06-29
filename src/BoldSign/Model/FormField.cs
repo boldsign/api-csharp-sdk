@@ -16,6 +16,7 @@ namespace BoldSign.Model
     using System.IO;
     using System.Runtime.Serialization;
     using System.Text;
+    using System.Text.RegularExpressions;
     using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using Newtonsoft.Json;
@@ -105,7 +106,8 @@ namespace BoldSign.Model
         /// <param name="attachmentInfo">Gets or sets the attachmentInfo.</param>
         /// <param name="imageInfo">Gets or sets the imageInfo.</param>
         /// <param name="editableDateFieldSettings">Gets or sets the editableDateFieldSettings.</param>
-        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings))
+        /// <param name="hyperlinkText">Gets or sets the hyperlinkText.</param>
+        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default)
         {
             // to ensure "fieldType" is required (not null)
             if (type == null)
@@ -141,6 +143,7 @@ namespace BoldSign.Model
             this.Font = font;
             this.FontSize = fontSize;
             this.Id = id;
+            this.HyperlinkText = hyperlinkText;
             if (type == FieldType.Attachment && attachmentInfo == null)
             {
                 throw new InvalidDataException(ApiValidationMessages.AttachmentInformationRequired);
@@ -159,6 +162,31 @@ namespace BoldSign.Model
             }
 
             this.EditableDateFieldSettings = editableDateFieldSettings;
+
+            if (type == FieldType.Hyperlink)
+            {
+                if (string.IsNullOrEmpty(hyperlinkText) && string.IsNullOrEmpty(value))
+                {
+                    throw new InvalidDataContractException(ApiValidationMessages.BothHyperlinkFieldsRequired);
+                }
+
+                if (string.IsNullOrEmpty(hyperlinkText) && !string.IsNullOrEmpty(value))
+                {
+                    throw new InvalidDataContractException(ApiValidationMessages.HyperlinkLabelFieldsRequired);
+                }
+
+                if (!string.IsNullOrEmpty(hyperlinkText) && string.IsNullOrEmpty(value))
+                {
+                    throw new InvalidDataContractException(ApiValidationMessages.HyperlinkValueFieldsRequired);
+                }
+
+                string regex = @"(http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?";
+                var isValid = Regex.IsMatch(value, regex);
+                if (!isValid)
+                {
+                    throw new InvalidDataContractException(ApiValidationMessages.EnterValidURL);
+                }
+            }
         }
 
         /// <summary>
@@ -287,6 +315,13 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "editableDateFieldSettings", EmitDefaultValue = false)]
         public EditableDateFieldSettings EditableDateFieldSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HyperlinkText to be set to the form field (if required).
+        /// </summary>
+        /// <value>Gets or sets the HyperlinkText.</value>
+        [DataMember(Name = "hyperlinkText", EmitDefaultValue = true)]
+        public string HyperlinkText { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

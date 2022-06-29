@@ -217,5 +217,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "EditRecipient")]
         EditRecipient = 33,
+
+        /// <summary>
+        ///     Enum AuthenticationAdded for value: AuthenticationAdded
+        /// </summary>
+        [EnumMember(Value = "AuthenticationAdded")]
+        AuthenticationAdded = 34,
     }
 }
