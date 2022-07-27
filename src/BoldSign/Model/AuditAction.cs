@@ -223,5 +223,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "AuthenticationAdded")]
         AuthenticationAdded = 34,
+
+        /// <summary>
+        ///     Enum Attachment for value: Attachment
+        /// </summary>
+        [EnumMember(Value = "Attachment")]
+        Attachment = 35,
     }
 }
