@@ -220,6 +220,18 @@ namespace BoldSign.Model
         public string HyperlinkText { get; set; }
 
         /// <summary>
+        /// Gets or sets the bounds.
+        /// </summary>
+        [DataMember(Name = "bounds", EmitDefaultValue = false)]
+        public Rectangle Bounds { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pageNumber.
+        /// </summary>
+        [DataMember(Name = "pageNumber", EmitDefaultValue = false)]
+        public int PageNumber { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
