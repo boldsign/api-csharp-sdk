@@ -103,6 +103,12 @@ namespace BoldSign.Model
         public bool CombineAuditTrail { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating completed email type.
+        /// </summary>
+        [DataMember(Name = "completedEmailType", EmitDefaultValue = true)]
+        public CompletedEmailType CompletedEmailType { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>
