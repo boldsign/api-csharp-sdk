@@ -551,6 +551,11 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.DisclaimerDescription), createBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
 
+            if (createBrandData.CompletedEmailType != 0)
+            {
+                localVarFormParams.Add(nameof(createBrandData.CompletedEmailType), createBrandData.CompletedEmailType.ToString());
+            }
+
             // make the HTTP request
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
 
@@ -643,6 +648,11 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.EmailDisplayName), createBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerDescription), createBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
+
+            if (createBrandData.CompletedEmailType != 0)
+            {
+                localVarFormParams.Add(nameof(createBrandData.CompletedEmailType), createBrandData.CompletedEmailType.ToString());
+            }
 
             // make the HTTP request
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
@@ -739,6 +749,11 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.DisclaimerDescription), editBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
 
+            if (editBrandData.CompletedEmailType != 0)
+            {
+                localVarFormParams.Add(nameof(editBrandData.CompletedEmailType), editBrandData.CompletedEmailType.ToString());
+            }
+
             // make the HTTP request
             var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
 
@@ -834,6 +849,11 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.EmailDisplayName), editBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerDescription), editBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
+
+            if (editBrandData.CompletedEmailType != 0)
+            {
+                localVarFormParams.Add(nameof(editBrandData.CompletedEmailType), editBrandData.CompletedEmailType.ToString());
+            }
 
             // make the HTTP request
             var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
