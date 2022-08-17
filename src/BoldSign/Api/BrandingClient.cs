@@ -550,6 +550,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.EmailDisplayName), createBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerDescription), createBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
+            localVarFormParams.Add(nameof(createBrandData.DocumentTimeZone), createBrandData.DocumentTimeZone);
 
             if (createBrandData.CompletedEmailType != 0)
             {
@@ -648,6 +649,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.EmailDisplayName), createBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerDescription), createBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
+            localVarFormParams.Add(nameof(createBrandData.DocumentTimeZone), createBrandData.DocumentTimeZone);
 
             if (createBrandData.CompletedEmailType != 0)
             {
@@ -748,6 +750,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.EmailDisplayName), editBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerDescription), editBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
+            localVarFormParams.Add(nameof(editBrandData.DocumentTimeZone), editBrandData.DocumentTimeZone);
 
             if (editBrandData.CompletedEmailType != 0)
             {
@@ -849,6 +852,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.EmailDisplayName), editBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerDescription), editBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
+            localVarFormParams.Add(nameof(editBrandData.DocumentTimeZone), editBrandData.DocumentTimeZone);
 
             if (editBrandData.CompletedEmailType != 0)
             {
