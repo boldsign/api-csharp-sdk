@@ -109,6 +109,12 @@ namespace BoldSign.Model
         public CompletedEmailType CompletedEmailType { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating time zone of the document.
+        /// </summary>
+        [DataMember(Name = "documentTimeZone", EmitDefaultValue = true)]
+        public string DocumentTimeZone { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>
