@@ -36,7 +36,8 @@ namespace BoldSign.Model
         ///     Initializes a new instance of the <see cref="RevokeDocument" /> class.
         /// </summary>
         /// <param name="message">Gets or sets the message. (required).</param>
-        public RevokeDocument(string message = default)
+        /// <param name="onBehalfOf">Gets or sets the on behalf of email.</param>
+        public RevokeDocument(string message = default, string onBehalfOf = default)
         {
             // to ensure "message" is required (not null)
             if (message == null)
@@ -45,6 +46,7 @@ namespace BoldSign.Model
             }
 
             this.Message = message;
+            this.OnBehalfOf = onBehalfOf;
         }
 
         /// <summary>
@@ -53,6 +55,12 @@ namespace BoldSign.Model
         /// <value>Gets or sets the message.</value>
         [DataMember(Name = "message", EmitDefaultValue = true)]
         public string Message { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf ofemail.
+        /// </summary>
+        [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
+        public string OnBehalfOf { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

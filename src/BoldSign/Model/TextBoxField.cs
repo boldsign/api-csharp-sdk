@@ -58,8 +58,9 @@ namespace BoldSign.Model
         /// <param name="validationCustomRegex">validationCustomRegex.</param>
         /// <param name="placeholder">placeHolder.</param>
         /// <param name="validationCustomRegexMessage">validationCustomRegexMessage.</param>
+        /// <param name="dataSyncTag">dataSyncTag.</param>
         [Obsolete("Name is deprecated, please use Id instead")]
-        public TextBoxField(string name = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string placeholder = default(string), string validationCustomRegexMessage = default(string)) : base(name: name, type: FieldType.TextBox, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, characterLimit: characterLimit)
+        public TextBoxField(string name = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string placeholder = default(string), string validationCustomRegexMessage = default(string), string dataSyncTag = default(string)) : base(name: name, type: FieldType.TextBox, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, characterLimit: characterLimit, dataSyncTag: dataSyncTag)
         {
             this.ValidationType = validationType;
             this.ValidationCustomRegex = validationCustomRegex;
@@ -87,9 +88,11 @@ namespace BoldSign.Model
         /// <param name="placeholder">placeHolder.</param>
         /// <param name="id">id.</param>
         /// <param name="validationCustomRegexMessage">validationCustomRegexMessage.</param>
+        /// <param name="dataSyncTag">dataSyncTag.</param>
+        /// <param name="isReadOnly">Gets or sets a value indicating whether is read only mode.</param>
 
-        public TextBoxField(int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string placeholder = default(string), string id = default(string), string validationCustomRegexMessage = default(string))
-            : base(type: FieldType.TextBox, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, characterLimit: characterLimit, id: id)
+        public TextBoxField(int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string placeholder = default(string), string id = default(string), string validationCustomRegexMessage = default(string), string dataSyncTag = default(string), bool isReadOnly = default)
+            : base(type: FieldType.TextBox, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, characterLimit: characterLimit, id: id, dataSyncTag: dataSyncTag, isReadOnly: isReadOnly)
         {
             this.ValidationType = validationType;
             this.ValidationCustomRegex = validationCustomRegex;

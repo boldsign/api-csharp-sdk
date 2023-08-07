@@ -552,9 +552,9 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(createBrandData.DocumentTimeZone), createBrandData.DocumentTimeZone);
 
-            if (createBrandData.CompletedEmailType != 0)
+            if (createBrandData.EmailSignedDocument != 0)
             {
-                localVarFormParams.Add(nameof(createBrandData.CompletedEmailType), createBrandData.CompletedEmailType.ToString());
+                localVarFormParams.Add(nameof(createBrandData.EmailSignedDocument), createBrandData.EmailSignedDocument.ToString());
             }
 
             // make the HTTP request
@@ -651,9 +651,9 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(createBrandData.DocumentTimeZone), createBrandData.DocumentTimeZone);
 
-            if (createBrandData.CompletedEmailType != 0)
+            if (createBrandData.EmailSignedDocument != 0)
             {
-                localVarFormParams.Add(nameof(createBrandData.CompletedEmailType), createBrandData.CompletedEmailType.ToString());
+                localVarFormParams.Add(nameof(createBrandData.EmailSignedDocument), createBrandData.EmailSignedDocument.ToString());
             }
 
             // make the HTTP request
@@ -752,9 +752,9 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(editBrandData.DocumentTimeZone), editBrandData.DocumentTimeZone);
 
-            if (editBrandData.CompletedEmailType != 0)
+            if (editBrandData.EmailSignedDocument != 0)
             {
-                localVarFormParams.Add(nameof(editBrandData.CompletedEmailType), editBrandData.CompletedEmailType.ToString());
+                localVarFormParams.Add(nameof(editBrandData.EmailSignedDocument), editBrandData.EmailSignedDocument.ToString());
             }
 
             // make the HTTP request
@@ -854,9 +854,9 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(editBrandData.DocumentTimeZone), editBrandData.DocumentTimeZone);
 
-            if (editBrandData.CompletedEmailType != 0)
+            if (editBrandData.EmailSignedDocument != 0)
             {
-                localVarFormParams.Add(nameof(editBrandData.CompletedEmailType), editBrandData.CompletedEmailType.ToString());
+                localVarFormParams.Add(nameof(editBrandData.EmailSignedDocument), editBrandData.EmailSignedDocument.ToString());
             }
 
             // make the HTTP request

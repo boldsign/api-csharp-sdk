@@ -3,7 +3,7 @@ namespace BoldSign.Api
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Threading.Tasks;    
+    using System.Threading.Tasks;
     using BoldSign.Model;
 
     /// <summary>
@@ -12,6 +12,33 @@ namespace BoldSign.Api
     public interface IDocumentClient : IApiAccessor
     {
         #region Synchronous Operations
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient.</param>
+        /// <param name="newSignerEmail">The new  email address of recipient.</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        void ChangeRecipient(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient.</param>
+        /// <param name="newSignerEmail">The new email address of recipient.</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        ApiResponse<object> ChangeRecipientWithHttpInfo(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
 
         /// <summary>
         ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -26,8 +53,9 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns></returns>
-        void ChangeAccessCode(string documentId, string emailId, string newAccessCode, int? signerOrder = default);
+        void ChangeAccessCode(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default);
 
         /// <summary>
         ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -42,8 +70,9 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> ChangeAccessCodeWithHttpInfo(string documentId, string emailId, string newAccessCode, int? zOrder = default);
+        ApiResponse<object> ChangeAccessCodeWithHttpInfo(string documentId, string emailId, string newAccessCode, int? zOrder = default, string onBehalfOf = default);
 
         /// <summary>
         ///     Delete the document when a particular document’s ID is given as input.
@@ -52,8 +81,12 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="deletePermanently">
+        /// if true, the document will be deleted permanently.
+        /// if false, the document will be moved to the trash.
+        /// </param>
         /// <returns></returns>
-        void DeleteDocument(string documentId);
+        void DeleteDocument(string documentId, bool deletePermanently = false);
 
         /// <summary>
         ///     Delete the document when a particular document’s ID is given as input.
@@ -62,8 +95,12 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// /// <param name="deletePermanently">
+        /// if true, the document will be deleted permanently.
+        /// if false, the document will be moved to the trash.
+        /// </param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> DeleteDocumentWithHttpInfo(string documentId);
+        ApiResponse<object> DeleteDocumentWithHttpInfo(string documentId, bool deletePermanently = false);
 
         /// <summary>
         ///     Download the audit trail document for a particular document with given document ID.
@@ -72,8 +109,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of email.</param>
         /// <returns>System.IO.Stream</returns>
-        Stream DownloadAuditLog(string documentId);
+        Stream DownloadAuditLog(string documentId, string onBehalfOf = default);
 
         /// <summary>
         ///     Download the audit trail document for a particular document with given document ID.
@@ -82,8 +120,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of email.</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        ApiResponse<Stream> DownloadAuditLogWithHttpInfo(string documentId);
+        ApiResponse<Stream> DownloadAuditLogWithHttpInfo(string documentId, string onBehalfOf = default);
 
         /// <summary>
         ///     Download the document for given document ID.
@@ -92,8 +131,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>System.IO.Stream</returns>
-        Stream DownloadDocument(string documentId);
+        Stream DownloadDocument(string documentId, string onBehalfOf = default);
 
         /// <summary>
         ///    Download the document for given document ID.
@@ -102,8 +142,29 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId);
+        ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf = default);
+
+        /// <summary>
+        ///    Download the attachment for given document ID and attachment ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="attachmentId">attachmentId.</param>
+        /// <param name="onBehalfOf">OnBehalfOf Email.</param>
+        /// <returns>System.IO.Stream.</returns>
+        Stream DownloadAttachment(string documentId, string attachmentId, string onBehalfOf = null);
+
+        /// <summary>
+        ///   Download the attachment for given document ID and attachment ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="attachmentId">attachmentId.</param>
+        /// <param name="onBehalfOf">OnBehalfOf Email.</param>
+        /// <returns>ApiResponse of System.IO.Stream.</returns>
+        ApiResponse<Stream> DownloadAttachmenttWithHttpInfo(string documentId, string attachmentId, string onBehalfOf = null);
 
         /// <summary>
         ///    Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
@@ -186,6 +247,59 @@ namespace BoldSign.Api
         ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
 
         /// <summary>
+        ///     List of behalf documents which can be filtered by status, page size and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page index specified in get document list request.</param>
+        /// <param name="pageSize">Gets or sets the page size specified in get document list request. (optional, default to 10).</param>
+        /// <param name="emailAddress">Gets or sets the sender identity's email used to filter the documents returned in the API. The API will return documents that were sent on behalf of the specified email address. (optional).</param>
+        /// <param name="status">Gets or sets the status used to filter documents based on their current status, including In-progress, Completed, Declined, Expired, and Revoked. (optional).</param>
+        /// <param name="searchKey">Gets or sets the search key used to filter the documents returned in the API. The API will return documents that contain the search key in the document title, document ID, sender or signer(s) name, etc. (optional).</param>
+        /// <param name="pageType">Gets or sets the page type used to differentiate between documents sent on the user's behalf and documents sent by the user on behalf of others. The API will return documents based on the specified value. (optional).</param>
+        /// <param name="startDate">Gets or sets the start date used to filter the documents returned in the API. The API will return documents that were created on or after this date (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
+        /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
+        /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <returns>BehalfDocumentRecords.</returns>
+        BehalfDocumentRecords ListBehalfDocuments(
+            int page,
+            int? pageSize = default,
+            List<string> emailAddress = default,
+            List<Status> status = default,
+            string searchKey = default,
+            PageType? pageType = default,
+            DateTime? startDate = default,
+            DateTime? endDate = default,
+            List<string> signers = default,
+            List<string> labels = default);
+        /// <summary>
+        ///     List of behalf documents which can be filtered by status, page size and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page index specified in get document list request.</param>
+        /// <param name="pageSize">Gets or sets the page size specified in get document list request. (optional, default to 10).</param>
+        /// <param name="emailAddress">Gets or sets the sender identity's email used to filter the documents returned in the API. The API will return documents that were sent on behalf of the specified email address. (optional).</param>
+        /// <param name="status">Gets or sets the status used to filter documents based on their current status, including In-progress, Completed, Declined, Expired, and Revoked. (optional).</param>
+        /// <param name="searchKey">Gets or sets the search key used to filter the documents returned in the API. The API will return documents that contain the search key in the document title, document ID, sender or signer(s) name, etc. (optional).</param>
+        /// <param name="pageType">Gets or sets the page type used to differentiate between documents sent on the user's behalf and documents sent by the user on behalf of others. The API will return documents based on the specified value. (optional).</param>
+        /// <param name="startDate">Gets or sets the start date used to filter the documents returned in the API. The API will return documents that were created on or after this date (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
+        /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
+        /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <returns>ApiResponse of BehalfDocumentRecords.</returns>
+        ApiResponse<BehalfDocumentRecords> ListBehalfDocumentsWithHttpInfo(
+            int page,
+            int? pageSize = default,
+            List<string> emailAddress = default,
+            List<Status> status = default,
+            string searchKey = default,
+            PageType? pageType = default,
+            DateTime? startDate = default,
+            DateTime? endDate = default,
+            List<string> signers = default,
+            List<string> labels = default);
+
+        /// <summary>
         ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <remarks>
@@ -217,8 +331,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="revokeMessage">RevokeDetails.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns></returns>
-        void RevokeDocument(string documentId, string revokeMessage);
+        void RevokeDocument(string documentId, string revokeMessage, string onBehalfOf = default);
 
         /// <summary>
         ///     Revoke the document with the given document ID.
@@ -228,8 +343,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="revokeMessage">RevokeDetails.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> RevokeDocumentWithHttpInfo(string documentId, string revokeMessage);
+        ApiResponse<object> RevokeDocumentWithHttpInfo(string documentId, string revokeMessage, string onBehalfOf = default);
 
         /// <summary>
         ///     Sends the document for sign.
@@ -254,6 +370,34 @@ namespace BoldSign.Api
         #region Asynchronous Operations
 
         /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient .</param>
+        /// <param name="newSignerEmail">The new email address  of recipient .</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
+        Task ChangeRecipientasync(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient .</param>
+        /// <param name="newSignerEmail">The new email address of recipient .</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        Task<ApiResponse<object>> ChangeRecipientasyncWithHttpInfo(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
+
+        /// <summary>
         ///      Changes the access code for the desired document signer by verifying the email ID of the signer.
         /// </summary>
         /// <remarks>
@@ -266,8 +410,9 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of void</returns>
-        Task ChangeAccessCodeAsync(string documentId, string emailId, string newAccessCode, int? signerOrder = default);
+        Task ChangeAccessCodeAsync(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default);
 
         /// <summary>
         ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -282,8 +427,9 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> ChangeAccessCodeAsyncWithHttpInfo(string documentId, string emailId, string newAccessCode, int? signerOrder = default);
+        Task<ApiResponse<object>> ChangeAccessCodeAsyncWithHttpInfo(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default);
 
         /// <summary>
         ///     Delete the document.
@@ -292,8 +438,12 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="deletePermanently">
+        /// if true, the document will be deleted permanently.
+        /// if false, the document will be moved to the trash.
+        /// </param>
         /// <returns>Task of void</returns>
-        Task DeleteDocumentAsync(string documentId);
+        Task DeleteDocumentAsync(string documentId, bool deletePermanently = false);
 
         /// <summary>
         ///     Delete the document.
@@ -302,8 +452,12 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="deletePermanently">
+        /// if true, the document will be deleted permanently.
+        /// if false, the document will be moved to the trash.
+        /// </param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> DeleteDocumentAsyncWithHttpInfo(string documentId);
+        Task<ApiResponse<object>> DeleteDocumentAsyncWithHttpInfo(string documentId, bool deletePermanently = false);
 
         /// <summary>
         ///    Download the audit trail document for a particular document with given document ID.
@@ -312,8 +466,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of email.</param>
         /// <returns>Task of System.IO.Stream</returns>
-        Task<Stream> DownloadAuditLogAsync(string documentId);
+        Task<Stream> DownloadAuditLogAsync(string documentId, string onBehalfOf = default);
 
         /// <summary>
         ///     Download the audit trail document for a particular document with given document ID.
@@ -322,8 +477,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of email.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        Task<ApiResponse<Stream>> DownloadAuditLogAsyncWithHttpInfo(string documentId);
+        Task<ApiResponse<Stream>> DownloadAuditLogAsyncWithHttpInfo(string documentId, string onBehalfOf = default);
 
         /// <summary>
         ///    Download the document for given document ID.
@@ -332,8 +488,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of System.IO.Stream</returns>
-        Task<Stream> DownloadDocumentAsync(string documentId);
+        Task<Stream> DownloadDocumentAsync(string documentId, string onBehalfOf = default);
 
         /// <summary>
         ///     Download the document for given document ID.
@@ -342,8 +499,29 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId);
+        Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId, string onBehalfOf = default);
+
+        /// <summary>
+        ///     Download the attachment for given document ID and attachment ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="attachmentId">Attachment Id.</param>
+        /// <param name="onBehalfOf">OnBehalfOf Email.</param>
+        /// <returns>Task of System.IO.Stream.</returns>
+        Task<Stream> DownloadAttachmentAsync(string documentId, string attachmentId, string onBehalfOf = null);
+
+        /// <summary>
+        ///     Download the attachment for given document ID and attachment ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="attachmentId">Attachment Id.</param>
+        /// <param name="onBehalfOf">OnBehalfOf Email.</param>
+        /// <returns>Task of ApiResponse (System.IO.Stream).</returns>
+        Task<ApiResponse<Stream>> DownloadAttachmentAsyncWithHttpInfo(string documentId, string attachmentId, string onBehalfOf = null);
 
         /// <summary>
         ///     Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
@@ -426,6 +604,60 @@ namespace BoldSign.Api
         Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
 
         /// <summary>
+        ///     List of behalf documents which can be filtered by status, page size and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page index specified in get document list request.</param>
+        /// <param name="pageSize">Gets or sets the page size specified in get document list request. (optional, default to 10).</param>
+        /// <param name="emailAddress">Gets or sets the sender identity's email used to filter the documents returned in the API. The API will return documents that were sent on behalf of the specified email address. (optional).</param>
+        /// <param name="status">Gets or sets the status used to filter documents based on their current status, including In-progress, Completed, Declined, Expired, and Revoked. (optional).</param>
+        /// <param name="searchKey">Gets or sets the search key used to filter the documents returned in the API. The API will return documents that contain the search key in the document title, document ID, sender or signer(s) name, etc. (optional).</param>
+        /// <param name="pageType">Gets or sets the page type used to differentiate between documents sent on the user's behalf and documents sent by the user on behalf of others. The API will return documents based on the specified value. (optional).</param>
+        /// <param name="startDate">Gets or sets the start date used to filter the documents returned in the API. The API will return documents that were created on or after this date (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
+        /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
+        /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <returns>Task of BehalfDocumentRecords.</returns>
+        Task<BehalfDocumentRecords> ListBehalfDocumentsAsync(
+            int page,
+            int? pageSize = default,
+            List<string> emailAddress = default,
+            List<Status> status = default,
+            string searchKey = default,
+            PageType? pageType = default,
+            DateTime? startDate = default,
+            DateTime? endDate = default,
+            List<string> signers = default,
+            List<string> labels = default);
+
+        /// <summary>
+        ///    List of behalf documents which can be filtered by status, page size and so on.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="page">Gets or sets the page index specified in get document list request.</param>
+        /// <param name="pageSize">Gets or sets the page size specified in get document list request. (optional, default to 10).</param>
+        /// <param name="emailAddress">Gets or sets the sender identity's email used to filter the documents returned in the API. The API will return documents that were sent on behalf of the specified email address. (optional).</param>
+        /// <param name="status">Gets or sets the status used to filter documents based on their current status, including In-progress, Completed, Declined, Expired, and Revoked. (optional).</param>
+        /// <param name="searchKey">Gets or sets the search key used to filter the documents returned in the API. The API will return documents that contain the search key in the document title, document ID, sender or signer(s) name, etc. (optional).</param>
+        /// <param name="pageType">Gets or sets the page type used to differentiate between documents sent on the user's behalf and documents sent by the user on behalf of others. The API will return documents based on the specified value. (optional).</param>
+        /// <param name="startDate">Gets or sets the start date used to filter the documents returned in the API. The API will return documents that were created on or after this date (optional).</param>
+        /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
+        /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
+        /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <returns>Task of ApiResponse (BehalfDocumentRecords).</returns>
+        Task<ApiResponse<BehalfDocumentRecords>> ListBehalfDocumentsAsyncWithHttpInfo(
+            int page,
+            int? pageSize = default,
+            List<string> emailAddress = default,
+            List<Status> status = default,
+            string searchKey = default,
+            PageType? pageType = default,
+            DateTime? startDate = default,
+            DateTime? endDate = default,
+            List<string> signers = default,
+            List<string> labels = default);
+
+        /// <summary>
         ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
         /// </summary>
         /// <remarks>
@@ -458,7 +690,14 @@ namespace BoldSign.Api
         /// <param name="authenticationType">AuthenticationType.</param>
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
-        void AddAuthentication(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+        /// <param name="onBehalfOf">The on behalf of email.</param>
+        void AddAuthentication(
+            string documentId,
+            string emailId,
+            AuthenticationType authenticationType,
+            int? signerOrder = default,
+            string newAccessCode = "",
+            string onBehalfOf = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -469,8 +708,15 @@ namespace BoldSign.Api
         /// <param name="authenticationType">AuthenticationType.</param>
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>ApiResponse of Object(void).</returns>
-        ApiResponse<object> AddAuthenticationWithHttpInfo(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+        ApiResponse<object> AddAuthenticationWithHttpInfo(
+            string documentId,
+            string emailId,
+            AuthenticationType authenticationType,
+            int? signerOrder = default,
+            string newAccessCode = "",
+            string onBehalfOf = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -481,8 +727,15 @@ namespace BoldSign.Api
         /// <param name="authenticationType">AuthenticationType.</param>
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>AddAuthentication.</returns>
-        Task AddAuthenticationAsync(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+        Task AddAuthenticationAsync(
+            string documentId,
+            string emailId,
+            AuthenticationType authenticationType,
+            int? signerOrder = default,
+            string newAccessCode = "",
+            string onBehalfOf = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -493,8 +746,15 @@ namespace BoldSign.Api
         /// <param name="authenticationType">AuthenticationType.</param>
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
-        Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(string documentId, string emailId, AuthenticationType authenticationType, int? signerOrder = default, string newAccessCode = "");
+        Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
+            string documentId,
+            string emailId,
+            AuthenticationType authenticationType,
+            int? signerOrder = default,
+            string newAccessCode = "",
+            string onBehalfOf = default);
 
         /// <summary>
         ///     Revoke the document with the given document ID.
@@ -504,8 +764,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="revokeMessage">RevokeDetails.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of void</returns>
-        Task RevokeDocumentAsync(string documentId, string revokeMessage);
+        Task RevokeDocumentAsync(string documentId, string revokeMessage, string onBehalfOf = default);
 
         /// <summary>
         ///     Revoke the document with the given document ID.
@@ -515,8 +776,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="revokeMessage">RevokeDetails.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> RevokeDocumentAsyncWithHttpInfo(string documentId, string revokeMessage);
+        Task<ApiResponse<object>> RevokeDocumentAsyncWithHttpInfo(string documentId, string revokeMessage, string onBehalfOf = default);
 
         /// <summary>
         ///     Sends the document for sign.
@@ -575,7 +837,8 @@ namespace BoldSign.Api
         /// <param name="documentId">DocumentId.</param>
         /// <param name="emailId">EmailID.</param>
         /// <param name="signerOrder">SignerOrder.</param>
-        void RemoveAuthentication(string documentId, string emailId, int? signerOrder = default);
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        void RemoveAuthentication(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
 
         /// <summary>
         ///     Remove Authentication to user.
@@ -589,8 +852,9 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> RemoveAuthenticationWithHttpInfo(string documentId, string emailId, int? signerOrder = default);
+        ApiResponse<object> RemoveAuthenticationWithHttpInfo(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
 
         /// <summary>
         ///     Remove Authentication to user.
@@ -604,8 +868,9 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of void</returns>
-        Task RemoveAuthenticationAsync(string documentId, string emailId, int? signerOrder = default);
+        Task RemoveAuthenticationAsync(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
 
         /// <summary>
         ///      Remove Authentication to user.
@@ -619,8 +884,76 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> RemoveAuthenticationAsyncWithHttpInfo(string documentId, string emailId, int? signerOrder = default);
+        Task<ApiResponse<object>> RemoveAuthenticationAsyncWithHttpInfo(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
+
+        /// <summary>
+        /// Extends the expiration date of the document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The Document ID.</param>
+        /// <param name="newExpiryValue">
+        /// The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.
+        /// </param>
+        /// <param name="warnPrior">
+        /// If null, the existing configuration will be used.
+        /// If true, one day before the expiration date, a warning email will be sent.
+        /// If false, a warning email will not be sent one day before the expiration date.
+        /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        void ExtendExpiry(string documentId, string newExpiryValue, bool? warnPrior = null, string onBehalfOf = null);
+
+        /// <summary>
+        /// Extends the expiration date of the document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The Document ID.</param>
+        /// <param name="newExpiryValue">
+        /// The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.
+        /// </param>
+        /// <param name="warnPrior">
+        /// If null, the existing configuration will be used.
+        /// If true, one day before the expiration date, a warning email will be sent.
+        /// If false, a warning email will not be sent one day before the expiration date.
+        /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        ApiResponse<object> ExtendExpiryWithHttpinfo(string documentId, string newExpiryValue, bool? warnPrior = null, string onBehalfOf = null);
+
+        /// <summary>
+        /// Extends the expiration date of the document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The Document ID.</param>
+        /// <param name="newExpiryValue">
+        /// The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.
+        /// </param>
+        /// <param name="warnPrior">
+        /// If null, the existing configuration will be used.
+        /// If true, one day before the expiration date, a warning email will be sent.
+        /// If false, a warning email will not be sent one day before the expiration date.
+        /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns><see cref="Task"/> representing the asynchronous operation.</returns>
+        Task ExtendExpiryAsync(string documentId, string newExpiryValue, bool? warnPrior = null, string onBehalfOf = null);
+
+        /// <summary>
+        /// Extends the expiration date of the document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The Document ID.</param>
+        /// <param name="newExpiryValue">
+        /// The new expiry value should be specified in yyyy-MM-dd format for days type, ISO date time format for specific date time and integer for hours type.
+        /// </param>
+        /// <param name="warnPrior">
+        /// If null, the existing configuration will be used.
+        /// If true, one day before the expiration date, a warning email will be sent.
+        /// If false, a warning email will not be sent one day before the expiration date.
+        /// </param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>Task of ApiResponse.</returns>
+        Task<ApiResponse<object>> ExtendExpiryAsyncWithHttpInfo(string documentId, string newExpiryValue, bool? warnPrior = null, string onBehalfOf = null);
 
         #endregion Asynchronous Operations
     }

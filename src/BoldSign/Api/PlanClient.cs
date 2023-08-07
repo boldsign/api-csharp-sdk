@@ -233,7 +233,7 @@ namespace BoldSign.Api
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
-            var exception = this.ExceptionFactory?.Invoke("GetProperties", localVarResponse);
+            var exception = this.ExceptionFactory?.Invoke("GetApiCreditsCount", localVarResponse);
 
             if (exception != null)
             {

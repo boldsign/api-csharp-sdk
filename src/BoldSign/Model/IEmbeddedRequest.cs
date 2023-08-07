@@ -32,6 +32,11 @@ namespace BoldSign.Model
         public bool ShowSaveButton { get; set; }
 
         /// <summary>
+        /// Gets or sets the locale.
+        /// </summary>
+        public Locales Locale { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether to show send button.
         /// </summary>
         public bool ShowSendButton { get; set; }
@@ -52,5 +57,10 @@ namespace BoldSign.Model
         /// Default is 30 days.
         /// </summary>
         public DateTime? SendLinkValidTill { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show tooltip.
+        /// </summary>
+        public bool ShowTooltip { get; set; }
     }
 }

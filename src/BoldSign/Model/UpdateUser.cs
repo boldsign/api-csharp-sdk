@@ -18,10 +18,14 @@ namespace BoldSign.Model
         /// </summary>
         /// <param name="userId">Gets or sets userId.</param>
         /// <param name="userRole">Gets or sets userRole.</param>
-        public UpdateUser(string userId, UserRoleType userRole = UserRoleType.Member)
+        /// <param name="userStatus">Gets or sets userStatus.</param>
+        /// <param name="toUserId">Gets or sets toUserId.</param>
+        public UpdateUser(string userId, UserRoleType userRole = UserRoleType.Member, UserStatusOption userStatus = default, string toUserId = default)
         {
             this.UserId = userId;
             this.UserRole = userRole;
+            this.UserStatus = userStatus;
+            this.ToUserId = toUserId;
         }
 
         /// <summary>
@@ -36,5 +40,17 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "userRole", EmitDefaultValue = true)]
         public UserRoleType UserRole { get; set; }
+
+        /// <summary>
+        /// Gets or sets the UserStatus.
+        /// </summary>
+        [DataMember(Name = "userStatus", EmitDefaultValue = false)]
+        public UserStatusOption UserStatus { get; set; }
+
+        /// <summary>
+        /// Gets or sets the toUserId.
+        /// </summary>
+        [DataMember(Name = "toUserId", EmitDefaultValue = false)]
+        public string ToUserId { get; set; }
     }
 }

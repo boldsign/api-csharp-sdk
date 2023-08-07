@@ -42,6 +42,22 @@ namespace BoldSign.Examples
         }
 
         /// <summary>
+        ///     Lists the behalf documents.
+        /// </summary>
+        public BehalfDocumentRecords ListBehalfDocuments()
+        {
+            var tags = new List<string> { "tag" };
+            var recipients = new List<string> { "recipient1@email.com", "recipient2@email.com" };
+            var documents = this.DocumentClient.ListBehalfDocuments(
+                page: 1,
+                pageSize: 20,
+                labels: tags,
+                signers: recipients);
+
+            return documents;
+        }
+
+        /// <summary>
         ///     Lists the document by senders.
         /// </summary>
         public DocumentRecords ListDocumentBySenders()
@@ -88,6 +104,51 @@ namespace BoldSign.Examples
         }
 
         /// <summary>
+        ///    Add emailOTP authentication.
+        /// </summary>
+        public void AddAuthenticationEmailOTP()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
+
+            this.DocumentClient.AddAuthentication(documentId, "signer1@email.com", AuthenticationType.EmailOTP);
+        }
+
+        /// <summary>
+        ///    Add AccessCode authentication.
+        /// </summary>
+        public void AddAuthenticationAccessCode()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
+
+            this.DocumentClient.AddAuthentication(documentId, "signer1@email.com", AuthenticationType.AccessCode, 1, "123456");
+        }
+
+        /// <summary>
+        ///    Add emailOTP authentication(When Document signing order enabled).
+        /// </summary>
+        public void AddAuthenticationEmailOTPWithOrder()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
+
+            this.DocumentClient.AddAuthentication(documentId, "signer1@email.com", AuthenticationType.EmailOTP, 2);
+        }
+
+        /// <summary>
+        ///    Add AccessCode authentication(When Document signing order enabled).
+        /// </summary>
+        public void AddAuthenticationAccessCodeWithOrder()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
+
+            // targeting 2nd order signer of the document
+            this.DocumentClient.AddAuthentication(documentId, "signer1@email.com", AuthenticationType.AccessCode, 2, "123456");
+        }
+
+        /// <summary>
         ///     Gets the document properties.
         /// </summary>
         /// <returns>A DocumentProperties.</returns>
@@ -111,6 +172,20 @@ namespace BoldSign.Examples
             var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
 
             var documentStream = this.DocumentClient.DownloadDocument(documentId);
+
+            return documentStream;
+        }
+
+        /// <summary>
+        ///     Downloads the Attachment.
+        /// </summary>
+        /// <returns>A Stream.</returns>
+        public Stream DownloadAttachment()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "87e96d94-2a50-4a6b-aff1-449283d395d3";
+            var attachmentId = "attachment_6rn98";
+            var documentStream = this.DocumentClient.DownloadAttachment(documentId, attachmentId);
 
             return documentStream;
         }
@@ -214,6 +289,17 @@ namespace BoldSign.Examples
         }
 
         /// <summary>
+        /// Extends the expiration date of the document.
+        /// </summary>
+        public void ExtendExpiry()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "052181ef-0817-41f6-9e75-6310b796d7fd";
+            var newExpiryValue = "2022-10-15";
+            this.DocumentClient.ExtendExpiry(documentId, newExpiryValue);
+        }
+
+        /// <summary>
         ///     chnages the recipient details.
         /// </summary>
         public void ChangeRecipient()
@@ -221,7 +307,7 @@ namespace BoldSign.Examples
             // This is an example document id, add your own document id upon usage.
             var documentId = "1ace7c82-6770-4d03-b514-b593e20c4550";
 
-            this.DocumentClient.ChangeRecipient(documentId, "signer1@gmail.com", "wrong email", "signer2", "signer2@email.com");
+            this.DocumentClient.ChangeRecipient(documentId, "signer1@email.com", "wrong email", "signer2", "signer2@email.com");
         }
 
         /// <summary>
@@ -260,7 +346,7 @@ namespace BoldSign.Examples
         {
             List<FormField> formFeilds = new List<FormField>();
             formFeilds.Add(new FormField(
-                        id: "Sign_1",
+                        name: "Sign",
                         type: FieldType.Signature,
                         pageNumber: 1,
                         isRequired: true,
@@ -274,7 +360,7 @@ namespace BoldSign.Examples
                 {
                     new DocumentSigner(
                         name: "Signer Name 1",
-                        emailAddress: "test@boldsign.dev",
+                        emailAddress: "signer1@email.com",
                         signerOrder: 1,
                         authenticationCode: "123",
                         signerType: SignerType.Signer,
@@ -324,7 +410,7 @@ namespace BoldSign.Examples
             List<FormField> formFields = new List<FormField>
             {
                 new FormField(
-                    id: "Sign_1",
+                    name: "Sign",
                     type: FieldType.Signature,
                     pageNumber: 1,
                     isRequired: true,
@@ -367,7 +453,7 @@ namespace BoldSign.Examples
             List<FormField> formFields = new List<FormField>
             {
                 new FormField(
-                    id: "Sign_1",
+                    name: "Sign",
                     type: FieldType.Signature,
                     pageNumber: 1,
                     isRequired: true,
@@ -415,5 +501,16 @@ namespace BoldSign.Examples
             // url to send the document from your web application
             var documentSendUrl = documentCreated.SendUrl;
         }
+        /// <summary>
+        ///     Removes the access code.
+        /// </summary>
+        public void RemoveAuthentication()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
+
+            this.DocumentClient.RemoveAuthentication(documentId, "signer1@email.com", 1);
+        }
+
     }
 }

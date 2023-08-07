@@ -53,8 +53,15 @@ namespace BoldSign.Model
         /// <param name="imageInfo">Gets or sets the imageField.</param>
         /// <param name="attachmentInfo">Gets or sets the attachmentField.</param>
         /// <param name="editableDateFieldSettings">Gets or sets the editableDateFieldSettings.</param>
+        /// <param name="dropdownOptions">Gets or sets the dropdownOptions.</param>
         /// <param name="hyperlinkText">Gets or sets the hyperlinkText.</param>
-        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), ImageInfo imageInfo = default(ImageInfo), AttachmentInfo attachmentInfo = default(AttachmentInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default(string))
+        /// <param name="dataSyncTag">Gets or sets the dataSyncTag.</param>
+        /// <param name="fileInfo">Gets or sets the download attachment fileInfo.</param>
+        /// <param name="isReadOnly">Gets or sets a value indicating whether is read only mode.</param>
+        /// <param name="conditionalRules">Gets or sets the conditionalRules.</param>
+        /// <param name="textAlign">Gets or sets the textAlign.</param>
+        /// <param name="textDirection">Gets or sets the direction of the text.</param>
+        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), ImageInfo imageInfo = default(ImageInfo), AttachmentInfo attachmentInfo = default(AttachmentInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default(string), string dataSyncTag = default(string), Api.Model.FileInfo fileInfo = default(Api.Model.FileInfo), List<string> dropdownOptions = default(List<string>), bool? isReadOnly = default(bool?), List<ConditionalRule> conditionalRules = default(List<ConditionalRule>), TextAlign textAlign = TextAlign.Left, TextDirection textDirection = TextDirection.LTR)
         {
             this.Id = id;
             this.Type = type;
@@ -76,6 +83,13 @@ namespace BoldSign.Model
             this.AttachmentInfo = attachmentInfo;
             this.EditableDateFieldSettings = editableDateFieldSettings;
             this.HyperlinkText = hyperlinkText;
+            this.IsReadOnly = isReadOnly;
+            this.DataSyncTag = dataSyncTag;
+            this.FileInfo = fileInfo;
+            this.DropdownOptions = dropdownOptions;
+            this.ConditionalRules = conditionalRules;
+            this.TextAlign = textAlign;
+            this.TextDirection = textDirection;
         }
 
         /// <summary>
@@ -112,6 +126,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets a value indicating whether is required.</value>
         [DataMember(Name = "isRequired", EmitDefaultValue = false)]
         public bool? IsRequired { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is read only mode.
+        /// </summary>
+        /// <value>Gets or sets a value indicating whether is read only mode.</value>
+        [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
+        public bool? IsReadOnly { get; set; }
 
         /// <summary>
         /// Gets or sets the line height for the content in form fields such as text box.
@@ -230,6 +251,42 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "pageNumber", EmitDefaultValue = false)]
         public int PageNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data sync tag value, this property helps to group the similar element types and it's only applicable for textbox, image, dropdown, checkbox fields, it won't affect the other fields.
+        /// </summary>
+        [DataMember(Name = "dataSyncTag", EmitDefaultValue = false)]
+        public string DataSyncTag { get; set; }
+
+        /// <summary>
+        /// Gets or sets the file info.
+        /// </summary>
+        [DataMember(Name = "fileInfo", EmitDefaultValue = false)]
+        public Api.Model.FileInfo FileInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Dropdown Options.
+        /// </summary>
+        [DataMember(Name = "dropdownOptions", EmitDefaultValue = false)]
+        public List<string> DropdownOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the conditional rules value, this property helps to frame rules.
+        /// </summary>
+        [DataMember(Name = "conditionalRules", EmitDefaultValue = false)]
+        public List<ConditionalRule> ConditionalRules { get; set; }
+
+        /// <summary>
+        /// Gets or sets the textAlign.
+        /// </summary>
+        [DataMember(Name = "textAlign", EmitDefaultValue = true)]
+        public TextAlign TextAlign { get; set; }
+
+        /// <summary>
+        /// Gets or sets the direction of the text.
+        /// </summary>
+        [DataMember(Name = "textDirection", EmitDefaultValue = true)]
+        public TextDirection TextDirection { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

@@ -30,7 +30,8 @@ namespace BoldSign.Api.Model
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional).
         /// </param>
-        public ChangeRecipient(string newSignerName, string reason, string oldSignerEmail, string newSignerEmail, int? signerOrder = default)
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        public ChangeRecipient(string newSignerName, string reason, string oldSignerEmail, string newSignerEmail, int? signerOrder = default, string onBehalfOf = default)
         {
             // to ensure "signer name" is required (not null)
             if (string.IsNullOrEmpty(newSignerName))
@@ -77,6 +78,7 @@ namespace BoldSign.Api.Model
             }
 
             this.Order = signerOrder;
+            this.OnBehalfOf = onBehalfOf;
         }
 
         /// <summary>
@@ -117,6 +119,12 @@ namespace BoldSign.Api.Model
         /// <value>Gets the value of signer Order .</value>
         [DataMember(Name = "order", EmitDefaultValue = true)]
         public int? Order { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
+        public string OnBehalfOf { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

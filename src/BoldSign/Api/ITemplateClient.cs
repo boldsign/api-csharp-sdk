@@ -1,7 +1,9 @@
 namespace BoldSign.Api
 {
-    using System.Threading.Tasks;    
+    using System.IO;
+    using System.Threading.Tasks;
     using BoldSign.Model;
+    using BoldSign.Api.Model;
 
     /// <summary>
     ///    Represents a collection of functions to interact with the API endpoints. The functions perform actions such as sending document sign request from template, deleting a template, listing the templates and so on.
@@ -73,6 +75,118 @@ namespace BoldSign.Api
         /// <param name="sendForSignFromTemplate">It contains page,page size and status details. (optional)</param>
         /// <returns>ApiResponse of DocumentCreated</returns>
         ApiResponse<DocumentCreated> SendUsingTemplateWithHttpInfo(SendForSignFromTemplate sendForSignFromTemplate = default);
+
+        /// <summary>
+        ///     Download the template for given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>System.IO.Stream.</returns>
+        Stream DownloadTemplate(string templateId);
+
+        /// <summary>
+        ///    Download the template for given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>ApiResponse of System.IO.Stream.</returns>
+        ApiResponse<Stream> DownloadTemplateWithHttpInfo(string templateId);
+
+         /// <summary>
+        /// Creates a template.
+        /// </summary>
+        /// <param name="createTemplate">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Template Created.</returns>
+        TemplateCreated CreateTemplate(CreateTemplateRequest createTemplate);
+
+        /// <summary>
+        ///  Creates a template.
+        /// </summary>
+        /// <param name="createTemplate">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Template created.</returns>
+        Task<TemplateCreated> CreateTemplateAsync(CreateTemplateRequest createTemplate);
+
+        /// <summary>
+        ///  Creates a template.
+        /// </summary>
+        /// <param name="createTemplate">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of Template created.</returns>
+        ApiResponse<TemplateCreated> CreateTemplateWithHttpInfo(CreateTemplateRequest createTemplate);
+
+        /// <summary>
+        /// Creates a template.
+        /// </summary>
+        /// <param name="createTemplate">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of Template Created.</returns>
+        Task<ApiResponse<TemplateCreated>> CreateTemplateWithHttpInfoAsync(CreateTemplateRequest createTemplate);
+
+        /// <summary>
+        ///  Generates a create URL using a template which embeds template create process into your application.
+        /// </summary>
+        /// <param name="createTemplate">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateCreated).</returns>
+        EmbeddedTemplateCreated CreateEmbeddedTemplateUrl(CreateEmbeddedTemplateRequest createTemplate);
+
+        /// <summary>
+        ///  Generates a create URL using a template which embeds template create process into your application.
+        /// </summary>
+        /// <param name="createRequest">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateCreated).</returns>
+        Task<EmbeddedTemplateCreated> CreateEmbeddedTemplateUrlAsync(CreateEmbeddedTemplateRequest createRequest);
+
+        /// <summary>
+        ///  Generates a create URL using a template which embeds template create process into your application.
+        /// </summary>
+        /// <param name="createTemplate">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateCreated).</returns>
+        ApiResponse<EmbeddedTemplateCreated> CreateEmbeddedTemplateUrlWithHttpInfo(CreateEmbeddedTemplateRequest createTemplate);
+
+        /// <summary>
+        ///  Generates a create URL using a template which embeds template create process into your application.
+        /// </summary>
+        /// <param name="createRequest">The create template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateCreated).</returns>
+        Task<ApiResponse<EmbeddedTemplateCreated>> CreateEmbeddedTemplateUrlWithHttpInfoAsync(CreateEmbeddedTemplateRequest createRequest);
+
+                /// <summary>
+        ///  Generates a edit embed URL using a template id which embeds template edit process into your application.
+        /// </summary>
+        /// <param name="embedTemplateEdit">The embed template edit request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateEdited).</returns>
+        EmbeddedTemplateEdited GetEmbeddedTemplateEditUrl(EmbeddedTemplateEditRequest embedTemplateEdit);
+
+        /// <summary>
+        ///  Generates a edit embed URL using a template id which embeds template edit process into your application.
+        /// </summary>
+        /// <param name="embeddedTemplateEditRequest">The embedded template edit request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateEdited).</returns>
+        Task<EmbeddedTemplateEdited> GetEmbeddedTemplateEditUrlAsync(EmbeddedTemplateEditRequest embeddedTemplateEditRequest);
+
+        /// <summary>
+        ///  Generates a edit embed URL using a template id which embeds template edit process into your application.
+        /// </summary>
+        /// <param name="embedTemplateEdit">The embed template edit request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateEdited).</returns>
+        ApiResponse<EmbeddedTemplateEdited> GetEmbeddedTemplateEditUrlWithHttpInfo(EmbeddedTemplateEditRequest embedTemplateEdit);
+
+        /// <summary>
+        ///  Generates a edit embed URL using a template id which embeds template edit process into your application.
+        /// </summary>
+        /// <param name="embeddedTemplateEditRequest">The embedded template edit request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplateEdited).</returns>
+        Task<ApiResponse<EmbeddedTemplateEdited>> GetEmbeddedTemplateEditUrlWithHttpInfoAsync(EmbeddedTemplateEditRequest embeddedTemplateEditRequest);
 
         #endregion Synchronous Operations
 
@@ -173,6 +287,54 @@ namespace BoldSign.Api
         /// <param name="send">It contains page,page size and status details.</param>
         /// <returns>Task of ApiResponse (DocumentCreated).</returns>
         Task<ApiResponse<EmbeddedSendCreated>> CreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedTemplateRequest send = default);
+
+        /// <summary>
+        ///    Download the template for given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>Task of System.IO.Stream.</returns>
+        Task<Stream> DownloadTemplateAsync(string templateId);
+
+        /// <summary>
+        ///     Download the template for given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>Task of ApiResponse (System.IO.Stream).</returns>
+        Task<ApiResponse<Stream>> DownloadTemplateAsyncWithHttpInfo(string templateId);
+
+        /// <summary>
+        ///     Get summary of the template for the given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>TemplateProperties.</returns>
+        TemplateProperties GetProperties(string templateId);
+
+        /// <summary>
+        ///     Get summary of the template for the given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>ApiResponse of TemplateProperties.</returns>
+        ApiResponse<TemplateProperties> GetPropertiesWithHttpInfo(string templateId);
+
+        /// <summary>
+        ///     Get summary of the template for the given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>Task of TemplateProperties.</returns>
+        Task<TemplateProperties> GetPropertiesAsync(string templateId);
+
+        /// <summary>
+        ///    Get summary of the template for the given template ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="templateId">Template Id.</param>
+        /// <returns>Task of ApiResponse (TemplateProperties).</returns>
+        Task<ApiResponse<TemplateProperties>> GetPropertiesAsyncWithHttpInfo(string templateId);
 
         #endregion Asynchronous Operations
     }

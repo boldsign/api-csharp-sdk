@@ -272,10 +272,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>TeamList.</returns>
-        public TeamList ListTeam(int page, int? pageSize = default)
+        public TeamList ListTeam(int page, int? pageSize = default, string searchKey = default)
         {
-            var localVarResponse = this.ListTeamWithHttpInfo(page, pageSize);
+            var localVarResponse = this.ListTeamWithHttpInfo(page, pageSize, searchKey);
 
             return localVarResponse.Data;
         }
@@ -286,8 +287,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>ApiResponse of TeamList.</returns>
-        public ApiResponse<TeamList> ListTeamWithHttpInfo(int page, int? pageSize = default)
+        public ApiResponse<TeamList> ListTeamWithHttpInfo(int page, int? pageSize = default, string searchKey = default)
         {
             var localVarPath = "/v1/teams/list";
             var localVarPathParams = new Dictionary<string, string>();
@@ -319,6 +321,11 @@ namespace BoldSign.Api
             if (pageSize != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "PageSize", pageSize)); // query parameter
+            }
+
+            if (searchKey != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "SearchKey", searchKey)); // query parameter
             }
 
             // authentication (Bearer) required
@@ -351,10 +358,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>Task of TeamList.</returns>
-        public async Task<TeamList> ListTeamAsync(int page, int? pageSize = default)
+        public async Task<TeamList> ListTeamAsync(int page, int? pageSize = default, string searchKey = default)
         {
-            var localVarResponse = await this.ListTeamAsyncWithHttpInfo(page, pageSize).ConfigureAwait(false);
+            var localVarResponse = await this.ListTeamAsyncWithHttpInfo(page, pageSize, searchKey).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
@@ -365,8 +373,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>Task of ApiResponse (TeamList).</returns>
-        public async Task<ApiResponse<TeamList>> ListTeamAsyncWithHttpInfo(int page, int? pageSize = default)
+        public async Task<ApiResponse<TeamList>> ListTeamAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default)
         {
             var localVarPath = "/v1/teams/list";
             var localVarPathParams = new Dictionary<string, string>();
@@ -398,6 +407,11 @@ namespace BoldSign.Api
             if (pageSize != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "PageSize", pageSize)); // query parameter
+            }
+
+            if (searchKey != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "SearchKey", searchKey)); // query parameter
             }
 
             // authentication (Bearer) required

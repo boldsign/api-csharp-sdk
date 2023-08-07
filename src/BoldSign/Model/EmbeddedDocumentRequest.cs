@@ -53,6 +53,12 @@ namespace BoldSign.Model
         public bool ShowSaveButton { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets the locale.
+        /// </summary>
+        [JsonProperty("locale")]
+        public Locales Locale { get; set; } = Locales.EN;
+
+        /// <summary>
         /// Gets or sets a value indicating whether to show send button.
         /// </summary>
         [JsonProperty("showSendButton")]
@@ -77,6 +83,12 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("sendLinkValidTill")]
         public DateTime? SendLinkValidTill { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show tooltip.
+        /// </summary>
+        [JsonProperty("showTooltip")]
+        public bool ShowTooltip { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

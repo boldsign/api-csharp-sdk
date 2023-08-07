@@ -31,6 +31,7 @@ namespace BoldSign.Model
         /// <param name="enableReassign">Gets or sets the enableReassign.By Default True.</param>
         /// <param name="enableSigningOrder">Gets or sets the enableSigningOrder.</param>
         /// <param name="documentInfo">Gets or sets the send documentInfo.</param>
+        /// <param name="roleRemovalIndices">Gets or sets the role removal indices.</param>
         public EmbeddedTemplateRequest(
             string templateId = default,
             string title = default,
@@ -43,7 +44,8 @@ namespace BoldSign.Model
             bool enablePrintAndSign = default,
             bool enableReassign = true,
             bool? enableSigningOrder = default,
-            IEnumerable<DocumentInfo> documentInfo = default)
+            IEnumerable<DocumentInfo> documentInfo = default,
+            int[] roleRemovalIndices = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -61,6 +63,7 @@ namespace BoldSign.Model
             this.EnableReassign = enableReassign;
             this.EnableSigningOrder = enableSigningOrder;
             this.DocumentInfo = documentInfo;
+            this.RoleRemovalIndices = roleRemovalIndices;
         }
 
         /// <summary>
@@ -88,6 +91,12 @@ namespace BoldSign.Model
         public bool ShowSaveButton { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets the locale.
+        /// </summary>
+        [JsonProperty("locale")]
+        public Locales Locale { get; set; } = Locales.EN;
+
+        /// <summary>
         /// Gets or sets a value indicating whether to show send button.
         /// </summary>
         [JsonProperty("showSendButton")]
@@ -112,6 +121,12 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("sendLinkValidTill")]
         public DateTime? SendLinkValidTill { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show tool tip.
+        /// </summary>
+        [JsonProperty("showTooltip")]
+        public bool ShowTooltip { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

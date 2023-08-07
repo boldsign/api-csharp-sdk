@@ -45,8 +45,9 @@ namespace BoldSign.Model
         /// <param name="bounds">bounds (required).</param>
         /// <param name="isRequired">Gets or sets a value indicating whether is required..</param>
         /// <param name="value">Gets or sets the value..</param>
+        /// <param name="dataSyncTag">Gets or sets the dataSyncTag.</param>
         [Obsolete("Name is deprecated, please use Id instead")]
-        public FormField(string name = default, FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default)
+        public FormField(string name = default, FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string dataSyncTag = default)
         {
 
             // to ensure "fieldType" is required (not null)
@@ -84,6 +85,7 @@ namespace BoldSign.Model
             this.CharacterLimit = characterLimit;
             this.Font = font;
             this.FontSize = fontSize;
+            this.DataSyncTag = dataSyncTag;
         }
 
         /// <summary>
@@ -107,7 +109,12 @@ namespace BoldSign.Model
         /// <param name="imageInfo">Gets or sets the imageInfo.</param>
         /// <param name="editableDateFieldSettings">Gets or sets the editableDateFieldSettings.</param>
         /// <param name="hyperlinkText">Gets or sets the hyperlinkText.</param>
-        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default)
+        /// <param name="dataSyncTag">Gets or sets the dataSyncTag.</param>
+        /// <param name="isReadOnly">Gets or sets a value indicating whether is read only mode.</param>
+        /// <param name="conditionalRules">Gets or sets the conditionalRules.</param>
+        /// <param name="textAlign">Gets or sets the textAlign.</param>
+        /// <param name="textDirection">Gets or sets the direction of the text.</param>
+        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default, string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default, TextAlign textAlign = Api.Model.TextAlign.Left, TextDirection textDirection = TextDirection.LTR)
         {
             // to ensure "fieldType" is required (not null)
             if (type == null)
@@ -144,6 +151,11 @@ namespace BoldSign.Model
             this.FontSize = fontSize;
             this.Id = id;
             this.HyperlinkText = hyperlinkText;
+            this.IsReadOnly = isReadOnly;
+            this.DataSyncTag = dataSyncTag;
+            this.ConditionalRules = conditionalRules;
+            this.TextAlign = textAlign;
+            this.TextDirection = textDirection;
             if (type == FieldType.Attachment && attachmentInfo == null)
             {
                 throw new InvalidDataException(ApiValidationMessages.AttachmentInformationRequired);
@@ -276,6 +288,13 @@ namespace BoldSign.Model
         public bool IsRequired { get; set; }
 
         /// <summary>
+        ///     Gets or sets a value indicating whether is read only mode.
+        /// </summary>
+        /// <value>Gets or sets a value indicating wherther is read only mode.</value>
+        [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
+        public bool IsReadOnly { get; set; }
+
+        /// <summary>
         ///     Gets or sets the Value to be set to the form field (if required).
         /// </summary>
         /// <value>Gets or sets the value.</value>
@@ -323,6 +342,33 @@ namespace BoldSign.Model
         [DataMember(Name = "hyperlinkText", EmitDefaultValue = true)]
         public string HyperlinkText { get; set; }
 
+        /// <summary>
+        /// Gets or sets the data sync tag value, this property helps to group the similar element types and it's only applicable for textbox, image, dropdown, checkbox fields, it won't affect the other fields.
+        /// </summary>
+        /// <value>Gets or sets the DataSyncTag.</value>
+        [DataMember(Name = "dataSyncTag", EmitDefaultValue = true)]
+        public string DataSyncTag { get; set; }
+
+        /// <summary>
+        /// Gets or sets the conditional rules value, this property helps to frame rules.
+        /// </summary>
+        [DataMember(Name = "conditionalRules", EmitDefaultValue = false)]
+        public List<ConditionalRule> ConditionalRules { get; set; }
+
+        /// <summary>
+        /// Gets or sets the TextAlign to be set to the form field.
+        /// </summary>
+        /// <value>Gets or sets the TextAlign.</value>
+        [DataMember(Name = "textAlign", EmitDefaultValue = true)]
+        public TextAlign TextAlign { get; set; }
+
+        /// <summary>
+        /// Gets or sets the direction of the text.
+        /// </summary>
+        /// <value>Gets or sets the direction of the text.</value>
+        [DataMember(Name = "textDirection", EmitDefaultValue = true)]
+        public TextDirection TextDirection { get; set; }
+        
         /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>

@@ -39,10 +39,12 @@ namespace BoldSign.Model
         /// </summary>
         /// <param name="index">Gets or sets the signer order..</param>
         /// <param name="value">Gets or sets the signer role..</param>
-        public ExistingFormField(int index = default, string value = default)
+        /// <param name="isReadOnly">Gets or sets a value indicating whether is read only mode.</param>
+        public ExistingFormField(int index = default, string value = default, bool isReadOnly = default)
         {
             this.Index = index;
             this.Value = value;
+            this.IsReadOnly = isReadOnly;
         }
 
         /// <summary>
@@ -50,10 +52,12 @@ namespace BoldSign.Model
         /// </summary>
         /// <param name="id">Gets oe sets the id.</param>
         /// <param name="value">Gets or sets the signer role.</param>
-        public ExistingFormField(string id = default, string value = default)
+        /// <param name="isReadOnly">Gets or sets a value indicating whether is read only mode.</param>
+        public ExistingFormField(string id = default, string value = default, bool isReadOnly = default)
         {
             this.Id = id;
             this.Value = value;
+            this.IsReadOnly = isReadOnly;
         }
 
         /// <summary>
@@ -84,6 +88,12 @@ namespace BoldSign.Model
         /// <value>Gets or sets the signer role.</value>
         [DataMember(Name = "value", EmitDefaultValue = false)]
         public string Value { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether IsReadOnly.
+        /// </summary>
+        [DataMember(Name = "isReadOnly", EmitDefaultValue = true)]
+        public bool IsReadOnly { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

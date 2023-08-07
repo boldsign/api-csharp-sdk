@@ -34,8 +34,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">Page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>TeamDetails.</returns>
-        TeamList ListTeam(int page, int? pageSize = default);
+        TeamList ListTeam(int page, int? pageSize = default, string searchKey = default);
 
         /// <summary>
         /// Get team List.
@@ -43,8 +44,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>ApiResponse of TeamListResponse.</returns>
-        ApiResponse<TeamList> ListTeamWithHttpInfo(int page, int? pageSize = default);
+        ApiResponse<TeamList> ListTeamWithHttpInfo(int page, int? pageSize = default, string searchKey = default);
 
         /// <summary>
         /// Creates a new Team.
@@ -99,8 +101,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>TeamList.</returns>
-        Task<TeamList> ListTeamAsync(int page, int? pageSize = default);
+        Task<TeamList> ListTeamAsync(int page, int? pageSize = default, string searchKey = default);
 
         /// <summary>
         /// Get team List.
@@ -108,8 +111,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="page">page.</param>
         /// <param name="pageSize">page Size (optional, default to 10).</param>
+        /// <param name="searchKey">searchKey (optional).</param>
         /// <returns>ApiResponse of TeamListResponse.</returns>
-        Task<ApiResponse<TeamList>> ListTeamAsyncWithHttpInfo(int page, int? pageSize = default);
+        Task<ApiResponse<TeamList>> ListTeamAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default);
 
         /// <summary>
         ///  Creates a new Team.

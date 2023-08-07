@@ -21,14 +21,14 @@ namespace BoldSign.Model
     ///     Send for Sign request DTO.
     /// </summary>
     [DataContract(Name = "SendForSignRequest")]
-    public class SendForSign
+    public class SendForSign : IDocumentUpload
     {
         /// <summary>
         ///  Gets or sets the files to be uploaded.
         /// </summary>
         [Required]
         [JsonProperty("files")]
-        public List<IDocumentFile> Files { get; set; }
+        public List<IDocumentFile> Files { get; set; } = new List<IDocumentFile>();
 
         /// <summary>
         ///  Gets or sets title for the signature request.
@@ -60,10 +60,23 @@ namespace BoldSign.Model
         public bool EnableSigningOrder { get; set; }
 
         /// <summary>
+        /// Gets or sets the expiry date type.
+        /// </summary>
+        [JsonProperty("expiryDateType")]
+        public ExpiryDateType ExpiryDateType { get; set; }
+
+        /// <summary>
         ///  Number of days after which the document will expire.
         /// </summary>
+        [Obsolete("ExpiryDays is deprecated, please use ExpiryValue instead.")]
         [JsonProperty("expiryDays")]
         public int ExpiryDays { get; set; }
+
+        /// <summary>
+        ///  Gets or sets the expiry value based on expiry date type.
+        /// </summary>
+        [JsonProperty("expiryValue")]
+        public long ExpiryValue { get; set; } = 60;
 
         /// <summary>
         /// Gets or sets the reminder settings for the signature request.
@@ -83,7 +96,7 @@ namespace BoldSign.Model
         /// Gets or sets the File URLs to be uploaded.
         /// </summary>
         [JsonProperty("fileUrls")]
-        public List<Uri> FileUrls { get; set; }
+        public List<Uri> FileUrls { get; set; } = new List<Uri>();
 
         /// <summary>
         ///     Gets or sets a value indicating whether to enable DisableEmails.
@@ -109,7 +122,7 @@ namespace BoldSign.Model
         /// Default is false.
         /// </summary>
         [JsonProperty("hideDocumentId")]
-        public bool HideDocumentId { get; set; }
+        public bool? HideDocumentId { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to convert the text tags to form fields.
@@ -149,5 +162,16 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("documentInfo")]
         public IEnumerable<DocumentInfo> DocumentInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email address.
+        /// </summary>
+        [JsonProperty("onBehalfOf")]
+        public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether to AutoDetect Fields for the document signer.
+        /// </summary>
+        public bool AutoDetectFields { get; set; }
     }
 }
