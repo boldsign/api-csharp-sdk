@@ -33,7 +33,13 @@ namespace BoldSign.Model
         /// <param name="order">Gets or sets the zOrder.</param>
         /// <param name="accessCode">Gets or sets the access code.</param>
         /// <param name="authenticationType">Gets or sets the authentication type.</param>
-        public AddAuthenticationAccessCodeDetails(string emailId, int? order, string accessCode = "", AuthenticationType authenticationType = default)
+        /// <param name="onBehalfOf">The on behalf of email.</param>
+        public AddAuthenticationAccessCodeDetails(
+            string emailId,
+            int? order,
+            string accessCode = "",
+            AuthenticationType authenticationType = default,
+            string onBehalfOf = default)
         {
             // to ensure "accessCode" is required (not null) for AuthenticationType AccessCode.
             if (string.IsNullOrEmpty(accessCode) && authenticationType == AuthenticationType.AccessCode)
@@ -51,6 +57,7 @@ namespace BoldSign.Model
             this.Order = order;
             this.AccessCode = accessCode;
             this.AuthenticationType = authenticationType;
+            this.OnBehalfOf = onBehalfOf;
         }
 
         /// <summary>
@@ -80,6 +87,12 @@ namespace BoldSign.Model
         [Required]
         [DataMember(Name = "authenticationType", EmitDefaultValue = true)]
         public AuthenticationType AuthenticationType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
+        public string OnBehalfOf { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

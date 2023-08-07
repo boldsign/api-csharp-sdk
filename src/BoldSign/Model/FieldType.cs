@@ -86,5 +86,23 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Hyperlink")]
         Hyperlink = 11,
+
+        /// <summary>
+        ///     Enum Dropdown for value: Dropdown
+        /// </summary>
+        [EnumMember(Value = "Dropdown")]
+        Dropdown = 12,
+
+        /// <summary>
+        /// Enum Title for value: Title
+        /// </summary>
+        [EnumMember(Value = "Title")]
+        Title = 13,
+
+        /// <summary>
+        ///     Enum Company for value: Company
+        /// </summary>
+        [EnumMember(Value = "Company")]
+        Company = 14,
     }
 }

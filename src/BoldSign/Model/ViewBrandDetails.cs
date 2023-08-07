@@ -14,6 +14,7 @@
 
 namespace BoldSign.Model
 {
+    using System;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
@@ -26,7 +27,7 @@ namespace BoldSign.Model
         /// <summary>
         /// Gets or sets the brand id.
         /// </summary>
-        [DataMember(Name = "id", EmitDefaultValue = true)]
+        [DataMember(Name = "brandId", EmitDefaultValue = true)]
         public string Id { get; set; }
 
         /// <summary>
@@ -103,10 +104,10 @@ namespace BoldSign.Model
         public bool CombineAuditTrail { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating completed email type.
+        /// Gets or sets a value indicating delivery of the signed document in email as attachment or link to view and download the document.
         /// </summary>
-        [DataMember(Name = "completedEmailType", EmitDefaultValue = true)]
-        public CompletedEmailType CompletedEmailType { get; set; }
+        [DataMember(Name = "emailSignedDocument", EmitDefaultValue = true)]
+        public EmailSignedDocument EmailSignedDocument { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating time zone of the document.

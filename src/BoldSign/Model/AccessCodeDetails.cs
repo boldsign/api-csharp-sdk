@@ -28,7 +28,8 @@ namespace BoldSign.Model
         ///     Initializes a new instance of the <see cref="AccessCodeDetails" /> class.
         /// </summary>
         /// <param name="accessCode">Gets or sets the access code. (required).</param>
-        public AccessCodeDetails(string accessCode = default)
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        public AccessCodeDetails(string accessCode = default, string onBehalfOf = default)
         {
             // to ensure "accessCode" is required (not null)
             if (accessCode == null)
@@ -37,6 +38,7 @@ namespace BoldSign.Model
             }
 
             this.AccessCode = accessCode;
+            this.OnBehalfOf = onBehalfOf;
         }
 
         /// <summary>
@@ -46,6 +48,11 @@ namespace BoldSign.Model
         [DataMember(Name = "accessCode", EmitDefaultValue = true)]
         public string AccessCode { get; set; }
 
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
+        public string OnBehalfOf { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

@@ -56,7 +56,14 @@ namespace BoldSign.Api
         {
             var status = (int)response.StatusCode;
 
-            if (status >= 400)
+            if (status == 403)
+            {
+                return new ApiException(
+                   status,
+                   string.Format(CultureInfo.CurrentCulture, "You don't have permission to access this resource."),
+                   response.Content);
+            }
+            else if (status >= 400)
             {
                 return new ApiException(
                     status,

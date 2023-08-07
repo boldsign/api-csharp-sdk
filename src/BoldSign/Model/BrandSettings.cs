@@ -14,6 +14,7 @@
 
 namespace BoldSign.Model
 {
+    using System;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
@@ -45,7 +46,7 @@ namespace BoldSign.Model
         /// Gets or sets the button color.
         /// </summary>
         [DataMember(Name = "buttonColor", EmitDefaultValue = true)]
-        public string ButtonColor { get; set; } = "#00BDD4";
+        public string ButtonColor { get; set; } = "#0565FF";
 
         /// <summary>
         /// Gets or sets the button text color.
@@ -97,10 +98,10 @@ namespace BoldSign.Model
         public bool CombineAuditTrail { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating completed email type.
+        /// Gets or sets a value indicating delivery of the signed document in email as attachment or link to view and download the document.
         /// </summary>
-        [DataMember(Name = "completedEmailType", EmitDefaultValue = true)]
-        public CompletedEmailType CompletedEmailType { get; set; }
+        [DataMember(Name = "emailSignedDocument", EmitDefaultValue = true)]
+        public EmailSignedDocument EmailSignedDocument { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating time zone of the document and it should be specified in UTC offset format. For example, +05:00, −02:30.

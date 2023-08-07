@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -132,8 +132,20 @@
   <data name="FieldTypeRequired" xml:space="preserve">
     <value>fieldType is a required property for FormField and cannot be null</value>
   </data>
-  <data name="FileOrFileUrl" xml:space="preserve">
-    <value>Please use either Files parameter or FileUrls parameter, but not both</value>
+  <data name="BothFileParamUsed" xml:space="preserve">
+    <value>Conflicting file information detected. Please use either the 'Files' option to send a file or the 'FileUrls' option to give a file link. Using both options at the same time is not possible.</value>
+  </data>
+    <data name="MissingFileInput" xml:space="preserve">
+    <value>File input missing. To proceed, please upload a file using the 'Files' property or provide a URL for the file using the 'FileUrls' property.</value>
+  </data>
+  <data name="NoSignerFormFieldsWhenNoFile" xml:space="preserve">
+    <value>Signer cannot have 'FormFields' if no file has been uploaded. Please upload a file before adding 'FormFields' for the Signer</value>
+  </data>
+  <data name="NoRoleFormFieldsWhenNoFile" xml:space="preserve">
+    <value>Role cannot have 'FormFields' if no file has been uploaded. Please upload a file before adding 'FormFields' for the Role</value>
+  </data>
+  <data name="FilesIsSet" xml:space="preserve">
+    <value>Missing required parameter 'files' when calling DocumentApi-&gt;SendDocument</value>
   </data>
   <data name="FilesizesWithin100MB" xml:space="preserve">
     <value>Document's size exceeds the limit of 100 MB. Please replace it. (all files combined)</value>
@@ -158,6 +170,15 @@
   </data>
   <data name="TextTagValueNotSupported" xml:space="preserve">
     <value>The Value property is supported for text tag definitions only for text box and label fields</value>
+  </data>
+  <data name="ExpiryDaysValOutOfRange" xml:space="preserve">
+    <value>Provided expiry days should be within the range 1 - 180</value>
+  </data>
+  <data name="ExpiryHoursValOutOfRange" xml:space="preserve">
+    <value>Provided expiry hours should be within the range 8 - 4320</value>
+  </data>
+  <data name="ExpirySpecifcDateOutOfRange" xml:space="preserve">
+    <value>Exact date and time given for document expiry should be between 1 to 180 days</value>
   </data>
   <data name="InvalidTextTagSize" xml:space="preserve">
     <value>Invalid field size. Field height and width should be greater then 0.</value>
@@ -241,10 +262,10 @@
     <value>Missing required parameter 'teamName' when calling TeamApi-&amp;gt;Update</value>
   </data>
   <data name="BrandIdDelete" xml:space="preserve">
-      <value>Missing required parameter 'brandId' when calling BrandingApi-&amp;gt;DeleteBrand</value>
+    <value>Missing required parameter 'brandId' when calling BrandingApi-&amp;gt;DeleteBrand</value>
   </data>
   <data name="InValidEndDate" xml:space="preserve">
-      <value>End date should be greater or equal to start date.</value>
+    <value>End date should be greater or equal to start date.</value>
   </data>
   <data name="BrandIdResetDefault" xml:space="preserve">
     <value>Missing required parameter 'brandId' when calling BrandingApi-&amp;gt;ResetDefaultBrand</value>
@@ -287,5 +308,89 @@
   </data>
   <data name="HyperlinkValueFieldsRequired" xml:space="preserve">
     <value>Value is required for Hyperlink FormField</value>
+  </data>
+  <data name="DefaultNewExpiryDate" xml:space="preserve">
+    <value>The new expiry date must not be less than the current date and time</value>
+  </data>
+  <data name="DocumentIdAccessCode" xml:space="preserve">
+    <value>Missing required parameter 'documentId' when calling DocumentApi-&gt;ExtendExpiry</value>
+  </data>
+  <data name="InvalidDateFormat" xml:space="preserve">
+    <value>Invalid date format. Supported dateformat is</value>
+  </data>
+  <data name="InvalidDefaultOption" xml:space="preserve">
+    <value>Default option mismatches with the dropdown list of options</value>
+  </data>
+  <data name="RequiredDropdownOptions" xml:space="preserve">
+    <value>Dropdown option(s) are required for the Dropdown form field</value>
+  </data>
+  <data name="InvalidDropdownOption" xml:space="preserve">
+    <value>Dropdown option(s) cannot be null or empty</value>
+  </data>
+  <data name="DuplicateDropdownOption" xml:space="preserve">
+    <value>Duplicate options are not allowed for the dropdown list</value>
+  </data>
+  <data name="RequiredName" xml:space="preserve">
+      <value>Name is a required parameter to create sender identity.</value>
+  </data>
+  <data name="TitleAndDocumentInfo" xml:space="preserve">
+      <value>Both title and the document information cannot be present for a single document.</value>
+  </data>
+  <data name="NotInAllowedTolerance" xml:space="preserve">
+      <value>The webhook cannot be processed because the current timestamp is outside of the allowed tolerance</value>
+  </data>
+  <data name="NotValidSignature" xml:space="preserve">
+      <value>The signature for the webhook is not present/matched with the BoldSign-Signature header</value>
+  </data>
+  <data name="SignatureHeaderIsNull" xml:space="preserve">
+      <value>Signature header can not be null</value>
+  </data>
+  <data name="WrongSignature" xml:space="preserve">
+      <value>The webhook cannot be processed because the signature cannot be safely calculated</value>
+  </data>
+  <data name="TemplateIdDownload" xml:space="preserve">
+    <value>Missing required parameter 'templateId' when calling TemplateApi-&gt;DownloadTemplate</value>
+  </data>
+  <data name="TemplateIdIsSet" xml:space="preserve">
+    <value>Missing required parameter 'templateId' when calling TemplateApi-&gt;GetProperties</value>
+  </data>
+  <data name="EmbeddedTemplateIdNull" xml:space="preserve">
+    <value>The parameter 'templateId' should not be null or empty.</value>
+  </data>
+  <data name="TemplateTitleRequired" xml:space="preserve">
+      <value>Template title is required for create template.</value>
+  </data>
+  <data name="RolesRequired" xml:space="preserve">
+      <value>Roles cannot be null or empty.</value>
+  </data>
+  <data name="FormFieldsRequired" xml:space="preserve">
+      <value>Form fields value cannot be null or empty.</value>
+  </data>
+  <data name="ReviewerFields" xml:space="preserve">
+      <value>Reviewer should not have any form fields.</value>
+  </data>
+  <data name="GroupNameRequired" xml:space="preserve">
+      <value>Please provide group name for radio button form field.</value>
+  </data>
+  <data name="InvalidSignerOrder" xml:space="preserve">
+      <value>Signer order should be between 1 and 50.</value>
+  </data>
+  <data name="DuplicateRoleIndex" xml:space="preserve">
+      <value>Duplicate role index are not allowed.</value>
+  </data>
+  <data name="DocumentInfoMissing" xml:space="preserve">
+      <value>document info is missing for the  signer’s language {0}.</value>
+  </data>
+  <data name="ExtraLanguageValues" xml:space="preserve">
+      <value>Only one document info is allowed per signer language.</value>
+  </data>
+  <data name="DocumentTitleRequired" xml:space="preserve">
+      <value>Document title is required for document info.</value>
+  </data>
+  <data name="InvalidLanguage" xml:space="preserve">
+      <value>The document info language {0} is not found or used in roles.</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+      <value>Role Name is Required.</value>
   </data>
 </root>

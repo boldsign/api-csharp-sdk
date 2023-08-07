@@ -10,11 +10,10 @@
 
 namespace BoldSign.Model.Webhook
 {
-    using Newtonsoft.Json;
     using System;
-    using System.Collections.Generic;
     using System.Runtime.Serialization;
-    using System.Text;
+    using BoldSign.Api.Converters;
+    using Newtonsoft.Json;
 
     /// <summary>
     ///     Send for Sign request DTO.
@@ -25,12 +24,24 @@ namespace BoldSign.Model.Webhook
         /// Gets or sets the webhook event meta data.
         /// </summary>
         [DataMember(Name = "event", EmitDefaultValue = false)]
+        [JsonProperty("event")]
         public WebhookEventMetadata Event { get; set; }
 
         /// <summary>
-        /// Gets or sets the webhook document event object.
+        /// Gets or sets the BoldSign webhook payload.
+        /// </summary>
+        [JsonProperty("data")]
+        [JsonConverter(typeof(WebhookObjectConverter))]
+        public IWebhookData Data { get; set; }
+
+        /// <summary>
+        /// <para>Gets or sets the webhook document event object.</para>
+        /// <para>Notice: This property is kept only for backward compatibility.
+        /// Please use <see cref="Data"/> to unify your webhook handling.</para>
         /// </summary>
         [DataMember(Name = "document", EmitDefaultValue = false)]
+        [JsonProperty("document")]
+        [Obsolete("Please use \"Data\" property instead.")]
         public DocumentEvent Document { get; set; }
     }
 }

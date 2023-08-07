@@ -41,6 +41,10 @@ namespace BoldSign.Api.Model
         /// <param name="dateFormat">Gets or sets the dateFormat.</param>
         /// <param name="radioGroupName">Gets or sets the radioGroupName.</param>
         /// <param name="value">The form field value, applicable only for label and textbox fields.</param>
+        /// <param name="dropdownOptions"> Fets or sets the dropdown Options.</param>
+        /// <param name="imageInfo">Gets or sets the imageInfo.</param>
+        /// <param name="hyperlinkText"> Gets or sets the hyperlinkText.</param>
+        /// <param name="attachmentInfo"> Gets or sets the attachmentInfo.</param>
         public TextTagDefinition(
             string definitionId,
             FieldType type,
@@ -53,7 +57,11 @@ namespace BoldSign.Api.Model
             Size size = default,
             string dateFormat = default,
             string radioGroupName = default,
-            string value = default)
+            string value = default,
+            List<string> dropdownOptions = default,
+            ImageInfo imageInfo = default,
+            string hyperlinkText = default,
+            AttachmentInfo attachmentInfo = default)
         {
             this.DefinitionId = definitionId;
             this.Type = type;
@@ -67,6 +75,10 @@ namespace BoldSign.Api.Model
             this.DateFormat = dateFormat;
             this.RadioGroupName = radioGroupName;
             this.Value = value;
+            this.DropdownOptions = dropdownOptions;
+            this.ImageInfo = imageInfo;
+            this.HyperlinkText = hyperlinkText;
+            this.AttachmentInfo = attachmentInfo;
         }
 
         /// <summary>
@@ -142,5 +154,29 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
         public string Value { get; set; }
+
+        /// <summary>
+        /// Gets or sets dropdown options.
+        /// </summary>
+        [DataMember(Name = "dropdownOptions", EmitDefaultValue = false)]
+        public List<string> DropdownOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the image info.
+        /// </summary>
+        [DataMember(Name = "imageInfo", EmitDefaultValue = false)]
+        public ImageInfo ImageInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HyperlinkText.
+        /// </summary>
+        [DataMember(Name = "hyperlinkText", EmitDefaultValue = false)]
+        public string HyperlinkText { get; set; }
+
+        /// <summary>
+        /// Gets or sets the attachment info.
+        /// </summary>
+        [DataMember(Name = "attachmentInfo", EmitDefaultValue = false)]
+        public AttachmentInfo AttachmentInfo { get; set; }
     }
 }

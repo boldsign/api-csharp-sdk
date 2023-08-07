@@ -38,11 +38,14 @@ namespace BoldSign.Model
         /// <param name="reminderSettings">Gets or sets the reminderSettings.</param>
         /// <param name="cc">Gets or sets the cc.</param>
         /// <param name="expiryDays">Gets or sets the expiryDays.</param>
+        /// <param name="expiryValue">Gets or sets the expiry value based on expiry date type.</param>
+        /// <param name="expiryDateType">Gets or sets the expiry date type.</param>
         /// <param name="disableExpiryAlert">Gets or sets the disableExpiryAlert.</param>
         /// <param name="enablePrintAndSign">Gets or sets the enablePrintAndSign.</param>
         /// <param name="enableReassign">Gets or sets the enableReassign.</param>
         /// <param name="enableSigningOrder">Gets or sets the enableSigningOrder.</param>
         /// <param name="documentInfo">Gets or sets the documentInfo.</param>
+        /// <param name="roleRemovalIndices">Gets or sets the role removal indices.</param>
         public SendForSignFromTemplate(
             string templateId = default,
             string title = default,
@@ -51,15 +54,19 @@ namespace BoldSign.Model
             string brandId = default,
             List<string> labels = default,
             bool disableEmails = default,
-            bool hideDocumentId = default,
+            bool? hideDocumentId = default,
             ReminderSettings reminderSettings = default,
             IEnumerable<DocumentCC> cc = default,
-            int expiryDays = 60,
+            int expiryDays = default,
+            long expiryValue = 60,
+            ExpiryDateType expiryDateType = default(ExpiryDateType),
             bool disableExpiryAlert = default,
             bool enablePrintAndSign = default,
             bool enableReassign = true,
             bool? enableSigningOrder = default,
-            IEnumerable<DocumentInfo> documentInfo = default)
+            IEnumerable<DocumentInfo> documentInfo = default,
+            string onBehalfOf = default,
+            int[] roleRemovalIndices = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -76,11 +83,15 @@ namespace BoldSign.Model
             this.ReminderSettings = reminderSettings;
             this.CC = cc;
             this.ExpiryDays = expiryDays;
+            this.ExpiryValue = expiryValue;
+            this.ExpiryDateType = expiryDateType;
             this.DisableExpiryAlert = disableExpiryAlert;
             this.EnablePrintAndSign = enablePrintAndSign;
             this.EnableReassign = enableReassign;
             this.EnableSigningOrder = enableSigningOrder;
             this.DocumentInfo = documentInfo;
+            this.OnBehalfOf = onBehalfOf;
+            this.RoleRemovalIndices = roleRemovalIndices;
         }
 
         /// <summary>
@@ -134,7 +145,7 @@ namespace BoldSign.Model
         /// Default is false.
         /// </summary>
         [DataMember(Name = "hideDocumentId", EmitDefaultValue = true)]
-        public bool HideDocumentId { get; set; }
+        public bool? HideDocumentId { get; set; }
 
         /// <summary>
         /// Gets or sets the reminder settings for the signature request.
@@ -149,10 +160,23 @@ namespace BoldSign.Model
         public IEnumerable<DocumentCC> CC { get; set; }
 
         /// <summary>
+        /// Gets or sets the expiry date type.
+        /// </summary>
+        [DataMember(Name = "expiryDateType", EmitDefaultValue = false)]
+        public ExpiryDateType ExpiryDateType { get; set; }
+
+        /// <summary>
         ///  Gets or sets number of days after which the document will expire.
         /// </summary>
+        [Obsolete("ExpiryDays is deprecated, please use ExpiryValue instead.")]
         [DataMember(Name = "expiryDays", EmitDefaultValue = true)]
-        public int ExpiryDays { get; set; } = 60;
+        public int ExpiryDays { get; set; }
+
+        /// <summary>
+        ///  Gets or sets the value when the document should get expired.
+        /// </summary>
+        [DataMember(Name = "expiryValue", EmitDefaultValue = false)]
+        public long ExpiryValue { get; set; } = 60;
 
         /// <summary>
         ///  Gets or sets a value indicating whether Disableexpiryalert is true or false.
@@ -186,6 +210,18 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("documentInfo")]
         public IEnumerable<DocumentInfo> DocumentInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of mail id.
+        /// </summary>
+        [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
+        public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the role removal indices which starts from 1. For example, if you want to remove role 2 and 3 the input should be new []{2,3}.
+        /// </summary>
+        [DataMember(Name = "roleRemovalIndices", EmitDefaultValue = false)]
+        public int[] RoleRemovalIndices { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

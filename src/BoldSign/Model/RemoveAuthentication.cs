@@ -29,10 +29,12 @@ namespace BoldSign.Api.Model
         /// </summary>
         /// <param name="emailId">The User Service.</param>
         /// <param name="zorder">The emailHandler.</param>
-        public RemoveAuthentication(string emailId, int? zorder)
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        public RemoveAuthentication(string emailId, int? zorder, string onBehalfOf = default)
         {
             this.EmailId = emailId;
             this.ZOrder = zorder;
+            this.OnBehalfOf = onBehalfOf;
         }
 
         /// <summary>
@@ -48,5 +50,11 @@ namespace BoldSign.Api.Model
         /// <value>Gets the value of access code.</value>
         [DataMember(Name = "zorder", EmitDefaultValue = true)]
         public int? ZOrder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
+        public string OnBehalfOf { get; set; }
     }
 }

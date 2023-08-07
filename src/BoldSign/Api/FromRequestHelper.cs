@@ -5,6 +5,7 @@ namespace BoldSign.Api
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using BoldSign.Api.Model;
     using BoldSign.Model;
 
     internal static class FromRequestHelper
@@ -16,9 +17,9 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(signRequestDetails.Title), signRequestDetails.Title);
             }
 
-            string expiryDays = signRequestDetails.ExpiryDays > 0 ? signRequestDetails.ExpiryDays.ToString() : "60";
+            localVarFormParams.Add(nameof(signRequestDetails.ExpiryValue), signRequestDetails.ExpiryValue.ToString(CultureInfo.CurrentCulture));
 
-            localVarFormParams.Add(nameof(signRequestDetails.ExpiryDays), expiryDays);
+            localVarFormParams.Add(nameof(signRequestDetails.ExpiryDateType), signRequestDetails.ExpiryDateType.ToString());
 
             if (signRequestDetails.Message != null)
             {
@@ -59,6 +60,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(signRequestDetails.BrandId), signRequestDetails.BrandId);
             }
 
+            if (!string.IsNullOrEmpty(signRequestDetails.OnBehalfOf))
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.OnBehalfOf), signRequestDetails.OnBehalfOf);
+            }
+
             if (signRequestDetails.ReminderSettings != null)
             {
                 localVarFormParams.Add($"{nameof(signRequestDetails.ReminderSettings)}.{nameof(signRequestDetails.ReminderSettings.EnableAutoReminder)}", signRequestDetails.ReminderSettings.EnableAutoReminder.ToString());
@@ -79,6 +85,8 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(embeddedRequest.ShowPreviewButton), embeddedRequest.ShowPreviewButton ? "true" : "false");
                 localVarFormParams.Add(nameof(embeddedRequest.ShowNavigationButtons), embeddedRequest.ShowNavigationButtons ? "true" : "false");
                 localVarFormParams.Add(nameof(embeddedRequest.SendViewOption), embeddedRequest.SendViewOption.ToString());
+                localVarFormParams.Add(nameof(embeddedRequest.Locale), embeddedRequest.Locale.ToString());
+                localVarFormParams.Add(nameof(embeddedRequest.ShowTooltip), embeddedRequest.ShowTooltip ? "true" : "false");
 
                 if (embeddedRequest.SendLinkValidTill.HasValue)
                 {
@@ -87,6 +95,7 @@ namespace BoldSign.Api
             }
 
             localVarFormParams.Add(nameof(signRequestDetails.EnableSigningOrder), signRequestDetails.EnableSigningOrder ? "true" : "false");
+            localVarFormParams.Add(nameof(signRequestDetails.AutoDetectFields), signRequestDetails.AutoDetectFields ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.UseTextTags), signRequestDetails.UseTextTags ? "true" : "false");
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -95,10 +104,106 @@ namespace BoldSign.Api
                 signRequestDetails.DisableEmails || signRequestDetails.EnableEmbeddedSigning ? "true" : "false");
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            localVarFormParams.Add(nameof(signRequestDetails.HideDocumentId), signRequestDetails.HideDocumentId ? "true" : "false");
+            if (signRequestDetails.HideDocumentId != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.HideDocumentId), signRequestDetails.HideDocumentId == true ? "true" : "false");
+            }
             localVarFormParams.Add(nameof(signRequestDetails.DisableExpiryAlert), signRequestDetails.DisableExpiryAlert ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.EnablePrintAndSign), signRequestDetails.EnablePrintAndSign ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.EnableReassign), signRequestDetails.EnableReassign ? "true" : "false");
+
+            return localVarFormParams;
+        }
+
+        /// <summary>
+        /// Represents a ConvertToFormRequest.
+        /// </summary>
+        /// <param name="templateRequest">template request.</param>
+        /// <param name="localVarFormParams">local VarForm Params.</param>
+        /// <returns>localVarFormParams.</returns>
+        public static Dictionary<string, string> ConvertToFormRequestForTemplate(CreateTemplateRequest templateRequest, Dictionary<string, string> localVarFormParams)
+        {
+            if (templateRequest.Title != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.Title), templateRequest.Title);
+            }
+
+            if (templateRequest.DocumentInfo != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.DocumentInfo.ToList(), nameof(templateRequest.DocumentInfo));
+            }
+
+            if (templateRequest.Description != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.Description), templateRequest.Description);
+            }
+
+            if (templateRequest.DocumentTitle != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.DocumentTitle), templateRequest.DocumentTitle);
+            }
+
+            if (templateRequest.DocumentMessage != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.DocumentMessage), templateRequest.DocumentMessage);
+            }
+
+            if (templateRequest.Roles != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.Roles.ToList(), nameof(templateRequest.Roles));
+            }
+
+            if (templateRequest.CC != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.CC.ToList(), nameof(templateRequest.CC));
+            }
+
+            if (templateRequest.BrandId != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.BrandId), templateRequest.BrandId);
+            }
+
+            if (templateRequest.TextTagDefinitions != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.TextTagDefinitions.ToList(), nameof(templateRequest.TextTagDefinitions));
+            }
+
+            if (templateRequest is CreateEmbeddedTemplateRequest embeddedRequest)
+            {
+                if (embeddedRequest.RedirectUrl != null)
+                {
+                    localVarFormParams.Add(nameof(embeddedRequest.RedirectUrl), embeddedRequest.RedirectUrl.ToString());
+                }
+
+                localVarFormParams.Add(nameof(embeddedRequest.ShowToolbar), embeddedRequest.ShowToolbar ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ShowSaveButton), embeddedRequest.ShowSaveButton ? "true" : "false");
+
+#pragma warning disable CS0618//Type or member is obsolete
+                if(embeddedRequest.ShowSendButton != null)
+                {
+                    localVarFormParams.Add(nameof(embeddedRequest.ShowSendButton), embeddedRequest.ShowSendButton == true ? "true" : "false");
+                }
+#pragma warning restore CS0618//Type or member is obsolete
+
+                localVarFormParams.Add(nameof(embeddedRequest.ShowCreateButton), embeddedRequest.ShowCreateButton ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ShowPreviewButton), embeddedRequest.ShowPreviewButton ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ShowNavigationButtons), embeddedRequest.ShowNavigationButtons ? "true" : "false");
+                localVarFormParams.Add(nameof(embeddedRequest.ViewOption), embeddedRequest.ViewOption.ToString());
+                localVarFormParams.Add(nameof(embeddedRequest.Locale), embeddedRequest.Locale.ToString());
+                localVarFormParams.Add(nameof(embeddedRequest.ShowTooltip), embeddedRequest.ShowTooltip ? "true" : "false");
+
+                if (embeddedRequest.LinkValidTill.HasValue)
+                {
+                    localVarFormParams.Add(nameof(embeddedRequest.LinkValidTill), embeddedRequest.LinkValidTill.ToString());
+                }
+            }
+
+            localVarFormParams.Add(nameof(templateRequest.EnableSigningOrder), templateRequest.EnableSigningOrder ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.EnablePrintAndSign), templateRequest.EnablePrintAndSign ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.EnableReassign), templateRequest.EnableReassign ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.AllowNewRoles), templateRequest.AllowNewRoles ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.AllowMessageEditing), templateRequest.AllowMessageEditing ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.UseTextTags), templateRequest.UseTextTags ? "true" : "false");
 
             return localVarFormParams;
         }
@@ -151,6 +256,28 @@ namespace BoldSign.Api
                 }
 
                 var name = $"{parameterName}[{prop.Name}]";
+
+                if (prop.Name == "AcceptedFileTypes" && value is List<string>)
+                {
+                    List<string> acceptedFileTypes = (List<string>)value;
+
+                    var i = -1;
+                    foreach (var acceptedFileType in acceptedFileTypes)
+                    {
+                        localVarFormParams.Add(name + "[" + ++i + "]", acceptedFileType?.ToString());
+                    }
+                }
+
+                if (prop.Name == "DropdownOptions" && value is List<string>)
+                {
+                    List<string> dropdownOptions = (List<string>)value;
+
+                    var i = -1;
+                    foreach (var dropdownOption in dropdownOptions)
+                    {
+                        localVarFormParams.Add(name + "[" + ++i + "]", dropdownOption?.ToString());
+                    }
+                }
 
                 if (value is Enum)
                 {
