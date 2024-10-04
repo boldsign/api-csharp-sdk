@@ -1,3 +1,5 @@
+using BoldSign.Api.Model;
+
 namespace BoldSign.Examples
 {
     using BoldSign.Api;
@@ -7,6 +9,7 @@ namespace BoldSign.Examples
     using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Linq;
 
     /// <summary>
     ///     The document examples.
@@ -40,7 +43,7 @@ namespace BoldSign.Examples
 
             return documents;
         }
-
+        
         /// <summary>
         ///     Lists the behalf documents.
         /// </summary>
@@ -307,7 +310,7 @@ namespace BoldSign.Examples
             // This is an example document id, add your own document id upon usage.
             var documentId = "1ace7c82-6770-4d03-b514-b593e20c4550";
 
-            this.DocumentClient.ChangeRecipient(documentId, "signer1@email.com", "wrong email", "signer2", "signer2@email.com");
+            this.DocumentClient.ChangeRecipient(documentId, "signer1@gmail.com", "wrong email", "signer2", "signer2@email.com");
         }
 
         /// <summary>
@@ -347,10 +350,11 @@ namespace BoldSign.Examples
             List<FormField> formFeilds = new List<FormField>();
             formFeilds.Add(new FormField(
                         name: "Sign",
-                        type: FieldType.Signature,
+                        type: FieldType.CheckBox,
                         pageNumber: 1,
                         isRequired: true,
                         bounds: new Rectangle(x: 50, y: 50, width: 200, height: 30)));
+
             var documentDetails = new SendForSign
             {
                 Title = "Sent from API SDK",
@@ -359,15 +363,92 @@ namespace BoldSign.Examples
                 Signers = new List<DocumentSigner>
                 {
                     new DocumentSigner(
-                        name: "Signer Name 1",
-                        emailAddress: "signer1@email.com",
+                        signerName: "Signer Name 1",
+                        signerType: SignerType.Signer,
+                        signerEmail: "ranjitha.vazhivittan+1@syncfusion.com",
+                        signerOrder: 1,
+                        authenticationCode: "123",
+                        privateMessage: "This is private message for signer",
+                        formFields: formFeilds,
+                        locale: Locales.EN)
+                },
+            };
+
+            // document read from local as byte array
+            var fileBytes = File.ReadAllBytes("doc-1.pdf");
+
+            // document read from local as stream
+            using var fs = File.OpenRead("doc-2.pdf");
+
+            documentDetails.Files = new List<IDocumentFile>
+            {
+                new DocumentFilePath
+                {
+                    ContentType = "application/pdf",
+                    // directly provide file path
+                    FilePath = "doc-1.pdf",
+                },
+                new DocumentFileBytes
+                {
+                    ContentType = "application/pdf",
+                    FileData = fileBytes,
+                    FileName = "doc-1.pdf",
+                },
+                new DocumentFileStream
+                {
+                    ContentType = "application/pdf",
+                    FileData = fs,
+                    FileName = "doc-2.pdf",
+                },
+            };
+
+            var documentCreated = this.DocumentClient.SendDocument(documentDetails);
+
+            return documentCreated;
+        }
+        
+        /// <summary>
+        ///     Creates the document with Radio button.
+        /// </summary>
+        public async Task<DocumentCreated> CreateDocumentWithRadioButtonField()
+        {
+            var radioButtonFields = new List<RadioButtonField>
+            {
+                new RadioButtonField(
+                    id: "Tamil_Language",
+                    pageNumber: 1,
+                    isRequired: true,
+                    label: "Tamil",
+                    groupName: "Language",
+                    bounds: new Rectangle(x: 50, y: 200, width: 20, height: 20)),
+                new RadioButtonField(
+                    id: "Maths_Language",
+                    pageNumber: 1,
+                    isRequired: true,
+                    label: "Maths",
+                    groupName: "Language",
+                    bounds: new Rectangle(x: 150, y: 200, width: 20, height: 20)),
+            };
+
+            var documentDetails = new SendForSign
+            {
+                Title = "Sent from API SDK",
+                Message = "This is document message sent from API SDK",
+                EnableSigningOrder = true,
+                Signers = new List<DocumentSigner>
+                {
+                    new DocumentSigner(
+                        signerName: "Signer Name 1",
+                        signerEmail: "signer1@email.com",
                         signerOrder: 1,
                         authenticationCode: "123",
                         signerType: SignerType.Signer,
                         privateMessage: "This is private message for signer",
-                        formFields:formFeilds),
+                        formFields: radioButtonFields.Cast<FormField>().ToList(),
+                        locale: Locales.EN),
                 },
             };
+            
 
             // document read from local as byte array
             var fileBytes = File.ReadAllBytes("doc-1.pdf");
@@ -425,13 +506,14 @@ namespace BoldSign.Examples
                 Signers = new List<DocumentSigner>
                 {
                     new DocumentSigner(
-                        name: "Signer Name 1",
-                        emailAddress: "signer1@email.com",
+                        signerName: "Signer Name 1",
+                        signerType: SignerType.Signer,
+                        signerEmail: "signer1@email.com",
                         signerOrder: 1,
                         authenticationCode: "123",
-                        signerType: SignerType.Signer,
                         privateMessage: "This is private message for signer",
-                        formFields:formFields),
+                        formFields:formFields,
+                        locale: Locales.EN),
                 },
             };
 
@@ -468,13 +550,14 @@ namespace BoldSign.Examples
                 Signers = new List<DocumentSigner>
                 {
                     new DocumentSigner(
-                        name: "Signer Name 1",
-                        emailAddress: "signer1@email.com",
+                        signerName: "Signer Name 1",
+                        signerType: SignerType.Signer,
+                        signerEmail: "signer1@email.com",
                         signerOrder: 1,
                         authenticationCode: "123",
-                        signerType: SignerType.Signer,
                         privateMessage: "This is private message for signer",
-                        formFields: formFields),
+                        formFields: formFields,
+                        locale: Locales.EN),
                 },
                 Files = new List<IDocumentFile>
                 {
@@ -510,6 +593,28 @@ namespace BoldSign.Examples
             var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
 
             this.DocumentClient.RemoveAuthentication(documentId, "signer1@email.com", 1);
+        }
+        
+        /// <summary>
+        /// pre fill form field.
+        /// </summary>
+        public async Task PrefillFieldsAsync()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "702d9699-3f01-4a46-ac70-c0545cff73b7";
+            var prefillFieldRequest = new PrefillFieldRequest(documentId)
+            {
+                Fields = new List<PrefillField>()
+                {
+                    new PrefillField()
+                    {
+                        Id = "checkbox_v4tuQ",
+                        Value = "off"
+                    }
+                },
+            };
+
+            await this.DocumentClient.PrefillFieldsAsync(prefillFieldRequest);
         }
 
     }

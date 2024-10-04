@@ -51,7 +51,7 @@
         /// </summary>
         public void ResendSenderIdentityInvitation()
         {
-            var email = "identity@email.com";
+            var email = "identity@gmail.com";
             this.senderIdentityClient.ResendInvitation(email);
         }
 
@@ -60,7 +60,7 @@
         /// </summary>
         public void RerequestSenderIdentity()
         {
-            var email = "identity@email.com";
+            var email = "identity@gmail.com";
             this.senderIdentityClient.RerequestSenderIdentity(email);
         }
 
@@ -69,7 +69,7 @@
         /// </summary>
         public void DeleteSenderIdentity()
         {
-            var email = "identity@email.com";
+            var email = "identity@gmail.com";
             this.senderIdentityClient.DeleteSenderIdentity(email);
         }
 

@@ -29,7 +29,6 @@ namespace BoldSign.Api.Model
         /// <param name="localVarHeaderParams">The header params.</param>
         /// <param name="localVarFormParams">The form params.</param>
         /// <param name="localVarFileParams">The file params.</param>
-        /// <param name="localVarPathParams">The path params.</param>
         /// <param name="localVarHttpContentType">The content type.</param>
         /// <param name="localVarFileUrlParams">The file url params.</param>
         public ApiRequest(
@@ -39,7 +38,6 @@ namespace BoldSign.Api.Model
             Dictionary<string, string> localVarHeaderParams = default,
             Dictionary<string, string> localVarFormParams = default,
             Dictionary<string, List<IDocumentFile>> localVarFileParams = default,
-            Dictionary<string, string> localVarPathParams = default,
             string localVarHttpContentType = default,
             Dictionary<string, Uri> localVarFileUrlParams = default)
         {
@@ -49,7 +47,6 @@ namespace BoldSign.Api.Model
             this.LocalVarHeaderParams = localVarHeaderParams;
             this.LocalVarFormParams = localVarFormParams;
             this.LocalVarFileParams = localVarFileParams;
-            this.LocalVarPathParams = localVarPathParams;
             this.LocalVarHttpContentType = localVarHttpContentType;
             this.LocalVarFileUrlParams = localVarFileUrlParams;
         }
@@ -94,12 +91,6 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "localVarFileParams", EmitDefaultValue = true)]
         public Dictionary<string, List<IDocumentFile>> LocalVarFileParams { get; set; }
-
-        /// <summary>
-        /// Gets or sets the path params.
-        /// </summary>
-        [DataMember(Name = "localVarPathParams", EmitDefaultValue = true)]
-        public Dictionary<string, string> LocalVarPathParams { get; set; }
 
         /// <summary>
         /// Gets or sets the content type.

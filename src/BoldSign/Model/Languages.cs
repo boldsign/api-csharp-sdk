@@ -10,6 +10,11 @@ namespace BoldSign.Model
     public enum Languages
     {
         /// <summary>
+        /// None.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
         /// English.
         /// </summary>
         English = 1,

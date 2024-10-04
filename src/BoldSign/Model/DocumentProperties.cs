@@ -10,6 +10,7 @@
 
 namespace BoldSign.Model
 {
+    using BoldSign.Api.Model;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -56,6 +57,7 @@ namespace BoldSign.Model
         /// <param name="behalfOf">Gets or sets the behalf details.</param>
         /// <param name="expiryDateType">Gets or sets the expiry data type of the document..</param>
         /// <param name="expiryValue">Gets or sets the expiry value of the document..</param>
+        /// <param name="documentDownloadOption">Gets or sets the document download option.</param>
         public DocumentProperties(
             string documentId = default(string),
             string messageTitle = default(string),
@@ -88,7 +90,8 @@ namespace BoldSign.Model
             bool enableReassign = default(bool),
             BehalfOf behalfOf = default(BehalfOf),
             ExpiryDateType expiryDateType = default(ExpiryDateType),
-            long? expiryValue = default(long?))
+            long? expiryValue = default(long?),
+            DocumentDownloadOption documentDownloadOption = default(DocumentDownloadOption))
         {
             this.DocumentId = documentId;
             this.MessageTitle = messageTitle;
@@ -122,6 +125,7 @@ namespace BoldSign.Model
             this.BehalfOf = behalfOf;
             this.ExpiryDateType = expiryDateType;
             this.ExpiryValue = expiryValue;
+            this.DocumentDownloadOption = documentDownloadOption;
         }
 
         /// <summary>
@@ -348,6 +352,19 @@ namespace BoldSign.Model
         /// <value>Gets the value of expiry value of the document.</value>
         [DataMember(Name = "expiryValue", EmitDefaultValue = false)]
         public long? ExpiryValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable individual document downloads.
+        /// </summary>
+        [DataMember(Name = "documentDownloadOption", EmitDefaultValue = true)]
+        public DocumentDownloadOption DocumentDownloadOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Recipient Notification Settings.
+        /// </summary>
+        /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
+        [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
+        public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

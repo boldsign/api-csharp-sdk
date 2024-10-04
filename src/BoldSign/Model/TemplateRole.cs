@@ -36,6 +36,7 @@ namespace BoldSign.Api.Model
         /// <param name="imposeAuthentication">Gets or sets the authentication type of template.</param>
         /// <param name="allowRoleDelete">Gets or sets the allow permission to role delete option  of template.</param>
         /// <param name="allowRoleEdit">Gets or sets the allow permission to role edit option  of template.</param>
+        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: TemplateRole(int roleIndex, string name, string defaultSignerName = default, string defaultSignerEmail = default, int signerOrder = default, SignerType signerType = SignerType.Signer, List<FormField> formFields = default, string hostEmail = default, ImposeAuthentication imposeAuthentication = ImposeAuthentication.None, bool allowRoleEdit = true, bool allowRoleDelete = true, Locales locale = Locales.EN)")]
         public TemplateRole(
             string name,
             int index,
@@ -45,7 +46,7 @@ namespace BoldSign.Api.Model
             SignerType signerType = SignerType.Signer,
             List<FormField> formFields = default,
             string hostEmail = default,
-            Languages language = Languages.English,
+            Languages language = Languages.None,
             ImposeAuthentication imposeAuthentication = ImposeAuthentication.None,
             bool allowRoleEdit = true,
             bool allowRoleDelete = true)
@@ -74,6 +75,62 @@ namespace BoldSign.Api.Model
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="TemplateRole" /> class.
+        /// </summary>
+        /// <param name="roleIndex">Gets or sets the role index. (required).</param>
+        /// <param name="name">Gets or sets the name. (required).</param>
+        /// <param name="defaultSignerName">Gets or sets the role signer name.</param>
+        /// <param name="defaultSignerEmail">Gets or sets the  role signer email address.</param>
+        /// <param name="signerOrder">Gets or sets the signer order.</param>
+        /// <param name="signerType">signerType.</param>
+        /// <param name="formFields">Gets or sets the formFields.</param>
+        /// <param name="hostEmail">Gets or sets the hostEmail.</param>
+        /// <param name="imposeAuthentication">Gets or sets the authentication type of template.</param>
+        /// <param name="allowRoleDelete">Gets or sets the allow permission to role delete option  of template.</param>
+        /// <param name="allowRoleEdit">Gets or sets the allow permission to role edit option  of template.</param>
+        /// <param name="locale">Gets or sets the locale.</param>
+         public TemplateRole(
+            int roleIndex,
+            string name,
+            string defaultSignerName = default,
+            string defaultSignerEmail = default,
+            int signerOrder = default,
+            SignerType signerType = SignerType.Signer,
+            List<FormField> formFields = default,
+            string hostEmail = default,
+            ImposeAuthentication imposeAuthentication = ImposeAuthentication.None,
+            bool allowRoleEdit = true,
+            bool allowRoleDelete = true,
+            Locales locale = Locales.EN)
+        {
+            // to ensure "name" is required (not null)
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InvalidDataException(ApiValidationMessages.RoleName);
+            }
+            this.Index = roleIndex;
+            this.Name = name;
+            this.DefaultSignerName = defaultSignerName;
+            this.DefaultSignerEmail = defaultSignerEmail;
+            this.SignerOrder = signerOrder;
+            this.SignerType = signerType;
+            this.FormFields = formFields;
+            this.HostEmail = hostEmail;
+            this.ImposeAuthentication = imposeAuthentication;
+            this.AllowRoleDelete = allowRoleDelete;
+            this.AllowRoleEdit = allowRoleEdit;
+            this.Locale = locale;
+        }
+
+         /// <summary>
+         /// Initializes a new instance of the <see cref="TemplateRole" /> class.
+         /// </summary>
+         public TemplateRole()
+         {
+
+         }
+
+         /// <summary>
         /// Gets or sets the role Name.
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
@@ -120,13 +177,26 @@ namespace BoldSign.Api.Model
         /// Gets or sets Languages such as English, French, Spanish, German.
         /// </summary>
         [DataMember(Name = "language", EmitDefaultValue = true)]
+        [Obsolete("language is deprecated, please use locale instead")]
         public Languages Language { get; set; }
+
+        /// <summary>
+        /// Gets or sets locale such as EN, FR, ES.
+        /// </summary>
+        [DataMember(Name = "locale", EmitDefaultValue = true)]
+        public Locales Locale { get; set; }
 
         /// <summary>
         /// Gets or sets the Authentication Type such as None ,Access Code, EmailOTP.
         /// </summary>
         [DataMember(Name = "imposeAuthentication", EmitDefaultValue = true)]
         public ImposeAuthentication ImposeAuthentication { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// </summary>
+        [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
+        public bool AllowFieldConfiguration { get; set; }
 
         /// <summary>
         /// Gets or sets document Form fields such as Sign, Checkbox, Radio buttons etc.
@@ -145,6 +215,24 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "allowRoleDelete", EmitDefaultValue = true)]
         public bool AllowRoleDelete { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the phone number.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the delivery mode of the signer.
+        /// </summary>
+        [DataMember(Name = "deliveryMode", EmitDefaultValue = true)]
+        public DeliveryMode DeliveryMode { get; set; } = DeliveryMode.Email;
+
+        /// <summary>
+        /// Gets or sets the Recipient Notification Settings.
+        /// </summary>
+        [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
+        public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

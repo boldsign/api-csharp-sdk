@@ -45,6 +45,7 @@ namespace BoldSign.Api.Model
         /// <param name="imageInfo">Gets or sets the imageInfo.</param>
         /// <param name="hyperlinkText"> Gets or sets the hyperlinkText.</param>
         /// <param name="attachmentInfo"> Gets or sets the attachmentInfo.</param>
+        /// <param name="timeFormat">Gets or sets the timeFormat.</param>
         public TextTagDefinition(
             string definitionId,
             FieldType type,
@@ -61,7 +62,8 @@ namespace BoldSign.Api.Model
             List<string> dropdownOptions = default,
             ImageInfo imageInfo = default,
             string hyperlinkText = default,
-            AttachmentInfo attachmentInfo = default)
+            AttachmentInfo attachmentInfo = default,
+            string timeFormat = default)
         {
             this.DefinitionId = definitionId;
             this.Type = type;
@@ -79,6 +81,7 @@ namespace BoldSign.Api.Model
             this.ImageInfo = imageInfo;
             this.HyperlinkText = hyperlinkText;
             this.AttachmentInfo = attachmentInfo;
+            this.TimeFormat = timeFormat;
         }
 
         /// <summary>
@@ -143,6 +146,12 @@ namespace BoldSign.Api.Model
         public string DateFormat { get; set; }
 
         /// <summary>
+        /// Gets or sets timeFormat.
+        /// </summary>
+        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
+        public string TimeFormat { get; set; }
+
+        /// <summary>
         /// Gets or sets RadioGroupName.
         /// </summary>
         [DataMember(Name = "radioGroupName", EmitDefaultValue = false)]
@@ -178,5 +187,18 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "attachmentInfo", EmitDefaultValue = false)]
         public AttachmentInfo AttachmentInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Tab Index.
+        /// </summary>
+        [DataMember(Name = "tabIndex", EmitDefaultValue = false)]
+        [Range(-1, int.MaxValue, ErrorMessage = "The minimum value must be -1 or higher")]
+        public int? TabIndex { get; set; }
+
+        /// <summary>
+        /// Gets or sets the label.
+        /// </summary>
+        [DataMember(Name = "label", EmitDefaultValue = false)]
+        public string Label { get; set; }
     }
 }

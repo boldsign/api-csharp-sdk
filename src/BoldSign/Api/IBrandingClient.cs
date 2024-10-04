@@ -169,5 +169,37 @@ namespace BoldSign.Api
         /// <param name="brandId">Brand Id.</param>
         /// <returns>Task of ApiResponse.</returns>
         Task<ApiResponse<object>> DeleteBrandAsyncWithHttpInfo(string brandId);
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <param name="brandId">brandId.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of BrandDetails.</returns>
+        Task<BrandDetails> GetBrandDetailsAsync(string brandId);
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <param name="brandId">brandId.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of BrandDetails.</returns>
+        Task<ApiResponse<BrandDetails>> GetBrandDetailsAsyncWithHttpInfo(string brandId);
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="brandId">Brand Id.</param>
+        /// <returns>ApiResponse of BrandDetails.</returns>
+        ApiResponse<BrandDetails> GetBrandDetailsWithHttpInfo(string brandId);
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="brandId">Brand Id.</param>
+        /// <returns>BrandDetails.</returns>
+        BrandDetails GetBrandDetails(string brandId);
     }
 }

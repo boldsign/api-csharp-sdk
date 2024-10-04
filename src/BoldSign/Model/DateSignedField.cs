@@ -40,10 +40,12 @@ namespace BoldSign.Model
         /// <param name="isUnderLineFont">Gets or sets a value indicating whether the font style is underline.</param>
         /// <param name="lineHeight">Gets or sets the lineHeight.</param>
         /// <param name="dateFormat">Gets or sets the dateFormat.</param>
+        /// <param name="timeFormat">Gets or sets the timeFormat.</param>
         [Obsolete("Name is deprecated, please use Id instead")]
-        public DateSignedField(string name = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, string dateFormat = default) : base(name: name, type: FieldType.DateSigned, pageNumber: pageNumber,bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight)
+        public DateSignedField(string name = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, string dateFormat = default, string timeFormat = default) : base(name: name, type: FieldType.DateSigned, pageNumber: pageNumber,bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight)
         {
             this.DateFormat = dateFormat;
+            this.TimeFormat = timeFormat;
         }
 
         /// <summary>
@@ -62,10 +64,12 @@ namespace BoldSign.Model
         /// <param name="lineHeight">Gets or sets the lineHeight.</param>
         /// <param name="dateFormat">Gets or sets the dateFormat.</param>
         /// <param name="id">Gets or sets the id.</param>
-        public DateSignedField(int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, string dateFormat = default, string id = default)
+        /// <param name="timeFormat">Gets or sets the timeFormat.</param>
+        public DateSignedField(int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, string dateFormat = default, string id = default, string timeFormat = default)
             : base(type: FieldType.DateSigned, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, id: id)
         {
             this.DateFormat = dateFormat;
+            this.TimeFormat = timeFormat;
         }
 
         /// <summary>
@@ -78,6 +82,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "dateFormat", EmitDefaultValue = false)]
         public string DateFormat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the TimeFormat and it's only applicable for DateSigned field.
+        /// </summary>
+        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
+        public string TimeFormat { get; set; }
 
         /// <summary>
         /// Gets the form field type.It is a read only property.

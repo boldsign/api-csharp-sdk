@@ -175,8 +175,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the sender identity.</param>
         /// <returns>A Task.</returns>
-        SenderIdentityList ListSenderIdentities(int page, int? pageSize = default, string search = default);
+        SenderIdentityList ListSenderIdentities(int page, int? pageSize = default, string search = default, List<string> brandIds = default);
 
         /// <summary>
         /// Gets the sender identity list.
@@ -184,8 +185,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the sender identity.</param>
         /// <returns>A Task.</returns>
-        ApiResponse<SenderIdentityList> ListSenderIdentitiesWithHttpInfo(int page, int? pageSize = default, string search = default);
+        ApiResponse<SenderIdentityList> ListSenderIdentitiesWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> brandIds = default);
 
         /// <summary>
         /// Gets the sender identity list.
@@ -193,8 +195,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the sender identity.</param>
         /// <returns>A Task.</returns>
-        Task<SenderIdentityList> ListSenderIdentitiesAsync(int page, int? pageSize = default, string search = default);
+        Task<SenderIdentityList> ListSenderIdentitiesAsync(int page, int? pageSize = default, string search = default, List<string> brandIds = default);
 
         /// <summary>
         /// Gets the sender identity list.
@@ -202,7 +205,8 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the sender identity.</param>
         /// <returns>A Task.</returns>
-        Task<ApiResponse<SenderIdentityList>> ListSenderIdentitiesAsyncWithHttpInfo(int page, int? pageSize = default, string search = default);
+        Task<ApiResponse<SenderIdentityList>> ListSenderIdentitiesAsyncWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> brandIds = default);
     }
 }

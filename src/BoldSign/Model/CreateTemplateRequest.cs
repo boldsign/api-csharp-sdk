@@ -74,6 +74,12 @@ namespace BoldSign.Api.Model
         public string BrandId { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to allow senders to replace or delete files.
+        /// </summary>
+        [JsonProperty("allowModifyFiles")]
+        public bool AllowModifyFiles { get; set; } = true;
+
+        /// <summary>
         /// Gets or sets a value indicating whether  the allow message editing option is enabled or disabled.
         /// </summary>
         [JsonProperty("allowMessageEditing")]
@@ -84,6 +90,12 @@ namespace BoldSign.Api.Model
         /// </summary>
         [JsonProperty("allowNewRoles")]
         public bool AllowNewRoles { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets list of allow new files.
+        /// </summary>
+        [JsonProperty("allowNewFiles")]
+        public bool AllowNewFiles { get; set; } = true;
 
         /// <summary>
         /// Gets or sets a value indicating whether  the enable  reassign value option is enabled or disabled.
@@ -119,5 +131,36 @@ namespace BoldSign.Api.Model
         /// </summary>
         [JsonProperty("textTagDefinitions")]
         public List<TextTagDefinition> TextTagDefinitions { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether to AutoDetect Fields for the document signer.
+        /// </summary>
+        [JsonProperty("autoDetectFields")]
+        public bool AutoDetectFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [JsonProperty("onBehalfOf")]
+        public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document labels.
+        /// </summary>
+        [JsonProperty("labels")]
+        public IEnumerable<string> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the template labels.
+        /// </summary>
+        [JsonProperty("templateLabels")]
+        public IEnumerable<string> TemplateLabels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Recipient Notification Settings.
+        /// </summary>
+        [JsonProperty("recipientNotificationSettings")]
+        [Display(Description = "Recipient Notification Settings of the Template.")]
+        public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
     }
 }

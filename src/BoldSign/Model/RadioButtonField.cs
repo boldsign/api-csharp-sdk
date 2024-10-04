@@ -54,10 +54,12 @@ namespace BoldSign.Model
         /// <param name="id">Gets or sets the id.</param>
         /// <param name="isReadOnly">Gets or sets a value indicating whether is read only mode.</param>
         /// <param name="conditionalRules">Gets or sets the conditionalRules.</param>
-        public RadioButtonField(int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string groupName = default, string id = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default)
+        /// <param name="label">Gets or sets the label value.</param>
+        public RadioButtonField(int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string groupName = default, string id = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default, string label = default)
             : base(type: FieldType.RadioButton, pageNumber: pageNumber, bounds: bounds, isRequired: isRequired, value: value, font: font, fontSize: fontSize, fontHexColor: fontHexColor, isBoldFont: isBoldFont, isItalicFont: isItalicFont, isUnderLineFont: isUnderLineFont, lineHeight: lineHeight, characterLimit: characterLimit, id: id, isReadOnly: isReadOnly, conditionalRules: conditionalRules)
         {
             this.GroupName = groupName;
+            this.Label = label;
         }
 
         /// <summary>
@@ -75,5 +77,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "groupName", EmitDefaultValue = true)]
         public new string GroupName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Label for radio button fields.
+        /// </summary>
+        [DataMember(Name = "label", EmitDefaultValue = true)]
+        public new string Label { get; set; }
     }
 }

@@ -104,6 +104,12 @@ namespace BoldSign.Model
         public bool CombineAuditTrail { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether exclude audit trial from email enable or not.
+        /// </summary>
+        [DataMember(Name = "excludeAuditTrailFromEmail", EmitDefaultValue = true)]
+        public bool ExcludeAuditTrailFromEmail { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating delivery of the signed document in email as attachment or link to view and download the document.
         /// </summary>
         [DataMember(Name = "emailSignedDocument", EmitDefaultValue = true)]
@@ -114,6 +120,36 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "documentTimeZone", EmitDefaultValue = true)]
         public string DocumentTimeZone { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether standard fields can be viewed or not.
+        /// </summary>
+        [DataMember(Name = "showBuiltInFormFields", EmitDefaultValue = true)]
+        public bool ShowBuiltInFormFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether custom fields are allowed to create.
+        /// </summary>
+        [DataMember(Name = "allowCustomFieldCreation", EmitDefaultValue = true)]
+        public bool AllowCustomFieldCreation { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether shared fields can be viewed or not.
+        /// </summary>
+        [DataMember(Name = "showSharedCustomFields", EmitDefaultValue = true)]
+        public bool ShowSharedCustomFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to hide decline.
+        /// </summary>
+        [DataMember(Name = "hideDecline", EmitDefaultValue = true)]
+        public bool HideDecline { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to hide save.
+        /// </summary>
+        [DataMember(Name = "hideSave", EmitDefaultValue = true)]
+        public bool HideSave { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

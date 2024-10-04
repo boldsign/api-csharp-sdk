@@ -16,13 +16,17 @@ namespace BoldSign.Api
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using System.Web;
+    using BoldSign.Api.Extensions;
+    using BoldSign.Api.Resources;
     using BoldSign.Model;
     using Newtonsoft.Json;
-    using RestSharp;
-    using RestSharp.Extensions;
 
     /// <summary>
     ///     API client is mainly responsible for making the HTTP call to the API backend.
@@ -43,6 +47,13 @@ namespace BoldSign.Api
         {
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
         };
+        private List<HttpMethod> noContentMethods = new List<HttpMethod>
+        {
+            HttpMethod.Get,
+            HttpMethod.Head,
+            HttpMethod.Delete,
+        };
+        private HttpClient httpClient;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ApiClient" /> class
@@ -51,33 +62,36 @@ namespace BoldSign.Api
         public ApiClient()
         {
             this.Configuration = Api.Configuration.Default;
-            this.RestClient = new RestClient(this.Configuration.BasePath);
+            this.HttpClient = new HttpClient();
+            this.HttpClient.BaseAddress = new Uri(this.Configuration.BasePath);
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ApiClient" /> class
-        ///     with default base path <see cref="Client.Configuration.ApiBaseUrl"/>.
+        ///     with default base path <see cref="Api.Configuration.ApiBaseUrl"/>.
         /// </summary>
         /// <param name="config">An instance of Configuration.</param>
         public ApiClient(Configuration config)
         {
             this.Configuration = config ?? Api.Configuration.Default;
 
-            this.RestClient = new RestClient(this.Configuration.BasePath);
+            this.HttpClient = new HttpClient();
+            this.HttpClient.BaseAddress = new Uri(this.Configuration.BasePath);
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ApiClient" /> class
-        ///     with default base path and api key. <see cref="Client.Configuration.ApiBaseUrl"/>.
         /// </summary>
-        /// <param name="config">An instance of Configuration.</param>
+        /// <param name="basePath">An instance of base path.</param>
+        /// <param name="apiKey">An instance of api key.</param>
         public ApiClient(string basePath, string apiKey)
         {
             if (string.IsNullOrEmpty(basePath))
             {
                 throw new ArgumentException("basePath cannot be empty");
             }
-            this.RestClient = new RestClient(basePath);
+            this.HttpClient = new HttpClient();
+            this.HttpClient.BaseAddress = new Uri(basePath);
             this.Configuration = Api.Configuration.Default;
             this.Configuration.DefaultHeader.Remove(XApiKey);
             this.Configuration.DefaultHeader.Add(XApiKey, apiKey);
@@ -115,7 +129,8 @@ namespace BoldSign.Api
                 throw new ArgumentException("basePath cannot be empty");
             }
 
-            this.RestClient = new RestClient(basePath);
+            this.HttpClient = new HttpClient();
+            this.HttpClient.BaseAddress = new Uri(basePath);
             this.Configuration = Api.Configuration.Default;
         }
 
@@ -131,61 +146,46 @@ namespace BoldSign.Api
         public IReadableConfiguration Configuration { get; set; }
 
         /// <summary>
-        ///     Gets or sets the RestClient.
+        ///     Gets or sets the HttpClient.
         /// </summary>
-        /// <value>An instance of the RestClient</value>
-        internal RestClient RestClient { get; set; }
-
-        /// <summary>
-        ///     Allows for extending request processing for <see cref="ApiClient" /> generated code.
-        /// </summary>
-        /// <param name="request">The RestSharp request object</param>
-        private void InterceptRequest(IRestRequest request)
+        /// <value>An instance of the HttpClient.</value>
+        internal HttpClient HttpClient
         {
-            // Make this method partial, if extending or intercepting is required.
-        }
-
-        /// <summary>
-        ///     Allows for extending response processing for <see cref="ApiClient" /> generated code.
-        /// </summary>
-        /// <param name="request">The RestSharp request object</param>
-        /// <param name="response">The RestSharp response object</param>
-        private void InterceptResponse(IRestRequest request, IRestResponse response)
-        {
-            // Make this method partial, if extending or intercepting is required.
+            get => this.httpClient ?? new HttpClient();
+            set => this.httpClient = value;
         }
 
         // Creates and sets up a RestRequest prior to a call.
-        internal RestRequest PrepareRequest(
-            string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
-            Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
-            Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType, Dictionary<string, Uri> fileUrlsParams, Dictionary<string, IDocumentFile> singleFileParam)
+        /// <summary>
+        ///  Creates and sets up a RestRequest prior to a call.
+        /// </summary>
+        /// <param name="path">Gets or sets a path.</param>
+        /// <param name="method">Gets or sets a method.</param>
+        /// <param name="queryParams">Gets or sets a queryParams.</param>
+        /// <param name="postBody">Gets or sets a postBody.</param>
+        /// <param name="headerParams">Gets or sets a headerParams.</param>
+        /// <param name="formParams">Gets or sets a formParams.</param>
+        /// <param name="fileParams">Gets or sets a fileParams.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <param name="fileUrlsParams">Gets or sets a fileUrlParams.</param>>
+        /// <param name="singleFileParam">Gets or sets a singleFileParam.</param>>
+        /// <returns>request.</returns>
+        internal HttpRequestMessage PrepareRequest(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<IDocumentFile>> fileParams, string contentType, Dictionary<string, Uri> fileUrlsParams,  KeyValuePair<string, IImageFile> singleFileParam)
         {
-            var request = new RestRequest(path, method);
-
-            // add path parameter, if any
-            foreach (var param in pathParams)
-            {
-                request.AddParameter(param.Key, param.Value, ParameterType.UrlSegment);
-            }
+            var pathUrl = BuildUri(path, queryParams);
+            var request = new HttpRequestMessage(method, pathUrl);
+            var form = new MultipartFormDataContent();
 
             // add header parameter, if any
             foreach (var param in headerParams)
             {
-                request.AddHeader(param.Key, param.Value);
-            }
-
-            // add query parameter, if any
-            foreach (var param in queryParams)
-            {
-                request.AddQueryParameter(param.Key, param.Value);
+                request.Headers.Add(param.Key, param.Value);
             }
 
             // add form parameter, if any
             foreach (var param in formParams)
             {
-                request.AddParameter(param.Key, param.Value);
+                form.AddFormParameter(param.Key, param.Value);
             }
 
             // add file parameter, if any
@@ -195,36 +195,93 @@ namespace BoldSign.Api
                 {
                     if (file is DocumentFilePath documentFilePath)
                     {
-                        request.AddFile(param.Key, Path.GetFullPath(documentFilePath.FilePath), documentFilePath.ContentType);
+                        if (string.IsNullOrEmpty(documentFilePath.FilePath))
+                        {
+                            throw new ApiException(400, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFilePath.FilePath)));
+                        }
+
+                        if (string.IsNullOrEmpty(documentFilePath.ContentType))
+                        {
+                            throw new ApiException(422, ApiValidationMessages.UnsupportedFileType);
+                        }
+
+                        var fileContent = new ByteArrayContent(File.ReadAllBytes(documentFilePath.FilePath));
+                        fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFilePath.ContentType);
+                        var fileName = Path.GetFileName(documentFilePath.FilePath);
+                        form.Add(fileContent, param.Key, fileName);
                     }
                     else
                     {
                         var documentFile = GetDocumentFile(file);
-                        request.AddFile(param.Key, documentFile.FileData, documentFile.FileName, documentFile.ContentType);
+                        if (string.IsNullOrEmpty(documentFile.FileName))
+                        {
+                            throw new ApiException(400, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFile.FileName)));
+                        }
+
+                        if (string.IsNullOrEmpty(documentFile.ContentType))
+                        {
+                            throw new ApiException(422, ApiValidationMessages.UnsupportedFileType);
+                        }
+
+                        var byteArrayContent = new ByteArrayContent(documentFile.FileData);
+                        byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFile.ContentType);
+                        form.Add(byteArrayContent, param.Key, documentFile.FileName);
                     }
                 }
             }
 
-            // add single file URL parameter, if any
-            if (singleFileParam != null)
+            if (!string.IsNullOrEmpty(singleFileParam.Key))
             {
-                foreach (var param in singleFileParam)
+                var key = singleFileParam.Key;
+                if (singleFileParam.Value == null)
                 {
-                    var documentFile = GetDocumentFile(param.Value);
-                    request.AddFile(param.Key, documentFile.FileName, documentFile.ContentType);
+                    throw new ApiException((int)HttpStatusCode.BadRequest, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, singleFileParam.Key));
+                }
+
+                switch (singleFileParam.Value)
+                {
+                    case ImageFileStream brandingFileStream:
+                    {
+                        HandleFileStream(brandingFileStream, key, form);
+                        break;
+                    }
+
+                    case ImageFileBytes brandingFileBytes:
+                    {
+                        HandleFileBytes(brandingFileBytes, key, form);
+                        break;
+                    }
+
+                    case ImageFilePath brandingFilePath:
+                    {
+                        HandleFilePath(brandingFilePath, key, form);
+                        break;
+                    }
+
+                    default:
+                    {
+                        throw new InvalidOperationException(ApiValidationMessages.InvalidBrandFileInstance);
+                    }
                 }
             }
 
             // add file URL parameter, if any
             foreach (var param in fileUrlsParams)
             {
-                request.AddParameter(param.Key, param.Value);
+                form.AddFormParameter(param.Key, param.Value?.AbsoluteUri);
             }
 
-
-            if (postBody != null) // http body (model or byte[]) parameter
+            // http body (model or byte[]) parameter
+            if (postBody != null)
             {
-                request.AddParameter(contentType, postBody, ParameterType.RequestBody);
+                var requestBodyContent = new StringContent(postBody.ToString(), Encoding.UTF8, contentType);
+                request.Content = requestBodyContent;
+                return request;
+            }
+
+            if (!this.noContentMethods.Contains(method) && form.Any())
+            {
+                request.Content = form;
             }
 
             return request;
@@ -248,10 +305,11 @@ namespace BoldSign.Api
             }
             else if (documentFile is DocumentFileStream documentFileStream)
             {
+                var bytes = documentFileStream.FileData.ReadAsBytes();
                 return new DocumentFile
                 {
                     ContentType = documentFileStream.ContentType,
-                    FileData = documentFileStream.FileData.ReadAsBytes(),
+                    FileData = bytes,
                     FileName = documentFileStream.FileName,
                 };
             }
@@ -269,30 +327,23 @@ namespace BoldSign.Api
         /// <param name="headerParams">Header parameters.</param>
         /// <param name="formParams">Form parameters.</param>
         /// <param name="fileParams">File parameters.</param>
-        /// <param name="pathParams">Path parameters.</param>
-        /// <param name="contentType">Content Type of the request</param>
-        /// <param name="fileUrlParams">File Url parameter.</param>>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <param name="fileUrlParams">File URL parameter.</param>
         /// <param name="singleFileParam">Single file parameter.</param>
-        /// <returns>Object</returns>
-        internal object CallApi(
-            string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
-            Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
-            Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType, Dictionary<string, Uri> fileUrlParams, Dictionary<string, IDocumentFile> singleFileParam = null)
+        /// <returns>Object.</returns>
+        internal HttpResponseMessage CallApi(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<IDocumentFile>> fileParams, string contentType, Dictionary<string, Uri> fileUrlParams, KeyValuePair<string, IImageFile> singleFileParam = default)
         {
-            var request = this.PrepareRequest(
-                path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType, fileUrlParams, singleFileParam);
+            using var request = this.PrepareRequest(path, method, queryParams, postBody, headerParams, formParams, fileParams, contentType, fileUrlParams, singleFileParam);
 
-            // set timeout
-
-            this.RestClient.Timeout = this.Configuration.Timeout;
             // set user agent
-            this.RestClient.UserAgent = this.Configuration.UserAgent;
+            if (this.HttpClient.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                this.HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(this.Configuration.UserAgent);
+            }
 
-            this.InterceptRequest(request);
-            var response = this.RestClient.Execute(request);
-            this.InterceptResponse(request, response);
+            this.InterceptRequest();
+            var response = this.HttpClient.SendAsync(request).GetAwaiter().GetResult();
+            this.InterceptResponse();
 
             return response;
         }
@@ -307,24 +358,21 @@ namespace BoldSign.Api
         /// <param name="headerParams">Header parameters.</param>
         /// <param name="formParams">Form parameters.</param>
         /// <param name="fileParams">File parameters.</param>
-        /// <param name="pathParams">Path parameters.</param>
-        /// <param name="contentType">Content type.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
         /// <param name="fileUrlsParams">File Urls parameter.</param>
         /// <param name="singleFileParam">single file parameter.</param>
         /// <returns>The Task instance.</returns>
-        internal async Task<object> CallApiAsync(
-            string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
-            Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
-            Dictionary<string, List<IDocumentFile>> fileParams, Dictionary<string, string> pathParams,
-            string contentType, Dictionary<string, Uri> fileUrlsParams, Dictionary<string, IDocumentFile> singleFileParam = null)
+        internal async Task<HttpResponseMessage> CallApiAsync(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<IDocumentFile>> fileParams, string contentType, Dictionary<string, Uri> fileUrlsParams, KeyValuePair<string, IImageFile> singleFileParam = default)
         {
-            var request = this.PrepareRequest(
-                path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType, fileUrlsParams, singleFileParam);
-            this.RestClient.UserAgent = this.Configuration.UserAgent;
-            this.InterceptRequest(request);
-            var response = await this.RestClient.ExecuteTaskAsync(request);
-            this.InterceptResponse(request, response);
+            using var request = this.PrepareRequest(path, method, queryParams, postBody, headerParams, formParams, fileParams, contentType, fileUrlsParams, singleFileParam);
+            if (this.HttpClient.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                this.HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(this.Configuration.UserAgent);
+            }
+
+            this.InterceptRequest();
+            var response = await this.HttpClient.SendAsync(request).ConfigureAwait(false);
+            this.InterceptResponse();
 
             return response;
         }
@@ -337,19 +385,19 @@ namespace BoldSign.Api
         public string EscapeString(string str) => UrlEncode(str);
 
         /// <summary>
-        ///     Create FileParameter based on Stream.
+        ///     Allows for extending request processing for <see cref="ApiClient" /> generated code.
         /// </summary>
-        /// <param name="name">Parameter name.</param>
-        /// <param name="stream">Input stream.</param>
-        /// <returns>FileParameter.</returns>
-        private FileParameter ParameterToFile(string name, Stream stream)
+        private void InterceptRequest()
         {
-            if (stream is FileStream)
-            {
-                return FileParameter.Create(name, ReadAsBytes(stream), Path.GetFileName(((FileStream)stream).Name));
-            }
+            // Make this method partial, if extending or intercepting is required.
+        }
 
-            return FileParameter.Create(name, ReadAsBytes(stream), "no_file_name_provided");
+        /// <summary>
+        ///     Allows for extending response processing for <see cref="ApiClient" /> generated code.
+        /// </summary>
+        private void InterceptResponse()
+        {
+            // Make this method partial, if extending or intercepting is required.
         }
 
         /// <summary>
@@ -411,13 +459,15 @@ namespace BoldSign.Api
         /// <param name="response">The HTTP response.</param>
         /// <param name="type">Object type.</param>
         /// <returns>Object representation of the JSON string.</returns>
-        internal object Deserialize(IRestResponse response, Type type)
+        internal object Deserialize(HttpResponseMessage response, Type type)
         {
             var headers = response.Headers;
 
-            if (type == typeof(byte[])) // return byte array
+            // return byte array
+            if (type == typeof(byte[]))
             {
-                return response.RawBytes;
+                var res = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                return res;
             }
 
             // TODO: ? if (type.IsAssignableFrom(typeof(Stream)))
@@ -436,25 +486,27 @@ namespace BoldSign.Api
 
                         if (match.Success)
                         {
-                            var fileName = filePath + SanitizeFilename(match.Groups[1].Value.Replace("\"", "").Replace("'", ""));
-                            File.WriteAllBytes(fileName, response.RawBytes);
+                            var fileName = filePath + SanitizeFilename(match.Groups[1].Value.Replace("\"", string.Empty).Replace("'", string.Empty));
+                            File.WriteAllBytes(fileName, response.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult());
 
                             return new FileStream(fileName, FileMode.Open);
                         }
                     }
                 }
 
-                var stream = new MemoryStream(response.RawBytes);
+                var stream = new MemoryStream(response.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult());
 
                 return stream;
             }
 
-            if (type.Name.StartsWith("System.Nullable`1[[System.DateTime")) // return a datetime object
+            // return a datetime object
+            if (type.Name.StartsWith("System.Nullable`1[[System.DateTime", StringComparison.CurrentCulture))
             {
-                return DateTime.Parse(response.Content, null, DateTimeStyles.RoundtripKind);
+                return DateTime.Parse(response.Content.ReadAsStringAsync().GetAwaiter().GetResult(), null, DateTimeStyles.RoundtripKind);
             }
 
-            if (type == typeof(string) || type.Name.StartsWith("System.Nullable")) // return primitive type
+            // return primitive type
+            if (type == typeof(string) || type.Name.StartsWith("System.Nullable", StringComparison.CurrentCulture))
             {
                 return ConvertType(response.Content, type);
             }
@@ -462,7 +514,7 @@ namespace BoldSign.Api
             // at this point, it must be a model (json)
             try
             {
-                return JsonConvert.DeserializeObject(response.Content, type, this.serializerSettings);
+                return JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().GetAwaiter().GetResult(), type, this.serializerSettings);
             }
             catch (Exception e)
             {
@@ -522,11 +574,11 @@ namespace BoldSign.Api
             {
                 if (this.IsJsonMime(contentType.ToLower()))
                 {
-                    return contentType;
+                    return "application/json";
                 }
             }
 
-            return contentTypes[0]; // use the first content type specified in 'consumes'
+            return "application/json"; // use the first content type specified in 'consumes'
         }
 
         /// <summary>
@@ -586,6 +638,17 @@ namespace BoldSign.Api
 
                 return ms.ToArray();
             }
+        }
+
+        private static string BuildUri(string path, IEnumerable<KeyValuePair<string, string>> queryParams)
+        {
+            if (queryParams == null || !queryParams.Any())
+            {
+                return path;
+            }
+
+            var queryString = string.Join("&", queryParams.Select(x => $"{WebUtility.UrlEncode(x.Key)}={WebUtility.UrlEncode(x.Value)}"));
+            return $"{path}?{queryString}";
         }
 
         /// <summary>
@@ -671,5 +734,99 @@ namespace BoldSign.Api
         /// <param name="value"></param>
         /// <returns>True if object is a collection type</returns>
         private static bool IsCollection(object value) => value is IList || value is ICollection;
+
+         private static void HandleFileBytes(ImageFileBytes brandLogoFileBytes, string key, MultipartFormDataContent form)
+        {
+            var fileBytes = brandLogoFileBytes.FileBytes;
+            if (fileBytes == null)
+            {
+                throw new ApiException((int)HttpStatusCode.BadRequest, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(brandLogoFileBytes.FileBytes)));
+            }
+
+            AddFileContentToForm(fileBytes, key, form);
+        }
+
+        private static void HandleFileStream(ImageFileStream documentFileStream, string key, MultipartFormDataContent form)
+        {
+            var fileStream = documentFileStream.FileStream;
+            if (fileStream == null)
+            {
+                throw new ApiException((int)HttpStatusCode.BadRequest, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFileStream.FileStream)));
+            }
+
+            using var memoryStream = new MemoryStream();
+            fileStream.CopyTo(memoryStream);
+
+            AddFileContentToForm(memoryStream.ToArray(), key, form);
+        }
+
+        private static void HandleFilePath(ImageFilePath documentFilePath, string key, MultipartFormDataContent form)
+        {
+            // If FilePath is empty, throw an exception
+            if (string.IsNullOrEmpty(documentFilePath.FilePath))
+            {
+                throw new ApiException((int)HttpStatusCode.BadRequest, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFilePath.FilePath)));
+            }
+
+            AddFileContentToForm(File.ReadAllBytes(documentFilePath.FilePath), key, form);
+        }
+
+        private static void AddFileContentToForm(byte[] fileBytes, string key, MultipartFormDataContent form)
+        {
+            var fileName = $"{GetExtension(fileBytes)}";
+            var fileContent = new ByteArrayContent(fileBytes);
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = key,
+                FileName = fileName,
+            };
+            form.Add(fileContent);
+        }
+
+        private static string GetExtension(byte[] bytes)
+        {
+            if (IsPng(bytes))
+            {
+                return ".png";
+            }
+            else if (IsJpeg(bytes))
+            {
+                return ".jpeg";
+            }
+            else if (IsSvg(bytes))
+            {
+                return ".svg";
+            }
+
+            throw new ApiException((int)HttpStatusCode.BadRequest, ApiValidationMessages.UnsupportedBrandLogoType);
+        }
+
+        private static bool IsPng(byte[] fileBytes)
+        {
+            // PNG files start with the following bytes (magic number): 89 50 4E 47 0D 0A 1A 0A
+            return fileBytes.Length >= 8 &&
+                   fileBytes[0] == 0x89 &&
+                   fileBytes[1] == 0x50 &&
+                   fileBytes[2] == 0x4E &&
+                   fileBytes[3] == 0x47 &&
+                   fileBytes[4] == 0x0D &&
+                   fileBytes[5] == 0x0A &&
+                   fileBytes[6] == 0x1A &&
+                   fileBytes[7] == 0x0A;
+        }
+
+        private static bool IsJpeg(byte[] fileBytes)
+        {
+            // JPEG or JPG files start with the following bytes (magic number): FF D8
+            return fileBytes.Length >= 2 &&
+                   fileBytes[0] == 255 && // JPEG signature
+                   fileBytes[1] == 216;
+        }
+
+        private static bool IsSvg(byte[] fileBytes)
+        {
+            string fileHeader = Encoding.UTF8.GetString(fileBytes);
+            return fileHeader.StartsWith("<?xml") || fileHeader.StartsWith("<svg");
+        }
     }
 }

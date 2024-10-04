@@ -10,6 +10,7 @@
 
 namespace BoldSign.Model.Webhook
 {
+    using BoldSign.Api.Model;
     using System;
     using System.Linq;
     using System.IO;
@@ -156,5 +157,19 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "isCombinedAudit", EmitDefaultValue = false)]
         [JsonProperty("isCombinedAudit")]
         public bool? IsCombinedAudit { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected brand.
+        /// </summary>
+        [DataMember(Name = "brandId", EmitDefaultValue = false)]
+        [JsonProperty("brandId")]
+        public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document download option.
+        /// </summary>
+        [DataMember(Name = "documentDownloadOption", EmitDefaultValue = true)]
+        [JsonProperty("documentDownloadOption")]
+        public DocumentDownloadOption? DocumentDownloadOption { get; set; }
     }
 }

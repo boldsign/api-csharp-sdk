@@ -20,12 +20,12 @@ namespace BoldSign.Api
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
     using Newtonsoft.Json;
-    using RestSharp;
 
     /// <summary>
     ///  Represents a function to interact with the API endpoints. The function perform action such as creating sender identity and so on.
@@ -113,7 +113,7 @@ namespace BoldSign.Api
         /// </summary>
         /// <value>The base path.</value>
         /// <returns>base path.</returns>
-        public string GetBasePath() => this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+        public string GetBasePath() => this.Configuration.ApiClient.HttpClient.BaseAddress.AbsoluteUri;
 
         /// <inheritdoc/>
         public SenderIdentityCreated CreateSenderIdentity(SenderIdentityRequest createSenderIdentityRequest = default)
@@ -134,7 +134,6 @@ namespace BoldSign.Api
             ValidateCreateSenderIdentityProperties(createSenderIdentityRequest);
 
             var localVarPath = "/v1/senderIdentities/create";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -192,7 +191,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -205,7 +204,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<SenderIdentityCreated>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (SenderIdentityCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SenderIdentityCreated)));
         }
 
@@ -228,7 +227,6 @@ namespace BoldSign.Api
             ValidateCreateSenderIdentityProperties(createSenderIdentityRequest);
 
             var localVarPath = "/v1/senderIdentities/create";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -286,7 +284,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -299,7 +297,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<SenderIdentityCreated>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (SenderIdentityCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SenderIdentityCreated)));
         }
 
@@ -317,10 +315,9 @@ namespace BoldSign.Api
                 throw new ArgumentNullException(nameof(editSenderIdentityRequest));
             }
 
-            ValidateCreateSenderIdentityProperties(editSenderIdentityRequest);
+            ValidateEditSenderIdentityProperties(editSenderIdentityRequest);
 
             var localVarPath = "/v1/senderIdentities/update";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -366,7 +363,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -379,7 +376,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -397,10 +394,9 @@ namespace BoldSign.Api
                 throw new ArgumentNullException(nameof(editSenderIdentityRequest));
             }
 
-            ValidateCreateSenderIdentityProperties(editSenderIdentityRequest);
+            ValidateEditSenderIdentityProperties(editSenderIdentityRequest);
 
             var localVarPath = "/v1/senderIdentities/update";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -446,7 +442,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -459,7 +455,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -478,7 +474,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/senderIdentities/resendInvitation";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -512,7 +507,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -525,7 +520,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -544,7 +539,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/senderIdentities/resendInvitation";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -578,7 +572,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -591,7 +585,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -610,7 +604,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/senderIdentities/rerequest";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -644,7 +637,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -657,7 +650,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -676,7 +669,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/senderIdentities/rerequest";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -710,7 +702,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -723,7 +715,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -742,7 +734,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/senderIdentities/delete";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -776,7 +767,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -789,7 +780,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -808,7 +799,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/senderIdentities/delete";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -842,7 +832,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -855,7 +845,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -923,19 +913,18 @@ namespace BoldSign.Api
         }
 
         /// <inheritdoc/>
-        public SenderIdentityList ListSenderIdentities(int page, int? pageSize = default, string search = default)
+        public SenderIdentityList ListSenderIdentities(int page, int? pageSize = default, string search = default, List<string> brandIds = default)
         {
-            var localVarResponse = this.ListSenderIdentitiesWithHttpInfo(page, pageSize, search);
+            var localVarResponse = this.ListSenderIdentitiesWithHttpInfo(page, pageSize, search, brandIds);
 
             return localVarResponse.Data;
         }
 
         /// <inheritdoc/>
-        public ApiResponse<SenderIdentityList> ListSenderIdentitiesWithHttpInfo(int page, int? pageSize = default, string search = default)
+        public ApiResponse<SenderIdentityList> ListSenderIdentitiesWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> brandIds = default)
         {
             // verify the required parameter 'page' is set
             var localVarPath = "/v1/senderIdentities/list";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -971,6 +960,11 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "Search", search)); // query parameter
             }
 
+            if (brandIds != null && brandIds.Any())
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -978,7 +972,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -991,24 +985,23 @@ namespace BoldSign.Api
 
             return new ApiResponse<SenderIdentityList>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (SenderIdentityList)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SenderIdentityList)));
         }
 
         /// <inheritdoc/>
-        public async Task<SenderIdentityList> ListSenderIdentitiesAsync(int page, int? pageSize = default, string search = default)
+        public async Task<SenderIdentityList> ListSenderIdentitiesAsync(int page, int? pageSize = default, string search = default, List<string> brandIds = default)
         {
-            var localVarResponse = await this.ListSenderIdentitiesAsyncWithHttpInfo(page, pageSize, search).ConfigureAwait(false);
+            var localVarResponse = await this.ListSenderIdentitiesAsyncWithHttpInfo(page, pageSize, search, brandIds).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
 
         /// <inheritdoc/>
-        public async Task<ApiResponse<SenderIdentityList>> ListSenderIdentitiesAsyncWithHttpInfo(int page, int? pageSize = default, string search = default)
+        public async Task<ApiResponse<SenderIdentityList>> ListSenderIdentitiesAsyncWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> brandIds = default)
         {
             // verify the required parameter 'page' is set
             var localVarPath = "/v1/senderIdentities/list";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1044,6 +1037,11 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "Search", search)); // query parameter
             }
 
+            if (brandIds != null && brandIds.Any())
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -1051,7 +1049,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1064,7 +1062,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<SenderIdentityList>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (SenderIdentityList)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SenderIdentityList)));
         }
 
@@ -1078,6 +1076,20 @@ namespace BoldSign.Api
             if (!IsValidEmail(senderIdentityRequest.Email))
             {
                  throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
+            }
+        }
+
+        private static void ValidateEditSenderIdentityProperties(SenderIdentityRequest editSenderIdentityRequest)
+        {
+            if (string.IsNullOrEmpty(editSenderIdentityRequest.Name) &&
+                string.IsNullOrEmpty(editSenderIdentityRequest.RedirectUrl?.ToString()))
+            {
+                throw new ApiException(422, ApiValidationMessages.RequiredNameOrRedirectUrl);
+            }
+
+            if (!IsValidEmail(editSenderIdentityRequest.Email))
+            {
+                throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
             }
         }
     }

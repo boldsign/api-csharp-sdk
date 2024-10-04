@@ -63,5 +63,17 @@ namespace BoldSign.Model.Webhook
         [JsonProperty("approvedDateTime")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime? ApprovedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the brand id.
+        /// </summary>
+        [JsonProperty("brandId")]
+        public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the RedirectUrl.
+        /// </summary>
+        [JsonProperty("redirectUrl")]
+        public string RedirectUrl { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BoldSign.Api;
+﻿using System.IO;
+using BoldSign.Api;
 using BoldSign.Model;
 
 namespace BoldSign.Examples
@@ -41,14 +42,27 @@ namespace BoldSign.Examples
         /// </summary>
         public BrandingData CreateBrand()
         {
+            var fileBytes = File.ReadAllBytes("assets/sample.jpg");
+            var stream = new MemoryStream(fileBytes);
+
             var createBrandData = new BrandSettings()
             {
                 // This is an example brand settings data to create, add your own brand settings upon usage.
                 BrandName = "Brand from SDK",
-                BrandLogo = new DocumentFileBytes
+                // BrandLogo = new ImageFileBytes()
+                // {
+                //     ContentType = "image/jpeg",
+                //     FileBytes = fileBytes,
+                // },
+                // BrandLogo = new ImageFileStream()
+                // {
+                //     FileStream = stream,
+                //     ContentType = "image/jpeg",
+                // },
+                BrandLogo = new ImageFilePath()
                 {
-                    ContentType = "image/jpg",
-                    FileName = "assets/sample.jpg",
+                  FilePath  = "assets/sample.jpg",
+                  ContentType = "image/jpeg",
                 },
                 CombineAuditTrail = false,
                 IsDefault = false,
@@ -60,6 +74,11 @@ namespace BoldSign.Examples
                 ButtonColor = "#00BDD4",
                 ButtonTextColor = "#FFFFFF",
                 RedirectUrl = "https://app.boldsign.com/dashboard",
+                AllowCustomFieldCreation = false,
+                ShowBuiltInFormFields = true,
+                ShowSharedCustomFields = false,
+                HideDecline = false,
+                HideSave = false,
             };
             var result = this.BrandingClient.CreateBrand(createBrandData);
             return result;
@@ -71,15 +90,27 @@ namespace BoldSign.Examples
         public BrandingData EditBrand()
         {
             string brandId = "Your brand-id";
+            var fileBytes = File.ReadAllBytes("assets/sample.jpg");
+            var stream = new MemoryStream(fileBytes);
 
             var editBrandData = new BrandSettings()
             {
                 // This is an example brand settings data to edit, add your own brand settings upon usage.
                 BrandName = "Brand edit from SDK",
-                BrandLogo = new DocumentFileBytes
+                // BrandLogo = new ImageFileBytes()
+                // {
+                //     ContentType = "image/jpeg",
+                //     FileBytes = fileBytes,
+                // },
+                // BrandLogo = new ImageFileStream()
+                // {
+                //     FileStream = stream,
+                //     ContentType = "image/jpeg",
+                // },
+                BrandLogo = new ImageFilePath()
                 {
-                    ContentType = "image/jpg",
-                    FileName = "assets/sample.jpg",
+                    FilePath  = "assets/sample.jpg",
+                    ContentType = "image/jpeg",
                 },
                 CombineAuditTrail = false,
                 IsDefault = false,
@@ -103,6 +134,18 @@ namespace BoldSign.Examples
         {
             var brandRecords = this.BrandingClient.ListBrand();
             return brandRecords;
+        }
+        
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        public BrandDetails GetBrand()
+        {
+            // This is an example brand id, add your own brand id upon usage.
+            var brandId = "your brand-id";
+
+            var brandSettings = this.BrandingClient.GetBrandDetails(brandId);
+            return brandSettings;
         }
     }
 }

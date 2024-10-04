@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -128,6 +128,9 @@
   </data>
   <data name="DocumentIdRequired" xml:space="preserve">
     <value>Document ID is required</value>
+  </data>
+  <data name="TemplateIdRequired" xml:space="preserve">
+    <value>Template ID is required or not in GUID type</value>
   </data>
   <data name="FieldTypeRequired" xml:space="preserve">
     <value>fieldType is a required property for FormField and cannot be null</value>
@@ -279,6 +282,9 @@
   <data name="MaxLabelsCount" xml:space="preserve">
     <value>A document can only contain a maximum of 50 labels</value>
   </data>
+  <data name="MaxTemplateOrDocumentLabelsCount" xml:space="preserve">
+    <value>A document or template can only contain a maximum of 50 labels</value>
+  </data>
   <data name="BrandLogoRequired" xml:space="preserve">
     <value>The Brand logo is required</value>
   </data>
@@ -392,5 +398,59 @@
   </data>
   <data name="RoleName" xml:space="preserve">
       <value>Role Name is Required.</value>
+  </data>
+  <data name="StandardFieldVisibilityErr" xml:space="preserve">
+    <value>Custom field creation should only be allowed when built-in form fields are enabled. If not, shared custom fields can be enabled.</value>
+  </data>
+  <data name="DocumentInfoLocaleMissing" xml:space="preserve">
+      <value>The document info locale does not match the signer’s locale {0}.</value>
+  </data>
+  <data name="FieldNameRequired" xml:space="preserve">
+    <value>Field name is required</value>
+  </data>
+  <data name="InvalidLocale" xml:space="preserve">
+      <value>The document info locale {0} does not match the one used in roles.</value>
+  </data>
+  <data name="FieldDescriptionRequired" xml:space="preserve">
+    <value>Field description is required</value>
+  </data>
+  <data name="FieldIdRequired" xml:space="preserve">
+    <value>Field id is required</value>
+  </data>
+    <data name="UnsupportedFileType" xml:space="preserve">
+    <value>Unsupported file(s). Supported file formats are PDF, Word, PNG, JPEG, JPG and XLSX</value>
+  </data>
+    <data name="UnsupportedMediaType" xml:space="preserve">
+    <value>Unsupported Media Type</value>
+  </data>
+    <data name="EmptyFields" xml:space="preserve">
+    <value>{0} cannot be null or empty.</value>
+  </data>
+  <data name="ExtraLocaleValues" xml:space="preserve">
+      <value>Only one document info is allowed per signer locale.</value>
+  </data>
+  <data name="AllowConfigureFieldsError" xml:space="preserve">
+      <value>The 'AllowFieldConfiguration' property is unsupported for the Reviewer role.</value>
+  </data>
+  <data name="RequiredNameOrRedirectUrl" xml:space="preserve">
+      <value>Either name or redirectUrl is required to update sender identity.</value>
+  </data>
+  <data name="UnsupportedBrandLogoType" xml:space="preserve">
+      <value>Unsupported file. Supported file formats are PNG, JPEG, JPG and SVG.</value>
+  </data>
+  <data name="InvalidBrandFileInstance" xml:space="preserve">
+      <value>The IImageFile parameter must be an instance of ImageFileStream, ImageFileBytes, or ImageFilePath.</value>
+  </data>
+  <data name="BrandIdGet" xml:space="preserve">
+      <value>Missing required parameter 'brandId' when calling BrandingApi-&amp;gt;GetBrand</value>
+  </data>
+  <data name="ExceptionFactoryUnsupported" xml:space="preserve">
+    <value>Multicast delegate for ExceptionFactory is unsupported</value>
+  </data>
+  <data name="ContactIdDelete" xml:space="preserve">
+    <value>Missing required parameter 'contactId' when calling ContactingApi-&gt;DeleteContact</value>
+  </data>
+  <data name="ContactIdMissing" xml:space="preserve">
+    <value>Missing required parameter 'id' when calling ContactingApi-&gt;UpdateContact</value>
   </data>
 </root>

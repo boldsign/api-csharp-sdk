@@ -29,7 +29,8 @@ namespace BoldSign.Model
         /// </summary>
         /// <param name="accessCode">Gets or sets the access code. (required).</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
-        public AccessCodeDetails(string accessCode = default, string onBehalfOf = default)
+        /// <param name="phoneNumber">Gets or sets the phone number.</param>
+        public AccessCodeDetails(string accessCode = default, string onBehalfOf = default, PhoneNumber phoneNumber = default)
         {
             // to ensure "accessCode" is required (not null)
             if (accessCode == null)
@@ -39,6 +40,7 @@ namespace BoldSign.Model
 
             this.AccessCode = accessCode;
             this.OnBehalfOf = onBehalfOf;
+            this.PhoneNumber = phoneNumber;
         }
 
         /// <summary>
@@ -53,6 +55,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
         public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = true)]
+        public PhoneNumber PhoneNumber { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

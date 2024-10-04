@@ -146,5 +146,20 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "lastActivityDate", EmitDefaultValue = false)]
         [JsonProperty("lastActivityDate")]
         public long? LastActivityDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets a authentication type.
+        /// </summary>
+        [DataMember(Name = "authenticationType", EmitDefaultValue = true)]
+        [JsonProperty("authenticationType")]
+        public string AuthenticationType { get; set; } = "None";
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// </summary>
+        /// <value>Gets or sets a value indicating whether gets or sets the allow field configuration.</value>
+        [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
+        [JsonProperty("allowFieldConfiguration")]
+        public bool AllowFieldConfiguration { get; set; }
     }
 }

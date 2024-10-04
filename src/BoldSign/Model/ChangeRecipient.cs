@@ -11,6 +11,7 @@ namespace BoldSign.Api.Model
     using System.Runtime.Serialization;
     using System.Text;
     using BoldSign.Api.Resources;
+    using BoldSign.Model;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -31,10 +32,12 @@ namespace BoldSign.Api.Model
         ///     used to target that particular order with given signer email. (optional).
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
-        public ChangeRecipient(string newSignerName, string reason, string oldSignerEmail, string newSignerEmail, int? signerOrder = default, string onBehalfOf = default)
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The Old Signer phone number.</param>
+        public ChangeRecipient(string newSignerName, string reason, string oldSignerEmail, string newSignerEmail, int? signerOrder = default, string onBehalfOf = default,  PhoneNumber phoneNumber = default, PhoneNumber oldPhoneNumber = default)
         {
             // to ensure "signer name" is required (not null)
-            if (string.IsNullOrEmpty(newSignerName))
+            if (string.IsNullOrEmpty(newSignerName) && phoneNumber == null)
             {
                 throw new InvalidDataException(ApiValidationMessages.SignerNameRequired);
             }
@@ -50,7 +53,7 @@ namespace BoldSign.Api.Model
             this.Reason = reason;
 
             // to ensure "oldsignermail" is required (not null)
-            if (string.IsNullOrEmpty(oldSignerEmail))
+            if (string.IsNullOrEmpty(oldSignerEmail) && oldPhoneNumber == null)
             {
                 throw new InvalidDataException(ApiValidationMessages.OldSignerEmailRequired);
             }
@@ -58,7 +61,7 @@ namespace BoldSign.Api.Model
             this.OldSignerEmail = oldSignerEmail;
 
             // to ensure "newmailid" is required (not null)
-            if (string.IsNullOrEmpty(newSignerEmail))
+            if (string.IsNullOrEmpty(newSignerEmail) && oldPhoneNumber == null)
             {
                 throw new InvalidDataException(ApiValidationMessages.NewSignerEmailAddressRequired);
             }
@@ -66,7 +69,7 @@ namespace BoldSign.Api.Model
             this.NewSignerEmail = newSignerEmail;
 
             // to ensure "oldSignermail"and "newSignermail" are not as same
-            if (oldSignerEmail.ToUpperInvariant() == newSignerEmail.ToUpperInvariant())
+            if (!string.IsNullOrEmpty(oldSignerEmail) && !string.IsNullOrEmpty(newSignerEmail) && oldSignerEmail.ToUpperInvariant() == newSignerEmail.ToUpperInvariant())
             {
                 throw new InvalidDataException(ApiValidationMessages.SameSignerEmailNotAllowed);
             }
@@ -79,6 +82,8 @@ namespace BoldSign.Api.Model
 
             this.Order = signerOrder;
             this.OnBehalfOf = onBehalfOf;
+            this.PhoneNumber = phoneNumber;
+            this.OldPhoneNumber = oldPhoneNumber;
         }
 
         /// <summary>
@@ -125,6 +130,18 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
         public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the signer phone number.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = true)]
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the signer phone number.
+        /// </summary>
+        [DataMember(Name = "oldPhoneNumber", EmitDefaultValue = true)]
+        public PhoneNumber OldPhoneNumber { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

@@ -103,5 +103,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "SV")]
         SV,
+
+        /// <summary>
+        /// Inherit from template.
+        /// </summary>
+        [EnumMember(Value = "Default")]
+        Default,
     }
 }

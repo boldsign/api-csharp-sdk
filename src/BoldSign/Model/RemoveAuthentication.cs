@@ -16,6 +16,7 @@ namespace BoldSign.Api.Model
     using System.IO;
     using System.Runtime.Serialization;
     using BoldSign.Api.Resources;
+    using BoldSign.Model;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -30,11 +31,13 @@ namespace BoldSign.Api.Model
         /// <param name="emailId">The User Service.</param>
         /// <param name="zorder">The emailHandler.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
-        public RemoveAuthentication(string emailId, int? zorder, string onBehalfOf = default)
+        /// <param name="phoneNumber">The phone number.</param>
+        public RemoveAuthentication(string emailId, int? zorder, string onBehalfOf = default, PhoneNumber phoneNumber = default)
         {
             this.EmailId = emailId;
             this.ZOrder = zorder;
             this.OnBehalfOf = onBehalfOf;
+            this.PhoneNumber = phoneNumber;
         }
 
         /// <summary>
@@ -56,5 +59,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
         public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = true)]
+        public PhoneNumber PhoneNumber { get; set; }
     }
 }

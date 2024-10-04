@@ -34,6 +34,7 @@ namespace BoldSign.Api.Model
         /// <param name="imposeAuthentication">Gets or sets the authentication type of template.</param>
         /// <param name="allowRoleDelete">Gets or sets the allow permission to role delete option  of template.</param>
         /// <param name="allowRoleEdit">Gets or sets the allow permission to role edit option  of template.</param>
+        /// <param name="locale">Gets or sets the locale.</param>
         public RoleProperties(
     string name,
     int index,
@@ -48,7 +49,8 @@ namespace BoldSign.Api.Model
     bool enableEmailOTP = default,
     ImposeAuthentication imposeAuthentication = ImposeAuthentication.None,
     bool allowRoleEdit = true,
-    bool allowRoleDelete = true)
+    bool allowRoleDelete = true,
+    Locales locale = Locales.EN)
         {
             this.Name = name;
             this.Index = index;
@@ -67,6 +69,7 @@ namespace BoldSign.Api.Model
             this.ImposeAuthentication = imposeAuthentication;
             this.AllowRoleDelete = allowRoleDelete;
             this.AllowRoleEdit = allowRoleEdit;
+            this.Locale = locale;
         }
 
         /// <summary>
@@ -94,6 +97,12 @@ namespace BoldSign.Api.Model
         public string DefaultSignerEmail { get; set; }
 
         /// <summary>
+        /// Gets or sets the phone number.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
         /// Gets or sets the signer order value.
         /// </summary>
         [DataMember(Name = "signerOrder", EmitDefaultValue = false)]
@@ -116,7 +125,14 @@ namespace BoldSign.Api.Model
         /// Gets or sets Languages such as English, French, Spanish, German.
         /// </summary>
         [DataMember(Name = "language", EmitDefaultValue = true)]
+        [Obsolete("language is deprecated, please use locale instead")]
         public Languages Language { get; set; }
+
+        /// <summary>
+        /// Gets or sets locale such as EN, FR, ES.
+        /// </summary>
+        [DataMember(Name = "locale", EmitDefaultValue = true)]
+        public Locales Locale { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether enable access code recipients.
@@ -137,6 +153,19 @@ namespace BoldSign.Api.Model
         public ImposeAuthentication ImposeAuthentication { get; set; }
 
         /// <summary>
+        /// Gets or Sets a delivery mode.
+        /// </summary>
+        /// <value>Gets or sets the delivery mode.</value>
+        [DataMember(Name = "deliveryMode", EmitDefaultValue = true)]
+        public DeliveryMode DeliveryMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// </summary>
+        [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
+        public bool AllowFieldConfiguration { get; set; }
+
+        /// <summary>
         /// Gets or sets document Form fields such as Sign, Checkbox, Radio buttons etc.
         /// </summary>
         [DataMember(Name = "formFields", EmitDefaultValue = true)]
@@ -153,6 +182,13 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "allowRoleDelete", EmitDefaultValue = true)]
         public bool AllowRoleDelete { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the Recipient Notification Settings.
+        /// </summary>
+        /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
+        [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
+        public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

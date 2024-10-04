@@ -4,6 +4,7 @@
 
 namespace BoldSign.Api.Model.Webhook.Template
 {
+    using System.Runtime.Serialization;
     using BoldSign.Model;
     using Newtonsoft.Json;
 
@@ -83,5 +84,18 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("hostUserId")]
         public string HostUserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a impose authentication type.
+        /// </summary>
+        [DataMember(Name = "imposeAuthentication", EmitDefaultValue = true)]
+        [JsonProperty("imposeAuthentication")]
+        public string ImposeAuthentication { get; set; } = "None";
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// </summary>
+        [JsonProperty("allowFieldConfiguration")]
+        public bool AllowFieldConfiguration { get; set; }
     }
 }

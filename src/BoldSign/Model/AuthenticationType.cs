@@ -15,6 +15,12 @@ namespace BoldSign.Model
     public enum AuthenticationType
     {
         /// <summary>
+        /// Represents None.
+        /// </summary>
+        [EnumMember(Value = "None")]
+        None = 0,
+
+        /// <summary>
         /// Represents EmailOTP only.
         /// </summary>
         [EnumMember(Value = "EmailOTP")]
@@ -25,5 +31,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "AccessCode")]
         AccessCode = 2,
+
+        /// <summary>
+        /// Represents SmsOTP only.
+        /// </summary>
+        [EnumMember(Value = "SMSOTP")]
+        SMSOTP = 3,
     }
 }

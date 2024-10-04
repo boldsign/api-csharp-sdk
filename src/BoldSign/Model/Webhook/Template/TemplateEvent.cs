@@ -5,6 +5,7 @@
 namespace BoldSign.Api.Model.Webhook.Template
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using BoldSign.Model;
     using BoldSign.Model.Webhook;
@@ -71,6 +72,18 @@ namespace BoldSign.Api.Model.Webhook.Template
         public DocumentStatus Status { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to allow new files while using this template to send a document.
+        /// </summary>
+        [JsonProperty("allowNewFiles")]
+        public bool? AllowNewFiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow senders to replace or delete files.
+        /// </summary>
+        [JsonProperty("allowModifyFiles")]
+        public bool? AllowModifyFiles { get; set; }
+
+        /// <summary>
         /// Gets or sets the signerDetails.
         /// </summary>
         [JsonProperty("signerDetails")]
@@ -107,5 +120,29 @@ namespace BoldSign.Api.Model.Webhook.Template
         [JsonProperty("isTemplate")]
         [DefaultValue(false)]
         public bool IsTemplate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected brand.
+        /// </summary>
+        [JsonProperty("brandId")]
+        public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [JsonProperty("onBehalfOf")]
+        public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document labels.
+        /// </summary>
+        [JsonProperty("labels")]
+        public IEnumerable<string> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the template labels.
+        /// </summary>
+        [JsonProperty("templateLabels")]
+        public IEnumerable<string> TemplateLabels { get; set; }
     }
 }

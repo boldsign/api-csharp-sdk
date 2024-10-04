@@ -78,6 +78,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;AllowFieldConfiguration&apos; property is unsupported for the Reviewer role..
+        /// </summary>
+        internal static string AllowConfigureFieldsError {
+            get {
+                return ResourceManager.GetString("AllowConfigureFieldsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Attachment Information is required..
         /// </summary>
         internal static string AttachmentInformationRequired {
@@ -141,6 +150,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;brandId&apos; when calling BrandingApi-&amp;gt;GetBrand.
+        /// </summary>
+        internal static string BrandIdGet {
+            get {
+                return ResourceManager.GetString("BrandIdGet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing required parameter &apos;brandId&apos; when calling BrandingApi-&amp;gt;ResetDefaultBrand.
         /// </summary>
         internal static string BrandIdResetDefault {
@@ -164,6 +182,24 @@ namespace BoldSign.Api.Resources {
         internal static string BrandNameRequired {
             get {
                 return ResourceManager.GetString("BrandNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;contactId&apos; when calling ContactingApi-&gt;DeleteContact.
+        /// </summary>
+        internal static string ContactIdDelete {
+            get {
+                return ResourceManager.GetString("ContactIdDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;id&apos; when calling ContactingApi-&gt;UpdateContact.
+        /// </summary>
+        internal static string ContactIdMissing {
+            get {
+                return ResourceManager.GetString("ContactIdMissing", resourceCulture);
             }
         }
         
@@ -200,6 +236,15 @@ namespace BoldSign.Api.Resources {
         internal static string DocumentIdRequiredAPI {
             get {
                 return ResourceManager.GetString("DocumentIdRequiredAPI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The document info locale does not match the signer’s locale {0}..
+        /// </summary>
+        internal static string DocumentInfoLocaleMissing {
+            get {
+                return ResourceManager.GetString("DocumentInfoLocaleMissing", resourceCulture);
             }
         }
         
@@ -285,6 +330,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} cannot be null or empty..
+        /// </summary>
+        internal static string EmptyFields {
+            get {
+                return ResourceManager.GetString("EmptyFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Label cannot be null or empty.
         /// </summary>
         internal static string EmptyLabels {
@@ -299,6 +353,15 @@ namespace BoldSign.Api.Resources {
         internal static string EnterValidURL {
             get {
                 return ResourceManager.GetString("EnterValidURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multicast delegate for ExceptionFactory is unsupported.
+        /// </summary>
+        internal static string ExceptionFactoryUnsupported {
+            get {
+                return ResourceManager.GetString("ExceptionFactoryUnsupported", resourceCulture);
             }
         }
         
@@ -339,11 +402,56 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only one document info is allowed per signer locale..
+        /// </summary>
+        internal static string ExtraLocaleValues {
+            get {
+                return ResourceManager.GetString("ExtraLocaleValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field description is required.
+        /// </summary>
+        internal static string FieldDescriptionRequired {
+            get {
+                return ResourceManager.GetString("FieldDescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field id is required.
+        /// </summary>
+        internal static string FieldIdRequired {
+            get {
+                return ResourceManager.GetString("FieldIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field name is required.
+        /// </summary>
+        internal static string FieldNameRequired {
+            get {
+                return ResourceManager.GetString("FieldNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to fieldType is a required property for FormField and cannot be null.
         /// </summary>
         internal static string FieldTypeRequired {
             get {
                 return ResourceManager.GetString("FieldTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;files&apos; when calling DocumentApi-&gt;SendDocument.
+        /// </summary>
+        internal static string FilesIsSet {
+            get {
+                return ResourceManager.GetString("FilesIsSet", resourceCulture);
             }
         }
         
@@ -429,6 +537,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The IImageFile parameter must be an instance of ImageFileStream, ImageFileBytes, or ImageFilePath..
+        /// </summary>
+        internal static string InvalidBrandFileInstance {
+            get {
+                return ResourceManager.GetString("InvalidBrandFileInstance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provide a valid brand ID.
         /// </summary>
         internal static string InvalidBrandId {
@@ -501,6 +618,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The document info locale {0} does not match the one used in roles..
+        /// </summary>
+        internal static string InvalidLocale {
+            get {
+                return ResourceManager.GetString("InvalidLocale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Signer order should be between 1 and 50..
         /// </summary>
         internal static string InvalidSignerOrder {
@@ -551,6 +677,15 @@ namespace BoldSign.Api.Resources {
         internal static string MaxLabelsCount {
             get {
                 return ResourceManager.GetString("MaxLabelsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A document or template can only contain a maximum of 50 labels.
+        /// </summary>
+        internal static string MaxTemplateOrDocumentLabelsCount {
+            get {
+                return ResourceManager.GetString("MaxTemplateOrDocumentLabelsCount", resourceCulture);
             }
         }
         
@@ -663,6 +798,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Either name or redirectUrl is required to update sender identity..
+        /// </summary>
+        internal static string RequiredNameOrRedirectUrl {
+            get {
+                return ResourceManager.GetString("RequiredNameOrRedirectUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reviewer should not have any form fields..
         /// </summary>
         internal static string ReviewerFields {
@@ -744,6 +888,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom field creation should only be allowed when built-in form fields are enabled. If not, shared custom fields can be enabled..
+        /// </summary>
+        internal static string StandardFieldVisibilityErr {
+            get {
+                return ResourceManager.GetString("StandardFieldVisibilityErr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing required parameter &apos;teamId&apos; when calling TeamApi-&amp;gt;GetTeamDetails.
         /// </summary>
         internal static string TeamIdIsSet {
@@ -807,6 +960,15 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Template ID is required or not in GUID type.
+        /// </summary>
+        internal static string TemplateIdRequired {
+            get {
+                return ResourceManager.GetString("TemplateIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template title is required for create template..
         /// </summary>
         internal static string TemplateTitleRequired {
@@ -848,6 +1010,33 @@ namespace BoldSign.Api.Resources {
         internal static string TitleOrDocumentInfoIsRequired {
             get {
                 return ResourceManager.GetString("TitleOrDocumentInfoIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported file. Supported file formats are PNG, JPEG, JPG and SVG..
+        /// </summary>
+        internal static string UnsupportedBrandLogoType {
+            get {
+                return ResourceManager.GetString("UnsupportedBrandLogoType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported file(s). Supported file formats are PDF, Word, PNG, JPEG, JPG and XLSX.
+        /// </summary>
+        internal static string UnsupportedFileType {
+            get {
+                return ResourceManager.GetString("UnsupportedFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported Media Type.
+        /// </summary>
+        internal static string UnsupportedMediaType {
+            get {
+                return ResourceManager.GetString("UnsupportedMediaType", resourceCulture);
             }
         }
         

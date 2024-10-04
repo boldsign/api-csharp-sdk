@@ -106,6 +106,13 @@ namespace BoldSign.Model
         public bool DisableEmails { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to enable SMS notification.
+        /// When DisableSMS is enabled, Reminder is automatically ignored.
+        /// </summary>
+        [JsonProperty("disableSMS")]
+        public bool DisableSMS { get; set; }
+
+        /// <summary>
         /// Gets or sets the brand id.
         /// </summary>
         [JsonProperty("brandId")]
@@ -173,5 +180,18 @@ namespace BoldSign.Model
         ///  Gets or sets a value indicating whether to AutoDetect Fields for the document signer.
         /// </summary>
         public bool AutoDetectFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value to customize how the documents are downloaded.
+        /// </summary>
+        [JsonProperty("documentDownloadOption")]
+        public DocumentDownloadOption? DocumentDownloadOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Recipient Notification Settings.
+        /// </summary>
+        [JsonProperty("recipientNotificationSettings")]
+        [Display(Description = "Recipient Notification Settings of the document.")]
+        public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
     }
 }
