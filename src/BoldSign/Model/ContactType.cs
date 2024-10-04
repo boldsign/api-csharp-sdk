@@ -1,4 +1,4 @@
-// <copyright file="CompletedEmailType.cs" company="Syncfusion Inc">
+﻿// <copyright file="ContactType.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -19,20 +19,21 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Represents completed email type.
+    ///     Defines DocumentList as Sent, Received and Both.
     /// </summary>
-    /// <value>Represents the completed email type.</value>
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum CompletedEmailType
+    public enum ContactType
     {
         /// <summary>
-        /// Attachment with link type.
+        ///     Enum for AllContacts
         /// </summary>
-        AttachmentsWithLink = 1,
+        [EnumMember(Value = "MyContacts")]
+        MyContacts,
 
         /// <summary>
-        /// Document link in email type.
+        ///     Enum for AllContacts
         /// </summary>
-        LinkOnly = 2,
+        [EnumMember(Value = "AllContacts")]
+        AllContacts,
     }
 }

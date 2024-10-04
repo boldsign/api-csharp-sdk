@@ -40,6 +40,8 @@ namespace BoldSign.Model
         /// <param name="brandId">Gets or sets the brand id..</param>
         /// <param name="allowMessageEditing">Gets or sets the allowMessageEditing..</param>>
         /// <param name="allowNewRoles">Gets or sets the allowNewRoles..</param>
+        /// <param name="allowNewFiles">Gets or sets the allowNewFiles..</param>
+        /// <param name="allowModifyFiles">Gets or sets the allowModifyFiles..</param>
         /// <param name="enableReassign">Gets or sets a value indicating whether to Enable Reassign.By Default True..</param>
         /// <param name="enablePrintAndSign">Gets or sets a value indicating whether to Enable Print And Sign.</param>
         /// <param name="enableSigningOrder">Gets or sets a value indicating whether to enable signing order..</param>
@@ -47,6 +49,10 @@ namespace BoldSign.Model
         /// <param name="createdBy">createdBy.</param>
         /// <param name="sharedTemplateDetail">sharedTemplateDetail..</param>
         /// <param name="documentInfo">Gets or sets the documentInfo..</param>>
+        /// <param name="documentDownloadOption">Gets or sets the documentDownloadOption.</param>
+        /// <param name="labels">Gets or sets the documentLabels.</param>
+        /// <param name="templateLabels">Gets or sets the templateLabels.</param>
+        /// <param name="behalfOf">Gets or sets the behalf of details..</param>
         public TemplateProperties(
             string templateId = default(string),
             string title = default(string),
@@ -60,13 +66,19 @@ namespace BoldSign.Model
             string brandId = default(string),
             bool allowMessageEditing = default(bool),
             bool allowNewRoles = default(bool),
+            bool allowNewFiles = default(bool),
+            bool allowModifyFiles = default(bool),
             bool enableReassign = default(bool),
             bool enablePrintAndSign = default(bool),
             bool enableSigningOrder = default(bool),
             long? createdDate = default(long?),
             TemplateSenderDetail createdBy = default(TemplateSenderDetail),
             List<SharedTemplateDetail> sharedTemplateDetail = default(List<SharedTemplateDetail>),
-            IEnumerable<DocumentInfo> documentInfo = default(IEnumerable<DocumentInfo>))
+            IEnumerable<DocumentInfo> documentInfo = default(IEnumerable<DocumentInfo>),
+            DocumentDownloadOption documentDownloadOption = default(DocumentDownloadOption),
+            List<string> labels = default(List<string>),
+            List<string> templateLabels = default(List<string>),
+            BehalfOf behalfOf = default(BehalfOf))
         {
             this.TemplateId = templateId;
             this.MessageTitle = title;
@@ -80,6 +92,8 @@ namespace BoldSign.Model
             this.BrandId = brandId;
             this.AllowMessageEditing = allowMessageEditing;
             this.AllowNewRoles = allowNewRoles;
+            this.AllowNewFiles = allowNewFiles;
+            this.AllowModifyFiles = allowModifyFiles;
             this.EnableReassign = enableReassign;
             this.EnablePrintAndSign = enablePrintAndSign;
             this.EnableSigningOrder = enableSigningOrder;
@@ -87,6 +101,10 @@ namespace BoldSign.Model
             this.CreatedBy = createdBy;
             this.SharedTemplateDetail = sharedTemplateDetail;
             this.DocumentInfo = documentInfo;
+            this.DocumentDownloadOption = documentDownloadOption;
+            this.Labels = labels;
+            this.TemplateLabels = templateLabels;
+            this.BehalfOf = behalfOf;
         }
 
         /// <summary>
@@ -171,6 +189,20 @@ namespace BoldSign.Model
         public bool? AllowNewRoles { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether allow new files is enabled.
+        /// </summary>
+        /// <value>Gets or sets a value of indicating whether to enable allow new files.</value>
+        [DataMember(Name = "allowNewFiles", EmitDefaultValue = false)]
+        public bool? AllowNewFiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether allow modify files is enabled.
+        /// </summary>
+        /// <value>Gets or sets a value of indicating whether to enable modify files.</value>
+        [DataMember(Name = "allowModifyFiles", EmitDefaultValue = false)]
+        public bool? AllowModifyFiles { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether reassign is enabled.
         /// </summary>
         /// <value>Gets or sets a value of indicating whether to enable reassign mode.By Default True.</value>
@@ -217,6 +249,40 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("documentInfo")]
         public IEnumerable<DocumentInfo> DocumentInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable individual document downloads.
+        /// </summary>
+        [DataMember(Name = "documentDownloadOption", EmitDefaultValue = true)]
+        public DocumentDownloadOption DocumentDownloadOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Tag's Name.
+        /// </summary>
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
+        [JsonProperty("labels")]
+        public List<string> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Tag's Name.
+        /// </summary>
+        [DataMember(Name = "templateLabels", EmitDefaultValue = false)]
+        [JsonProperty("templateLabels")]
+        public List<string> TemplateLabels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the behalf of details.
+        /// </summary>
+        /// <value>Gets the value of behalf of details.</value>
+        [DataMember(Name = "behalfOf", EmitDefaultValue = false)]
+        public BehalfOf BehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Recipient Notification Settings.
+        /// </summary>
+        /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
+        [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
+        public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object.

@@ -10,6 +10,7 @@
 
 namespace BoldSign.Model
 {
+    using BoldSign.Api.Model;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -46,6 +47,7 @@ namespace BoldSign.Model
         /// <param name="enableSigningOrder">Gets or sets the enableSigningOrder.</param>
         /// <param name="documentInfo">Gets or sets the documentInfo.</param>
         /// <param name="roleRemovalIndices">Gets or sets the role removal indices.</param>
+        /// <param name="documentDownloadOption">Gets or sets the document download option.</param>
         public SendForSignFromTemplate(
             string templateId = default,
             string title = default,
@@ -59,14 +61,15 @@ namespace BoldSign.Model
             IEnumerable<DocumentCC> cc = default,
             int expiryDays = default,
             long expiryValue = 60,
-            ExpiryDateType expiryDateType = default(ExpiryDateType),
-            bool disableExpiryAlert = default,
+            ExpiryDateType? expiryDateType = default,
+            bool? disableExpiryAlert = default,
             bool enablePrintAndSign = default,
-            bool enableReassign = true,
+            bool? enableReassign = default,
             bool? enableSigningOrder = default,
             IEnumerable<DocumentInfo> documentInfo = default,
             string onBehalfOf = default,
-            int[] roleRemovalIndices = default)
+            int[] roleRemovalIndices = default,
+            DocumentDownloadOption? documentDownloadOption = default)
         {
             this.TemplateId = templateId;
             this.Title = title;
@@ -92,6 +95,7 @@ namespace BoldSign.Model
             this.DocumentInfo = documentInfo;
             this.OnBehalfOf = onBehalfOf;
             this.RoleRemovalIndices = roleRemovalIndices;
+            this.DocumentDownloadOption = documentDownloadOption;
         }
 
         /// <summary>
@@ -141,6 +145,12 @@ namespace BoldSign.Model
         public bool DisableEmails { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to enable SMS notification.When disable sms is set to true, all the status sms and completed document sms will be stopped, and reminder is also automatically ignored.
+        /// </summary>
+        [DataMember(Name ="disableSMS", EmitDefaultValue = true)]
+        public bool DisableSMS { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether to remove the document ID watermark from all the PDF pages of the document.
         /// Default is false.
         /// </summary>
@@ -163,7 +173,7 @@ namespace BoldSign.Model
         /// Gets or sets the expiry date type.
         /// </summary>
         [DataMember(Name = "expiryDateType", EmitDefaultValue = false)]
-        public ExpiryDateType ExpiryDateType { get; set; }
+        public ExpiryDateType? ExpiryDateType { get; set; }
 
         /// <summary>
         ///  Gets or sets number of days after which the document will expire.
@@ -184,7 +194,7 @@ namespace BoldSign.Model
         ///  If the document expires in one day, the email will be sent before 2 hours of the expiry.
         /// </summary>
         [DataMember(Name = "disableExpiryAlert", EmitDefaultValue = true)]
-        public bool DisableExpiryAlert { get; set; }
+        public bool? DisableExpiryAlert { get; set; }
 
         /// <summary>
         ///  Gets or sets a value indicating whether to enable print and sign mode.
@@ -197,7 +207,7 @@ namespace BoldSign.Model
         ///  By Default True.
         /// </summary>
         [DataMember(Name = "enableReassign", EmitDefaultValue = true)]
-        public bool EnableReassign { get; set; } = true;
+        public bool? EnableReassign { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether to enable signing order for the document signer.
@@ -222,6 +232,25 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "roleRemovalIndices", EmitDefaultValue = false)]
         public int[] RoleRemovalIndices { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value to customize how the documents are downloaded.
+        /// </summary>
+        [DataMember(Name = "documentDownloadOption", EmitDefaultValue = true)]
+        public DocumentDownloadOption? DocumentDownloadOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Recipient Notification Settings.
+        /// </summary>
+        [JsonProperty("recipientNotificationSettings")]
+        [Display(Description = "Recipient Notification Settings of the Template.")]
+        public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets remove form fields id.
+        /// </summary>
+        [DataMember(Name = "removeFormFields", EmitDefaultValue = false)]
+        public List<string> RemoveFormFields { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

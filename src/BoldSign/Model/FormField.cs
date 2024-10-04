@@ -114,7 +114,8 @@ namespace BoldSign.Model
         /// <param name="conditionalRules">Gets or sets the conditionalRules.</param>
         /// <param name="textAlign">Gets or sets the textAlign.</param>
         /// <param name="textDirection">Gets or sets the direction of the text.</param>
-        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default, string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default, TextAlign textAlign = Api.Model.TextAlign.Left, TextDirection textDirection = TextDirection.LTR)
+        /// <param name="characterSpacing">Gets or sets the space of the character.</param>
+        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default, string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default, TextAlign textAlign = Api.Model.TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default)
         {
             // to ensure "fieldType" is required (not null)
             if (type == null)
@@ -156,6 +157,7 @@ namespace BoldSign.Model
             this.ConditionalRules = conditionalRules;
             this.TextAlign = textAlign;
             this.TextDirection = textDirection;
+            this.CharacterSpacing = characterSpacing;
             if (type == FieldType.Attachment && attachmentInfo == null)
             {
                 throw new InvalidDataException(ApiValidationMessages.AttachmentInformationRequired);
@@ -368,11 +370,34 @@ namespace BoldSign.Model
         /// <value>Gets or sets the direction of the text.</value>
         [DataMember(Name = "textDirection", EmitDefaultValue = true)]
         public TextDirection TextDirection { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the space of the character.
+        /// </summary>
+        /// <value>Gets or sets the characterSpacing.</value>
+        [DataMember(Name = "characterSpacing", EmitDefaultValue = true)]
+        public float CharacterSpacing { get; set; }
+
         /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson() => JsonConvert.SerializeObject(this, Formatting.Indented);
+
+        /// <summary>
+        /// Gets or sets the background hex color.
+        /// The BackgroundHexColor property allows you to set the background color of a label field using hexadecimal color codes ("#FF5733"). The default color is transparent or no background color.
+        /// Default value is null.
+        /// </summary>
+        /// <value>Gets or sets the Backgroundcolor Value.</value>
+        [DataMember(Name = "backgroundHexColor", EmitDefaultValue = true)]
+        public string BackgroundHexColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Tab Index.
+        /// </summary>
+        [DataMember(Name = "tabIndex", EmitDefaultValue = false)]
+        [Range(-1, int.MaxValue, ErrorMessage = "The minimum value must be -1 or higher")]
+        public int? TabIndex { get; set; }
     }
 }

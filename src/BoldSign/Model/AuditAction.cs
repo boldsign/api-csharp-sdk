@@ -241,5 +241,143 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "AutoReminderOFF")]
         AutoReminderOFF = 37,
+
+        /// <summary>
+        /// Resume document signing  by user.
+        /// </summary>
+        [EnumMember(Value = "ResumeDocumentSigning")]
+        ResumeDocumentSigning = 38,
+
+        /// <summary>
+        /// Email otp authentication added.
+        /// </summary>
+        [EnumMember(Value = "EmailOTPAuthenticationAdded")]
+        EmailOTPAuthenticationAdded = 39,
+
+        /// <summary>
+        /// Email otp authentication removed.
+        /// </summary>
+        [EnumMember(Value = "EmailOTPAuthenticationRemoved")]
+        EmailOTPAuthenticationRemoved = 40,
+
+        /// <summary>
+        /// Email otp verified.
+        /// </summary>
+        [EnumMember(Value = "EmailOTPVerified")]
+        EmailOTPVerified = 41,
+
+        /// <summary>
+        /// Email otp authentication failed.
+        /// </summary>
+        [EnumMember(Value = "EmailOTPAuthenticationFailed")]
+        EmailOTPAuthenticationFailed = 42,
+
+        /// <summary>
+        /// Email otp resend.
+        /// </summary>
+        [EnumMember(Value = "EmailOTPResend")]
+        EmailOTPResend = 43,
+
+        /// <summary>
+        /// Unlock Email OTP by user.
+        /// </summary>
+        [EnumMember(Value = "UnlockEmailOTP")]
+        UnlockEmailOTP = 44,
+
+        /// <summary>
+        /// Email authentication added.
+        /// </summary>
+        [EnumMember(Value = "EmailAuthenticationAdded")]
+        EmailAuthenticationAdded = 45,
+
+        /// <summary>
+        /// Email authentication removed.
+        /// </summary>
+        [EnumMember(Value = "EmailAuthenticationRemoved")]
+        EmailAuthenticationRemoved = 46,
+
+        /// <summary>
+        /// Email otp verify.
+        /// </summary>
+        [EnumMember(Value = "EmailOtpVerify")]
+        EmailOtpVerify = 47,
+
+        /// <summary>
+        /// Email authentication failed.
+        /// </summary>
+        [EnumMember(Value = "EmailAuthenticationFailed")]
+        EmailAuthenticationFailed = 48,
+
+        /// <summary>
+        /// SMS OTP.
+        /// </summary>
+        [EnumMember(Value = "SMSOTP")]
+        SMSOTP = 49,
+
+        /// <summary>
+        /// Phone number changes.
+        /// </summary>
+        [EnumMember(Value = "PhoneNumberChanged")]
+        PhoneNumberChanged = 50,
+
+        /// <summary>
+        ///  Unlocked sms otp.
+        /// </summary>
+        [EnumMember(Value = "UnlockedSMSOTP")]
+        UnlockedSMSOTP = 51,
+
+        /// <summary>
+        /// Sms authentication added.
+        /// </summary>
+        [EnumMember(Value = "SMSAuthenticationAdded")]
+        SMSAuthenticationAdded = 52,
+
+        /// <summary>
+        /// Sms authentication removed.
+        /// </summary>
+        [EnumMember(Value = "SMSAuthenticationRemoved")]
+        SMSAuthenticationRemoved = 53,
+
+        /// <summary>
+        /// Sms otp verify.
+        /// </summary>
+        [EnumMember(Value = "SMSOTPVerified")]
+        SMSOTPVerified = 54,
+
+        /// <summary>
+        /// Sms authentication failed.
+        /// </summary>
+        [EnumMember(Value = "SMSAuthenticationFailed")]
+        SMSAuthenticationFailed = 55,
+
+        /// <summary>
+        /// SMS otp resend.
+        /// </summary>
+        [EnumMember(Value = "SMSOTPResend")]
+        SMSOTPResend = 56,
+
+        /// <summary>
+        /// Generated Signing Link.
+        /// </summary>
+        [EnumMember(Value = "GeneratedSigningLink")]
+        GeneratedSigningLink = 57,
+
+        /// <summary>
+        /// Document Editing Initiated.
+        /// </summary>
+        [EnumMember(Value = "EditingInitiated")]
+        EditingInitiated = 58,
+
+        /// <summary>
+        /// Document Editing Cancelled.
+        /// </summary>
+        [EnumMember(Value = "EditingCancelled")]
+        EditingCancelled = 59,
+
+        /// <summary>
+        /// Document Editing Completed.
+        /// </summary>
+        [EnumMember(Value = "EditingCompleted")]
+        EditingCompleted = 60,
     }
 }

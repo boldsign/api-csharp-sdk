@@ -28,7 +28,7 @@ namespace BoldSign.Api.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="TemplateFormField"/> class.
         /// </summary>
-        /// <param name="type">fieldType.</param>
+        /// <param name="fieldType">fieldType.</param>
         /// <param name="pageNumber">Gets or sets the page number. (required).</param>
         /// <param name="bounds">bounds (required).</param>
         /// <param name="isRequired">Gets or sets a value indicating whether is required..</param>
@@ -57,9 +57,14 @@ namespace BoldSign.Api.Model
         /// <param name="conditionalRules">Gets or sets the conditionalRules.</param>
         /// <param name="textAlign">Gets or sets the textAlign.</param>
         /// <param name="textDirection">Gets or sets the direction of the text.</param>
-        public TemplateFormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string groupName = default, List<string> dropdownOptions = default(List<string>), string placeholder = default(string), string dateFormat = default, BoldSign.Model.ValidationType validationType = default(BoldSign.Model.ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default(List<ConditionalRule>), TextAlign textAlign = TextAlign.Left, TextDirection textDirection = TextDirection.LTR)
+        /// <param name="characterSpacing">Gets or sets the space of the character.</param>
+        /// <param name="type">Gets or sets the fieldType.</param>
+        /// <param name="hyperlinkText">Gets or sets the hyperlinkText.</param>
+        /// <param name="label">Gets or sets the label value.</param>
+        /// <param name="timeFormat">Gets or sets the timeFormat.</param>
+        public TemplateFormField(FieldType fieldType = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string groupName = default, List<string> dropdownOptions = default(List<string>), string placeholder = default(string), string dateFormat = default, BoldSign.Model.ValidationType validationType = default(BoldSign.Model.ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default(List<ConditionalRule>), TextAlign textAlign = TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default, string type = default, string hyperlinkText = default, string label = default, string timeFormat = default)
         {
-            this.mType = type;
+            this.mType = fieldType;
             this.PageNumber = pageNumber;
             this.Bounds = bounds;
             this.Value = value;
@@ -88,6 +93,11 @@ namespace BoldSign.Api.Model
             this.ConditionalRules = conditionalRules;
             this.TextAlign = textAlign;
             this.TextDirection = textDirection;
+            this.CharacterSpacing = characterSpacing;
+            this.FieldType = type;
+            this.HyperlinkText = hyperlinkText;
+            this.Label = label;
+            this.TimeFormat = timeFormat;
         }
 
         /// <summary>
@@ -236,6 +246,17 @@ namespace BoldSign.Api.Model
         public string DateFormat { get; set; }
 
         /// <summary>
+        /// Gets or sets the TimeFormat and it's only applicable for DateSigned field.
+        /// Please use the pre-defined TimeFormat.
+        /// <Example>Supported formats:
+        /// hh:mm tt, h:mm tt, HH:mm, H:mm.
+        /// </Example>
+        /// <value>The default value is time format specified in the business profile.</value>
+        /// </summary>
+        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
+        public string TimeFormat { get; set; }
+
+        /// <summary>
         /// Gets or Sets Placeholder value.
         /// </summary>
         [DataMember(Name = "placeholder", EmitDefaultValue = false)]
@@ -251,6 +272,7 @@ namespace BoldSign.Api.Model
         ///     Gets or sets the form field type.
         /// </summary>
         [DataMember(Name = "fieldType", EmitDefaultValue = true)]
+        [Obsolete("Type is deprecated, please use FieldType instead.")]
         public virtual FieldType Type
         {
             get { return this.mType; }
@@ -262,6 +284,12 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "groupName", EmitDefaultValue = true)]
         public string GroupName { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the Label for radio button fields.
+        /// </summary>
+        [DataMember(Name = "label", EmitDefaultValue = true)]
+        public string Label { get; set; }
 
         /// <summary>
         /// Gets or sets the data sync tag value and it's only applicable for textbox, image, dropdown, checkbox fields, it won't affect the other fields.
@@ -294,6 +322,42 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "textDirection", EmitDefaultValue = true)]
         public TextDirection TextDirection { get; set; }
+
+        /// <summary>
+        /// Gets or sets the character spacing.
+        /// </summary>
+        /// <value>Gets the value of character spacing.</value>
+        [DataMember(Name = "characterSpacing", EmitDefaultValue = true)]
+        public float CharacterSpacing { get; set; }
+
+        /// <summary>
+        /// Gets or sets the field type.
+        /// </summary>
+        /// <value>Gets the value of field type.</value>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public string FieldType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the hyperlink text.
+        /// </summary>
+        /// <value>Gets the value of hyperlink text.</value>
+        [DataMember(Name = "hyperlinkText", EmitDefaultValue = true)]
+        public string HyperlinkText { get; set; }
+
+        /// <summary>
+        /// Gets or sets the background hex color.
+        /// The BackgroundHexColor property allows you to set the background color of a label field using hexadecimal color codes ("#FF5733"). The default color is transparent or no background color.
+        /// Default value is null.
+        /// </summary>
+        /// <value>Gets the value of backgroundColor.</value>
+        [DataMember(Name = "backgroundHexColor", EmitDefaultValue = false)]
+        public string BackgroundHexColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the tab index position .
+        /// </summary>
+        [DataMember(Name = "tabIndex", EmitDefaultValue = true)]
+        public int TabIndex { get; set; }
 
     }
 }

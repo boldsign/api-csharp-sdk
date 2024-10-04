@@ -28,10 +28,12 @@ namespace BoldSign.Model
         /// </summary>
         /// <param name="message">Gets or sets reminder message..</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
-        public ReminderMessage(string message = default, string onBehalfOf = default)
+        /// <param name="reminderPhoneNumbers">The reminder phone number.</param>
+        public ReminderMessage(string message = default, string onBehalfOf = default, List<PhoneNumber> reminderPhoneNumbers = default)
         {
             this.Message = message;
             this.OnBehalfOf = onBehalfOf;
+            this.ReminderPhoneNumbers = reminderPhoneNumbers;
         }
 
         /// <summary>
@@ -46,6 +48,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "onBehalfOf", EmitDefaultValue = true)]
         public string OnBehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [DataMember(Name = "reminderPhoneNumbers", EmitDefaultValue = true)]
+        public List<PhoneNumber> ReminderPhoneNumbers { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

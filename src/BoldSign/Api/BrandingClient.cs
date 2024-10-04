@@ -17,10 +17,10 @@ namespace BoldSign.Api
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
-    using RestSharp;
 
     /// <summary>
     ///    Represents a collection of functions to interact with the API endpoints. The functions perform actions such as creating brand, deleting brand, listing the brand and so on.
@@ -108,7 +108,7 @@ namespace BoldSign.Api
         /// </summary>
         /// <value>The base path.</value>
         /// <returns>GetBasePath.</returns>
-        public string GetBasePath() => this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+        public string GetBasePath() => this.Configuration.ApiClient.HttpClient.BaseAddress.AbsoluteUri;
 
         /// <summary>
         ///     Delete the branding when a particular brand’s ID is given as input.
@@ -135,13 +135,11 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/brand/delete";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -184,7 +182,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -197,7 +195,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -227,13 +225,11 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/brand/delete";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -276,7 +272,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -289,7 +285,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -318,13 +314,11 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/brand/resetdefault";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -367,7 +361,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -380,7 +374,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -410,13 +404,11 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/brand/resetdefault";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -459,7 +451,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -472,7 +464,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -504,13 +496,12 @@ namespace BoldSign.Api
             ValidateBrandSettings(createBrandData);
 
             var localVarPath = "/v1/brand/create";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
+            KeyValuePair<string, IImageFile> localVarSingleFileParams;
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -539,18 +530,32 @@ namespace BoldSign.Api
             }
 
             localVarFormParams.Add(nameof(createBrandData.BrandName), createBrandData.BrandName);
-            localVarSingleFileParams.Add("BrandLogo", createBrandData.BrandLogo);
+            localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(createBrandData.BrandLogo), createBrandData.BrandLogo);
             localVarFormParams.Add(nameof(createBrandData.BackgroundColor), createBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonColor), createBrandData.ButtonColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonTextColor), createBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(createBrandData.CanHideTagLine), createBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.CombineAuditTrail), createBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.ExcludeAuditTrailFromEmail), createBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.IsDefault), createBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.RedirectUrl), createBrandData.RedirectUrl);
             localVarFormParams.Add(nameof(createBrandData.EmailDisplayName), createBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerDescription), createBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(createBrandData.DocumentTimeZone), createBrandData.DocumentTimeZone);
+            localVarFormParams.Add(nameof(createBrandData.AllowCustomFieldCreation), createBrandData.AllowCustomFieldCreation ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.ShowBuiltInFormFields), createBrandData.ShowBuiltInFormFields ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.ShowSharedCustomFields), createBrandData.ShowSharedCustomFields ? "true" : "false");
+
+            if (createBrandData.HideDecline != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideDecline), createBrandData.HideDecline.Value ? "true" : "false");
+            }
+
+            if (createBrandData.HideSave != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideSave), createBrandData.HideSave.Value ? "true" : "false");
+            }
 
             if (createBrandData.EmailSignedDocument != 0)
             {
@@ -558,7 +563,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -571,7 +576,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<BrandingData>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BrandingData)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandingData)));
         }
 
@@ -603,13 +608,12 @@ namespace BoldSign.Api
             ValidateBrandSettings(createBrandData);
 
             var localVarPath = "/v1/brand/create";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
+            KeyValuePair<string, IImageFile> localVarSingleFileParams;
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -638,18 +642,32 @@ namespace BoldSign.Api
             }
 
             localVarFormParams.Add(nameof(createBrandData.BrandName), createBrandData.BrandName);
-            localVarSingleFileParams.Add("BrandLogo", createBrandData.BrandLogo);
+            localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(createBrandData.BrandLogo), createBrandData.BrandLogo);
             localVarFormParams.Add(nameof(createBrandData.BackgroundColor), createBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonColor), createBrandData.ButtonColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonTextColor), createBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(createBrandData.CanHideTagLine), createBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.CombineAuditTrail), createBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.ExcludeAuditTrailFromEmail), createBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.IsDefault), createBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.RedirectUrl), createBrandData.RedirectUrl);
             localVarFormParams.Add(nameof(createBrandData.EmailDisplayName), createBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerDescription), createBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(createBrandData.DisclaimerTitle), createBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(createBrandData.DocumentTimeZone), createBrandData.DocumentTimeZone);
+            localVarFormParams.Add(nameof(createBrandData.AllowCustomFieldCreation), createBrandData.AllowCustomFieldCreation ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.ShowBuiltInFormFields), createBrandData.ShowBuiltInFormFields ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.ShowSharedCustomFields), createBrandData.ShowSharedCustomFields ? "true" : "false");
+
+            if (createBrandData.HideDecline != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideDecline), createBrandData.HideDecline.Value ? "true" : "false");
+            }
+
+            if (createBrandData.HideSave != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideSave), createBrandData.HideSave.Value ? "true" : "false");
+            }
 
             if (createBrandData.EmailSignedDocument != 0)
             {
@@ -657,7 +675,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
             var exception = this.ExceptionFactory?.Invoke("CreateBrand", localVarResponse);
@@ -669,7 +687,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<BrandingData>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BrandingData)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandingData)));
         }
 
@@ -700,16 +718,15 @@ namespace BoldSign.Api
                 throw new ArgumentNullException(nameof(editBrandData));
             }
 
-            ValidateBrandSettings(editBrandData);
+            ValidateEditBrandSettings(editBrandData);
 
             var localVarPath = "/v1/brand/edit";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
+            KeyValuePair<string, IImageFile> localVarSingleFileParams = default;
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -739,18 +756,35 @@ namespace BoldSign.Api
 
             localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "brandId", brandId)); // query parameter
             localVarFormParams.Add(nameof(editBrandData.BrandName), editBrandData.BrandName);
-            localVarSingleFileParams.Add("BrandLogo", editBrandData.BrandLogo);
+            if (editBrandData.BrandLogo != null)
+            {
+                localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(editBrandData.BrandLogo), editBrandData.BrandLogo);
+            }
             localVarFormParams.Add(nameof(editBrandData.BackgroundColor), editBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonColor), editBrandData.ButtonColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonTextColor), editBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(editBrandData.CanHideTagLine), editBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.CombineAuditTrail), editBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.ExcludeAuditTrailFromEmail), editBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.IsDefault), editBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.RedirectUrl), editBrandData.RedirectUrl);
             localVarFormParams.Add(nameof(editBrandData.EmailDisplayName), editBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerDescription), editBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(editBrandData.DocumentTimeZone), editBrandData.DocumentTimeZone);
+            localVarFormParams.Add(nameof(editBrandData.AllowCustomFieldCreation), editBrandData.AllowCustomFieldCreation ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.ShowBuiltInFormFields), editBrandData.ShowBuiltInFormFields ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.ShowSharedCustomFields), editBrandData.ShowSharedCustomFields ? "true" : "false");
+
+            if (editBrandData.HideDecline != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideDecline), editBrandData.HideDecline.Value ? "true" : "false");
+            }
+
+            if (editBrandData.HideSave != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideSave), editBrandData.HideSave.Value ? "true" : "false");
+            }
 
             if (editBrandData.EmailSignedDocument != 0)
             {
@@ -758,7 +792,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -771,7 +805,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<BrandingData>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BrandingData)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandingData)));
         }
 
@@ -802,16 +836,15 @@ namespace BoldSign.Api
                 throw new ArgumentNullException(nameof(editBrandData));
             }
 
-            ValidateBrandSettings(editBrandData);
+            ValidateEditBrandSettings(editBrandData);
 
             var localVarPath = "/v1/brand/edit";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
+            KeyValuePair<string, IImageFile> localVarSingleFileParams = default;
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -841,18 +874,35 @@ namespace BoldSign.Api
 
             localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "brandId", brandId)); // query parameter
             localVarFormParams.Add(nameof(editBrandData.BrandName), editBrandData.BrandName);
-            localVarSingleFileParams.Add("BrandLogo", editBrandData.BrandLogo);
+            if (editBrandData.BrandLogo != null)
+            {
+                localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(editBrandData.BrandLogo), editBrandData.BrandLogo);
+            }
             localVarFormParams.Add(nameof(editBrandData.BackgroundColor), editBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonColor), editBrandData.ButtonColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonTextColor), editBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(editBrandData.CanHideTagLine), editBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.CombineAuditTrail), editBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.ExcludeAuditTrailFromEmail), editBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.IsDefault), editBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.RedirectUrl), editBrandData.RedirectUrl);
             localVarFormParams.Add(nameof(editBrandData.EmailDisplayName), editBrandData.EmailDisplayName);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerDescription), editBrandData.DisclaimerDescription);
             localVarFormParams.Add(nameof(editBrandData.DisclaimerTitle), editBrandData.DisclaimerTitle);
             localVarFormParams.Add(nameof(editBrandData.DocumentTimeZone), editBrandData.DocumentTimeZone);
+            localVarFormParams.Add(nameof(editBrandData.AllowCustomFieldCreation), editBrandData.AllowCustomFieldCreation ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.ShowBuiltInFormFields), editBrandData.ShowBuiltInFormFields ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.ShowSharedCustomFields), editBrandData.ShowSharedCustomFields ? "true" : "false");
+
+            if (editBrandData.HideDecline != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideDecline), editBrandData.HideDecline.Value ? "true" : "false");
+            }
+
+            if (editBrandData.HideSave != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideSave), editBrandData.HideSave.Value ? "true" : "false");
+            }
 
             if (editBrandData.EmailSignedDocument != 0)
             {
@@ -860,7 +910,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
             var exception = this.ExceptionFactory?.Invoke("EditBrand", localVarResponse);
@@ -872,7 +922,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<BrandingData>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BrandingData)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandingData)));
         }
 
@@ -896,13 +946,11 @@ namespace BoldSign.Api
         public ApiResponse<BrandingRecords> ListBrandWithHttpInfo()
         {
             var localVarPath = "/v1/brand/list";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -931,7 +979,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -944,7 +992,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<BrandingRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BrandingRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandingRecords)));
         }
 
@@ -968,13 +1016,11 @@ namespace BoldSign.Api
         public async Task<ApiResponse<BrandingRecords>> ListBrandAsyncWithHttpInfo()
         {
             var localVarPath = "/v1/brand/list";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarSingleFileParams = new Dictionary<string, IDocumentFile>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1003,7 +1049,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams, localVarSingleFileParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
             var exception = this.ExceptionFactory?.Invoke("ListBrand", localVarResponse);
@@ -1015,8 +1061,163 @@ namespace BoldSign.Api
 
             return new ApiResponse<BrandingRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BrandingRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandingRecords)));
+        }
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="brandId">Brand Id.</param>
+        /// <returns>BrandDetails.</returns>
+        public BrandDetails GetBrandDetails(string brandId)
+        {
+            var localVarResponse = this.GetBrandDetailsWithHttpInfo(brandId);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="brandId">Brand Id.</param>
+        /// <returns>ApiResponse of BrandDetails.</returns>
+        public ApiResponse<BrandDetails> GetBrandDetailsWithHttpInfo(string brandId)
+        {
+            // verify the required parameter 'brandId' is set
+            if (brandId == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.BrandIdGet);
+            }
+
+            var localVarPath = "/v1/brand/get";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "brandId", brandId)); // query parameter
+
+            // authentication (Bearer) required
+            string apiKey = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            if (!string.IsNullOrEmpty(apiKey))
+            {
+                localVarHeaderParams["Authorization"] = apiKey;
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("GetBrand", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<BrandDetails>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (BrandDetails)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandDetails)));
+        }
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="brandId">Brand Id.</param>
+        /// <returns>Task of BrandDetails.</returns>
+        public async Task<BrandDetails> GetBrandDetailsAsync(string brandId)
+        {
+            var localVarResponse = await this.GetBrandDetailsAsyncWithHttpInfo(brandId).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get the brand.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="brandId">Brand Id.</param>
+        /// <returns>Task of ApiResponse (BrandDetails).</returns>
+        public async Task<ApiResponse<BrandDetails>> GetBrandDetailsAsyncWithHttpInfo(string brandId)
+        {
+            // verify the required parameter 'brandId' is set
+            if (brandId == null)
+            {
+                throw new ApiException(400, ApiValidationMessages.BrandIdGet);
+            }
+
+            var localVarPath = "/v1/brand/get";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "brandId", brandId)); // query parameter
+
+            // authentication (Bearer) required
+            string apiKey = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            if (!string.IsNullOrEmpty(apiKey))
+            {
+                localVarHeaderParams["Authorization"] = apiKey;
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("GetBrand", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<BrandDetails>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (BrandDetails)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandDetails)));
         }
 
         private static void ValidateBrandSettings(BrandSettings brandSettings)
@@ -1029,6 +1230,19 @@ namespace BoldSign.Api
             if (brandSettings.BrandLogo == null)
             {
                 throw new ApiException(422, ApiValidationMessages.BrandLogoRequired);
+            }
+
+            if (!brandSettings.ShowBuiltInFormFields && brandSettings.AllowCustomFieldCreation)
+            {
+                throw new ApiException(422, ApiValidationMessages.StandardFieldVisibilityErr);
+            }
+        }
+
+        private static void ValidateEditBrandSettings(BrandSettings brandSettings)
+        {
+            if (!brandSettings.ShowBuiltInFormFields && brandSettings.AllowCustomFieldCreation)
+            {
+                throw new ApiException(422, ApiValidationMessages.StandardFieldVisibilityErr);
             }
         }
     }

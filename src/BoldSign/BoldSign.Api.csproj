@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-        <FileVersion>4.9.5</FileVersion>
-        <ProductVersion>4.9.5</ProductVersion>
-        <Copyright>Copyright 2001-2023 Syncfusion Inc</Copyright>
+        <FileVersion>6.0.7</FileVersion>
+        <ProductVersion>6.0.7</ProductVersion>
+        <Copyright>Copyright 2001-2024 Syncfusion Inc</Copyright>
         <AssemblyName>BoldSign.Api</AssemblyName>
         <RootNamespace>BoldSign.Api</RootNamespace>
         <LangVersion>latest</LangVersion>
@@ -12,12 +12,20 @@
         <DocumentationFile>BoldSign.Api.xml</DocumentationFile>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="JsonSubTypes" Version="1.2.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-        <PackageReference Include="RestSharp" Version="106.15.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
         <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+        <Reference Include="System.Net.Http" />
     </ItemGroup>
 
     <ItemGroup>

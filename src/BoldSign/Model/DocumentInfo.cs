@@ -14,6 +14,7 @@
 
 namespace BoldSign.Model
 {
+    using System;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
@@ -26,10 +27,11 @@ namespace BoldSign.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="DocumentInfo" /> class.
         /// </summary>
-        /// <param name="language">Gets or sets the language. (required).</param>
+        /// <param name="language">Gets or sets the language.</param>
         /// <param name="title">Gets or sets the title.</param>
         /// <param name="description">Gets or sets the descriptiondescription.</param>
-        public DocumentInfo(Languages language = Languages.English, string title = default, string description = default)
+        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: DocumentInfo(string documentTitle, string documentDescription = default)")]
+        public DocumentInfo(Languages language = Languages.None, string title = default, string description = default)
         {
             this.Language = language;
             this.Title = title;
@@ -37,10 +39,38 @@ namespace BoldSign.Model
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="DocumentInfo" /> class.
+        /// </summary>
+        /// <param name="documentTitle">Gets or sets the documentTitle.(required).</param>
+        /// <param name="documentDescription">Gets or sets the documentDescription.</param>
+        /// <param name="locale">Gets or sets the locale.</param>
+        public DocumentInfo(string documentTitle, string documentDescription = default, Locales locale = Locales.EN)
+        {
+            this.Title = documentTitle;
+            this.Description = documentDescription;
+            this.Locale = locale;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DocumentInfo" /> class.
+        /// </summary>
+        public DocumentInfo()
+        {
+
+        }
+
+        /// <summary>
         ///  Gets or sets the language of the document.
         /// </summary>
         [DataMember(Name = "language", EmitDefaultValue = true)]
+        [Obsolete("Language is deprecated, please use Locale instead.")]
         public Languages Language { get; set; }
+
+        /// <summary>
+        /// Gets or sets locale such as EN, FR, ES.
+        /// </summary>
+        [DataMember(Name = "locale", EmitDefaultValue = true)]
+        public Locales Locale { get; set; }
 
         /// <summary>
         ///     Gets or sets the title.

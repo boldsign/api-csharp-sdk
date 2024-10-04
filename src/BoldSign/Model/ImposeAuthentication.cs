@@ -34,5 +34,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [EnumMember(Value = "AccessCode")]
         AccessCode = 3,
+
+        /// <summary>
+        /// Represents SMSOTP only.
+        /// </summary>
+        [EnumMember(Value = "SMSOTP")]
+        SMSOTP = 4,
     }
 }

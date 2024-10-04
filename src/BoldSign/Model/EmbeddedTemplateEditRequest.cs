@@ -84,6 +84,12 @@ namespace BoldSign.Api.Model
         public bool ShowTooltip { get; set; }
 
         /// <summary>
+        /// Gets or sets the on behalf of email.
+        /// </summary>
+        [JsonProperty("onBehalfOf")]
+        public string OnBehalfOf { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

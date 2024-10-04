@@ -1,5 +1,7 @@
 namespace BoldSign.Api
 {
+    using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
     using BoldSign.Model;
@@ -19,8 +21,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns></returns>
-        void DeleteTemplate(string templateId);
+        void DeleteTemplate(string templateId, string onBehalfOf = default);
 
         /// <summary>
         ///     Deletes a template with the given template ID.
@@ -29,8 +32,23 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> DeleteTemplateWithHttpInfo(string templateId);
+        ApiResponse<object> DeleteTemplateWithHttpInfo(string templateId, string onBehalfOf = default);
+
+        /// <summary>
+        /// Edit and update a template.
+        /// </summary>
+        /// <param name="editTemplate">The edit template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        void EditTemplate(EditTemplateRequest editTemplate);
+
+        /// <summary>
+        /// Edit and update a template.
+        /// </summary>
+        /// <param name="editTemplate">The edit template request.</param>
+        /// <returns>A Task.</returns>
+        ApiResponse<object> EditTemplateWithHttpInfo(EditTemplateRequest editTemplate);
 
         /// <summary>
         ///     List all the templates created.
@@ -41,8 +59,14 @@ namespace BoldSign.Api
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
+        /// <param name="createdBy">Gets or sets the created by.</param>
+        /// <param name="templateLabels">Gets or sets the template labels.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>TemplateRecords</returns>
-        TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
+        TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
 
         /// <summary>
         ///     List all the templates created.
@@ -53,8 +77,14 @@ namespace BoldSign.Api
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
+        /// <param name="createdBy">Gets or sets the created by.</param>
+        /// <param name="templateLabels">Gets or sets the template labels.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>ApiResponse of TemplateRecords</returns>
-        ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
+        ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
 
         /// <summary>
         ///     Send a document for signature using a Template.
@@ -81,16 +111,18 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>System.IO.Stream.</returns>
-        Stream DownloadTemplate(string templateId);
+        Stream DownloadTemplate(string templateId, string onBehalfOf = default);
 
         /// <summary>
         ///    Download the template for given template ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>ApiResponse of System.IO.Stream.</returns>
-        ApiResponse<Stream> DownloadTemplateWithHttpInfo(string templateId);
+        ApiResponse<Stream> DownloadTemplateWithHttpInfo(string templateId, string onBehalfOf = default);
 
          /// <summary>
         /// Creates a template.
@@ -199,8 +231,9 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>Task of void</returns>
-        Task DeleteTemplateAsync(string templateId);
+        Task DeleteTemplateAsync(string templateId, string onBehalfOf = default);
 
         /// <summary>
         ///     Deletes a template with the given template ID.
@@ -209,8 +242,24 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId">The template id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> DeleteTemplateAsyncWithHttpInfo(string templateId);
+        Task<ApiResponse<object>> DeleteTemplateAsyncWithHttpInfo(string templateId, string onBehalfOf = default);
+
+        /// <summary>
+        /// Edit and update a template.
+        /// </summary>
+        /// <param name="editTemplate">The edit template request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>A Task.</returns>
+        Task EditTemplateAsync(EditTemplateRequest editTemplate);
+
+        /// <summary>
+        /// Edit and update a template.
+        /// </summary>
+        /// <param name="editTemplate">The edit template request.</param>
+        /// <returns>A Task.</returns>
+        Task<ApiResponse<object>> EditTemplateWithHttpInfoAsync(EditTemplateRequest editTemplate);
 
         /// <summary>
         ///     List all the templates created.
@@ -221,8 +270,14 @@ namespace BoldSign.Api
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
+        /// <param name="createdBy">Gets or sets the created by.</param>
+        /// <param name="templateLabels">Gets or sets the template labels.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of TemplateRecords</returns>
-        Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
+        Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
 
         /// <summary>
         ///    List all the templates created.
@@ -233,8 +288,14 @@ namespace BoldSign.Api
         /// <param name="page">Gets or sets the page.</param>
         /// <param name="pageSize">Gets or sets the page size. (optional, default to 10)</param>
         /// <param name="templateType">Gets or sets the templateType. (optional, default to all).</param>
+        /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
+        /// <param name="createdBy">Gets or sets the created by.</param>
+        /// <param name="templateLabels">Gets or sets the template labels.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of ApiResponse (TemplateRecords)</returns>
-        Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default);
+        Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
 
         /// <summary>
         ///     Send a document for signature using a Template.
@@ -293,16 +354,18 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>Task of System.IO.Stream.</returns>
-        Task<Stream> DownloadTemplateAsync(string templateId);
+        Task<Stream> DownloadTemplateAsync(string templateId, string onBehalfOf = default);
 
         /// <summary>
         ///     Download the template for given template ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream).</returns>
-        Task<ApiResponse<Stream>> DownloadTemplateAsyncWithHttpInfo(string templateId);
+        Task<ApiResponse<Stream>> DownloadTemplateAsyncWithHttpInfo(string templateId, string onBehalfOf = default);
 
         /// <summary>
         ///     Get summary of the template for the given template ID.

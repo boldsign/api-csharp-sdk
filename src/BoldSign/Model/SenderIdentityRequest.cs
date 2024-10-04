@@ -4,6 +4,7 @@
 
 namespace BoldSign.Model
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
@@ -20,11 +21,15 @@ namespace BoldSign.Model
         /// <param name="name">Gets or sets name.</param>
         /// <param name="email">Gets or sets email.</param>
         /// <param name="notificationSettings">Gets or sets notification settings.</param>
-        public SenderIdentityRequest(string name, string email, NotificationSettings notificationSettings)
+        /// <param name="brandId">Gets or sets brand Id.</param>
+        /// <param name="redirectUrl">Gets or sets redirect url.</param>
+        public SenderIdentityRequest(string name, string email, NotificationSettings notificationSettings, string brandId = null, Uri redirectUrl = null)
         {
             this.Name = name;
             this.Email = email;
             this.NotificationSettings = notificationSettings;
+            this.BrandId = brandId;
+            this.RedirectUrl = redirectUrl;
         }
 
         /// <summary>
@@ -46,6 +51,18 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "notificationSettings")]
         public NotificationSettings NotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the brand Id.
+        /// </summary>
+        [DataMember(Name = "brandId", EmitDefaultValue = true)]
+        public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the redirect URL.
+        /// </summary>
+        [DataMember(Name = "redirectUrl", EmitDefaultValue = true)]
+        public Uri RedirectUrl { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object.

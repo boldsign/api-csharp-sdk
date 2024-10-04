@@ -20,6 +20,7 @@
             var userExamples = new UserExamples(new UserClient(apiClient));
             var brandingExamples = new BrandingExamples(new BrandingClient(apiClient));
             var senderIdentityExamples = new SenderIdentityExamples(new SenderIdentityClient(apiClient));
+            var customFieldExamples = new CustomFieldExamples(new CustomFieldClient(apiClient));
             await documentExamples.CreateDocument().ConfigureAwait(false);
 
             // webhook event helpers

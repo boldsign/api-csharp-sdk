@@ -6,6 +6,7 @@ namespace BoldSign.Api
     using System.Globalization;
     using System.Linq;
     using BoldSign.Api.Model;
+    using BoldSign.Api.Resources;
     using BoldSign.Model;
 
     internal static class FromRequestHelper
@@ -51,6 +52,11 @@ namespace BoldSign.Api
                 var i = -1;
                 foreach (var tag in signRequestDetails.Labels)
                 {
+                    if (string.IsNullOrEmpty(tag))
+                    {
+                        throw new ApiException(400, ApiValidationMessages.EmptyLabels);
+                    }
+
                     localVarFormParams.Add($"{nameof(signRequestDetails.Labels)}[{++i}]", tag?.ToString());
                 }
             }
@@ -70,6 +76,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add($"{nameof(signRequestDetails.ReminderSettings)}.{nameof(signRequestDetails.ReminderSettings.EnableAutoReminder)}", signRequestDetails.ReminderSettings.EnableAutoReminder.ToString());
                 localVarFormParams.Add($"{nameof(signRequestDetails.ReminderSettings)}.{nameof(signRequestDetails.ReminderSettings.ReminderDays)}", signRequestDetails.ReminderSettings.ReminderDays.ToString());
                 localVarFormParams.Add($"{nameof(signRequestDetails.ReminderSettings)}.{nameof(signRequestDetails.ReminderSettings.ReminderCount)}", signRequestDetails.ReminderSettings.ReminderCount.ToString());
+            }
+
+            if (signRequestDetails.RecipientNotificationSettings != null)
+            {
+                InitializeRecipientNotificationSettings(localVarFormParams, signRequestDetails.RecipientNotificationSettings);
             }
 
             if (signRequestDetails is IEmbeddedRequest embeddedRequest)
@@ -104,6 +115,8 @@ namespace BoldSign.Api
                 signRequestDetails.DisableEmails || signRequestDetails.EnableEmbeddedSigning ? "true" : "false");
 #pragma warning restore CS0618 // Type or member is obsolete
 
+            localVarFormParams.Add(nameof(signRequestDetails.DisableSMS), signRequestDetails.DisableSMS ? "true" : "false");
+
             if (signRequestDetails.HideDocumentId != null)
             {
                 localVarFormParams.Add(nameof(signRequestDetails.HideDocumentId), signRequestDetails.HideDocumentId == true ? "true" : "false");
@@ -112,9 +125,13 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(signRequestDetails.EnablePrintAndSign), signRequestDetails.EnablePrintAndSign ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.EnableReassign), signRequestDetails.EnableReassign ? "true" : "false");
 
+            if (signRequestDetails.DocumentDownloadOption != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.DocumentDownloadOption), signRequestDetails.DocumentDownloadOption.ToString());
+            }
+
             return localVarFormParams;
         }
-
         /// <summary>
         /// Represents a ConvertToFormRequest.
         /// </summary>
@@ -168,6 +185,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.TextTagDefinitions.ToList(), nameof(templateRequest.TextTagDefinitions));
             }
 
+            if (templateRequest.RecipientNotificationSettings != null)
+            {
+                InitializeRecipientNotificationSettings(localVarFormParams, templateRequest.RecipientNotificationSettings);
+            }
+
             if (templateRequest is CreateEmbeddedTemplateRequest embeddedRequest)
             {
                 if (embeddedRequest.RedirectUrl != null)
@@ -202,8 +224,26 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(templateRequest.EnablePrintAndSign), templateRequest.EnablePrintAndSign ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.EnableReassign), templateRequest.EnableReassign ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.AllowNewRoles), templateRequest.AllowNewRoles ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.AllowNewFiles), templateRequest.AllowNewFiles ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.AllowModifyFiles), templateRequest.AllowModifyFiles ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.AllowMessageEditing), templateRequest.AllowMessageEditing ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.UseTextTags), templateRequest.UseTextTags ? "true" : "false");
+            localVarFormParams.Add(nameof(templateRequest.AutoDetectFields), templateRequest.AutoDetectFields ? "true" : "false");
+
+            if (!string.IsNullOrEmpty(templateRequest.OnBehalfOf))
+            {
+                localVarFormParams.Add(nameof(templateRequest.OnBehalfOf), templateRequest.OnBehalfOf);
+            }
+
+            if (templateRequest.Labels != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.Labels.ToList(), nameof(templateRequest.Labels));
+            }
+
+            if (templateRequest.TemplateLabels != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.TemplateLabels.ToList(), nameof(templateRequest.TemplateLabels));
+            }
 
             return localVarFormParams;
         }
@@ -223,6 +263,38 @@ namespace BoldSign.Api
             }
 
             return localVarFileUrlParams;
+        }
+
+        /// <summary>
+        /// Initialize Recipient Notification Settings.
+        /// </summary>
+        /// <param name="localVarFormParams">localVarFormParams.</param>
+        /// <param name="recipientNotificationSettings">recipientNotificationSettings.</param>
+        private static void InitializeRecipientNotificationSettings(Dictionary<string, string> localVarFormParams, RecipientNotificationSettings recipientNotificationSettings)
+        {
+            const string baseKey = "RecipientNotificationSettings";
+
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.SignatureRequest)}", recipientNotificationSettings.SignatureRequest ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Declined)}", recipientNotificationSettings.Declined ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Revoked)}", recipientNotificationSettings.Revoked ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Signed)}", recipientNotificationSettings.Signed ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Completed)}", recipientNotificationSettings.Completed ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Expired)}", recipientNotificationSettings.Expired ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Reassigned)}", recipientNotificationSettings.Reassigned ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Deleted)}", recipientNotificationSettings.Deleted ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Reminders)}", recipientNotificationSettings.Reminders ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditRecipient)}", recipientNotificationSettings.EditRecipient ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditDocument)}", recipientNotificationSettings.EditDocument ? "true" : "false");
+        }
+
+        private static Dictionary<string, string> ToFormParameter(Dictionary<string, string> localVarFormParams, List<string> array, string parameterName)
+        {
+            for (int i = 0; i < array.Count; i++)
+            {
+                localVarFormParams.Add($"{parameterName}[{i}]", array[i]);
+            }
+
+            return localVarFormParams;
         }
 
         private static Dictionary<string, string> ToFormParameter(Dictionary<string, string> localVarFormParams, object property, string parameterName)
@@ -259,7 +331,7 @@ namespace BoldSign.Api
 
                 if (prop.Name == "AcceptedFileTypes" && value is List<string>)
                 {
-                    List<string> acceptedFileTypes = (List<string>)value;
+                    var acceptedFileTypes = (List<string>)value;
 
                     var i = -1;
                     foreach (var acceptedFileType in acceptedFileTypes)
@@ -270,7 +342,7 @@ namespace BoldSign.Api
 
                 if (prop.Name == "DropdownOptions" && value is List<string>)
                 {
-                    List<string> dropdownOptions = (List<string>)value;
+                    var dropdownOptions = (List<string>)value;
 
                     var i = -1;
                     foreach (var dropdownOption in dropdownOptions)
@@ -279,18 +351,18 @@ namespace BoldSign.Api
                     }
                 }
 
+                var propertyType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+
                 if (value is Enum)
                 {
-                    var enumType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
-
-                    var enumValues = Enum.GetValues(enumType);
+                    var enumValues = Enum.GetValues(propertyType);
 
                     if (enumValues.Cast<object>().Any(enumValue => Convert.ToInt32(value).ToString() == Convert.ToInt32(enumValue).ToString()))
                     {
                         localVarFormParams.Add(name, value.ToString());
                     }
                 }
-                else if (value is string || prop.PropertyType.IsPrimitive)
+                else if (value is string || propertyType.IsPrimitive)
                 {
                     localVarFormParams.Add(name, value.ToString());
                 }
@@ -302,7 +374,7 @@ namespace BoldSign.Api
                 {
                     ToFormParameter(localVarFormParams, value, name);
                 }
-                else if (prop.PropertyType.IsClass)
+                else if (propertyType.IsClass)
                 {
                     ToFormParameter(localVarFormParams, value, name);
                 }

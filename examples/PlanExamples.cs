@@ -9,7 +9,6 @@
     using BoldSign.Api;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
-    using RestSharp;
 
     /// <summary>
     ///     The plan examples.

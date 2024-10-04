@@ -1,9 +1,11 @@
+
 namespace BoldSign.Api
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
+    using BoldSign.Api.Model;
     using BoldSign.Model;
 
     /// <summary>
@@ -24,7 +26,9 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new  email address of recipient.</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
-        void ChangeRecipient(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The Old Signer Phone Number.</param>
+        void ChangeRecipient(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
 
         /// <summary>
         /// Change recipient details of a document.
@@ -37,8 +41,11 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new email address of recipient.</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
-        ApiResponse<object> ChangeRecipientWithHttpInfo(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
+        /// <param name="oldPhoneNumber">The Old Signer phone number.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        ApiResponse<object> ChangeRecipientWithHttpInfo(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
 
         /// <summary>
         ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -54,8 +61,9 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        void ChangeAccessCode(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default);
+        void ChangeAccessCode(string documentId, string emailId = default, string newAccessCode = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default);
 
         /// <summary>
         ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -71,8 +79,175 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> ChangeAccessCodeWithHttpInfo(string documentId, string emailId, string newAccessCode, int? zOrder = default, string onBehalfOf = default);
+        ApiResponse<object> ChangeAccessCodeWithHttpInfo(string documentId, string emailId = default, string newAccessCode = default, int? zOrder = default, string onBehalfOf = default,  PhoneNumber phoneNumber = default);
+
+        /// <summary>
+        /// Add tag.
+        /// </summary>
+        /// <param name="addTags">Add Tags.</param>
+        /// <returns></returns>
+        void AddTag(DocumentTags addTags);
+
+        /// <summary>
+        /// Add tag with Http info.
+        /// </summary>
+        /// <param name="addTags">ets or sets the add tags.</param>
+        /// <returns></returns>
+        ApiResponse<object> AddTagWithHttpInfo(DocumentTags addTags);
+
+        /// <summary>
+        /// Pre fill  form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        void PrefillFields(PrefillFieldRequest request);
+
+        /// <summary>
+        ///     Pre fill form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        ApiResponse<object> PrefillFieldsWithHttpInfo(PrefillFieldRequest request);
+
+        /// <summary>
+        /// Add tag async.
+        /// </summary>
+        /// <param name="addTags">Gets or sets the add tags.</param>
+        /// <returns></returns>
+        Task AddTagAsync(DocumentTags addTags);
+
+        /// <summary>
+        /// Add tag async with Http info.
+        /// </summary>
+        /// <param name="addTags">Gets or sets the add tags.</param>
+        /// <returns></returns>
+        Task<ApiResponse<object>> AddTagAsyncWithHttpInfo(DocumentTags addTags);
+
+        /// <summary>
+        ///     Pre fill  form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        Task PrefillFieldsAsync(PrefillFieldRequest request);
+
+        /// <summary>
+        ///     Pre fill form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        Task<ApiResponse<object>> PrefillFieldsAsyncWithHttpInfo(PrefillFieldRequest request);
+
+        /// <summary>
+        /// Delete tag.
+        /// </summary>
+        /// <param name="deleteTags">Gets or sets the delete tags.</param>
+        void DeleteTag(DocumentTags deleteTags);
+
+        /// <summary>
+        /// Delete with Http info.
+        /// </summary>
+        /// <param name="deleteTags">Gets or sets the delete tags.</param>
+        /// <returns></returns>
+        ApiResponse<object> DeleteTagWithHttpInfo(DocumentTags deleteTags);
+
+        /// <summary>
+        /// Delete tag async.
+        /// </summary>
+        /// <param name="deleteTags">Gets or sets the delete tags.</param>
+        /// <returns></returns>
+        Task DeleteTagAsync(DocumentTags deleteTags);
+
+        /// <summary>
+        /// Delete tag async with Http info.
+        /// </summary>
+        /// <param name="deleteTags">Gets or sets the delete tags.</param>
+        /// <returns></returns>
+        Task<ApiResponse<object>> DeleteTagAsyncWithHttpInfo(DocumentTags deleteTags);
+
+        /// <summary>
+        /// List team documents.
+        /// </summary>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="status">Gets or sets the status.</param>
+        /// <param name="teamId">Gets or sets the team id.</param>
+        /// <param name="userId">Gets or sets the user id.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="searchKey">Gets or sets the search key.</param>
+        /// <param name="labels">Gets or sets the labels.</param>
+        /// <param name="transmitType">Gets or sets the transmit type.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <returns></returns>
+        TeamDocumentRecords ListTeamDocuments(int page = 1, int? pageSize = default, DateTime? startDate = default,
+            List<Status> status = default, List<string> teamId = default, List<string> userId = default,
+            DateTime? endDate = default, string searchKey = default, List<string> labels = default,
+            TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+
+        /// <summary>
+        /// List team documents with Http info.
+        /// </summary>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="status">Gets or sets the status.</param>
+        /// <param name="teamId">Gets or sets the team id.</param>
+        /// <param name="userId">Gets or sets the user id.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="searchKey">Gets or sets the search key.</param>
+        /// <param name="labels">Gets or sets the labels.</param>
+        /// <param name="transmitType">Gets or sets the transmit type.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <returns></returns>
+        ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page = 1, int? pageSize = default,
+            DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
+            List<string> userId = default, DateTime? endDate = default, string searchKey = default,
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+
+        /// <summary>
+        /// List team documents async.
+        /// </summary>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="status">Gets or sets the status.</param>
+        /// <param name="teamId">Gets or sets the team id.</param>
+        /// <param name="userId">Gets or sets the user id.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="searchKey">Gets or sets the search key.</param>
+        /// <param name="labels">Gets or sets the labels.</param>
+        /// <param name="transmitType">Gets or sets the transmit type.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <returns></returns>
+        Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page = 1, int? pageSize = default,
+            DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
+            List<string> userId = default, DateTime? endDate = default, string searchKey = default,
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+
+        /// <summary>
+        /// List team documents async with Http info.
+        /// </summary>
+        /// <param name="page">Gets or sets the page.</param>
+        /// <param name="pageSize">Gets or sets the page size.</param>
+        /// <param name="startDate">Gets or sets the start date.</param>
+        /// <param name="status">Gets or sets the status.</param>
+        /// <param name="teamId">Gets or sets the team id.</param>
+        /// <param name="userId">Gets or sets the user id.</param>
+        /// <param name="endDate">Gets or sets the end date.</param>
+        /// <param name="searchKey">Gets or sets the search key.</param>
+        /// <param name="labels">Gets or sets the labels.</param>
+        /// <param name="transmitType">Gets or sets the transmit type.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <returns></returns>
+        Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default,
+            DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
+            List<string> userId = default, DateTime? endDate = default, string searchKey = default,
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+
+
+
 
         /// <summary>
         ///     Delete the document when a particular document’s ID is given as input.
@@ -85,7 +260,7 @@ namespace BoldSign.Api
         /// if true, the document will be deleted permanently.
         /// if false, the document will be moved to the trash.
         /// </param>
-        /// <returns></returns>
+        /// <param name="deletePermanently">Gets or sets the delete permanently.</param>
         void DeleteDocument(string documentId, bool deletePermanently = false);
 
         /// <summary>
@@ -173,11 +348,13 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email.  (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>EmbeddedSigningLink</returns>
-        EmbeddedSigningLink GetEmbeddedSignLink(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
+        EmbeddedSigningLink GetEmbeddedSignLink(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default);
 
         /// <summary>
         ///    Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
@@ -186,11 +363,13 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>ApiResponse of EmbeddedSigningLink</returns>
-        ApiResponse<EmbeddedSigningLink> GetEmbeddedSignLinkWithHttpInfo(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
+        ApiResponse<EmbeddedSigningLink> GetEmbeddedSignLinkWithHttpInfo(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default);
 
         /// <summary>
         ///     Get summary of the document for the given document ID.
@@ -226,8 +405,10 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>DocumentRecords</returns>
-        DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
+        DocumentRecords ListDocuments(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
 
         /// <summary>
         ///    List all user documents which can be filtered by date, time, sender, status, and so on.
@@ -243,8 +424,10 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
+        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
 
         /// <summary>
         ///     List of behalf documents which can be filtered by status, page size and so on.
@@ -260,9 +443,11 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
         /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
         /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the behalf documents.</param>
         /// <returns>BehalfDocumentRecords.</returns>
         BehalfDocumentRecords ListBehalfDocuments(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -271,7 +456,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default);
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default);
         /// <summary>
         ///     List of behalf documents which can be filtered by status, page size and so on.
         /// </summary>
@@ -286,9 +473,11 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
         /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
         /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the behalf documents.</param>
         /// <returns>ApiResponse of BehalfDocumentRecords.</returns>
         ApiResponse<BehalfDocumentRecords> ListBehalfDocumentsWithHttpInfo(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -297,7 +486,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default);
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default);
 
         /// <summary>
         ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
@@ -380,8 +571,11 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new email address  of recipient .</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
-        Task ChangeRecipientasync(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
+        /// <param name="oldPhoneNumber">The Old Signer Phone number.</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
+        Task ChangeRecipientasync(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
 
         /// <summary>
         /// Change recipient details of a document.
@@ -394,8 +588,11 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new email address of recipient .</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
-        Task<ApiResponse<object>> ChangeRecipientasyncWithHttpInfo(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder = null, string onBehalfOf = null);
+        /// <param name="oldPhoneNumber">The Old Signer Phone number.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        Task<ApiResponse<object>> ChangeRecipientasyncWithHttpInfo(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
 
         /// <summary>
         ///      Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -411,8 +608,9 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>Task of void</returns>
-        Task ChangeAccessCodeAsync(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default);
+        Task ChangeAccessCodeAsync(string documentId, string emailId = default, string newAccessCode = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default);
 
         /// <summary>
         ///     Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -428,8 +626,9 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> ChangeAccessCodeAsyncWithHttpInfo(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default);
+        Task<ApiResponse<object>> ChangeAccessCodeAsyncWithHttpInfo(string documentId, string emailId = default, string newAccessCode = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default);
 
         /// <summary>
         ///     Delete the document.
@@ -530,11 +729,13 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>Task of EmbeddedSigningLink</returns>
-        Task<EmbeddedSigningLink> GetEmbeddedSignLinkAsync(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
+        Task<EmbeddedSigningLink> GetEmbeddedSignLinkAsync(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default);
 
         /// <summary>
         ///     Get sign link in a mail for Embedded Sign to given Email ID. The link has expiry time. This method can also be used to send a redirect URL.
@@ -543,11 +744,13 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>Task of ApiResponse (EmbeddedSigningLink)</returns>
-        Task<ApiResponse<EmbeddedSigningLink>> GetEmbeddedSignLinkAsyncWithHttpInfo(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default);
+        Task<ApiResponse<EmbeddedSigningLink>> GetEmbeddedSignLinkAsyncWithHttpInfo(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default);
 
         /// <summary>
         ///     Get summary of the document for the given document ID.
@@ -583,8 +786,10 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of DocumentRecords</returns>
-        Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
+        Task<DocumentRecords> ListDocumentsAsync(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
 
         /// <summary>
         ///    List all user documents which can be filtered by date, time, sender, status, and so on.
@@ -600,8 +805,10 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of ApiResponse (DocumentRecords)</returns>
-        Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default);
+        Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
 
         /// <summary>
         ///     List of behalf documents which can be filtered by status, page size and so on.
@@ -617,9 +824,11 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
         /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
         /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the behalf documents.</param>
         /// <returns>Task of BehalfDocumentRecords.</returns>
         Task<BehalfDocumentRecords> ListBehalfDocumentsAsync(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -628,7 +837,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default);
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default);
 
         /// <summary>
         ///    List of behalf documents which can be filtered by status, page size and so on.
@@ -644,9 +855,11 @@ namespace BoldSign.Api
         /// <param name="endDate">Gets or sets the endDate used to filter the documents returned in the API. The API will return documents that were created on or before this date. (optional).</param>
         /// <param name="signers">Gets or sets the list of signer email addresses used to filter the documents returned in the API. The API will return documents where the signer's email address matches one of the email addresses provided in this list. (optional).</param>
         /// <param name="labels">Gets or sets the list of labels or tags used to filter the documents returned in the API. The API will return documents that have been tagged with one or more of the labels provided in this list. (optional).</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">The list of brand IDs to filter associated with the behalf documents.</param>
         /// <returns>Task of ApiResponse (BehalfDocumentRecords).</returns>
         Task<ApiResponse<BehalfDocumentRecords>> ListBehalfDocumentsAsyncWithHttpInfo(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -655,7 +868,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default);
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default);
 
         /// <summary>
         ///    Send a reminder message to pending signers for a particular document to their respective email IDs.
@@ -691,13 +906,15 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         void AddAuthentication(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default);
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -709,14 +926,16 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default);
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -728,14 +947,16 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>AddAuthentication.</returns>
         Task AddAuthenticationAsync(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default);
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -747,14 +968,16 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default);
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default);
 
         /// <summary>
         ///     Revoke the document with the given document ID.
@@ -838,7 +1061,8 @@ namespace BoldSign.Api
         /// <param name="emailId">EmailID.</param>
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
-        void RemoveAuthentication(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
+        /// <param name="phoneNumber">The phone number.</param>
+        void RemoveAuthentication(string documentId, string emailId = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default);
 
         /// <summary>
         ///     Remove Authentication to user.
@@ -853,8 +1077,9 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> RemoveAuthenticationWithHttpInfo(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
+        ApiResponse<object> RemoveAuthenticationWithHttpInfo(string documentId, string emailId = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default);
 
         /// <summary>
         ///     Remove Authentication to user.
@@ -870,7 +1095,7 @@ namespace BoldSign.Api
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of void</returns>
-        Task RemoveAuthenticationAsync(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
+        Task RemoveAuthenticationAsync(string documentId, string emailId = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default);
 
         /// <summary>
         ///      Remove Authentication to user.
@@ -886,7 +1111,7 @@ namespace BoldSign.Api
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> RemoveAuthenticationAsyncWithHttpInfo(string documentId, string emailId, int? signerOrder = default, string onBehalfOf = default);
+        Task<ApiResponse<object>> RemoveAuthenticationAsyncWithHttpInfo(string documentId, string emailId = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default);
 
         /// <summary>
         /// Extends the expiration date of the document.

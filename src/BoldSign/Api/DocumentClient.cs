@@ -16,11 +16,11 @@ namespace BoldSign.Api
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
-    using RestSharp;
 
     /// <summary>
     ///  Represents a collection of functions to interact with the API endpoints. The functions perform actions such as sending document to sign, getting document list, deleting a document, downloading audit log, downloading a document, changing access code of the desired signer and so on.
@@ -31,6 +31,7 @@ namespace BoldSign.Api
         private const long MaxFileSize = 104857600;
 
         private ExceptionFactory exceptionFactory = (name, response) => null;
+        private static readonly HttpMethod PatchHttpMethod = new HttpMethod("PATCH");
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DocumentClient" /> class.
@@ -87,7 +88,7 @@ namespace BoldSign.Api
         ///     Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public string GetBasePath() => this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
+        public string GetBasePath() => this.Configuration.ApiClient.HttpClient.BaseAddress.AbsoluteUri;
 
         /// <summary>
         ///     Gets or sets the configuration object.
@@ -123,16 +124,20 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new  email address of recipient.</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The Old Signer Phone Number.</param>
         public void ChangeRecipient(
             string documentId,
-            string oldSignerEmail,
-            string reason,
-            string newSignerName,
-            string newSignerEmail,
+            string oldSignerEmail = default,
+            string reason = default,
+            string newSignerName = default,
+            string newSignerEmail = default,
             int? signerOrder = default,
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default,
+            PhoneNumber oldPhoneNumber = default)
         {
-            this.ChangeRecipientWithHttpInfo(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder, onBehalfOf);
+            this.ChangeRecipientWithHttpInfo(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder, onBehalfOf, phoneNumber, oldPhoneNumber);
         }
 
         /// <summary>
@@ -146,26 +151,29 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new email address of recipient.</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The old Signer phone Number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public ApiResponse<object> ChangeRecipientWithHttpInfo(
             string documentId,
-            string oldSignerEmail,
-            string reason,
-            string newSignerName,
-            string newSignerEmail,
+            string oldSignerEmail = default,
+            string reason = default,
+            string newSignerName = default,
+            string newSignerEmail = default,
             int? signerOrder = default,
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default,
+            PhoneNumber oldPhoneNumber = default)
         {
-            ValidationForChangeRecipient(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder);
+            ValidationForChangeRecipient(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder, phoneNumber, oldPhoneNumber);
 
             var localVarPath = "/v1/document/ChangeRecipient";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var recipientDetails = new ChangeRecipient(newSignerName, reason, oldSignerEmail, newSignerEmail, signerOrder, onBehalfOf);
+            var recipientDetails = new ChangeRecipient(newSignerName, reason, oldSignerEmail, newSignerEmail, signerOrder, onBehalfOf, phoneNumber, oldPhoneNumber);
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -235,7 +243,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -248,7 +256,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -263,17 +271,21 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new email address  of recipient .</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The Old Signer Phone number.</param>
         /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
         public async Task ChangeRecipientasync(
             string documentId,
-            string oldSignerEmail,
-            string reason,
-            string newSignerName,
-            string newSignerEmail,
+            string oldSignerEmail = default,
+            string reason = default,
+            string newSignerName = default,
+            string newSignerEmail = default,
             int? signerOrder = default,
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default,
+            PhoneNumber oldPhoneNumber = default)
         {
-            await this.ChangeRecipientasyncWithHttpInfo(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder, onBehalfOf).ConfigureAwait(false);
+            await this.ChangeRecipientasyncWithHttpInfo(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder, onBehalfOf, phoneNumber, oldPhoneNumber).ConfigureAwait(false);
         }
 
 
@@ -288,26 +300,29 @@ namespace BoldSign.Api
         /// <param name="newSignerEmail">The new email address of recipient .</param>
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The Old signer phone number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public async Task<ApiResponse<object>> ChangeRecipientasyncWithHttpInfo(
              string documentId,
-             string oldSignerEmail,
-             string reason,
-             string newSignerName,
-             string newSignerEmail,
+             string oldSignerEmail = default,
+             string reason = default,
+             string newSignerName = default,
+             string newSignerEmail = default,
              int? signerOrder = default,
-             string onBehalfOf = default)
+             string onBehalfOf = default,
+             PhoneNumber phoneNumber = default,
+             PhoneNumber oldPhoneNumber = default)
         {
-            ValidationForChangeRecipient(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder);
+            ValidationForChangeRecipient(documentId, oldSignerEmail, reason, newSignerName, newSignerEmail, signerOrder, phoneNumber, oldPhoneNumber);
 
             var localVarPath = "/v1/document/ChangeRecipient";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var recipientDetails = new ChangeRecipient(newSignerName, reason, oldSignerEmail, newSignerEmail, signerOrder, onBehalfOf);
+            var recipientDetails = new ChangeRecipient(newSignerName, reason, oldSignerEmail, newSignerEmail, signerOrder, onBehalfOf, phoneNumber, oldPhoneNumber);
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -377,7 +392,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -390,7 +405,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -406,10 +421,11 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        public void ChangeAccessCode(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default)
+        public void ChangeAccessCode(string documentId, string emailId = default, string newAccessCode = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default)
         {
-            this.ChangeAccessCodeWithHttpInfo(documentId, emailId, newAccessCode, signerOrder, onBehalfOf);
+            this.ChangeAccessCodeWithHttpInfo(documentId, emailId, newAccessCode, signerOrder, onBehalfOf, phoneNumber);
         }
 
         /// <summary>
@@ -424,8 +440,9 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<object> ChangeAccessCodeWithHttpInfo(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default)
+        public ApiResponse<object> ChangeAccessCodeWithHttpInfo(string documentId, string emailId = default, string newAccessCode = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -434,7 +451,7 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'emailId' is set
-            if (emailId == null)
+            if (emailId == null  && phoneNumber == null)
             {
                 throw new ApiException(400, "Missing required parameter 'emailId' when calling DocumentApi->ChangeAccessCode");
             }
@@ -446,12 +463,12 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/changeAccessCode";
-            var localVarPathParams = new Dictionary<string, string>();
+
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
-            var accessCodeDetails = new AccessCodeDetails(newAccessCode, onBehalfOf);
+            var accessCodeDetails = new AccessCodeDetails(newAccessCode, onBehalfOf, phoneNumber);
             var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody;
 
@@ -531,10 +548,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -547,7 +563,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -563,10 +579,11 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>Task of void</returns>
-        public async Task ChangeAccessCodeAsync(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default)
+        public async Task ChangeAccessCodeAsync(string documentId, string emailId = default, string newAccessCode = default, int? signerOrder = default, string onBehalfOf = default, PhoneNumber phoneNumber = default)
         {
-            await this.ChangeAccessCodeAsyncWithHttpInfo(documentId, emailId, newAccessCode, signerOrder, onBehalfOf).ConfigureAwait(false);
+            await this.ChangeAccessCodeAsyncWithHttpInfo(documentId, emailId, newAccessCode, signerOrder, onBehalfOf, phoneNumber).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -581,8 +598,9 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional)
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async Task<ApiResponse<object>> ChangeAccessCodeAsyncWithHttpInfo(string documentId, string emailId, string newAccessCode, int? signerOrder = default, string onBehalfOf = default)
+        public async Task<ApiResponse<object>> ChangeAccessCodeAsyncWithHttpInfo(string documentId, string emailId = default, string newAccessCode = default, int? signerOrder = default, string onBehalfOf = default,  PhoneNumber phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -591,7 +609,7 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'emailId' is set
-            if (emailId == null)
+            if (emailId == null && phoneNumber == null)
             {
                 throw new ApiException(400, "Missing required parameter 'emailId' when calling DocumentApi->ChangeAccessCode");
             }
@@ -603,12 +621,11 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/changeAccessCode";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
-            var accessCodeDetails = new AccessCodeDetails(newAccessCode, onBehalfOf);
+            var accessCodeDetails = new AccessCodeDetails(newAccessCode, onBehalfOf, phoneNumber);
             var localVarFileUrlParams = new Dictionary<string, Uri>();
             object localVarPostBody;
 
@@ -687,10 +704,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -703,7 +719,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -718,13 +734,15 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional).
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         public void RemoveAuthentication(
             string documentId,
-            string emailId,
+            string emailId = default,
             int? signerOrder = default,
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
-            this.RemoveAuthenticationWithHttpInfo(documentId, emailId, signerOrder, onBehalfOf);
+            this.RemoveAuthenticationWithHttpInfo(documentId, emailId, signerOrder, onBehalfOf, phoneNumber);
         }
 
         /// <summary>
@@ -737,13 +755,15 @@ namespace BoldSign.Api
         ///     Gets or sets the signer&#39;s order.  When signer order is enabled for a document, this order is
         ///     used to target that particular order with given signer email. (optional).
         /// </param>
-        // <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public ApiResponse<object> RemoveAuthenticationWithHttpInfo(
             string documentId,
-            string emailId,
+            string emailId = default,
             int? signerOrder = default,
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -752,19 +772,18 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'emailId' is set
-            if (emailId == null)
+            if (emailId == null && phoneNumber == null)
             {
                 throw new ApiException(400, "Missing required parameter 'emailId' when calling DocumentApi->RemoveAuthentication");
             }
 
             var localVarPath = "/v1/document/RemoveAuthentication";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var bodyDetails = new RemoveAuthentication(emailId, signerOrder, onBehalfOf);
+            var bodyDetails = new RemoveAuthentication(emailId, signerOrder, onBehalfOf, phoneNumber);
             object localVarPatchBody;
 
             // to determine the Content-Type header
@@ -833,7 +852,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPatchBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPatchBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -846,7 +865,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -861,14 +880,16 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional).
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>Task of void.</returns>
         public async Task RemoveAuthenticationAsync(
             string documentId,
-            string emailId,
+            string emailId = default,
             int? signerOrder = default,
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
-            await this.RemoveAuthenticationAsyncWithHttpInfo(documentId, emailId, signerOrder, onBehalfOf).ConfigureAwait(false);
+            await this.RemoveAuthenticationAsyncWithHttpInfo(documentId, emailId, signerOrder, onBehalfOf, phoneNumber).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -882,12 +903,14 @@ namespace BoldSign.Api
         ///     used to target that particular order with given signer email. (optional).
         /// </param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <returns>Task of ApiResponse.</returns>
         public async Task<ApiResponse<object>> RemoveAuthenticationAsyncWithHttpInfo(
             string documentId,
-            string emailId,
+            string emailId = default,
             int? signerOrder = default,
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -896,19 +919,18 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'emailId' is set
-            if (emailId == null)
+            if (emailId == null && phoneNumber == null)
             {
                 throw new ApiException(400, "Missing required parameter 'emailId' when calling DocumentApi->RemoveAuthentication");
             }
 
             var localVarPath = "/v1/document/RemoveAuthentication";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var bodyDetails = new RemoveAuthentication(emailId, signerOrder, onBehalfOf);
+            var bodyDetails = new RemoveAuthentication(emailId, signerOrder, onBehalfOf, phoneNumber);
             object localVarPatchBody;
 
             // to determine the Content-Type header
@@ -977,7 +999,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.PATCH, localVarQueryParams, localVarPatchBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPatchBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var exception = this.ExceptionFactory?.Invoke("RemoveAuthentication", localVarResponse);
             var localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -988,7 +1010,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -1031,7 +1053,6 @@ namespace BoldSign.Api
             ValidationForExtendExpiry(documentId, newExpiryValue);
 
             var localVarPath = "/v1/document/extendExpiry";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1107,7 +1128,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1120,7 +1141,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -1164,7 +1185,6 @@ namespace BoldSign.Api
             ValidationForExtendExpiry(documentId, newExpiryValue);
 
             var localVarPath = "/v1/document/extendExpiry";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1241,7 +1261,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1254,7 +1274,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -1292,7 +1312,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/delete";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1343,10 +1362,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1359,7 +1377,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -1397,7 +1415,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/delete";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1448,10 +1465,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1464,7 +1480,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -1494,7 +1510,6 @@ namespace BoldSign.Api
 
             ValidationForAddDeleteTags(addTags.DocumentId, addTags.Tags);
             var localVarPath = "v1/document/addTags";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1549,7 +1564,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1562,7 +1577,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -1593,7 +1608,6 @@ namespace BoldSign.Api
 
             ValidationForAddDeleteTags(addTags.DocumentId, addTags.Tags);
             var localVarPath = "/v1/document/addTags";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1648,7 +1662,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1661,7 +1675,7 @@ namespace BoldSign.Api
 
             return Task.FromResult(new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null));
         }
 
@@ -1691,7 +1705,6 @@ namespace BoldSign.Api
 
             ValidationForAddDeleteTags(deleteTags.DocumentId, deleteTags.Tags);
             var localVarPath = "/v1/document/deleteTags";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1745,7 +1758,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1758,7 +1771,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -1789,7 +1802,6 @@ namespace BoldSign.Api
 
             ValidationForAddDeleteTags(deleteTags.DocumentId, deleteTags.Tags);
             var localVarPath = "/v1/document/deleteTags";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1844,7 +1856,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1857,7 +1869,7 @@ namespace BoldSign.Api
 
             return Task.FromResult(new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null));
         }
 
@@ -1891,7 +1903,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/downloadAuditLog";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -1945,10 +1956,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -1961,7 +1971,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<Stream>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
         }
 
@@ -1995,7 +2005,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/downloadAuditLog";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2049,10 +2058,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2065,7 +2073,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<Stream>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
         }
 
@@ -2088,9 +2096,9 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
-        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf)
+        public ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -2099,7 +2107,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/download";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2154,10 +2161,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2170,7 +2176,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<Stream>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
         }
 
@@ -2204,7 +2210,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/download";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2259,10 +2264,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2275,7 +2279,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<Stream>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
         }
 
@@ -2316,7 +2320,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/downloadAttachment";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2370,7 +2373,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2383,7 +2386,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<Stream>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
         }
 
@@ -2424,7 +2427,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/downloadAttachment";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2478,7 +2480,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2491,7 +2493,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<Stream>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
         }
 
@@ -2501,13 +2503,15 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>EmbeddedSigningLink</returns>
-        public EmbeddedSigningLink GetEmbeddedSignLink(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default)
+        public EmbeddedSigningLink GetEmbeddedSignLink(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default)
         {
-            var localVarResponse = this.GetEmbeddedSignLinkWithHttpInfo(documentId, signerEmail, signLinkValidTill, redirectUrl);
+            var localVarResponse = this.GetEmbeddedSignLinkWithHttpInfo(documentId, signerEmail, signLinkValidTill, redirectUrl, countryCode, phoneNumber);
 
             return localVarResponse.Data;
         }
@@ -2517,11 +2521,13 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>ApiResponse of EmbeddedSigningLink</returns>
-        public ApiResponse<EmbeddedSigningLink> GetEmbeddedSignLinkWithHttpInfo(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default)
+        public ApiResponse<EmbeddedSigningLink> GetEmbeddedSignLinkWithHttpInfo(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -2529,14 +2535,13 @@ namespace BoldSign.Api
                 throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->GetEmbeddedSignLink");
             }
 
-            // verify the required parameter 'signerEmail' is set
-            if (signerEmail == null)
+            // verify the required parameter 'signerEmail' or 'countryCode' and 'phoneNumber' is set
+            if (signerEmail == null  && (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(phoneNumber)))
             {
-                throw new ApiException(400, "Missing required parameter 'signerEmail' when calling DocumentApi->GetEmbeddedSignLink");
+                throw new ApiException(400, "Missing required parameter 'signerEmail' or 'countryCode' and 'phoneNumber' when calling DocumentApi->GetEmbeddedSignLink");
             }
 
             var localVarPath = "/v1/document/getEmbeddedSignLink";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2590,6 +2595,12 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "RedirectUrl", redirectUrl)); // query parameter
             }
 
+            if (countryCode != null && phoneNumber != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "CountryCode", countryCode)); // query parameter
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "PhoneNumber", phoneNumber)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -2597,10 +2608,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2613,7 +2623,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<EmbeddedSigningLink>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (EmbeddedSigningLink)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSigningLink)));
         }
 
@@ -2622,13 +2632,15 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>Task of EmbeddedSigningLink</returns>
-        public async Task<EmbeddedSigningLink> GetEmbeddedSignLinkAsync(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default)
+        public async Task<EmbeddedSigningLink> GetEmbeddedSignLinkAsync(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default)
         {
-            var localVarResponse = await this.GetEmbeddedSignLinkAsyncWithHttpInfo(documentId, signerEmail, signLinkValidTill, redirectUrl);
+            var localVarResponse = await this.GetEmbeddedSignLinkAsyncWithHttpInfo(documentId, signerEmail, signLinkValidTill, redirectUrl, countryCode, phoneNumber);
 
             return localVarResponse.Data;
         }
@@ -2638,11 +2650,13 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
+        /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
+        /// <param name="phoneNumber">Gets or sets Phone Number. (optional)</param>
         /// <returns>Task of ApiResponse (EmbeddedSigningLink)</returns>
-        public async Task<ApiResponse<EmbeddedSigningLink>> GetEmbeddedSignLinkAsyncWithHttpInfo(string documentId, string signerEmail, DateTime? signLinkValidTill = default, string redirectUrl = default)
+        public async Task<ApiResponse<EmbeddedSigningLink>> GetEmbeddedSignLinkAsyncWithHttpInfo(string documentId, string signerEmail = default, DateTime? signLinkValidTill = default, string redirectUrl = default, string countryCode = default, string phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -2650,14 +2664,13 @@ namespace BoldSign.Api
                 throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->GetEmbeddedSignLink");
             }
 
-            // verify the required parameter 'signerEmail' is set
-            if (signerEmail == null)
+            // verify the required parameter 'signerEmail' or 'countryCode' and 'phoneNumber' is set
+            if (signerEmail == null && (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(phoneNumber)))
             {
-                throw new ApiException(400, "Missing required parameter 'signerEmail' when calling DocumentApi->GetEmbeddedSignLink");
+                throw new ApiException(400, "Missing required parameter 'signerEmail' or 'countryCode' and 'phoneNumber' when calling DocumentApi->GetEmbeddedSignLink");
             }
 
             var localVarPath = "/v1/document/getEmbeddedSignLink";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2711,6 +2724,12 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "RedirectUrl", redirectUrl)); // query parameter
             }
 
+            if (countryCode != null && phoneNumber != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "CountryCode", countryCode)); // query parameter
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "PhoneNumber", phoneNumber)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -2718,10 +2737,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2734,7 +2752,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<EmbeddedSigningLink>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (EmbeddedSigningLink)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSigningLink)));
         }
 
@@ -2766,7 +2784,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/properties";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2801,10 +2818,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2817,7 +2833,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<DocumentProperties>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (DocumentProperties)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentProperties)));
         }
 
@@ -2849,7 +2865,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/properties";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -2884,10 +2899,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -2900,7 +2914,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<DocumentProperties>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (DocumentProperties)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentProperties)));
         }
 
@@ -2916,10 +2930,12 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>DocumentRecords</returns>
-        public DocumentRecords ListDocuments(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public DocumentRecords ListDocuments(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
-            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType);
+            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType, nextCursor, brandIds);
 
             return localVarResponse.Data;
         }
@@ -2936,13 +2952,14 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
             // verify the required parameter 'page' is set
 
             var localVarPath = "/v1/document/list";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -3010,6 +3027,11 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "SearchKey", searchKey)); // query parameter
             }
 
+            if (nextCursor != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "NextCursor", nextCursor)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -3021,11 +3043,15 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
             }
 
+            if (brandIds != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -3038,7 +3064,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<DocumentRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (DocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentRecords)));
         }
 
@@ -3054,10 +3080,12 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of DocumentRecords</returns>
-        public async Task<DocumentRecords> ListDocumentsAsync(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public async Task<DocumentRecords> ListDocumentsAsync(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
-            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType);
+            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType, nextCursor, brandIds);
 
             return localVarResponse.Data;
         }
@@ -3074,13 +3102,14 @@ namespace BoldSign.Api
         /// <param name="status">Gets or sets the status. (optional)</param>
         /// <param name="endDate">Gets or sets the endDate. (optional)</param>
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of ApiResponse (DocumentRecords)</returns>
-        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
             // verify the required parameter 'page' is set
 
             var localVarPath = "/v1/document/list";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -3148,6 +3177,11 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
             }
 
+            if (nextCursor != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "NextCursor", nextCursor)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -3159,11 +3193,15 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
             }
 
+            if (brandIds != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -3176,13 +3214,13 @@ namespace BoldSign.Api
 
             return new ApiResponse<DocumentRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (DocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentRecords)));
         }
 
         /// <inheritdoc />
         public BehalfDocumentRecords ListBehalfDocuments(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -3191,7 +3229,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default)
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default)
         {
             var localVarResponse = this.ListBehalfDocumentsWithHttpInfo(
                 page,
@@ -3203,14 +3243,16 @@ namespace BoldSign.Api
                 startDate,
                 endDate,
                 signers,
-                labels);
+                labels,
+                nextCursor,
+                brandIds);
 
             return localVarResponse.Data;
         }
 
         /// <inheritdoc />
         public ApiResponse<BehalfDocumentRecords> ListBehalfDocumentsWithHttpInfo(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -3219,7 +3261,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default)
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default)
         {
             var request = GetBehalfListValues(
                 this.Configuration,
@@ -3232,18 +3276,19 @@ namespace BoldSign.Api
                 startDate,
                 endDate,
                 signers,
-                labels);
+                labels,
+                nextCursor,
+                brandIds);
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 request.LocalVarPath,
-                Method.GET,
+                HttpMethod.Get,
                 request.LocalVarQueryParams,
                 request.LocalVarPostBody,
                 request.LocalVarHeaderParams,
                 request.LocalVarFormParams,
                 request.LocalVarFileParams,
-                request.LocalVarPathParams,
                 request.LocalVarHttpContentType,
                 request.LocalVarFileUrlParams);
 
@@ -3258,13 +3303,13 @@ namespace BoldSign.Api
 
             return new ApiResponse<BehalfDocumentRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BehalfDocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BehalfDocumentRecords)));
         }
 
         /// <inheritdoc />
         public async Task<BehalfDocumentRecords> ListBehalfDocumentsAsync(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -3273,7 +3318,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default)
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default)
         {
             var localVarResponse = await this.ListBehalfDocumentsAsyncWithHttpInfo(
                 page,
@@ -3285,14 +3332,16 @@ namespace BoldSign.Api
                 startDate,
                 endDate,
                 signers,
-                labels).ConfigureAwait(false);
+                labels,
+                nextCursor,
+                brandIds).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
 
         /// <inheritdoc />
         public async Task<ApiResponse<BehalfDocumentRecords>> ListBehalfDocumentsAsyncWithHttpInfo(
-            int page,
+            int page = 1,
             int? pageSize = default,
             List<string> emailAddress = default,
             List<Status> status = default,
@@ -3301,7 +3350,9 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default)
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default)
         {
             var request = GetBehalfListValues(
                 this.Configuration,
@@ -3314,18 +3365,19 @@ namespace BoldSign.Api
                 startDate,
                 endDate,
                 signers,
-                labels);
+                labels,
+                nextCursor,
+                brandIds);
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 request.LocalVarPath,
-                Method.GET,
+                HttpMethod.Get,
                 request.LocalVarQueryParams,
                 request.LocalVarPostBody,
                 request.LocalVarHeaderParams,
                 request.LocalVarFormParams,
                 request.LocalVarFileParams,
-                request.LocalVarPathParams,
                 request.LocalVarHttpContentType,
                 request.LocalVarFileUrlParams).ConfigureAwait(false);
 
@@ -3340,7 +3392,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<BehalfDocumentRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (BehalfDocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BehalfDocumentRecords)));
         }
 
@@ -3358,10 +3410,12 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
         /// <param name="labels">Gets or set the labels.</param>
         /// <param name="transmitType">transmitType.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>ApiResponse of TeamDocumentRecords.</returns>
-        public TeamDocumentRecords ListTeamDocuments(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public TeamDocumentRecords ListTeamDocuments(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
-            var localVarResponse = this.ListTeamDocumentsWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType);
+            var localVarResponse = this.ListTeamDocumentsWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType, nextCursor, brandIds);
 
             return localVarResponse.Data;
         }
@@ -3380,14 +3434,15 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
         /// <param name="labels">Gets or set the labels.</param>
         /// <param name="transmitType">transmitType.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>ApiResponse of TeamDocumentRecords.</returns>
-        public ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
             ValidationForEndDate(startDate, endDate);
 
             // verify the required parameter 'page' is set
             var localVarPath = "/v1/document/teamlist";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -3453,6 +3508,11 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "SearchKey", searchKey)); // query parameter
             }
 
+            if (nextCursor != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "NextCursor", nextCursor)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -3464,8 +3524,13 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
             }
 
+            if (brandIds != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -3478,7 +3543,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<TeamDocumentRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (TeamDocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TeamDocumentRecords)));
         }
 
@@ -3496,10 +3561,12 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
         /// <param name="labels">Gets or set the labels.</param>
         /// <param name="transmitType">transmitType.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of TeamDocumentRecords.</returns>
-        public async Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public async Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
-            var localVarResponse = await this.ListTeamDocumentsAsyncWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType).ConfigureAwait(false);
+            var localVarResponse = await this.ListTeamDocumentsAsyncWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType, nextCursor, brandIds).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
@@ -3518,14 +3585,15 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional).</param>
         /// <param name="labels">Gets or set the labels.</param>
         /// <param name="transmitType">transmitType.</param>
+        /// <param name="nextCursor">Gets or sets the nextCursor.</param>
+        /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of ApiResponse (TeamDocumentRecords).</returns>
-        public async Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default)
+        public async Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
         {
             ValidationForEndDate(startDate, endDate);
 
             // verify the required parameter 'page' is set
             var localVarPath = "/v1/document/teamlist";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -3591,6 +3659,11 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
             }
 
+            if (nextCursor != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "NextCursor", nextCursor)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -3602,8 +3675,13 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "Labels", labels)); // query parameter
             }
 
+            if (brandIds != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -3616,7 +3694,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<TeamDocumentRecords>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (TeamDocumentRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TeamDocumentRecords)));
         }
 
@@ -3650,7 +3728,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/remind";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -3730,10 +3807,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -3746,7 +3822,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -3780,7 +3856,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/remind";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -3860,10 +3935,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -3876,7 +3950,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -3916,7 +3990,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/revoke";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -3977,10 +4050,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -3993,7 +4065,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -4033,7 +4105,6 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/revoke";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -4094,10 +4165,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -4110,7 +4180,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -4136,7 +4206,6 @@ namespace BoldSign.Api
             ValidateSendProperties(signRequestDetails);
 
             var localVarPath = "/v1/document/send";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -4183,10 +4252,9 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -4199,7 +4267,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<DocumentCreated>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
         }
 
@@ -4222,7 +4290,6 @@ namespace BoldSign.Api
             ValidateSendProperties(sendRequest);
 
             var localVarPath = "/v1/document/createEmbeddedRequestUrl";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -4268,15 +4335,14 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
                 localVarPath,
-                Method.POST,
+                HttpMethod.Post,
                 localVarQueryParams,
                 localVarPostBody,
                 localVarHeaderParams,
                 localVarFormParams,
                 localVarFileParams,
-                localVarPathParams,
                 localVarHttpContentType,
                 localVarFileUrlParams);
 
@@ -4291,7 +4357,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<EmbeddedSendCreated>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
         }
 
@@ -4314,7 +4380,6 @@ namespace BoldSign.Api
             ValidateSendProperties(sendRequest);
 
             var localVarPath = "/v1/document/createEmbeddedRequestUrl";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -4360,15 +4425,14 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                Method.POST,
+                HttpMethod.Post,
                 localVarQueryParams,
                 localVarPostBody,
                 localVarHeaderParams,
                 localVarFormParams,
                 localVarFileParams,
-                localVarPathParams,
                 localVarHttpContentType,
                 localVarFileUrlParams).ConfigureAwait(false);
 
@@ -4382,7 +4446,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<EmbeddedSendCreated>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
         }
 
@@ -4408,7 +4472,6 @@ namespace BoldSign.Api
             ValidateSendProperties(signRequestDetails);
 
             var localVarPath = "/v1/document/send";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -4454,10 +4517,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(
-                localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
             var exception = this.ExceptionFactory?.Invoke("SendDocument", localVarResponse);
@@ -4469,7 +4529,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<DocumentCreated>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
         }
 
@@ -4483,15 +4543,17 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         public void AddAuthentication(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
-            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf);
+            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber);
         }
 
         /// <summary>
@@ -4504,14 +4566,16 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4520,7 +4584,7 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'emailId' is set
-            if (emailId == null)
+            if (emailId == null && phoneNumber == null)
             {
                 throw new ApiException(400, ApiValidationMessages.EmailIdRequiredAPI);
             }
@@ -4538,13 +4602,12 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/addAuthentication";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf);
+            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber);
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -4614,7 +4677,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams);
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -4627,7 +4690,7 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -4641,16 +4704,18 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>AddAuthentication.</returns>
         public async Task AddAuthenticationAsync(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
-            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf).ConfigureAwait(false);
+            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -4663,14 +4728,16 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         public async Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
-            string emailId,
-            AuthenticationType authenticationType,
+            string emailId = default,
+            AuthenticationType authenticationType = default,
             int? signerOrder = default,
             string newAccessCode = "",
-            string onBehalfOf = default)
+            string onBehalfOf = default,
+            PhoneNumber phoneNumber = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4679,7 +4746,7 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'emailId' is set
-            if (emailId == null)
+            if (emailId == null && phoneNumber == null)
             {
                 throw new ApiException(400, ApiValidationMessages.EmailIdRequiredAPI);
             }
@@ -4697,13 +4764,12 @@ namespace BoldSign.Api
             }
 
             var localVarPath = "/v1/document/addAuthentication";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf);
+            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber);
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -4773,7 +4839,7 @@ namespace BoldSign.Api
             }
 
             // make the HTTP request
-            var localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath, Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarPathParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
@@ -4786,7 +4852,260 @@ namespace BoldSign.Api
 
             return new ApiResponse<object>(
                 localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
+        }
+
+         /// <summary>
+        ///     Pre fill  form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        public void PrefillFields(PrefillFieldRequest request)
+        {
+            this.PrefillFieldsWithHttpInfo(request);
+        }
+
+        /// <summary>
+        ///     Pre fill form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        public ApiResponse<object> PrefillFieldsWithHttpInfo(PrefillFieldRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            // verify the required parameter 'documentId' is set
+            if (request.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->PrefillFields");
+            }
+
+            // verify the required parameter 'pre fill filed' is set
+            if (request.Fields == null || !request.Fields.Any())
+            {
+                throw new ApiException(400, "Missing required parameter 'prefillField' when calling DocumentApi->PrefillFields");
+            }
+
+            var localVarPath = "/v1/document/prefillFields";
+
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "DocumentId", request.DocumentId)); // query parameter
+
+            if (request.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(request); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = request; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("PrefillFields", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <summary>
+        ///     Pre fill  form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        public async Task PrefillFieldsAsync(PrefillFieldRequest request)
+        {
+            await this.PrefillFieldsAsyncWithHttpInfo(request).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///     Pre fill form fields.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        public async Task<ApiResponse<object>> PrefillFieldsAsyncWithHttpInfo(PrefillFieldRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentException(nameof(request));
+            }
+
+            // verify the required parameter 'documentId' is set
+            if (request.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->PrefillFields");
+            }
+
+            if (request.Fields == null || !request.Fields.Any())
+            {
+                throw new ApiException(400, "Missing required parameter 'prefillField' when calling DocumentApi->PrefillFields");
+            }
+
+            var localVarPath = "/v1/document/prefillFields";
+
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "DocumentId", request.DocumentId)); // query parameter
+
+            if (request.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(request); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = request; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                PatchHttpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("PrefillFields", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
         }
 
@@ -4817,11 +5136,6 @@ namespace BoldSign.Api
             if (string.IsNullOrEmpty(sendRequest.Title) && (sendRequest.DocumentInfo == null || !sendRequest.DocumentInfo.Any()))
             {
                 throw new ApiException(422, ApiValidationMessages.TitleOrDocumentInfoIsRequired);
-            }
-
-            if (!string.IsNullOrEmpty(sendRequest.Title) && sendRequest.DocumentInfo != null && sendRequest.DocumentInfo.Any())
-            {
-                throw new ApiException(422, ApiValidationMessages.TitleAndDocumentInfo);
             }
 
             // verify the required parameter 'signers' is set
@@ -4892,7 +5206,7 @@ namespace BoldSign.Api
                 || (Uri.TryCreate(uri, UriKind.Absolute, out var result)
                     && (result.Scheme == Uri.UriSchemeHttp || result.Scheme == Uri.UriSchemeHttps));
         }
-        private static void ValidationForChangeRecipient(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder)
+        private static void ValidationForChangeRecipient(string documentId, string oldSignerEmail, string reason, string newSignerName, string newSignerEmail, int? signerOrder, PhoneNumber phoneNumber, PhoneNumber oldPhoneNumber)
         {
             // verify the required parameter 'documentId' is set
             if (string.IsNullOrEmpty(documentId))
@@ -4901,25 +5215,25 @@ namespace BoldSign.Api
             }
 
             // verify the required parameter 'oldSignerEmailAddress' is set
-            if (string.IsNullOrEmpty(oldSignerEmail))
+            if (string.IsNullOrEmpty(oldSignerEmail) && oldPhoneNumber == null)
             {
                 throw new ApiException(400, ApiValidationMessages.OldSignerEmailRequired);
             }
 
             // verify the required parameter 'newSignerEmailAddress' is set
-            if (string.IsNullOrEmpty(newSignerEmail))
+            if (string.IsNullOrEmpty(newSignerEmail) && phoneNumber == null)
             {
                 throw new ApiException(400, ApiValidationMessages.NewSignerEmailAddressRequired);
             }
 
             // to ensure "oldSignermail"and "newSignermail" are not as same
-            if (oldSignerEmail.ToUpperInvariant() == newSignerEmail.ToUpperInvariant())
+            if (!string.IsNullOrEmpty(oldSignerEmail) && !string.IsNullOrEmpty(newSignerEmail) && oldSignerEmail.ToUpperInvariant() == newSignerEmail.ToUpperInvariant())
             {
                 throw new ApiException(400, ApiValidationMessages.SameSignerEmailNotAllowed);
             }
 
             // verify the required parameter 'new signer name' is set
-            if (string.IsNullOrEmpty(newSignerName))
+            if (string.IsNullOrEmpty(newSignerName) && phoneNumber == null)
             {
                 throw new ApiException(400, ApiValidationMessages.SignerNameRequired);
             }
@@ -4962,11 +5276,12 @@ namespace BoldSign.Api
             DateTime? startDate = default,
             DateTime? endDate = default,
             List<string> signers = default,
-            List<string> labels = default)
+            List<string> labels = default,
+            long? nextCursor = default,
+            List<string> brandIds = default)
         {
             // verify the required parameter 'page' is set
             var localVarPath = "/v1/document/behalfList";
-            var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -5037,6 +5352,16 @@ namespace BoldSign.Api
                 localVarQueryParams.AddRange(configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "EndDate", endDate)); // query parameter
             }
 
+            if (nextCursor != null)
+            {
+                localVarQueryParams.AddRange(configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "NextCursor", nextCursor)); // query parameter
+            }
+
+            if (brandIds != null && brandIds.Any())
+            {
+                localVarQueryParams.AddRange(configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(configuration.GetApiKeyWithPrefix("Authorization")))
             {
@@ -5050,7 +5375,6 @@ namespace BoldSign.Api
                 localVarHeaderParams,
                 localVarFormParams,
                 localVarFileParams,
-                localVarPathParams,
                 localVarHttpContentType,
                 localVarFileUrlParams);
         }

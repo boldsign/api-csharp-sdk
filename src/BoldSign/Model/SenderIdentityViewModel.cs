@@ -64,5 +64,17 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "notificationSettings")]
         public NotificationSettings NotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the brand Id.
+        /// </summary>
+        [DataMember(Name = "brandId")]
+        public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the redirect URL.
+        /// </summary>
+        [DataMember(Name = "redirectUrl")]
+        public string RedirectUrl { get; set; }
     }
 }

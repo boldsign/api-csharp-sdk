@@ -55,35 +55,36 @@ namespace BoldSign.Api
         public static readonly ExceptionFactory DefaultExceptionFactory = (methodName, response) =>
         {
             var status = (int)response.StatusCode;
+            var error = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (status == 403)
             {
                 return new ApiException(
                    status,
-                   string.Format(CultureInfo.CurrentCulture, "You don't have permission to access this resource."),
-                   response.Content);
+                   string.Format("Error calling {0}: {1}", methodName, error),
+                   error);
             }
             else if (status >= 400)
             {
                 return new ApiException(
                     status,
-                    string.Format("Error calling {0}: {1}", methodName, response.Content),
-                    response.Content);
+                    string.Format("Error calling {0}: {1}", methodName, error),
+                    error);
             }
 
             if (status == 0)
             {
                 return new ApiException(
                     status,
-                    string.Format("Error calling {0}: {1}", methodName, response.ErrorMessage), response.ErrorMessage);
+                    string.Format("Error calling {0}: {1}", methodName, error), error);
             }
 
             else if (status == 202)
             {
                 return new ApiException(
                    status,
-                   string.Format(CultureInfo.CurrentCulture, "Error calling {0}: {1}", methodName, response.Content),
-                   response.Content);
+                   string.Format(CultureInfo.CurrentCulture, "Error calling {0}: {1}", methodName, error),
+                   error);
             }
 
             return null;
@@ -135,7 +136,7 @@ namespace BoldSign.Api
         /// </summary>
         public Configuration()
         {
-            this.UserAgent = "OpenAPI-Generator/1.0.0/csharp";
+            this.UserAgent = "OpenAPI-Generator/1.0.0 (CSharp)";
             this.BasePath = ApiBaseUrl;
             this.DefaultHeader = new ConcurrentDictionary<string, string>();
             this.ApiKey = new ConcurrentDictionary<string, string>();
@@ -223,7 +224,7 @@ namespace BoldSign.Api
                 // pass-through to ApiClient if it's set.
                 if (this._apiClient != null)
                 {
-                    this._apiClient.RestClient.BaseUrl = new Uri(this._basePath);
+                    this._apiClient.HttpClient.BaseAddress = new Uri(this._basePath);
                 }
             }
         }
@@ -238,8 +239,8 @@ namespace BoldSign.Api
         /// </summary>
         public virtual int Timeout
         {
-            get => this.ApiClient.RestClient.Timeout;
-            set => this.ApiClient.RestClient.Timeout = value;
+            get => this.ApiClient.HttpClient.Timeout.Milliseconds;
+            set => this.ApiClient.HttpClient.Timeout = TimeSpan.FromMilliseconds(value);
         }
 
         /// <summary>
