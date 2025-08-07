@@ -157,6 +157,12 @@ namespace BoldSign.Api.Model
         public IEnumerable<string> TemplateLabels { get; set; }
 
         /// <summary>
+        /// Gets or sets form group values for grouped form fields.
+        /// </summary>
+        [DataMember(Name = "formGroups", EmitDefaultValue = false)]
+        public List<FormGroup> FormGroups { get; set; }
+
+        /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         [JsonProperty("recipientNotificationSettings")]

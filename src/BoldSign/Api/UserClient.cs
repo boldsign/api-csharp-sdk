@@ -24,6 +24,7 @@ namespace BoldSign.Api
     using System.Net.Http;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
     using Newtonsoft.Json;
@@ -1051,6 +1052,157 @@ namespace BoldSign.Api
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (UserRecords)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(UserRecords)));
+        }
+
+        /// <summary>
+        /// Updates the user's metadata.
+        /// </summary>
+        /// <param name="updateUserMetaData">The users metaData.</param>
+        /// <returns>Task of update metaData.</returns>
+        public async Task UpdateUsersMetaDataAsync(UpdateUserMetaData updateUserMetaData)
+        {
+            await this.UpdateUserMetaDataAsyncWithHttpInfo(updateUserMetaData).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<object>> UpdateUserMetaDataAsyncWithHttpInfo(UpdateUserMetaData updateUserMetaData)
+        {
+            if (updateUserMetaData == null)
+            {
+                throw new ArgumentNullException(nameof(updateUserMetaData));
+            }
+
+            var localVarPath = "/v1/users/updateMetaData";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (updateUserMetaData.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(updateUserMetaData); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = updateUserMetaData; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("UpdateUserMetaData", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <summary>
+        /// Updates the user's metadata.
+        /// </summary>
+        /// <param name="updateUserMetaData">The users metaData.</param>
+        public void UpdateUsersMetaData(UpdateUserMetaData updateUserMetaData)
+        {
+            this.UpdateUserMetaDataWithHttpInfo(updateUserMetaData);
+        }
+
+        /// <inheritdoc/>
+        public ApiResponse<object> UpdateUserMetaDataWithHttpInfo(UpdateUserMetaData updateUserMetaData)
+        {
+            if (updateUserMetaData == null)
+            {
+                throw new ArgumentNullException(nameof(updateUserMetaData));
+            }
+
+            var localVarPath = "/v1/users/updateMetaData";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (updateUserMetaData.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(updateUserMetaData); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = updateUserMetaData; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("UpdateUserMetaData", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
         }
 
         /// <summary>

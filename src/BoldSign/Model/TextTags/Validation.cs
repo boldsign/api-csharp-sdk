@@ -32,6 +32,11 @@ namespace BoldSign.Api.Model
         /// Regex.
         /// </summary>
         Regex,
+
+        /// <summary>
+        /// Represents none.
+        /// </summary>
+        None,
     }
 
     /// <summary>
@@ -48,5 +53,10 @@ namespace BoldSign.Api.Model
         /// Gets or sets the regex value.
         /// </summary>
         public string Regex { get; set; }
+
+        /// <summary>
+        /// Gets or sets the regex message.
+        /// </summary>
+        public string RegexMessage { get; set; }
     }
 }

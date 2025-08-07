@@ -31,7 +31,28 @@ namespace BoldSign.Examples
 
             this.CustomFieldClient.CreateCustomField(brandCustomFieldDetails);
         }
-        
+
+        /// <summary>
+        /// Creates a custom field for the specified brand with resize option.
+        /// </summary>
+        public void CreateCustomFieldWithResizeOption()
+        {
+            var brandCustomFieldDetails = new BrandCustomFieldDetails()
+            {
+                FieldName = "Field Name",
+                FieldDescription = "Description",
+                FieldOrder = 1,
+                BrandId = "Brand Id",
+                FormField = new CustomFormField(
+                    type: FieldType.TextBox,
+                    isRequired: true),
+            };
+
+            brandCustomFieldDetails.FormField.ResizeOption = Api.Model.ResizeOptions.AutoResizeFont;
+
+            this.CustomFieldClient.CreateCustomField(brandCustomFieldDetails);
+        }
+
         /// <summary>
         /// Edits a custom field for the specified brand.
         /// </summary>

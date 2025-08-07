@@ -17,6 +17,7 @@ namespace BoldSign.Model
     using System.ComponentModel.DataAnnotations;
     using System.IO;
     using System.Runtime.Serialization;
+    using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using Newtonsoft.Json;
 
@@ -35,13 +36,15 @@ namespace BoldSign.Model
         /// <param name="authenticationType">Gets or sets the authentication type.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The phone number.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
         public AddAuthenticationAccessCodeDetails(
             string emailId,
             int? order,
             string accessCode = "",
             AuthenticationType authenticationType = default,
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default)
+            PhoneNumber phoneNumber = default,
+            IdentityVerificationSettings identityVerificationSettings = default)
         {
             // to ensure "accessCode" is required (not null) for AuthenticationType AccessCode.
             if (string.IsNullOrEmpty(accessCode) && authenticationType == AuthenticationType.AccessCode)
@@ -61,6 +64,7 @@ namespace BoldSign.Model
             this.AuthenticationType = authenticationType;
             this.OnBehalfOf = onBehalfOf;
             this.PhoneNumber = phoneNumber;
+            this.IdentityVerificationSettings = identityVerificationSettings;
         }
 
         /// <summary>
@@ -102,6 +106,25 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "phoneNumber", EmitDefaultValue = true)]
         public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication retry count.
+        /// </summary>
+        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
+        public int? AuthenticationRetryCount { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the identity verification settings.
+        /// </summary>
+        /// <value>Gets the value of identity verification settings.</value>
+        [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
+        public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value for authentication settings.
+        /// </summary>
+        [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
+        public AuthenticationSettings AuthenticationSettings { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

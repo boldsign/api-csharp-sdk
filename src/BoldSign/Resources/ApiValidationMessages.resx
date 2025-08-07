@@ -172,7 +172,7 @@
     <value>The given format is not valid.</value>
   </data>
   <data name="TextTagValueNotSupported" xml:space="preserve">
-    <value>The Value property is supported for text tag definitions only for text box and label fields</value>
+    <value>The Value property is supported for text tag definitions only for text boxes, labels, drop-downs, hyperlinks, checkboxes, radio buttons, images, and editable date fields.</value>
   </data>
   <data name="ExpiryDaysValOutOfRange" xml:space="preserve">
     <value>Provided expiry days should be within the range 1 - 180</value>
@@ -432,8 +432,8 @@
   <data name="AllowConfigureFieldsError" xml:space="preserve">
       <value>The 'AllowFieldConfiguration' property is unsupported for the Reviewer role.</value>
   </data>
-  <data name="RequiredNameOrRedirectUrl" xml:space="preserve">
-      <value>Either name or redirectUrl is required to update sender identity.</value>
+  <data name="RequiredNameOrRedirectUrlOrMetadata" xml:space="preserve">
+      <value>To update the sender identity, at least one of the following is required: name, redirectUrl, or metadata.</value>
   </data>
   <data name="UnsupportedBrandLogoType" xml:space="preserve">
       <value>Unsupported file. Supported file formats are PNG, JPEG, JPG and SVG.</value>
@@ -452,5 +452,17 @@
   </data>
   <data name="ContactIdMissing" xml:space="preserve">
     <value>Missing required parameter 'id' when calling ContactingApi-&gt;UpdateContact</value>
+  </data>
+  <data name="DocumentIdReport" xml:space="preserve">
+      <value>Missing required parameter 'documentId' when calling IdVerificationApi-&amp;gt;GetReport</value>
+  </data>
+  <data name="DocumentIdImage" xml:space="preserve">
+      <value>Missing required parameter 'documentId' when calling IdVerificationApi-&amp;gt;GetImage</value>
+  </data>
+  <data name="FileIdImage" xml:space="preserve">
+      <value>Missing required parameter 'fileId' when calling IdVerificationApi-&amp;gt;GetImage</value>
+  </data>
+  <data name="DocumentIdVerificationUrl" xml:space="preserve">
+      <value>Missing required parameter 'documentId' when calling IdVerificationApi-&amp;gt;CreateEmbeddedVerificationUrl</value>
   </data>
 </root>

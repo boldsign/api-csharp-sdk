@@ -980,7 +980,7 @@ namespace BoldSign.Api
             return new ApiResponse<ContactsDetails>(
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
-                (ContactsDetails)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(UserProperties)));
+                (ContactsDetails)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ContactsDetails)));
         }
 
         private static void ValidateCreateContactProperties(List<ContactDetails> contactDetailsList)

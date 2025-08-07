@@ -17,6 +17,7 @@ namespace BoldSign.Model
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text;
+    using BoldSign.Api.Model;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -87,7 +88,8 @@ namespace BoldSign.Model
         /// <param name="locale">Gets or sets the locale.</param>
         /// <param name="authenticationType">Gets or sets the authentication type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
-        public DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN,  AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
+        /// <param name="identityVerificationSettings">Gets or sets the identity verification settings.</param>
+        public DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN,  AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdentityVerificationSettings identityVerificationSettings = default)
         {
             // to ensure "name" is required (not null)
             if (string.IsNullOrEmpty(signerName))
@@ -107,6 +109,7 @@ namespace BoldSign.Model
             this.Locale = locale;
             this.AuthenticationType = authenticationType;
             this.PhoneNumber = phoneNumber;
+            this.IdentityVerificationSettings = identityVerificationSettings;
         }
 
         /// <summary>
@@ -225,6 +228,31 @@ namespace BoldSign.Model
         /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
         [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication retry count.
+        /// </summary>
+        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
+        public int? AuthenticationRetryCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable qualified electronic signature the document signer.
+        /// </summary>
+        [DataMember(Name = "enableQes", EmitDefaultValue = false)]
+        public bool? EnableQes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identity verification settings.
+        /// </summary>
+        /// <value>Gets the value of identity verification settings.</value>
+        [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
+        public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value for authentication settings.
+        /// </summary>
+        [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
+        public AuthenticationSettings AuthenticationSettings { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

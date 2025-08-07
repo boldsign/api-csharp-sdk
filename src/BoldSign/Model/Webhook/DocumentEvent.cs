@@ -171,5 +171,12 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "documentDownloadOption", EmitDefaultValue = true)]
         [JsonProperty("documentDownloadOption")]
         public DocumentDownloadOption? DocumentDownloadOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets the metadata.
+        /// </summary>
+        [DataMember(Name = "metaData", EmitDefaultValue = false)]
+        [JsonProperty("metaData")]
+        public Dictionary<string, string> MetaData { get; set; }
     }
 }

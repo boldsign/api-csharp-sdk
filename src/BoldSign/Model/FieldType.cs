@@ -104,5 +104,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Company")]
         Company = 14,
+
+        /// <summary>
+        /// Enum Formula for value: Formula
+        /// </summary>
+        [EnumMember(Value = "Formula")]
+        Formula = 15,
     }
 }

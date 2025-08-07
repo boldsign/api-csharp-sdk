@@ -15,6 +15,7 @@
 namespace BoldSign.Model
 {
     using System;
+    using BoldSign.Api.Model;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
@@ -41,6 +42,18 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "brandName", EmitDefaultValue = true)]
         public string BrandName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the custom domain settings.
+        /// </summary>
+        [DataMember(Name = "customDomainSettings", EmitDefaultValue = true)]
+        public CustomDomainSettings CustomDomainSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the domain is verified.
+        /// </summary>
+        [DataMember(Name = "isDomainVerified", EmitDefaultValue = true)]
+        public bool IsDomainVerified { get; set; }
 
         /// <summary>
         /// Gets or sets the background color.
@@ -150,6 +163,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "hideSave", EmitDefaultValue = true)]
         public bool HideSave { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document expiry settings.
+        /// </summary>
+        [DataMember(Name = "documentExpirySettings", EmitDefaultValue = true)]
+        public DocumentExpirySettings DocumentExpirySettings { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

@@ -103,6 +103,27 @@ namespace BoldSign.Model
         public long Timestamp { get; set; }
 
         /// <summary>
+        /// Gets or Sets Recipient changed log on edited document.
+        /// </summary>
+        /// <value>Gets the Recipient changed log on edited document.</value>
+        [DataMember(Name = "recipientChangeLog", EmitDefaultValue = false)]
+        public RecipientChangeLog RecipientChangeLog { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document changed log on edited document.
+        /// </summary>
+        /// <value>Gets the document changed log on edited document.</value>
+        [DataMember(Name = "documentChangeLog", EmitDefaultValue = false)]
+        public ModificationDetails DocumentChangeLog { get; set; }
+
+        /// <summary>
+        /// Gets or sets the field changed log on edited document.
+        /// </summary>
+        /// <value>Gets the field changed log on edited document.</value>
+        [DataMember(Name = "fieldChangeLog", EmitDefaultValue = false)]
+        public ModificationDetails FieldChangeLog { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

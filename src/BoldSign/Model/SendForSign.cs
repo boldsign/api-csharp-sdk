@@ -63,7 +63,7 @@ namespace BoldSign.Model
         /// Gets or sets the expiry date type.
         /// </summary>
         [JsonProperty("expiryDateType")]
-        public ExpiryDateType ExpiryDateType { get; set; }
+        public ExpiryDateType? ExpiryDateType { get; set; }
 
         /// <summary>
         ///  Number of days after which the document will expire.
@@ -149,7 +149,7 @@ namespace BoldSign.Model
         ///  If the document expires in one day, the email will be sent before 2 hours of the expiry.
         /// </summary>
         [JsonProperty("disableExpiryAlert")]
-        public bool DisableExpiryAlert { get; set; }
+        public bool? DisableExpiryAlert { get; set; }
 
         /// <summary>
         ///  Gets or sets a value indicating whether to enable print and sign mode.
@@ -188,10 +188,46 @@ namespace BoldSign.Model
         public DocumentDownloadOption? DocumentDownloadOption { get; set; }
 
         /// <summary>
+        /// Gets or sets the metadata.
+        /// </summary>
+        [JsonProperty("metaData")]
+        public Dictionary<string, string> MetaData { get; set; }
+
+        /// <summary>
+        /// Gets or sets form group values for grouped form fields.
+        /// </summary>
+        [DataMember(Name = "formGroups", EmitDefaultValue = false)]
+        public List<FormGroup> FormGroups { get; set; }
+
+        /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         [JsonProperty("recipientNotificationSettings")]
         [Display(Description = "Recipient Notification Settings of the document.")]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
+
+        /// <summary>
+        //// Gets or sets the download file name.
+        /// </summary>
+        [JsonProperty("downloadFileName")]
+        public string DownloadFileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document scheduled date value.
+        /// </summary>
+        [JsonProperty("scheduledSendTime")]
+        public long? ScheduledSendTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show send later option in embedded page.
+        /// </summary>
+        [JsonProperty("allowScheduledSend")]
+        public bool AllowScheduledSend { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
+        /// </summary>
+        [JsonProperty("enableAuditTrailLocalization")]
+        public bool? EnableAuditTrailLocalization { get; set; }
     }
 }

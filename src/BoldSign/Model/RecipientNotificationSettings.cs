@@ -90,5 +90,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "editDocument", EmitDefaultValue = true)]
         public bool EditDocument { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the document is viewed.
+        /// </summary>
+        [DataMember(Name = "viewed", EmitDefaultValue = true)]
+        public bool Viewed { get; set; }
     }
 }

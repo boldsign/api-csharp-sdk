@@ -298,6 +298,12 @@ namespace BoldSign.Model
         public string BackgroundHexColor { get; set; }
 
         /// <summary>
+        /// Gets or sets the resize option.
+        /// </summary>
+        [DataMember(Name = "resizeOption", EmitDefaultValue = true)]
+        public ResizeOptions? ResizeOption { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using BoldSign.Api;
+    using BoldSign.Api.Model;
     using BoldSign.Model;
 
     /// <summary>
@@ -54,6 +55,27 @@
                 );
 
             this.UserClient.UpdateUser(updateUsers);
+        }
+
+        /// <summary>
+        /// Updates user metadata.
+        /// This is an example user name, add your own user name upon usage.
+        /// This is an example user email, add your own identity email upon usage.
+        /// This is an example user metadata, add your own user metadata upon usage.
+        /// </summary>
+        public void UpdateUserWithMetadata()
+        {
+            var updateUserMetaData = new UpdateUserMetaData
+               (
+                   userId: "user-id",
+                   metaData: new Dictionary<string, string>
+                    {
+                        { "accountPlan", "Paid" },
+                        { "role", "Admin" },
+                    }
+               );
+
+            this.UserClient.UpdateUsersMetaData(updateUserMetaData);
         }
 
         /// <summary>

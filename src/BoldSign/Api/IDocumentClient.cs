@@ -177,11 +177,12 @@ namespace BoldSign.Api
         /// <param name="transmitType">Gets or sets the transmit type.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns></returns>
         TeamDocumentRecords ListTeamDocuments(int page = 1, int? pageSize = default, DateTime? startDate = default,
             List<Status> status = default, List<string> teamId = default, List<string> userId = default,
             DateTime? endDate = default, string searchKey = default, List<string> labels = default,
-            TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+            TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         /// List team documents with Http info.
@@ -198,11 +199,12 @@ namespace BoldSign.Api
         /// <param name="transmitType">Gets or sets the transmit type.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns></returns>
         ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page = 1, int? pageSize = default,
             DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
             List<string> userId = default, DateTime? endDate = default, string searchKey = default,
-            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         /// List team documents async.
@@ -219,11 +221,12 @@ namespace BoldSign.Api
         /// <param name="transmitType">Gets or sets the transmit type.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns></returns>
         Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page = 1, int? pageSize = default,
             DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
             List<string> userId = default, DateTime? endDate = default, string searchKey = default,
-            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         /// List team documents async with Http info.
@@ -240,11 +243,12 @@ namespace BoldSign.Api
         /// <param name="transmitType">Gets or sets the transmit type.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns></returns>
         Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default,
             DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
             List<string> userId = default, DateTime? endDate = default, string searchKey = default,
-            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
 
 
@@ -407,8 +411,9 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>DocumentRecords</returns>
-        DocumentRecords ListDocuments(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+        DocumentRecords ListDocuments(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         ///    List all user documents which can be filtered by date, time, sender, status, and so on.
@@ -426,8 +431,9 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         ///     List of behalf documents which can be filtered by status, page size and so on.
@@ -788,8 +794,9 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>Task of DocumentRecords</returns>
-        Task<DocumentRecords> ListDocumentsAsync(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+        Task<DocumentRecords> ListDocumentsAsync(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         ///    List all user documents which can be filtered by date, time, sender, status, and so on.
@@ -807,8 +814,9 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>Task of ApiResponse (DocumentRecords)</returns>
-        Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default);
+        Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         ///     List of behalf documents which can be filtered by status, page size and so on.
@@ -907,6 +915,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         void AddAuthentication(
             string documentId,
             string emailId = default,
@@ -914,7 +925,10 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default);
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -927,6 +941,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
@@ -935,7 +952,10 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default);
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -948,6 +968,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>AddAuthentication.</returns>
         Task AddAuthenticationAsync(
             string documentId,
@@ -956,7 +979,10 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default);
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -969,6 +995,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
@@ -977,7 +1006,10 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default);
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
         ///     Revoke the document with the given document ID.

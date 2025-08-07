@@ -38,5 +38,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "TimesRoman")]
         TimesRoman = 3,
+
+        /// <summary>
+        ///    Enum NotoSans for value: NotoSans
+        /// </summary>
+        [EnumMember(Value = "NotoSans")]
+        NotoSans = 4,
     }
 }

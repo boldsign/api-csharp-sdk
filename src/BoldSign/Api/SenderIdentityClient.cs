@@ -1070,21 +1070,22 @@ namespace BoldSign.Api
         {
             if (string.IsNullOrEmpty(senderIdentityRequest.Name))
             {
-                 throw new ApiException(422, ApiValidationMessages.RequiredName);
+                throw new ApiException(422, ApiValidationMessages.RequiredName);
             }
 
             if (!IsValidEmail(senderIdentityRequest.Email))
             {
-                 throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
+                throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
             }
         }
 
         private static void ValidateEditSenderIdentityProperties(SenderIdentityRequest editSenderIdentityRequest)
         {
             if (string.IsNullOrEmpty(editSenderIdentityRequest.Name) &&
-                string.IsNullOrEmpty(editSenderIdentityRequest.RedirectUrl?.ToString()))
+                string.IsNullOrEmpty(editSenderIdentityRequest.RedirectUrl?.ToString()) &&
+                (editSenderIdentityRequest.MetaData == null || editSenderIdentityRequest.MetaData.Count == 0))
             {
-                throw new ApiException(422, ApiValidationMessages.RequiredNameOrRedirectUrl);
+                throw new ApiException(422, ApiValidationMessages.RequiredNameOrRedirectUrlOrMetadata);
             }
 
             if (!IsValidEmail(editSenderIdentityRequest.Email))

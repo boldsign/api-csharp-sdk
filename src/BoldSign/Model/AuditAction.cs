@@ -379,5 +379,113 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "EditingCompleted")]
         EditingCompleted = 60,
+
+        /// <summary>
+        /// Cloned document with field values.
+        /// </summary>
+        [EnumMember(Value = "ClonedWithFieldValues")]
+        ClonedWithFieldValues = 61,
+
+        /// <summary>
+        /// Signer authentication initiated.
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationInitiated")]
+        IdentityVerificationInitiated = 62,
+
+        /// <summary>
+        /// Signer authentication removed.
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationRemoved")]
+        IdentityVerificationRemoved = 63,
+
+        /// <summary>
+        /// Signer authentication successfully completed.
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationCompleted")]
+        IdentityVerificationCompleted = 64,
+
+        /// <summary>
+        /// Signer authentication failed.
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationFailed")]
+        IdentityVerificationFailed = 65,
+
+        /// <summary>
+        /// Identity verification manually completed.
+        /// </summary>
+        [EnumMember(Value = "ManualIdentityVerificationCompleted")]
+        ManualIdentityVerificationCompleted = 66,
+
+        /// <summary>
+        /// Identity verification reset.
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationReset")]
+        IdentityVerificationReset = 67,
+
+        /// <summary>
+        /// Manual verification initiated.
+        /// </summary>
+        [EnumMember(Value = "ManualIdentityVerificationInitiated")]
+        ManualIdentityVerificationInitiated = 68,
+
+        /// <summary>
+        /// Id authentication removed.
+        /// </summary>
+        [EnumMember(Value = "IdVerificationRemoved")]
+        IdVerificationRemoved = 69,
+
+        /// <summary>
+        /// Id authentication added.
+        /// </summary>
+        [EnumMember(Value = "IdVerificationAdded")]
+        IdVerificationAdded = 70,
+
+        /// <summary>
+        /// Create embedded sign.
+        /// </summary>
+        [EnumMember(Value = "CreateEmbeddedVerificationLink")]
+        CreateEmbeddedVerificationLink = 71,
+
+        /// <summary>
+        /// submitted sensitive document downloaded.
+        /// </summary>
+        [EnumMember(Value = "SensitiveDataDownloaded")]
+        SensitiveDataDownloaded = 72,
+
+        /// <summary>
+        /// Id verification documents downloaded.
+        /// </summary>
+        [EnumMember(Value = "DownloadedVerificationData")]
+        DownloadedVerificationData = 73,
+
+        /// <summary>
+        /// Indicates that the QES verification process has been initiated.
+        /// </summary>
+        [EnumMember(Value = "QESVerificationInitiated")]
+        QESVerificationInitiated = 74,
+
+        /// <summary>
+        /// Indicates that the QES verification process has been successfully completed.
+        /// </summary>
+        [EnumMember(Value = "QESVerified")]
+        QESVerified = 75,
+
+        /// <summary>
+        /// Indicates that the QES verification process has been rejected.
+        /// </summary>
+        [EnumMember(Value = "QESRejected")]
+        QESRejected = 76,
+
+        /// <summary>
+        /// Indicates that the QES verification process has expired.
+        /// </summary>
+        [EnumMember(Value = "QESExpired")]
+        QESExpired = 77,
+
+        /// <summary>
+        /// Indicates that the QES verification process has been withdrawn.
+        /// </summary>
+        [EnumMember(Value = "QESWithdrawn")]
+        QESWithdrawn = 78,
     }
 }

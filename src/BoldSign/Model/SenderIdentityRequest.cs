@@ -5,6 +5,7 @@
 namespace BoldSign.Model
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
@@ -63,6 +64,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "redirectUrl", EmitDefaultValue = true)]
         public Uri RedirectUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets key-value pairs of metadata.
+        /// </summary>
+        [DataMember(Name = "metaData", EmitDefaultValue = true)]
+        public Dictionary<string, string> MetaData { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object.

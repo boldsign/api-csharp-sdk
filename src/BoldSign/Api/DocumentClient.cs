@@ -2932,10 +2932,11 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>DocumentRecords</returns>
-        public DocumentRecords ListDocuments(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public DocumentRecords ListDocuments(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
-            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType, nextCursor, brandIds);
+            var localVarResponse = this.ListDocumentsWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType, nextCursor, brandIds, dateFilterType);
 
             return localVarResponse.Data;
         }
@@ -2954,8 +2955,9 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
             // verify the required parameter 'page' is set
 
@@ -3020,6 +3022,11 @@ namespace BoldSign.Api
             if (transmitType != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
+            }
+
+            if (dateFilterType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DateFilterType", dateFilterType)); // query parameter
             }
 
             if (searchKey != null)
@@ -3082,10 +3089,11 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>Task of DocumentRecords</returns>
-        public async Task<DocumentRecords> ListDocumentsAsync(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public async Task<DocumentRecords> ListDocumentsAsync(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
-            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType, nextCursor, brandIds);
+            var localVarResponse = await this.ListDocumentsAsyncWithHttpInfo(page, pageSize, sentBy, recipients, startDate, status, endDate, searchKey, labels, transmitType, nextCursor, brandIds, dateFilterType);
 
             return localVarResponse.Data;
         }
@@ -3104,8 +3112,9 @@ namespace BoldSign.Api
         /// <param name="searchKey">Gets or sets the searchKey. (optional)</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>Task of ApiResponse (DocumentRecords)</returns>
-        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public async Task<ApiResponse<DocumentRecords>> ListDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
             // verify the required parameter 'page' is set
 
@@ -3175,6 +3184,11 @@ namespace BoldSign.Api
             if (transmitType != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
+            }
+
+            if (dateFilterType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DateFilterType", dateFilterType)); // query parameter
             }
 
             if (nextCursor != null)
@@ -3412,10 +3426,11 @@ namespace BoldSign.Api
         /// <param name="transmitType">transmitType.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>ApiResponse of TeamDocumentRecords.</returns>
-        public TeamDocumentRecords ListTeamDocuments(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public TeamDocumentRecords ListTeamDocuments(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
-            var localVarResponse = this.ListTeamDocumentsWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType, nextCursor, brandIds);
+            var localVarResponse = this.ListTeamDocumentsWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType, nextCursor, brandIds, dateFilterType);
 
             return localVarResponse.Data;
         }
@@ -3436,8 +3451,9 @@ namespace BoldSign.Api
         /// <param name="transmitType">transmitType.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>ApiResponse of TeamDocumentRecords.</returns>
-        public ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default,DateFilterType? dateFilterType = default)
         {
             ValidationForEndDate(startDate, endDate);
 
@@ -3501,6 +3517,11 @@ namespace BoldSign.Api
             if (transmitType != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
+            }
+
+            if (dateFilterType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DateFilterType", dateFilterType)); // query parameter
             }
 
             if (searchKey != null)
@@ -3563,10 +3584,11 @@ namespace BoldSign.Api
         /// <param name="transmitType">transmitType.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>Task of TeamDocumentRecords.</returns>
-        public async Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public async Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
-            var localVarResponse = await this.ListTeamDocumentsAsyncWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType, nextCursor, brandIds).ConfigureAwait(false);
+            var localVarResponse = await this.ListTeamDocumentsAsyncWithHttpInfo(page, pageSize, startDate, status, teamId, userId, endDate, searchKey, labels, transmitType, nextCursor, brandIds, dateFilterType).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
@@ -3587,8 +3609,9 @@ namespace BoldSign.Api
         /// <param name="transmitType">transmitType.</param>
         /// <param name="nextCursor">Gets or sets the nextCursor.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>Task of ApiResponse (TeamDocumentRecords).</returns>
-        public async Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default)
+        public async Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
             ValidationForEndDate(startDate, endDate);
 
@@ -3657,6 +3680,11 @@ namespace BoldSign.Api
             if (transmitType != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TransmitType", transmitType)); // query parameter
+            }
+
+            if (dateFilterType != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "DateFilterType", dateFilterType)); // query parameter
             }
 
             if (nextCursor != null)
@@ -4544,6 +4572,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         public void AddAuthentication(
             string documentId,
             string emailId = default,
@@ -4551,9 +4582,12 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default)
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default)
         {
-            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber);
+            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings);
         }
 
         /// <summary>
@@ -4567,6 +4601,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
@@ -4575,7 +4612,10 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default)
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4607,7 +4647,12 @@ namespace BoldSign.Api
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber);
+            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber, identityVerificationSettings)
+            {
+                AuthenticationRetryCount = authenticationRetryCount,
+                AuthenticationSettings = authenticationSettings
+            };
+
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -4705,6 +4750,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>AddAuthentication.</returns>
         public async Task AddAuthenticationAsync(
             string documentId,
@@ -4713,9 +4761,12 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default)
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default)
         {
-            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber).ConfigureAwait(false);
+            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -4729,6 +4780,9 @@ namespace BoldSign.Api
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         public async Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
@@ -4737,7 +4791,10 @@ namespace BoldSign.Api
             int? signerOrder = default,
             string newAccessCode = "",
             string onBehalfOf = default,
-            PhoneNumber phoneNumber = default)
+            PhoneNumber phoneNumber = default,
+            int? authenticationRetryCount = default,
+            IdentityVerificationSettings identityVerificationSettings = default,
+            AuthenticationSettings authenticationSettings = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4769,7 +4826,11 @@ namespace BoldSign.Api
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
             var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber);
+            var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber, identityVerificationSettings)
+            {
+                AuthenticationRetryCount = authenticationRetryCount,
+                AuthenticationSettings = authenticationSettings
+            };
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -5169,7 +5230,15 @@ namespace BoldSign.Api
             if (sendRequest.UseTextTags
                 && sendRequest.TextTagDefinitions != null
                 && sendRequest.TextTagDefinitions
-                    .Any(texTag => !string.IsNullOrEmpty(texTag.Value) && !(texTag.Type == FieldType.Label || texTag.Type == FieldType.TextBox || texTag.Type == FieldType.Dropdown || texTag.Type == FieldType.Hyperlink)))
+                    .Any(texTag => !string.IsNullOrEmpty(texTag.Value)
+                                   && !(texTag.Type == FieldType.Label
+                                        || texTag.Type == FieldType.TextBox
+                                        || texTag.Type == FieldType.Dropdown
+                                        || texTag.Type == FieldType.Hyperlink
+                                        || texTag.Type == FieldType.CheckBox
+                                        || texTag.Type == FieldType.RadioButton
+                                        || texTag.Type == FieldType.Image
+                                        || texTag.Type == FieldType.EditableDate)))
             {
                 throw new ApiException(422, ApiValidationMessages.TextTagValueNotSupported);
             }

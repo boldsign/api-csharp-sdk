@@ -149,5 +149,29 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [EnumMember(Value = "DraftCreated")]
         DraftCreated = 22,
+
+        /// <summary>
+        /// Identity verification initiated event
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationInitiated")]
+        IdentityVerificationInitiated = 23,
+
+        /// <summary>
+        /// Identity verification succeeded event
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationSucceeded")]
+        IdentityVerificationSucceeded = 24,
+
+        /// <summary>
+        /// Identity verification failed event
+        /// </summary>
+        [EnumMember(Value = "IdentityVerificationFailed")]
+        IdentityVerificationFailed = 25,
+
+        /// <summary>
+        /// Template send failed event.
+        /// </summary>
+        [EnumMember(Value = "TemplateSendFailed")]
+        TemplateSendFailed = 26,
     }
 }

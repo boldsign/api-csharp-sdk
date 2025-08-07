@@ -21,6 +21,7 @@
             var brandingExamples = new BrandingExamples(new BrandingClient(apiClient));
             var senderIdentityExamples = new SenderIdentityExamples(new SenderIdentityClient(apiClient));
             var customFieldExamples = new CustomFieldExamples(new CustomFieldClient(apiClient));
+            var idVerificationExamples = new IdVerificationExamples(new IdVerificationClient(apiClient));
             await documentExamples.CreateDocument().ConfigureAwait(false);
 
             // webhook event helpers
@@ -38,6 +39,12 @@
                 // if its a sender identity event, cast as SenderIdentityEvent
                 case WebHookEventType.SenderIdentityUpdated:
                     var senderIdentityEvent = webhookEvent.Data as SenderIdentityEvent;
+
+                    break;
+
+                // if its a identity verification event, cast as IdentityVerificationEvent
+                case WebHookEventType.IdentityVerificationInitiated:
+                    var identityVerificationEvent = webhookEvent.Data as IdentityVerificationEvent;
 
                     break;
             }

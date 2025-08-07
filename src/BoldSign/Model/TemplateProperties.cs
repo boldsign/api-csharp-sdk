@@ -155,6 +155,13 @@ namespace BoldSign.Model
         public List<RoleProperties> Roles { get; set; }
 
         /// <summary>
+        /// Gets or sets the form groups.
+        /// </summary>
+        /// <value>Gets or sets the form groups.</value>
+        [DataMember(Name = "formGroups", EmitDefaultValue = false)]
+        public List<FormGroup> FormGroups { get; set; }
+
+        /// <summary>
         /// Gets or sets common fields.
         /// </summary>
         [DataMember(Name = "commonFields", EmitDefaultValue = true)]

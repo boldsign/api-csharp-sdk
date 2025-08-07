@@ -4,6 +4,7 @@
 
 namespace BoldSign.Api.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
     using BoldSign.Model;
@@ -13,7 +14,7 @@ namespace BoldSign.Api.Model
     /// The merge and send for sign.
     /// </summary>
     [DataContract]
-    public class MergeAndSendForSign
+    public class MergeAndSendForSign: IDocumentUpload
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MergeAndSendForSign" /> class.
@@ -51,7 +52,7 @@ namespace BoldSign.Api.Model
             IEnumerable<DocumentCC> cc = default,
             int expiryDays = default,
             long expiryValue = 60,
-            ExpiryDateType expiryDateType = default(ExpiryDateType),
+            ExpiryDateType? expiryDateType = default,
             bool disableExpiryAlert = default,
             bool enablePrintAndSign = default,
             bool enableReassign = true,
@@ -81,6 +82,14 @@ namespace BoldSign.Api.Model
             this.OnBehalfOf = onBehalfOf;
             this.RoleRemovalIndices = roleRemovalIndices;
         }
+
+        /// <inheritdoc />
+        [JsonIgnore]
+        public List<IDocumentFile> Files { get; set; } = new List<IDocumentFile>();
+
+        /// <inheritdoc />
+        [JsonProperty("fileUrls")]
+        public List<Uri> FileUrls { get; set; } = new List<Uri>();
 
         /// <summary>
         /// Gets or sets the template Ids.
@@ -151,7 +160,7 @@ namespace BoldSign.Api.Model
         /// Gets or sets the expiry date type.
         /// </summary>
         [DataMember(Name = "expiryDateType", EmitDefaultValue = false)]
-        public ExpiryDateType ExpiryDateType { get; set; }
+        public ExpiryDateType? ExpiryDateType { get; set; }
 
         /// <summary>
         ///  Gets or sets number of days after which the document will expire.
@@ -217,10 +226,58 @@ namespace BoldSign.Api.Model
         public DocumentDownloadOption? DocumentDownloadOption { get; set; }
 
         /// <summary>
+        /// Gets or sets the metadata of the document.
+        /// </summary>
+        [DataMember(Name = "metaData", EmitDefaultValue = true)]
+        public Dictionary<string, string> MetaData { get; set; }
+
+        /// <summary>
+        /// Gets or sets form group values for grouped form fields.
+        /// </summary>
+        [DataMember(Name = "formGroups", EmitDefaultValue = false)]
+        public List<FormGroup> FormGroups { get; set; }
+
+        /// <summary>
         /// Gets or sets remove form fields id.
         /// </summary>
         [DataMember(Name = "removeFormFields", EmitDefaultValue = false)]
         public List<string> RemoveFormFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the download file name.
+        /// </summary>
+        [DataMember(Name = "downloadFileName", EmitDefaultValue = true)]
+        public string DownloadFileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document scheduled date value.
+        /// </summary>
+        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
+        public long? ScheduledSendTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show send later option in embedded page.
+        /// </summary>
+        [DataMember(Name = "AllowScheduledSend", EmitDefaultValue = false)]
+        public bool AllowScheduledSend { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to convert the text tags to form fields.
+        /// </summary>
+        [DataMember(Name = "useTextTags", EmitDefaultValue = false)]
+        public bool UseTextTags { get; set; }
+
+        /// <summary>
+        /// Gets or sets the text tags definitions declared in the list can be used in the document by using the definition ID.
+        /// </summary>
+        [DataMember(Name = "textTagDefinitions", EmitDefaultValue = false)]
+        public List<TextTagDefinition> TextTagDefinitions { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
+        /// </summary>
+        [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
+        public bool? EnableAuditTrailLocalization { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.
