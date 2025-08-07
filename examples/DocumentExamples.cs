@@ -43,7 +43,7 @@ namespace BoldSign.Examples
 
             return documents;
         }
-        
+
         /// <summary>
         ///     Lists the behalf documents.
         /// </summary>
@@ -505,11 +505,11 @@ namespace BoldSign.Examples
             formulaField1.FormulaFieldSettings = new FormulaFieldSettings {
                 FormulaExpression = "[textbox1] + 1",
                 DecimalPrecision = 1
-            };    
+            };
             formulaField2.FormulaFieldSettings = new FormulaFieldSettings {
                 FormulaExpression = "If([textbox1]>1,1,2)",
                 DecimalPrecision = 1
-            };        
+            };
             formulaField3.FormulaFieldSettings = new FormulaFieldSettings {
                 FormulaExpression = "Floor([textbox1]/2)",
                 DecimalPrecision = 1
@@ -576,7 +576,7 @@ namespace BoldSign.Examples
                     {"DocumentType","NDA"},{"DocumentCategory","Legal"}
                 },
             };
-            
+
 
             // document read from local as byte array
             var fileBytes = File.ReadAllBytes("doc-1.pdf");
@@ -610,7 +610,7 @@ namespace BoldSign.Examples
 
             return documentCreated;
         }
-        
+
         /// <summary>
         ///     Creates the document with Radio button.
         /// </summary>
@@ -652,7 +652,7 @@ namespace BoldSign.Examples
                         locale: Locales.EN),
                 },
             };
-            
+
 
             // document read from local as byte array
             var fileBytes = File.ReadAllBytes("doc-1.pdf");
@@ -721,7 +721,7 @@ namespace BoldSign.Examples
                 },
                 ScheduledSendTime = scheduledSendTime,
             };
-            
+
 
             // document read from local as byte array
             var fileBytes = File.ReadAllBytes("doc-1.pdf");
@@ -792,8 +792,8 @@ namespace BoldSign.Examples
 
             documentDetails.FileUrls = new List<Uri>()
             {
-                new Uri("https://documentmanipulatordev.blob.core.windows.net/dev-public/EBrochure.pdf"),
-                new Uri("https://documentmanipulatordev.blob.core.windows.net/dev-public/Brouchure2021.pdf")
+                new Uri("https://example.com/EBrochure.pdf"),
+                new Uri("https://example.com/Brouchure2021.pdf")
             };
             var documentCreated = this.DocumentClient.SendDocument(documentDetails);
 
@@ -836,7 +836,7 @@ namespace BoldSign.Examples
 
             documentDetails.FileUrls = new List<Uri>()
             {
-                new Uri("https://documentmanipulatordev.blob.core.windows.net/dev-public/sample.pdf")
+                new Uri("https://example.com/sample.pdf")
             };
             var documentCreated = this.DocumentClient.SendDocument(documentDetails);
 
@@ -965,7 +965,7 @@ namespace BoldSign.Examples
             // url to send the document from your web application
             var documentSendUrl = documentCreated.SendUrl;
         }
-        
+
         /// <summary>
         /// pre fill form field.
         /// </summary>
