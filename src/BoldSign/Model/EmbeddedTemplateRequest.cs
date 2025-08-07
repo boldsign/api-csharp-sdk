@@ -7,14 +7,14 @@ namespace BoldSign.Model
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
-
+    using BoldSign.Api.Model;
     using Newtonsoft.Json;
 
     /// <summary>
     ///     Embedded send request using template DTO.
     /// </summary>
     [DataContract(Name = "EmbeddedTemplateRequest")]
-    public class EmbeddedTemplateRequest : SendForSignFromTemplate, IEmbeddedRequest
+    public class EmbeddedTemplateRequest : SendForSignFromTemplate, IEmbeddedRequest, IDocumentUpload
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="EmbeddedTemplateRequest" /> class.

@@ -5,6 +5,7 @@ namespace BoldSign.Api
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using BoldSign.Api.Extensions;
     using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
@@ -21,6 +22,11 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(signRequestDetails.ExpiryValue), signRequestDetails.ExpiryValue.ToString(CultureInfo.CurrentCulture));
 
             localVarFormParams.Add(nameof(signRequestDetails.ExpiryDateType), signRequestDetails.ExpiryDateType.ToString());
+
+            if (signRequestDetails.ScheduledSendTime != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.ScheduledSendTime), signRequestDetails.ScheduledSendTime.Value.ToString(CultureInfo.CurrentCulture));
+            }
 
             if (signRequestDetails.Message != null)
             {
@@ -47,6 +53,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.TextTagDefinitions.ToList(), nameof(signRequestDetails.TextTagDefinitions));
             }
 
+            if (signRequestDetails.FormGroups != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.FormGroups.ToList(), nameof(signRequestDetails.FormGroups));
+            }
+
             if (signRequestDetails.Labels != null)
             {
                 var i = -1;
@@ -69,6 +80,11 @@ namespace BoldSign.Api
             if (!string.IsNullOrEmpty(signRequestDetails.OnBehalfOf))
             {
                 localVarFormParams.Add(nameof(signRequestDetails.OnBehalfOf), signRequestDetails.OnBehalfOf);
+            }
+
+            if (signRequestDetails.DownloadFileName != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.DownloadFileName), signRequestDetails.DownloadFileName);
             }
 
             if (signRequestDetails.ReminderSettings != null)
@@ -121,13 +137,28 @@ namespace BoldSign.Api
             {
                 localVarFormParams.Add(nameof(signRequestDetails.HideDocumentId), signRequestDetails.HideDocumentId == true ? "true" : "false");
             }
-            localVarFormParams.Add(nameof(signRequestDetails.DisableExpiryAlert), signRequestDetails.DisableExpiryAlert ? "true" : "false");
+
+            if (signRequestDetails.DisableExpiryAlert != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.DisableExpiryAlert), signRequestDetails.DisableExpiryAlert.Value ? "true" : "false");
+            }
             localVarFormParams.Add(nameof(signRequestDetails.EnablePrintAndSign), signRequestDetails.EnablePrintAndSign ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.EnableReassign), signRequestDetails.EnableReassign ? "true" : "false");
+            localVarFormParams.Add(nameof(signRequestDetails.AllowScheduledSend), signRequestDetails.AllowScheduledSend ? "true" : "false");
 
             if (signRequestDetails.DocumentDownloadOption != null)
             {
                 localVarFormParams.Add(nameof(signRequestDetails.DocumentDownloadOption), signRequestDetails.DocumentDownloadOption.ToString());
+            }
+
+            if (signRequestDetails.MetaData != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.MetaData, nameof(signRequestDetails.MetaData));
+            }
+
+            if (signRequestDetails.EnableAuditTrailLocalization != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.EnableAuditTrailLocalization), signRequestDetails.EnableAuditTrailLocalization == true ? "true" : "false");
             }
 
             return localVarFormParams;
@@ -190,6 +221,11 @@ namespace BoldSign.Api
                 InitializeRecipientNotificationSettings(localVarFormParams, templateRequest.RecipientNotificationSettings);
             }
 
+            if (templateRequest.FormGroups != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.FormGroups.ToList(), nameof(templateRequest.FormGroups));
+            }
+
             if (templateRequest is CreateEmbeddedTemplateRequest embeddedRequest)
             {
                 if (embeddedRequest.RedirectUrl != null)
@@ -201,7 +237,7 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(embeddedRequest.ShowSaveButton), embeddedRequest.ShowSaveButton ? "true" : "false");
 
 #pragma warning disable CS0618//Type or member is obsolete
-                if(embeddedRequest.ShowSendButton != null)
+                if (embeddedRequest.ShowSendButton != null)
                 {
                     localVarFormParams.Add(nameof(embeddedRequest.ShowSendButton), embeddedRequest.ShowSendButton == true ? "true" : "false");
                 }
@@ -285,6 +321,7 @@ namespace BoldSign.Api
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Reminders)}", recipientNotificationSettings.Reminders ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditRecipient)}", recipientNotificationSettings.EditRecipient ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditDocument)}", recipientNotificationSettings.EditDocument ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Viewed)}", recipientNotificationSettings.Viewed ? "true" : "false");
         }
 
         private static Dictionary<string, string> ToFormParameter(Dictionary<string, string> localVarFormParams, List<string> array, string parameterName)
@@ -329,25 +366,12 @@ namespace BoldSign.Api
 
                 var name = $"{parameterName}[{prop.Name}]";
 
-                if (prop.Name == "AcceptedFileTypes" && value is List<string>)
+                if (value is IEnumerable<string> items)
                 {
-                    var acceptedFileTypes = (List<string>)value;
-
-                    var i = -1;
-                    foreach (var acceptedFileType in acceptedFileTypes)
+                    var i = 0;
+                    foreach (var item in items)
                     {
-                        localVarFormParams.Add(name + "[" + ++i + "]", acceptedFileType?.ToString());
-                    }
-                }
-
-                if (prop.Name == "DropdownOptions" && value is List<string>)
-                {
-                    var dropdownOptions = (List<string>)value;
-
-                    var i = -1;
-                    foreach (var dropdownOption in dropdownOptions)
-                    {
-                        localVarFormParams.Add(name + "[" + ++i + "]", dropdownOption?.ToString());
+                        localVarFormParams.Add($"{name}[{i++}]", item);
                     }
                 }
 
@@ -363,6 +387,14 @@ namespace BoldSign.Api
                     }
                 }
                 else if (value is string || propertyType.IsPrimitive)
+                {
+                    localVarFormParams.Add(name, value.ToInvariantString());
+                }
+                else if (value is int)
+                {
+                    localVarFormParams.Add(name, value.ToString());
+                }
+                else if (value is bool)
                 {
                     localVarFormParams.Add(name, value.ToString());
                 }

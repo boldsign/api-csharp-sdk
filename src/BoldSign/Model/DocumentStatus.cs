@@ -55,5 +55,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Draft")]
         Draft = 6,
+
+        /// <summary>
+        ///     Enum Scheduled for value: Scheduled
+        /// </summary>
+        [EnumMember(Value = "Scheduled")]
+        Scheduled = 7,
     }
 }

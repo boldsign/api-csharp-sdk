@@ -37,5 +37,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "SMSOTP")]
         SMSOTP = 3,
+
+        /// <summary>
+        /// Represents IdVerification only.
+        /// </summary>
+        [EnumMember(Value = "IdVerification")]
+        IdVerification = 4,
     }
 }

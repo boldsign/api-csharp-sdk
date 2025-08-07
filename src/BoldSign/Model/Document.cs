@@ -41,7 +41,8 @@ namespace BoldSign.Model
         /// <param name="labels">Gets or sets the labels.</param>
         /// <param name="cursor">Gets or sets the cursor.</param>
         /// <param name="brandId">Gets or sets the brandId.</param>
-        public Document(string documentId = default, DocumentSenderDetail senderDetail = default, List<DocumentCcDetails> ccDetails = default, long createdDate = default, long? activityDate = default, string activityBy = default, string messageTitle = default, DocumentStatus? status = default, List<DocumentSignerDetails> signerDetails = default, long? expiryDate = default, bool enableSigningOrder = default, List<string> labels = default, long? cursor = default, string brandId = default)
+        /// <param name="scheduledSendTime">Gets or sets the scheduledSendTime.</param>
+        public Document(string documentId = default, DocumentSenderDetail senderDetail = default, List<DocumentCcDetails> ccDetails = default, long createdDate = default, long? activityDate = default, string activityBy = default, string messageTitle = default, DocumentStatus? status = default, List<DocumentSignerDetails> signerDetails = default, long? expiryDate = default, bool enableSigningOrder = default, List<string> labels = default, long? cursor = default, string brandId = default, long? scheduledSendTime = default)
         {
             this.DocumentId = documentId;
             this.CcDetails = ccDetails;
@@ -64,6 +65,7 @@ namespace BoldSign.Model
             this.Labels = labels;
             this.Cursor = cursor;
             this.BrandId = brandId;
+            this.ScheduledSendTime = scheduledSendTime;
         }
 
         /// <summary>
@@ -158,6 +160,13 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "brandId", EmitDefaultValue = false)]
         public string BrandId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document scheduled date.
+        /// </summary>
+        /// <value>Gets or sets the value indiacting document scheduled date.</value>
+        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = true)]
+        public long? ScheduledSendTime { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object

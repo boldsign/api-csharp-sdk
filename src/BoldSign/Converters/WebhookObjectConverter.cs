@@ -28,6 +28,7 @@ namespace BoldSign.Api.Converters
                 { WebhookConstants.Document, typeof(DocumentEvent) },
                 { WebhookConstants.SenderIdentity, typeof(SenderIdentityEvent) },
                 { WebhookConstants.Template, typeof(TemplateEvent) },
+                { WebhookConstants.IdentityVerification, typeof(IdentityVerificationEvent) },
             });
 
         private static readonly Type WebhookEventDataType = typeof(IWebhookData);

@@ -23,7 +23,7 @@ namespace BoldSign.Model
     ///     Return send for signature template details in which the document is in the form of.
     /// </summary>
     [DataContract]
-    public class SendForSignFromTemplate
+    public class SendForSignFromTemplate : IDocumentUpload
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="SendForSignFromTemplate" /> class.
@@ -147,7 +147,7 @@ namespace BoldSign.Model
         /// <summary>
         /// Gets or sets a value indicating whether to enable SMS notification.When disable sms is set to true, all the status sms and completed document sms will be stopped, and reminder is also automatically ignored.
         /// </summary>
-        [DataMember(Name ="disableSMS", EmitDefaultValue = true)]
+        [DataMember(Name = "disableSMS", EmitDefaultValue = true)]
         public bool DisableSMS { get; set; }
 
         /// <summary>
@@ -240,6 +240,26 @@ namespace BoldSign.Model
         public DocumentDownloadOption? DocumentDownloadOption { get; set; }
 
         /// <summary>
+        /// Gets or sets the metadata of the document.
+        /// </summary>
+        [DataMember(Name = "metaData", EmitDefaultValue = true)]
+        public Dictionary<string, string> MetaData { get; set; }
+
+        /// <inheritdoc />
+        [JsonIgnore]
+        public List<IDocumentFile> Files { get; set; } = new List<IDocumentFile>();
+
+        /// <inheritdoc />
+        [JsonProperty("fileUrls")]
+        public List<Uri> FileUrls { get; set; } = new List<Uri>();
+
+        /// <summary>
+        /// Gets or sets form group values for grouped form fields.
+        /// </summary>
+        [DataMember(Name = "formGroups", EmitDefaultValue = false)]
+        public List<FormGroup> FormGroups { get; set; }
+
+        /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         [JsonProperty("recipientNotificationSettings")]
@@ -251,6 +271,30 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "removeFormFields", EmitDefaultValue = false)]
         public List<string> RemoveFormFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the download file name.
+        /// </summary>
+        [DataMember(Name = "downloadFileName", EmitDefaultValue = true)]
+        public string DownloadFileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document scheduled date value.
+        /// </summary>
+        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
+        public long? ScheduledSendTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show send later option in embedded page.
+        /// </summary>
+        [DataMember(Name = "allowScheduledSend", EmitDefaultValue = false)]
+        public bool AllowScheduledSend { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
+        /// </summary>
+        [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
+        public bool? EnableAuditTrailLocalization { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

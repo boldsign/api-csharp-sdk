@@ -24,6 +24,7 @@ namespace BoldSign.Api
     using System.Threading.Tasks;
     using System.Web;
     using BoldSign.Api.Extensions;
+    using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
     using Newtonsoft.Json;
@@ -170,7 +171,7 @@ namespace BoldSign.Api
         /// <param name="fileUrlsParams">Gets or sets a fileUrlParams.</param>>
         /// <param name="singleFileParam">Gets or sets a singleFileParam.</param>>
         /// <returns>request.</returns>
-        internal HttpRequestMessage PrepareRequest(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<IDocumentFile>> fileParams, string contentType, Dictionary<string, Uri> fileUrlsParams,  KeyValuePair<string, IImageFile> singleFileParam)
+        internal HttpRequestMessage PrepareRequest(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<IDocumentFile>> fileParams, string contentType, Dictionary<string, Uri> fileUrlsParams, KeyValuePair<string, IImageFile> singleFileParam)
         {
             var pathUrl = BuildUri(path, queryParams);
             var request = new HttpRequestMessage(method, pathUrl);
@@ -195,33 +196,15 @@ namespace BoldSign.Api
                 {
                     if (file is DocumentFilePath documentFilePath)
                     {
-                        if (string.IsNullOrEmpty(documentFilePath.FilePath))
-                        {
-                            throw new ApiException(400, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFilePath.FilePath)));
-                        }
-
-                        if (string.IsNullOrEmpty(documentFilePath.ContentType))
-                        {
-                            throw new ApiException(422, ApiValidationMessages.UnsupportedFileType);
-                        }
-
-                        var fileContent = new ByteArrayContent(File.ReadAllBytes(documentFilePath.FilePath));
+                        var content = GetDocumentFromFilePath(documentFilePath);
+                        var fileContent = new ByteArrayContent(content);
                         fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFilePath.ContentType);
                         var fileName = Path.GetFileName(documentFilePath.FilePath);
                         form.Add(fileContent, param.Key, fileName);
                     }
                     else
                     {
-                        var documentFile = GetDocumentFile(file);
-                        if (string.IsNullOrEmpty(documentFile.FileName))
-                        {
-                            throw new ApiException(400, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFile.FileName)));
-                        }
-
-                        if (string.IsNullOrEmpty(documentFile.ContentType))
-                        {
-                            throw new ApiException(422, ApiValidationMessages.UnsupportedFileType);
-                        }
+                        var documentFile = GetDocumentFileWithValidation(file);
 
                         var byteArrayContent = new ByteArrayContent(documentFile.FileData);
                         byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFile.ContentType);
@@ -241,27 +224,27 @@ namespace BoldSign.Api
                 switch (singleFileParam.Value)
                 {
                     case ImageFileStream brandingFileStream:
-                    {
-                        HandleFileStream(brandingFileStream, key, form);
-                        break;
-                    }
+                        {
+                            HandleFileStream(brandingFileStream, key, form);
+                            break;
+                        }
 
                     case ImageFileBytes brandingFileBytes:
-                    {
-                        HandleFileBytes(brandingFileBytes, key, form);
-                        break;
-                    }
+                        {
+                            HandleFileBytes(brandingFileBytes, key, form);
+                            break;
+                        }
 
                     case ImageFilePath brandingFilePath:
-                    {
-                        HandleFilePath(brandingFilePath, key, form);
-                        break;
-                    }
+                        {
+                            HandleFilePath(brandingFilePath, key, form);
+                            break;
+                        }
 
                     default:
-                    {
-                        throw new InvalidOperationException(ApiValidationMessages.InvalidBrandFileInstance);
-                    }
+                        {
+                            throw new InvalidOperationException(ApiValidationMessages.InvalidBrandFileInstance);
+                        }
                 }
             }
 
@@ -285,6 +268,80 @@ namespace BoldSign.Api
             }
 
             return request;
+        }
+
+        internal static byte[] GetDocumentFromFilePath(DocumentFilePath documentFilePath)
+        {
+            if (string.IsNullOrEmpty(documentFilePath.FilePath))
+            {
+                throw new ApiException(400, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFilePath.FilePath)));
+            }
+
+            if (string.IsNullOrEmpty(documentFilePath.ContentType))
+            {
+                throw new ApiException(422, ApiValidationMessages.UnsupportedFileType);
+            }
+
+            var content = File.ReadAllBytes(documentFilePath.FilePath);
+
+            return content;
+        }
+
+        internal static DocumentFile GetDocumentFileWithValidation(IDocumentFile file)
+        {
+            var documentFile = GetDocumentFile(file);
+            if (string.IsNullOrEmpty(documentFile.FileName))
+            {
+                throw new ApiException(400, string.Format(CultureInfo.CurrentCulture, ApiValidationMessages.EmptyFields, nameof(documentFile.FileName)));
+            }
+
+            if (string.IsNullOrEmpty(documentFile.ContentType))
+            {
+                throw new ApiException(422, ApiValidationMessages.UnsupportedFileType);
+            }
+
+            return documentFile;
+        }
+
+        internal static T HandleJsonFileParams<T>(IDocumentUpload documentUpload, T documentUploadJson)
+            where T : IDocumentUploadJson
+        {
+            if (documentUpload == null || documentUploadJson == null)
+            {
+                return documentUploadJson;
+            }
+
+            documentUploadJson.Files = new List<string>();
+            documentUploadJson.FileUrls = new List<Uri>();
+
+            foreach (var file in documentUpload.Files ?? new List<IDocumentFile>())
+            {
+                string base64String;
+                string contentType;
+
+                if (file is DocumentFilePath documentFilePath)
+                {
+                    var content = GetDocumentFromFilePath(documentFilePath);
+
+                    base64String = Convert.ToBase64String(content);
+                    contentType = documentFilePath.ContentType;
+                }
+                else
+                {
+                    var documentFile = GetDocumentFileWithValidation(file);
+
+                    base64String = Convert.ToBase64String(documentFile.FileData);
+                    contentType = documentFile.ContentType;
+                }
+
+                // data:application/{{fileType}};base64,{{content}}
+                var dataUri = $"data:{contentType};base64,{base64String}";
+                documentUploadJson.Files.Add(dataUri);
+            }
+
+            documentUploadJson.FileUrls.AddRange(documentUpload.FileUrls ?? new List<Uri>());
+
+            return documentUploadJson;
         }
 
         /// <summary>
@@ -411,19 +468,19 @@ namespace BoldSign.Api
         internal string ParameterToString(object obj)
         {
             if (obj is DateTime)
-                // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
-                // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
-                // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
-                // For example: 2009-06-15T13:45:30.0000000
+            // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
+            // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
+            // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
+            // For example: 2009-06-15T13:45:30.0000000
             {
                 return ((DateTime)obj).ToString(this.Configuration.DateTimeFormat);
             }
 
             if (obj is DateTimeOffset)
-                // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
-                // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
-                // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
-                // For example: 2009-06-15T13:45:30.0000000
+            // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
+            // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
+            // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
+            // For example: 2009-06-15T13:45:30.0000000
             {
                 return ((DateTimeOffset)obj).ToString(this.Configuration.DateTimeFormat);
             }
@@ -515,6 +572,23 @@ namespace BoldSign.Api
             try
             {
                 return JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().GetAwaiter().GetResult(), type, this.serializerSettings);
+            }
+            catch (Exception e)
+            {
+                throw new ApiException(500, e.Message);
+            }
+        }
+
+        /// <summary>
+        ///     Deserialize the JSON string into a proper object.
+        /// </summary>
+        /// <param name="json">The string content.</param>
+        /// <returns>Object representation of the JSON string.</returns>
+        internal T Deserialize<T>(string json)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(json, this.serializerSettings);
             }
             catch (Exception e)
             {
@@ -735,7 +809,7 @@ namespace BoldSign.Api
         /// <returns>True if object is a collection type</returns>
         private static bool IsCollection(object value) => value is IList || value is ICollection;
 
-         private static void HandleFileBytes(ImageFileBytes brandLogoFileBytes, string key, MultipartFormDataContent form)
+        private static void HandleFileBytes(ImageFileBytes brandLogoFileBytes, string key, MultipartFormDataContent form)
         {
             var fileBytes = brandLogoFileBytes.FileBytes;
             if (fileBytes == null)

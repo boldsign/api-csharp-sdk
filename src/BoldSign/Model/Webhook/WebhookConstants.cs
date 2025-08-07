@@ -28,5 +28,10 @@ namespace BoldSign.Model.Webhook
         /// The object type.
         /// </summary>
         public const string ObjectType = "object";
+
+        /// <summary>
+        /// The identity verification object type.
+        /// </summary>
+        public const string IdentityVerification = "identityVerification";
     }
 }

@@ -120,5 +120,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "modifiedDate")]
         public long ModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the metaData of the user.
+        /// </summary>
+        [DataMember(Name = "MetaData")]
+        public Dictionary<string, string> MetaData { get; set; }
     }
 }

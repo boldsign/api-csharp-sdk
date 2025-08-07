@@ -189,6 +189,12 @@ namespace BoldSign.Api.Model
         public AttachmentInfo AttachmentInfo { get; set; }
 
         /// <summary>
+        /// Gets or sets the GroupName for grouped check box fields.
+        /// </summary>
+        [DataMember(Name = "groupName", EmitDefaultValue = false)]
+        public string GroupName { get; set; }
+
+        /// <summary>
         /// Gets or sets the Tab Index.
         /// </summary>
         [DataMember(Name = "tabIndex", EmitDefaultValue = false)]
@@ -200,5 +206,59 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "label", EmitDefaultValue = false)]
         public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Offset Position of textTag.
+        /// </summary>
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
+        public TextTagOffset Offset { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether is read only mode.
+        /// </summary>
+        /// <value>Gets or sets a value indicating wherther is read only mode.</value>
+        [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
+        public bool IsReadOnly { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data sync tag value and it's only applicable for textbox, image, dropdown, checkbox fields, it won't affect the other fields.
+        /// </summary>
+        /// <value>Gets or sets the DataSyncTag.</value>
+        [DataMember(Name = "dataSyncTag", EmitDefaultValue = true)]
+        public string DataSyncTag { get; set; }
+
+        /// <summary>
+        /// Gets or sets the TextAlign to be set to the form field.
+        /// </summary>
+        /// <value>Gets or sets the TextAlign.</value>
+        [DataMember(Name = "textAlign", EmitDefaultValue = true)]
+        public TextAlign TextAlign { get; set; }
+
+        /// <summary>
+        /// Gets or sets the direction of the text..
+        /// </summary>
+        /// <value>Gets or sets the direction of the text.</value>
+        [DataMember(Name = "textDirection", EmitDefaultValue = true)]
+        public TextDirection TextDirection { get; set; }
+
+        /// <summary>
+        /// Gets or sets the space of the character.
+        /// </summary>
+        /// <value>Gets or sets the characterSpacing.</value>
+        [DataMember(Name = "characterSpacing", EmitDefaultValue = true)]
+        public float CharacterSpacing { get; set; }
+
+        /// <summary>
+        /// Gets or sets the character limit.
+        /// </summary>
+        /// <value>Gets or sets the line height.</value>
+        [DataMember(Name = "characterLimit", EmitDefaultValue = true)]
+        public int CharacterLimit { get; set; }
+
+        /// <summary>
+        /// Gets or sets the resize option.
+        /// </summary>
+        [DataMember(Name = "resizeOption", EmitDefaultValue = true)]
+        public ResizeOptions? ResizeOption { get; set; }
     }
 }

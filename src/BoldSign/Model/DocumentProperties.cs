@@ -58,6 +58,8 @@ namespace BoldSign.Model
         /// <param name="expiryDateType">Gets or sets the expiry data type of the document..</param>
         /// <param name="expiryValue">Gets or sets the expiry value of the document..</param>
         /// <param name="documentDownloadOption">Gets or sets the document download option.</param>
+        /// <param name="downloadFileName">Gets or sets Download FileName.</param>
+        /// <param name="scheduledSendTime">Gets or sets the scheduledSendTime.</param>
         public DocumentProperties(
             string documentId = default(string),
             string messageTitle = default(string),
@@ -91,7 +93,9 @@ namespace BoldSign.Model
             BehalfOf behalfOf = default(BehalfOf),
             ExpiryDateType expiryDateType = default(ExpiryDateType),
             long? expiryValue = default(long?),
-            DocumentDownloadOption documentDownloadOption = default(DocumentDownloadOption))
+            DocumentDownloadOption documentDownloadOption = default(DocumentDownloadOption),
+            string downloadFileName = default(string),
+            long? scheduledSendTime = default(long?))
         {
             this.DocumentId = documentId;
             this.MessageTitle = messageTitle;
@@ -126,6 +130,8 @@ namespace BoldSign.Model
             this.ExpiryDateType = expiryDateType;
             this.ExpiryValue = expiryValue;
             this.DocumentDownloadOption = documentDownloadOption;
+            this.DownloadFileName = downloadFileName;
+            this.ScheduledSendTime = scheduledSendTime;
         }
 
         /// <summary>
@@ -174,6 +180,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets the signerDetails.</value>
         [DataMember(Name = "signerDetails", EmitDefaultValue = false)]
         public List<DocumentSignerDetails> SignerDetails { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form groups.
+        /// </summary>
+        /// <value>Gets or sets the form groups.</value>
+        [DataMember(Name = "formGroups", EmitDefaultValue = false)]
+        public List<FormGroup> FormGroups { get; set; }
 
         /// <summary>
         /// Gets or sets the common fields in the document.
@@ -360,11 +373,35 @@ namespace BoldSign.Model
         public DocumentDownloadOption DocumentDownloadOption { get; set; }
 
         /// <summary>
+        /// Gets or sets the metadata.
+        /// </summary>
+        [DataMember(Name = "metaData", EmitDefaultValue = false)]
+        public Dictionary<string, string> MetaData { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether enable downloadFileName.
+        /// </summary>
+        [DataMember(Name = "downloadFileName", EmitDefaultValue = false)]
+        public string DownloadFileName { get; set; }
+
+        /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
         [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document scheduled date value.
+        /// </summary>
+        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
+        public long? ScheduledSendTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether enable audit trail localization.
+        /// </summary>
+        [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
+        public bool EnableAuditTrailLocalization { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

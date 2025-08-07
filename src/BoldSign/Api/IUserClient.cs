@@ -6,6 +6,7 @@ namespace BoldSign.Api
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using BoldSign.Api.Model;
     using BoldSign.Model;
 
     /// <summary>
@@ -203,5 +204,32 @@ namespace BoldSign.Api
         /// <param name="search">The search key.</param>
         /// <returns>A Task.</returns>
         Task<ApiResponse<UserRecords>> ListUsersAsyncWithHttpInfo(int page, int? pageSize = default, string search = default);
+
+        /// <summary>
+        /// Updates the user's metadata.
+        /// </summary>
+        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        /// <returns>A Task.</returns>
+        Task UpdateUsersMetaDataAsync(UpdateUserMetaData updateUserMetaData);
+
+        /// <summary>
+        /// Updates the user's metadata.
+        /// </summary>
+        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        /// <returns>A Task.</returns>
+        Task<ApiResponse<object>> UpdateUserMetaDataAsyncWithHttpInfo(UpdateUserMetaData updateUserMetaData);
+
+        /// <summary>
+        /// Updates the user's metadata.
+        /// </summary>
+        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        void UpdateUsersMetaData(UpdateUserMetaData updateUserMetaData);
+
+        /// <summary>
+        /// Updates the user's metadata.
+        /// </summary>
+        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        /// <returns>A Task.</returns>
+        ApiResponse<object> UpdateUserMetaDataWithHttpInfo(UpdateUserMetaData updateUserMetaData);
     }
 }

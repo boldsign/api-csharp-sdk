@@ -31,5 +31,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "EmailAndSMS")]
         EmailAndSMS = 2,
+
+        /// <summary>
+        /// The enum for WhatsApp request type.
+        /// </summary>
+        [EnumMember(Value = "WhatsApp")]
+        WhatsApp = 3,
     }
 }

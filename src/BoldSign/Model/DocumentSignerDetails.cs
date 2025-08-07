@@ -16,6 +16,7 @@ namespace BoldSign.Model
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text;
+    using BoldSign.Model.Webhook;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -46,7 +47,8 @@ namespace BoldSign.Model
         /// <param name="locale">Gets or sets the locale.</param>
         /// <param name="authenticationType">Authentication type.</param>
         /// <param name="phoneNumber">The phone number.</param>
-        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>), string hostEmail = default(string), string hostName = default(string), Languages language = Languages.English, string locale = default(string), AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
+        /// <param name="idVerification">Gets or sets id verification details.</param>
+        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>), string hostEmail = default(string), string hostName = default(string), Languages language = Languages.English, string locale = default(string), AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdVerification.IdVerification idVerification = default)
         {
             this.SignerName = signerName;
             this.SignerRole = signerRole;
@@ -99,6 +101,7 @@ namespace BoldSign.Model
             this.Locale = locale;
             this.AuthenticationType = authenticationType;
             this.PhoneNumber = phoneNumber;
+            this.IdVerification = idVerification;
         }
 
         /// <summary>
@@ -252,6 +255,37 @@ namespace BoldSign.Model
         /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
         [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication retry count.
+        /// </summary>
+        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
+        public int? AuthenticationRetryCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id verification details.
+        /// </summary>
+        /// <value>Gets or sets id verification details.</value>
+        [DataMember(Name = "idVerification", EmitDefaultValue = false)]
+        public IdVerification.IdVerification IdVerification { get; set; }
+
+        /// <summary>
+        /// Gets or sets the enableQes.
+        /// </summary>
+        [DataMember(Name = "enableQes", EmitDefaultValue = true)]
+        public bool EnableQes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication settings for the signer.
+        /// </summary>
+        [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
+        public SignerAuthenticationSettings SignerAuthenticationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or Sets a delivery mode.
+        /// </summary>
+        [DataMember(Name = "deliveryMode", EmitDefaultValue = true)]
+        public DeliveryMode DeliveryMode { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

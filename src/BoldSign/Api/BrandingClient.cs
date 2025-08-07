@@ -531,6 +531,7 @@ namespace BoldSign.Api
 
             localVarFormParams.Add(nameof(createBrandData.BrandName), createBrandData.BrandName);
             localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(createBrandData.BrandLogo), createBrandData.BrandLogo);
+            AddCustomDomainSettingsToFormParams(createBrandData, localVarFormParams);
             localVarFormParams.Add(nameof(createBrandData.BackgroundColor), createBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonColor), createBrandData.ButtonColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonTextColor), createBrandData.ButtonTextColor);
@@ -546,7 +547,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.AllowCustomFieldCreation), createBrandData.AllowCustomFieldCreation ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ShowBuiltInFormFields), createBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ShowSharedCustomFields), createBrandData.ShowSharedCustomFields ? "true" : "false");
-
+            AddDocumentExpirySettingsToFormParams(createBrandData, localVarFormParams);
             if (createBrandData.HideDecline != null)
             {
                 localVarFormParams.Add(nameof(createBrandData.HideDecline), createBrandData.HideDecline.Value ? "true" : "false");
@@ -643,6 +644,7 @@ namespace BoldSign.Api
 
             localVarFormParams.Add(nameof(createBrandData.BrandName), createBrandData.BrandName);
             localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(createBrandData.BrandLogo), createBrandData.BrandLogo);
+            AddCustomDomainSettingsToFormParams(createBrandData, localVarFormParams);
             localVarFormParams.Add(nameof(createBrandData.BackgroundColor), createBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonColor), createBrandData.ButtonColor);
             localVarFormParams.Add(nameof(createBrandData.ButtonTextColor), createBrandData.ButtonTextColor);
@@ -658,6 +660,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.AllowCustomFieldCreation), createBrandData.AllowCustomFieldCreation ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ShowBuiltInFormFields), createBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ShowSharedCustomFields), createBrandData.ShowSharedCustomFields ? "true" : "false");
+            AddDocumentExpirySettingsToFormParams(createBrandData, localVarFormParams);
 
             if (createBrandData.HideDecline != null)
             {
@@ -760,6 +763,7 @@ namespace BoldSign.Api
             {
                 localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(editBrandData.BrandLogo), editBrandData.BrandLogo);
             }
+            AddCustomDomainSettingsToFormParams(editBrandData, localVarFormParams);
             localVarFormParams.Add(nameof(editBrandData.BackgroundColor), editBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonColor), editBrandData.ButtonColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonTextColor), editBrandData.ButtonTextColor);
@@ -775,7 +779,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.AllowCustomFieldCreation), editBrandData.AllowCustomFieldCreation ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ShowBuiltInFormFields), editBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ShowSharedCustomFields), editBrandData.ShowSharedCustomFields ? "true" : "false");
-
+            AddDocumentExpirySettingsToFormParams(editBrandData, localVarFormParams);
             if (editBrandData.HideDecline != null)
             {
                 localVarFormParams.Add(nameof(editBrandData.HideDecline), editBrandData.HideDecline.Value ? "true" : "false");
@@ -878,6 +882,7 @@ namespace BoldSign.Api
             {
                 localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(editBrandData.BrandLogo), editBrandData.BrandLogo);
             }
+            AddCustomDomainSettingsToFormParams(editBrandData, localVarFormParams);
             localVarFormParams.Add(nameof(editBrandData.BackgroundColor), editBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonColor), editBrandData.ButtonColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonTextColor), editBrandData.ButtonTextColor);
@@ -893,7 +898,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.AllowCustomFieldCreation), editBrandData.AllowCustomFieldCreation ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ShowBuiltInFormFields), editBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ShowSharedCustomFields), editBrandData.ShowSharedCustomFields ? "true" : "false");
-
+            AddDocumentExpirySettingsToFormParams(editBrandData, localVarFormParams);
             if (editBrandData.HideDecline != null)
             {
                 localVarFormParams.Add(nameof(editBrandData.HideDecline), editBrandData.HideDecline.Value ? "true" : "false");
@@ -1220,6 +1225,27 @@ namespace BoldSign.Api
                 (BrandDetails)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(BrandDetails)));
         }
 
+        private static void AddDocumentExpirySettingsToFormParams(BrandSettings brandSettings, Dictionary<string, string> localVarFormParams)
+        {
+            if (brandSettings.DocumentExpirySettings != null)
+            {
+                localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.ExpiryDateType)}", brandSettings.DocumentExpirySettings.ExpiryDateType?.ToString());
+                localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.ExpiryValue)}", brandSettings.DocumentExpirySettings.ExpiryValue?.ToString());
+                if (brandSettings.DocumentExpirySettings.EnableDefaultExpiryAlert != null)
+                {
+                    localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.EnableDefaultExpiryAlert)}", brandSettings.DocumentExpirySettings.EnableDefaultExpiryAlert.Value ? "true" : "false");
+                }
+
+                if (brandSettings.DocumentExpirySettings.EnableAutoReminder != null)
+                {
+                    localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.EnableAutoReminder)}", brandSettings.DocumentExpirySettings.EnableAutoReminder.Value ? "true" : "false");
+                }
+
+                localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.ReminderDays)}", brandSettings.DocumentExpirySettings.ReminderDays?.ToString());
+                localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.ReminderCount)}", brandSettings.DocumentExpirySettings.ReminderCount?.ToString());
+            }
+        }
+
         private static void ValidateBrandSettings(BrandSettings brandSettings)
         {
             if (string.IsNullOrEmpty(brandSettings.BrandName))
@@ -1243,6 +1269,16 @@ namespace BoldSign.Api
             if (!brandSettings.ShowBuiltInFormFields && brandSettings.AllowCustomFieldCreation)
             {
                 throw new ApiException(422, ApiValidationMessages.StandardFieldVisibilityErr);
+            }
+        }
+
+        private static void AddCustomDomainSettingsToFormParams(BrandSettings brandSettings,
+            Dictionary<string, string> localVarFormParams)
+        {
+            if (brandSettings.CustomDomainSettings != null)
+            {
+                localVarFormParams.Add($"{nameof(brandSettings.CustomDomainSettings)}.{nameof(brandSettings.CustomDomainSettings.DomainName)}", brandSettings.CustomDomainSettings.DomainName);
+                localVarFormParams.Add($"{nameof(brandSettings.CustomDomainSettings)}.{nameof(brandSettings.CustomDomainSettings.FromName)}", brandSettings.CustomDomainSettings.FromName);
             }
         }
     }

@@ -235,6 +235,12 @@ namespace BoldSign.Api.Model
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to enable qualified electronic signature the document signer.
+        /// </summary>
+        [DataMember(Name = "enableQes", EmitDefaultValue = false)]
+        public bool? EnableQes { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

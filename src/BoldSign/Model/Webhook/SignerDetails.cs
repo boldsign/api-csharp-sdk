@@ -22,6 +22,7 @@ namespace BoldSign.Model.Webhook
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.ComponentModel.DataAnnotations;
+    using BoldSign.Api.Model.Webhook.IdVerification;
 
     /// <summary>
     /// The document signer.
@@ -161,5 +162,25 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
         [JsonProperty("allowFieldConfiguration")]
         public bool AllowFieldConfiguration { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication retry count.
+        /// </summary>
+        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
+        public int? AuthenticationRetryCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id verification details.
+        /// </summary>
+        /// <value>Gets or sets id verification details.</value>
+        [DataMember(Name = "idVerification", EmitDefaultValue = false)]
+        [JsonProperty("idVerification")]
+        public IdVerification IdVerification { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication settings for the signer.
+        /// </summary>
+        [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
+        public SignerAuthenticationSettings SignerAuthenticationSettings { get; set; }
     }
 }

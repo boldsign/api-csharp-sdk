@@ -44,7 +44,7 @@ namespace BoldSign.Api
                 throw new ApiException(422, errorMessage);
             }
 
-            if ((files.Count > 0 && fileUrls.Count > 0) || (!isFillingEmbedded && files.Count == 0 && fileUrls.Count == 0))
+            if (ValidateBothFileParamUsed(request, false) || (!isFillingEmbedded && files.Count == 0 && fileUrls.Count == 0))
             {
                 var errorMessage = files.Count > 0 && fileUrls.Count > 0
                     ? ApiValidationMessages.BothFileParamUsed
@@ -52,6 +52,21 @@ namespace BoldSign.Api
 
                 throw new ApiException(422, errorMessage);
             }
+        }
+
+        public static bool ValidateBothFileParamUsed(IDocumentUpload request, bool throwException)
+        {
+            var files = request.Files ?? new List<IDocumentFile>();
+            var fileUrls = request.FileUrls ?? new List<Uri>();
+
+            var used = files.Count > 0 && fileUrls.Count > 0;
+
+            if (used && throwException)
+            {
+                throw new ApiException(422, ApiValidationMessages.BothFileParamUsed);
+            }
+
+            return used;
         }
 
         private static bool HasAnyFormFields(IDocumentUpload request)

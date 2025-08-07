@@ -359,5 +359,29 @@ namespace BoldSign.Api.Model
         [DataMember(Name = "tabIndex", EmitDefaultValue = true)]
         public int TabIndex { get; set; }
 
+        /// <summary>
+        /// Gets or sets the formula settings.
+        /// </summary>
+        [DataMember(Name = "formulaFieldSettings", EmitDefaultValue = false)]
+        public FormulaFieldSettings FormulaFieldSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the resize option.
+        /// </summary>
+        [DataMember(Name = "resizeOption", EmitDefaultValue = true)]
+        public ResizeOptions? ResizeOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow form fields to edit while sending document.
+        /// </summary>
+        [DataMember(Name = "allowEditFormField", EmitDefaultValue = true)]
+        public bool AllowEditFormField { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow form fields to delete while sending document.
+        /// </summary>
+        [DataMember(Name = "allowDeleteFormField", EmitDefaultValue = true)]
+        public bool AllowDeleteFormField { get; set; }
+
     }
 }

@@ -115,7 +115,13 @@ namespace BoldSign.Model
         /// <summary>
         /// Gets or sets a value indicating whether sender reminder.
         /// </summary>
-        [DataMember(Name = "Reminders", EmitDefaultValue = true)]
+        [DataMember(Name = "reminders", EmitDefaultValue = true)]
         public bool Reminders { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether signed documents are included with sign completion for sender identity.
+        /// </summary>
+        [DataMember(Name = "attachSignedDocument", EmitDefaultValue = true)]
+        public bool AttachSignedDocument { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace BoldSign.Examples
 {
+    using System.Collections.Generic;
     using BoldSign.Api;
     using BoldSign.Model;
 
@@ -28,6 +29,12 @@
             notificationSettings.Completed = true;
             notificationSettings.Sent = true;
             var request = new SenderIdentityRequest("Sender Identity", "identity@email.com", notificationSettings);
+            request.MetaData = new Dictionary<string, string>
+            {
+                { "tenantId", "xxxxx070-xxxx-xxxx-xxxx-757xxxxxxxxx" },
+                { "accountPlan", "Free" },
+                { "role", "Admin" },
+            };
             var senderIdentityCreated = this.senderIdentityClient.CreateSenderIdentity(request);
             return senderIdentityCreated;
         }
@@ -43,6 +50,23 @@
             notificationSettings.Completed = false;
             notificationSettings.Sent = false;
             var request = new SenderIdentityRequest("Edit Sender Identity", "identity@email.com", notificationSettings);
+            this.senderIdentityClient.UpdateSenderIdentity(request);
+        }
+
+        /// <summary>
+        /// Updates sender identity metadata.
+        /// This is an example sender identity name, add your own sender identity name upon usage.
+        /// This is an example sender identity email, add your own identity email upon usage.
+        /// This is an example sender identity metadata, add your own sender identity metadata upon usage.
+        /// </summary>
+        public void UpdateSenderIdentityWithMetadata()
+        {
+            var request = new SenderIdentityRequest(null, "identity2025@email.com", null);
+            request.MetaData = new Dictionary<string, string>
+            {
+                { "accountPlan", "Paid" },
+                { "role", "" },
+            };
             this.senderIdentityClient.UpdateSenderIdentity(request);
         }
 

@@ -796,16 +796,16 @@ namespace BoldSign.Api.Resources {
                 return ResourceManager.GetString("RequiredName", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to Either name or redirectUrl is required to update sender identity..
+        ///   Looks up a localized string similar to Either name or redirectUrl or metadata is required to update sender identity.
         /// </summary>
-        internal static string RequiredNameOrRedirectUrl {
+        internal static string RequiredNameOrRedirectUrlOrMetadata {
             get {
-                return ResourceManager.GetString("RequiredNameOrRedirectUrl", resourceCulture);
+                return ResourceManager.GetString("RequiredNameOrRedirectUrlOrMetadata", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Reviewer should not have any form fields..
         /// </summary>
@@ -978,7 +978,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Value property is supported for text tag definitions only for text box and label fields.
+        ///   Looks up a localized string similar to The Value property is supported for text tag definitions only for text boxes, labels, drop-downs, hyperlinks, checkboxes, radio buttons, images, and editable date fields..
         /// </summary>
         internal static string TextTagValueNotSupported {
             get {
@@ -1064,6 +1064,42 @@ namespace BoldSign.Api.Resources {
         internal static string WrongSignature {
             get {
                 return ResourceManager.GetString("WrongSignature", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&amp;gt;GetReport.
+        /// </summary>
+        internal static string DocumentIdReport {
+            get {
+                return ResourceManager.GetString("DocumentIdReport", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&amp;gt;GetImage.
+        /// </summary>
+        internal static string DocumentIdImage {
+            get {
+                return ResourceManager.GetString("DocumentIdImage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;fileId&apos; when calling IdVerificationApi-&amp;gt;GetImage.
+        /// </summary>
+        internal static string FileIdImage {
+            get {
+                return ResourceManager.GetString("FileIdImage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&amp;gt;CreateEmbeddedVerificationUrl.
+        /// </summary>
+        internal static string DocumentIdVerificationUrl {
+            get {
+                return ResourceManager.GetString("DocumentIdVerificationUrl", resourceCulture);
             }
         }
     }

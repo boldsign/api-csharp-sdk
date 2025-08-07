@@ -350,6 +350,38 @@ namespace BoldSign.Api
         Task<ApiResponse<EmbeddedSendCreated>> CreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedTemplateRequest send = default);
 
         /// <summary>
+        ///     Embedded send document using multiple templates.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSend">It contains template id's, signer details, cc details, files, etc.</param>
+        /// <returns>An ApiResponse (EmbeddedSendCreated).</returns>
+        EmbeddedSendCreated MergeCreateEmbeddedRequestUrl(EmbeddedMergeTemplateRequest mergeAndSend = default);
+
+        /// <summary>
+        ///     Embedded send document using multiple templates.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSend">It contains template id's, signer details, cc details, files, etc.</param>
+        /// <returns>An ApiResponse (EmbeddedSendCreated).</returns>
+        ApiResponse<EmbeddedSendCreated> MergeCreateEmbeddedRequestUrlWithHttpInfo(EmbeddedMergeTemplateRequest mergeAndSend = default);
+
+        /// <summary>
+        ///     Embedded send document using multiple templates.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSend">It contains template id's, signer details, cc details, files, etc.</param>
+        /// <returns>Task of ApiResponse (EmbeddedSendCreated).</returns>
+        Task<EmbeddedSendCreated> MergeCreateEmbeddedRequestUrlAsync(EmbeddedMergeTemplateRequest mergeAndSend = default);
+
+        /// <summary>
+        ///     Embedded send document using multiple templates.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSend">It contains template id's, signer details, cc details, files, etc.</param>
+        /// <returns>Task of ApiResponse (EmbeddedSendCreated).</returns>
+        Task<ApiResponse<EmbeddedSendCreated>> MergeCreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedMergeTemplateRequest mergeAndSend = default);
+
+        /// <summary>
         ///    Download the template for given template ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>

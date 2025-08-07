@@ -76,5 +76,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "redirectUrl")]
         public string RedirectUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets key-value pairs of metadata.
+        /// </summary>
+        [DataMember(Name = "metaData")]
+        public Dictionary<string, string> MetaData { get; set; }
     }
 }

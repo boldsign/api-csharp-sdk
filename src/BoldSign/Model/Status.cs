@@ -68,5 +68,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Expired")]
         Expired = 8,
+
+        /// <summary>
+        /// Represents Scheduled.
+        /// </summary>
+        [EnumMember(Value = "Scheduled")]
+        Scheduled = 9,
     }
 }

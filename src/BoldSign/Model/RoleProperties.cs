@@ -191,6 +191,12 @@ namespace BoldSign.Api.Model
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the enableQes.
+        /// </summary>
+        [DataMember(Name = "enableQes", EmitDefaultValue = true)]
+        public bool EnableQes { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

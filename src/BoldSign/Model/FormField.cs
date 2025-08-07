@@ -379,6 +379,12 @@ namespace BoldSign.Model
         public float CharacterSpacing { get; set; }
 
         /// <summary>
+        /// Gets or sets the formula settings.
+        /// </summary>
+        [DataMember(Name = "formulaFieldSettings", EmitDefaultValue = false)]
+        public FormulaFieldSettings FormulaFieldSettings { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
@@ -394,10 +400,37 @@ namespace BoldSign.Model
         public string BackgroundHexColor { get; set; }
 
         /// <summary>
+        /// Gets or sets the GroupName for grouped check box fields.
+        /// </summary>
+        [DataMember(Name = "groupName", EmitDefaultValue = false)]
+        public string GroupName { get; set; }
+
+        /// <summary>
         /// Gets or sets the Tab Index.
         /// </summary>
         [DataMember(Name = "tabIndex", EmitDefaultValue = false)]
         [Range(-1, int.MaxValue, ErrorMessage = "The minimum value must be -1 or higher")]
         public int? TabIndex { get; set; }
+
+        /// <summary>
+        /// Gets or sets the resize option.
+        /// </summary>
+        [DataMember(Name = "resizeOption", EmitDefaultValue = true)]
+        public ResizeOptions? ResizeOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow form fields to delete while sending document.
+        /// This setting is intended for use only with template creation and editing APIs.
+        /// </summary>
+        [DataMember(Name = "allowDeleteFormField", EmitDefaultValue = true)]
+        public bool? AllowDeleteFormField { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow form fields to edit while sending document.
+        /// This setting is intended for use only with template creation and editing APIs.
+        /// </summary>
+        [DataMember(Name = "allowEditFormField", EmitDefaultValue = true)]
+        public bool? AllowEditFormField { get; set; }
+
     }
 }

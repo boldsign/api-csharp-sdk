@@ -5,6 +5,7 @@
 namespace BoldSign.Model.Webhook
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
@@ -75,5 +76,11 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [JsonProperty("redirectUrl")]
         public string RedirectUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets key-value pairs of metadata.
+        /// </summary>
+        [JsonProperty("metaData")]
+        public Dictionary<string, string> MetaData { get; set; }
     }
 }

@@ -14,6 +14,7 @@
 
 namespace BoldSign.Api.Model
 {
+    using System;
     using BoldSign.Model;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
@@ -68,11 +69,27 @@ namespace BoldSign.Api.Model
         /// <summary>
         /// Gets or sets Style.
         /// </summary>
-        public FontStyle? Style { get; set; } = FontStyle.Regular;
+        [Obsolete("Style is deprecated, please use IsBoldFont, IsItalicFont and IsUnderLineFont.")]
+        public FontStyle? Style { get; set; }
 
         /// <summary>
         /// Gets or sets LineHeight.
         /// </summary>
         public int LineHeight { get; set; } = 17;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the font style is bold.
+        /// </summary>
+        public bool IsBoldFont { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the font style is italic.
+        /// </summary>
+        public bool IsItalicFont { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the font style is underline.
+        /// </summary>
+        public bool IsUnderLineFont { get; set; }
     }
 }
