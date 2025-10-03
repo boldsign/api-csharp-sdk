@@ -353,6 +353,12 @@ namespace BoldSign.Model
         public bool AllowDeleteFormField { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the form field is hidden.
+        /// </summary>
+        [DataMember(Name = "hidden", EmitDefaultValue = true)]
+        public bool Hidden { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

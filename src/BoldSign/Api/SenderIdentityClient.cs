@@ -1083,9 +1083,10 @@ namespace BoldSign.Api
         {
             if (string.IsNullOrEmpty(editSenderIdentityRequest.Name) &&
                 string.IsNullOrEmpty(editSenderIdentityRequest.RedirectUrl?.ToString()) &&
-                (editSenderIdentityRequest.MetaData == null || editSenderIdentityRequest.MetaData.Count == 0))
+                (editSenderIdentityRequest.MetaData == null || editSenderIdentityRequest.MetaData.Count == 0) &&
+                editSenderIdentityRequest.NotificationSettings == null)
             {
-                throw new ApiException(422, ApiValidationMessages.RequiredNameOrRedirectUrlOrMetadata);
+                throw new ApiException(422, ApiValidationMessages.UpdateSenderIdentityRequiredFailed);
             }
 
             if (!IsValidEmail(editSenderIdentityRequest.Email))

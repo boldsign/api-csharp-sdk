@@ -182,5 +182,13 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
         public SignerAuthenticationSettings SignerAuthenticationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last reminder sent on date time.
+        /// </summary>
+        /// <value>Gets or sets a value indicating whether gets or sets the Last reminder sent time.</value>
+        [DataMember(Name = "lastReminderSentOn", EmitDefaultValue = false)]
+        [JsonProperty("lastReminderSentOn")]
+        public long? LastReminderSentOn { get; set; }
     }
 }

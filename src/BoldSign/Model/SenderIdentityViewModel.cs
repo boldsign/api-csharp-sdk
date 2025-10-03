@@ -30,6 +30,12 @@ namespace BoldSign.Model
     public class SenderIdentityViewModel
     {
         /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
+        [DataMember(Name = "id")]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         [DataMember(Name = "name")]

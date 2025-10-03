@@ -194,11 +194,20 @@ namespace BoldSign.Model
                     throw new InvalidDataContractException(ApiValidationMessages.HyperlinkValueFieldsRequired);
                 }
 
-                string regex = @"(http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?";
-                var isValid = Regex.IsMatch(value, regex);
-                if (!isValid)
+                if (!string.IsNullOrEmpty(value) && value.StartsWith("mailto:", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    throw new InvalidDataContractException(ApiValidationMessages.EnterValidURL);
+                    var emailPart = value.Replace("mailto:", string.Empty).Trim();
+                    if (!Regex.IsMatch(emailPart, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                    {
+                        throw new InvalidDataContractException(ApiValidationMessages.InvalidEmailAddress);
+                    }
+                }
+                else if (!string.IsNullOrEmpty(value) && !value.StartsWith("tel:", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    if (!Uri.TryCreate(value, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+                    {
+                        throw new InvalidDataContractException(ApiValidationMessages.EnterValidURL);
+                    }
                 }
             }
         }
