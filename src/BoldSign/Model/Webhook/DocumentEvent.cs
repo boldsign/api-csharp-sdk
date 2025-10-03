@@ -20,6 +20,7 @@ namespace BoldSign.Model.Webhook
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using BoldSign.Api.Model.Webhook;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.ComponentModel.DataAnnotations;
@@ -178,5 +179,12 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "metaData", EmitDefaultValue = false)]
         [JsonProperty("metaData")]
         public Dictionary<string, string> MetaData { get; set; }
+
+        /// <summary>
+        /// Gets or sets the failed delivery mode.
+        /// </summary>
+        [DataMember(Name = "failedDeliveryMode", EmitDefaultValue = false)]
+        [JsonProperty("failedDeliveryMode")]
+        public FailedDeliveryMode? FailedDeliveryMode { get; set; }
     }
 }

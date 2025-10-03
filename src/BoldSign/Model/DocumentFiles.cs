@@ -58,6 +58,20 @@ namespace BoldSign.Model
         public int? PageCount { get; set; }
 
         /// <summary>
+        /// Gets or Sets TemplateName.
+        /// </summary>
+        /// <value>Gets the value of templateName.</value>
+        [DataMember(Name = "templateName", EmitDefaultValue = false)]
+        public string TemplateName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TemplateId.
+        /// </summary>
+        /// <value>Gets the value of tempalateId.</value>
+        [DataMember(Name = "templateId", EmitDefaultValue = false)]
+        public string TemplateId { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

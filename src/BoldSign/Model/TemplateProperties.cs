@@ -59,7 +59,7 @@ namespace BoldSign.Model
             string description = default(string),
             string documentTitle = default(string),
             string documentMessage = default(string),
-            List<DocumentFiles> files = default(List<DocumentFiles>),
+            List<TemplateFiles> files = default(List<TemplateFiles>),
             List<RoleProperties> roles = default(List<RoleProperties>),
             List<TemplateFormField> commonFields = default(List<TemplateFormField>),
             List<string> cCDetails = default(List<string>),
@@ -146,7 +146,7 @@ namespace BoldSign.Model
         /// </summary>
         /// <value>Gets or Sets document uploaded file information.</value>
         [DataMember(Name = "files", EmitDefaultValue = false)]
-        public List<DocumentFiles> Files { get; set; }
+        public List<TemplateFiles> Files { get; set; }
 
         /// <summary>
         /// Gets or sets roles details.

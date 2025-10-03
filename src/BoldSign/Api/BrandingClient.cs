@@ -537,6 +537,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.ButtonTextColor), createBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(createBrandData.CanHideTagLine), createBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.CombineAuditTrail), createBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.CombineAttachments), createBrandData.CombineAttachments ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ExcludeAuditTrailFromEmail), createBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.IsDefault), createBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.RedirectUrl), createBrandData.RedirectUrl);
@@ -650,6 +651,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.ButtonTextColor), createBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(createBrandData.CanHideTagLine), createBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.CombineAuditTrail), createBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(createBrandData.CombineAttachments), createBrandData.CombineAttachments ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ExcludeAuditTrailFromEmail), createBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.IsDefault), createBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.RedirectUrl), createBrandData.RedirectUrl);
@@ -769,6 +771,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.ButtonTextColor), editBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(editBrandData.CanHideTagLine), editBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.CombineAuditTrail), editBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.CombineAttachments), editBrandData.CombineAttachments ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ExcludeAuditTrailFromEmail), editBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.IsDefault), editBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.RedirectUrl), editBrandData.RedirectUrl);
@@ -888,6 +891,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.ButtonTextColor), editBrandData.ButtonTextColor);
             localVarFormParams.Add(nameof(editBrandData.CanHideTagLine), editBrandData.CanHideTagLine ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.CombineAuditTrail), editBrandData.CombineAuditTrail ? "true" : "false");
+            localVarFormParams.Add(nameof(editBrandData.CombineAttachments), editBrandData.CombineAttachments ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ExcludeAuditTrailFromEmail), editBrandData.ExcludeAuditTrailFromEmail ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.IsDefault), editBrandData.IsDefault ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.RedirectUrl), editBrandData.RedirectUrl);

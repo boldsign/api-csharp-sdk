@@ -105,6 +105,12 @@ namespace BoldSign.Model
         public bool CombineAuditTrail { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the attachments should be combined to document while downloading.
+        /// </summary>
+        [DataMember(Name = "combineAttachments", EmitDefaultValue = true)]
+        public bool CombineAttachments { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether exclude audit trail from email can be enabled or not.
         /// </summary>
         [DataMember(Name = "excludeAuditTrailFromEmail", EmitDefaultValue = true)]
