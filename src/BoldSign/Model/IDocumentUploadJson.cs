@@ -1,4 +1,4 @@
-﻿// <copyright file="IDocumentUploadJson.cs" company="Syncfusion Inc">
+﻿// <copyright file="IDocumentUpload.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 

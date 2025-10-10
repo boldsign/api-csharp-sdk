@@ -1,7 +1,6 @@
 ﻿// <copyright file="AuthenticationFrequency.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
-
 namespace BoldSign.Api.Model
 {
     /// <summary>

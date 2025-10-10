@@ -272,7 +272,6 @@ namespace BoldSign.Model
         /// <summary>
         /// Gets or sets the character spacing.
         /// </summary>
-        /// <value>Gets the value of character spacing.</value>
         [DataMember(Name = "characterSpacing", EmitDefaultValue = false)]
         public float CharacterSpacing { get; set; }
 

@@ -1,4 +1,4 @@
-// <copyright file="TemplateEvent.cs" company="Syncfusion Inc">
+﻿// <copyright file="TemplateEvent.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -54,6 +54,12 @@ namespace BoldSign.Api.Model.Webhook.Template
         public DateTime? ActivityDate { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to allow new files while using this template to send a document.
+        /// </summary>
+        [JsonProperty("allowNewFiles")]
+        public bool? AllowNewFiles { get; set; }
+
+        /// <summary>
         /// Gets or sets the activityBy.
         /// </summary>
         [JsonProperty("activityBy")]
@@ -66,22 +72,16 @@ namespace BoldSign.Api.Model.Webhook.Template
         public string MessageTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the status.
-        /// </summary>
-        [JsonProperty("status")]
-        public DocumentStatus Status { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to allow new files while using this template to send a document.
-        /// </summary>
-        [JsonProperty("allowNewFiles")]
-        public bool? AllowNewFiles { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether to allow senders to replace or delete files.
         /// </summary>
         [JsonProperty("allowModifyFiles")]
         public bool? AllowModifyFiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets the status.
+        /// </summary>
+        [JsonProperty("status")]
+        public DocumentStatus Status { get; set; }
 
         /// <summary>
         /// Gets or sets the signerDetails.

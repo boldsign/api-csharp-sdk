@@ -222,7 +222,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&amp;gt;GetImage.
+        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&gt;GetImage.
         /// </summary>
         internal static string DocumentIdImage {
             get {
@@ -231,7 +231,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&amp;gt;GetReport.
+        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&gt;GetReport.
         /// </summary>
         internal static string DocumentIdReport {
             get {
@@ -258,7 +258,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&amp;gt;CreateEmbeddedVerificationUrl.
+        ///   Looks up a localized string similar to Missing required parameter &apos;documentId&apos; when calling IdVerificationApi-&gt;CreateEmbeddedVerificationUrl.
         /// </summary>
         internal static string DocumentIdVerificationUrl {
             get {
@@ -276,7 +276,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to document info is missing for the  signer’s language {0}..
+        ///   Looks up a localized string similar to The document info is missing for the  signer’s language {0}..
         /// </summary>
         internal static string DocumentInfoMissing {
             get {
@@ -285,7 +285,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Document title is required for document info..
+        ///   Looks up a localized string similar to Document title is required for document info.
         /// </summary>
         internal static string DocumentTitleRequired {
             get {
@@ -420,7 +420,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only one document info is allowed per signer language..
+        ///   Looks up a localized string similar to Only one document info is allowed per signer language.
         /// </summary>
         internal static string ExtraLanguageValues {
             get {
@@ -474,7 +474,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;fileId&apos; when calling IdVerificationApi-&amp;gt;GetImage.
+        ///   Looks up a localized string similar to Missing required parameter &apos;fileId&apos; when calling IdVerificationApi-&gt;GetImage.
         /// </summary>
         internal static string FileIdImage {
             get {
@@ -483,11 +483,11 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;files&apos; when calling DocumentApi-&gt;SendDocument.
+        ///   Looks up a localized string similar to Please use either Files parameter or FileUrls parameter, but not both.
         /// </summary>
-        internal static string FilesIsSet {
+        internal static string FileOrFileUrl {
             get {
-                return ResourceManager.GetString("FilesIsSet", resourceCulture);
+                return ResourceManager.GetString("FileOrFileUrl", resourceCulture);
             }
         }
         
@@ -519,7 +519,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide group name for radio button form field..
+        ///   Looks up a localized string similar to Please provide group name for radio button form field.
         /// </summary>
         internal static string GroupNameRequired {
             get {
@@ -843,7 +843,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Role Name is Required..
+        ///   Looks up a localized string similar to Role Name is Required.
         /// </summary>
         internal static string RoleName {
             get {
@@ -852,20 +852,11 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Roles cannot be null or empty..
+        ///   Looks up a localized string similar to Roles cannot be null or empty.
         /// </summary>
         internal static string RolesRequired {
             get {
                 return ResourceManager.GetString("RolesRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Both title and the document information cannot be present for a single document..
-        /// </summary>
-        internal static string SameProperty {
-            get {
-                return ResourceManager.GetString("SameProperty", resourceCulture);
             }
         }
         
@@ -969,7 +960,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing required parameter &apos;templateId&apos; when calling TemplateApi-&gt;GetProperties.
+        ///   Looks up a localized string similar to Missing required parameter &amp;amp;apos;templateId&amp;amp;apos; when calling TemplateApi-&amp;amp;gt;GetProperties..
         /// </summary>
         internal static string TemplateIdIsSet {
             get {
@@ -1032,7 +1023,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title or Document Information of the document is required..
+        ///   Looks up a localized string similar to Title or document information of the document is required..
         /// </summary>
         internal static string TitleOrDocumentInfoIsRequired {
             get {

@@ -19,6 +19,7 @@ namespace BoldSign.Api
     using System.Net.Http;
     using System.Threading.Tasks;
     using BoldSign.Api.Model;
+    using BoldSign.Api.Model.EditDocument;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
 
@@ -123,7 +124,7 @@ namespace BoldSign.Api
         /// <param name="newSignerName">The new name of the recipient.</param>
         /// <param name="newSignerEmail">The new  email address of recipient.</param>
         /// <param name="signerOrder"> The signer order.</param>
-        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
         /// <param name="oldPhoneNumber">The Old Signer Phone Number.</param>
         public void ChangeRecipient(
@@ -2521,7 +2522,7 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional).</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
         /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
@@ -2535,8 +2536,8 @@ namespace BoldSign.Api
                 throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->GetEmbeddedSignLink");
             }
 
-            // verify the required parameter 'signerEmail' or 'countryCode' and 'phoneNumber' is set
-            if (signerEmail == null  && (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(phoneNumber)))
+            // verify the required parameter 'signerEmail'  or 'countryCode' and 'phoneNumber' is set
+            if (signerEmail == null && (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(phoneNumber)))
             {
                 throw new ApiException(400, "Missing required parameter 'signerEmail' or 'countryCode' and 'phoneNumber' when calling DocumentApi->GetEmbeddedSignLink");
             }
@@ -2632,7 +2633,7 @@ namespace BoldSign.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional).</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
         /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
@@ -3453,7 +3454,7 @@ namespace BoldSign.Api
         /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>ApiResponse of TeamDocumentRecords.</returns>
-        public ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default,DateFilterType? dateFilterType = default)
+        public ApiResponse<TeamDocumentRecords> ListTeamDocumentsWithHttpInfo(int page = 1, int? pageSize = default, DateTime? startDate = default, List<Status> status = default, List<string> teamId = default, List<string> userId = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default)
         {
             ValidationForEndDate(startDate, endDate);
 
@@ -4571,9 +4572,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         public void AddAuthentication(
             string documentId,
@@ -4583,11 +4584,11 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default)
         {
-            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings);
+            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, identityVerificationSettings, authenticationRetryCount, authenticationSettings);
         }
 
         /// <summary>
@@ -4600,9 +4601,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public ApiResponse<object> AddAuthenticationWithHttpInfo(
@@ -4613,8 +4614,8 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default)
         {
             // verify the required parameter 'documentId' is set
@@ -4652,7 +4653,6 @@ namespace BoldSign.Api
                 AuthenticationRetryCount = authenticationRetryCount,
                 AuthenticationSettings = authenticationSettings
             };
-
             object localVarPostBody;
 
             // to determine the Content-Type header
@@ -4749,9 +4749,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>AddAuthentication.</returns>
         public async Task AddAuthenticationAsync(
@@ -4762,11 +4762,11 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default)
         {
-            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings).ConfigureAwait(false);
+            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, identityVerificationSettings, authenticationRetryCount, authenticationSettings).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -4779,9 +4779,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         public async Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
@@ -4792,8 +4792,8 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default)
         {
             // verify the required parameter 'documentId' is set
@@ -4917,7 +4917,7 @@ namespace BoldSign.Api
                 null);
         }
 
-         /// <summary>
+        /// <summary>
         ///     Pre fill  form fields.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
@@ -4949,7 +4949,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, "Missing required parameter 'prefillField' when calling DocumentApi->PrefillFields");
             }
 
-            var localVarPath = "/v1/document/prefillFields";
+            var localVarPath = "/v1-beta/document/prefillFields";
 
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
@@ -5075,7 +5075,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, "Missing required parameter 'prefillField' when calling DocumentApi->PrefillFields");
             }
 
-            var localVarPath = "/v1/document/prefillFields";
+            var localVarPath = "/v1-beta/document/prefillFields";
 
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
@@ -5168,6 +5168,341 @@ namespace BoldSign.Api
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 null);
+        }
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>DocumentProperties</returns>
+        public async Task<DocumentCreated> SendDocumentFromDraftAsync(string documentId)
+        {
+            var localVarResponse = await this.SendDocumentFromDraftAsyncWithHttpInfo(documentId).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>ApiResponse of DocumentProperties</returns>
+        public async Task<ApiResponse<DocumentCreated>> SendDocumentFromDraftAsyncWithHttpInfo(string documentId)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->draftSend");
+            }
+
+            var localVarPath = "/v1-beta/document/draftSend";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new string[]
+            {
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "documentId", documentId)); // query parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("draftSend", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>DocumentProperties</returns>
+        public DocumentCreated SendDocumentFromDraft(string documentId)
+        {
+            var localVarResponse = this.SendDocumentFromDraftWithHttpInfo(documentId);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>ApiResponse of DocumentProperties</returns>
+        public ApiResponse<DocumentCreated> SendDocumentFromDraftWithHttpInfo(string documentId)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->draftSend");
+            }
+
+            var localVarPath = "/v1-beta/document/draftSend";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new string[]
+            {
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "documentId", documentId)); // query parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("draftSend", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>DocumentEdited</returns>
+        public DocumentEdited EditDocument(EditDocumentRequest editDocumentRequest)
+        {
+            var localVarResponse = this.EditDocumentWithHttpInfo(editDocumentRequest);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of DocumentCreated</returns>
+        public ApiResponse<DocumentEdited> EditDocumentWithHttpInfo(EditDocumentRequest editDocumentRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (editDocumentRequest == null || editDocumentRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->EditDocument");
+            }
+
+            var localVarPath = "/v1-beta/document/edit";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<EditDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            //query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", editDocumentRequest.DocumentId));
+
+            if (editDocumentRequest.Files?.Count > 0)
+            {
+                localVarFileParams.Add("Files", editDocumentRequest.Files);
+            }
+
+            localVarFormParams = FromRequestHelper.ConvertToFormRequestForEditDocument(editDocumentRequest, localVarFormParams);
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApiForEdit(localVarPath, HttpMethod.Put,
+                localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarHttpContentType);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("EditDocument", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentEdited>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentEdited)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentEdited)));
+        }
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of DocumentEdited</returns>
+        public async Task<DocumentEdited> EditDocumentAsync(EditDocumentRequest editDocumentRequest)
+        {
+            var localVarResponse = await this.EditDocumentAsyncWithHttpInfo(editDocumentRequest);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (DocumentEdited)</returns>
+        public async Task<ApiResponse<DocumentEdited>> EditDocumentAsyncWithHttpInfo(EditDocumentRequest editDocumentRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (editDocumentRequest == null || editDocumentRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->EditDocument");
+            }
+
+            var localVarPath = "/v1-beta/document/edit";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<EditDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            //query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", editDocumentRequest.DocumentId));
+
+            if (editDocumentRequest.Files?.Count > 0)
+            {
+                localVarFileParams.Add("Files", editDocumentRequest.Files);
+            }
+
+            localVarFormParams = FromRequestHelper.ConvertToFormRequestForEditDocument(editDocumentRequest, localVarFormParams);
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiForEditAsync(localVarPath,
+                HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams, localVarHttpContentType).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("EditDocument", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentEdited>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentEdited)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentEdited)));
         }
 
         private static void ValidateSendProperties(SendForSign sendRequest)

@@ -243,184 +243,184 @@ namespace BoldSign.Model
         AutoReminderOFF = 37,
 
         /// <summary>
-        /// Resume document signing  by user.
-        /// </summary>
-        [EnumMember(Value = "ResumeDocumentSigning")]
-        ResumeDocumentSigning = 38,
-
-        /// <summary>
-        /// Email otp authentication added.
-        /// </summary>
-        [EnumMember(Value = "EmailOTPAuthenticationAdded")]
-        EmailOTPAuthenticationAdded = 39,
-
-        /// <summary>
-        /// Email otp authentication removed.
-        /// </summary>
-        [EnumMember(Value = "EmailOTPAuthenticationRemoved")]
-        EmailOTPAuthenticationRemoved = 40,
-
-        /// <summary>
-        /// Email otp verified.
-        /// </summary>
-        [EnumMember(Value = "EmailOTPVerified")]
-        EmailOTPVerified = 41,
-
-        /// <summary>
-        /// Email otp authentication failed.
-        /// </summary>
-        [EnumMember(Value = "EmailOTPAuthenticationFailed")]
-        EmailOTPAuthenticationFailed = 42,
-
-        /// <summary>
-        /// Email otp resend.
-        /// </summary>
-        [EnumMember(Value = "EmailOTPResend")]
-        EmailOTPResend = 43,
-
-        /// <summary>
-        /// Unlock Email OTP by user.
-        /// </summary>
-        [EnumMember(Value = "UnlockEmailOTP")]
-        UnlockEmailOTP = 44,
-
-        /// <summary>
-        /// Email authentication added.
-        /// </summary>
-        [EnumMember(Value = "EmailAuthenticationAdded")]
-        EmailAuthenticationAdded = 45,
-
-        /// <summary>
-        /// Email authentication removed.
-        /// </summary>
-        [EnumMember(Value = "EmailAuthenticationRemoved")]
-        EmailAuthenticationRemoved = 46,
-
-        /// <summary>
-        /// Email otp verify.
-        /// </summary>
-        [EnumMember(Value = "EmailOtpVerify")]
-        EmailOtpVerify = 47,
-
-        /// <summary>
-        /// Email authentication failed.
-        /// </summary>
-        [EnumMember(Value = "EmailAuthenticationFailed")]
-        EmailAuthenticationFailed = 48,
-
-        /// <summary>
         /// SMS OTP.
         /// </summary>
         [EnumMember(Value = "SMSOTP")]
-        SMSOTP = 49,
+        SMSOTP = 38,
 
         /// <summary>
         /// Phone number changes.
         /// </summary>
         [EnumMember(Value = "PhoneNumberChanged")]
-        PhoneNumberChanged = 50,
+        PhoneNumberChanged = 39,
 
         /// <summary>
         ///  Unlocked sms otp.
         /// </summary>
         [EnumMember(Value = "UnlockedSMSOTP")]
-        UnlockedSMSOTP = 51,
+        UnlockedSMSOTP = 40,
 
         /// <summary>
         /// Sms authentication added.
         /// </summary>
         [EnumMember(Value = "SMSAuthenticationAdded")]
-        SMSAuthenticationAdded = 52,
+        SMSAuthenticationAdded = 41,
 
         /// <summary>
         /// Sms authentication removed.
         /// </summary>
         [EnumMember(Value = "SMSAuthenticationRemoved")]
-        SMSAuthenticationRemoved = 53,
+        SMSAuthenticationRemoved = 42,
 
         /// <summary>
         /// Sms otp verify.
         /// </summary>
         [EnumMember(Value = "SMSOTPVerified")]
-        SMSOTPVerified = 54,
+        SMSOTPVerified = 43,
 
         /// <summary>
         /// Sms authentication failed.
         /// </summary>
         [EnumMember(Value = "SMSAuthenticationFailed")]
-        SMSAuthenticationFailed = 55,
+        SMSAuthenticationFailed = 44,
+
+        /// <summary>
+        /// Unlock Email OTP by user.
+        /// </summary>
+        [EnumMember(Value = "UnlockEmailOTP")]
+        UnlockEmailOTP = 45,
+
+        /// <summary>
+        /// Email authentication added.
+        /// </summary>
+        [EnumMember(Value = "EmailAuthenticationAdded")]
+        EmailAuthenticationAdded = 46,
+
+        /// <summary>
+        /// Email authentication removed.
+        /// </summary>
+        [EnumMember(Value = "EmailAuthenticationRemoved")]
+        EmailAuthenticationRemoved = 47,
+
+        /// <summary>
+        /// Email otp verify.
+        /// </summary>
+        [EnumMember(Value = "EmailOtpVerify")]
+        EmailOtpVerify = 48,
+
+        /// <summary>
+        /// Email authentication failed.
+        /// </summary>
+        [EnumMember(Value = "EmailAuthenticationFailed")]
+        EmailAuthenticationFailed = 49,
 
         /// <summary>
         /// SMS otp resend.
         /// </summary>
         [EnumMember(Value = "SMSOTPResend")]
-        SMSOTPResend = 56,
+        SMSOTPResend = 50,
 
         /// <summary>
-        /// Generated Signing Link.
+        /// Email otp resend.
         /// </summary>
-        [EnumMember(Value = "GeneratedSigningLink")]
-        GeneratedSigningLink = 57,
+        [EnumMember(Value = "EmailOTPResend")]
+        EmailOTPResend = 51,
 
         /// <summary>
-        /// Document Editing Initiated.
+        /// Resume document signing  by user.
         /// </summary>
-        [EnumMember(Value = "EditingInitiated")]
-        EditingInitiated = 58,
+        [EnumMember(Value = "ResumeDocumentSigning")]
+        ResumeDocumentSigning = 52,
 
         /// <summary>
-        /// Document Editing Cancelled.
+        /// Email otp authentication added.
         /// </summary>
-        [EnumMember(Value = "EditingCancelled")]
-        EditingCancelled = 59,
+        [EnumMember(Value = "EmailOTPAuthenticationAdded")]
+        EmailOTPAuthenticationAdded = 53,
 
         /// <summary>
-        /// Document Editing Completed.
+        /// Email otp authentication removed.
         /// </summary>
-        [EnumMember(Value = "EditingCompleted")]
-        EditingCompleted = 60,
+        [EnumMember(Value = "EmailOTPAuthenticationRemoved")]
+        EmailOTPAuthenticationRemoved = 54,
 
         /// <summary>
-        /// Cloned document with field values.
+        /// Email otp verified.
         /// </summary>
-        [EnumMember(Value = "ClonedWithFieldValues")]
-        ClonedWithFieldValues = 61,
+        [EnumMember(Value = "EmailOTPVerified")]
+        EmailOTPVerified = 55,
+
+        /// <summary>
+        /// Email otp authentication failed.
+        /// </summary>
+        [EnumMember(Value = "EmailOTPAuthenticationFailed")]
+        EmailOTPAuthenticationFailed = 56,
 
         /// <summary>
         /// Signer authentication initiated.
         /// </summary>
         [EnumMember(Value = "IdentityVerificationInitiated")]
-        IdentityVerificationInitiated = 62,
+        IdentityVerificationInitiated = 57,
 
         /// <summary>
         /// Signer authentication removed.
         /// </summary>
         [EnumMember(Value = "IdentityVerificationRemoved")]
-        IdentityVerificationRemoved = 63,
+        IdentityVerificationRemoved = 58,
 
         /// <summary>
         /// Signer authentication successfully completed.
         /// </summary>
         [EnumMember(Value = "IdentityVerificationCompleted")]
-        IdentityVerificationCompleted = 64,
+        IdentityVerificationCompleted = 59,
 
         /// <summary>
         /// Signer authentication failed.
         /// </summary>
         [EnumMember(Value = "IdentityVerificationFailed")]
-        IdentityVerificationFailed = 65,
+        IdentityVerificationFailed = 60,
+
+        /// <summary>
+        /// Id verification documents downloaded.
+        /// </summary>
+        [EnumMember(Value = "DownloadedVerificationData")]
+        DownloadedVerificationData = 61,
 
         /// <summary>
         /// Identity verification manually completed.
         /// </summary>
         [EnumMember(Value = "ManualIdentityVerificationCompleted")]
-        ManualIdentityVerificationCompleted = 66,
+        ManualIdentityVerificationCompleted = 62,
 
         /// <summary>
         /// Identity verification reset.
         /// </summary>
         [EnumMember(Value = "IdentityVerificationReset")]
-        IdentityVerificationReset = 67,
+        IdentityVerificationReset = 63,
+
+        /// <summary>
+        /// Create embedded sign.
+        /// </summary>
+        [EnumMember(Value = "CreateEmbeddedVerificationLink")]
+        CreateEmbeddedVerificationLink = 64,
+
+        /// <summary>
+        /// submitted sensitive document downloaded.
+        /// </summary>
+        [EnumMember(Value = "SensitiveDataDownloaded")]
+        SensitiveDataDownloaded = 65,
+
+        /// <summary>
+        /// Id authentication removed.
+        /// </summary>
+        [EnumMember(Value = "IdVerificationRemoved")]
+        IdVerificationRemoved = 66,
+
+        /// <summary>
+        /// Id authentication added.
+        /// </summary>
+        [EnumMember(Value = "IdVerificationAdded")]
+        IdVerificationAdded = 67,
 
         /// <summary>
         /// Manual verification initiated.
@@ -429,34 +429,34 @@ namespace BoldSign.Model
         ManualIdentityVerificationInitiated = 68,
 
         /// <summary>
-        /// Id authentication removed.
+        /// Generated Signing Link.
         /// </summary>
-        [EnumMember(Value = "IdVerificationRemoved")]
-        IdVerificationRemoved = 69,
+        [EnumMember(Value = "GeneratedSigningLink")]
+        GeneratedSigningLink = 69,
 
         /// <summary>
-        /// Id authentication added.
+        /// Document Editing Initiated.
         /// </summary>
-        [EnumMember(Value = "IdVerificationAdded")]
-        IdVerificationAdded = 70,
+        [EnumMember(Value = "EditingInitiated")]
+        EditingInitiated = 70,
 
         /// <summary>
-        /// Create embedded sign.
+        /// Document Editing Cancelled.
         /// </summary>
-        [EnumMember(Value = "CreateEmbeddedVerificationLink")]
-        CreateEmbeddedVerificationLink = 71,
+        [EnumMember(Value = "EditingCancelled")]
+        EditingCancelled = 71,
 
         /// <summary>
-        /// submitted sensitive document downloaded.
+        /// Document Editing Completed.
         /// </summary>
-        [EnumMember(Value = "SensitiveDataDownloaded")]
-        SensitiveDataDownloaded = 72,
+        [EnumMember(Value = "EditingCompleted")]
+        EditingCompleted = 72,
 
         /// <summary>
-        /// Id verification documents downloaded.
+        /// Cloned document with field values.
         /// </summary>
-        [EnumMember(Value = "DownloadedVerificationData")]
-        DownloadedVerificationData = 73,
+        [EnumMember(Value = "ClonedWithFieldValues")]
+        ClonedWithFieldValues = 73,
 
         /// <summary>
         /// Indicates that the QES verification process has been initiated.
@@ -487,5 +487,17 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "QESWithdrawn")]
         QESWithdrawn = 78,
+
+        /// <summary>
+        /// Indicates that the document has been resend after collaborative editing for approval.
+        /// </summary>
+        [EnumMember(Value = "ResentForApproval")]
+        ResentForApproval = 79,
+
+        /// <summary>
+        /// Indicates that the document fields has been changed during collaboration.
+        /// </summary>
+        [EnumMember(Value = "DocumentFieldMarkup")]
+        DocumentFieldMarkup = 80,
     }
 }

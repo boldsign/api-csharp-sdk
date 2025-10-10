@@ -162,7 +162,7 @@ namespace BoldSign.Model
         /// Gets or sets the document expiry settings.
         /// </summary>
         [DataMember(Name = "documentExpirySettings", EmitDefaultValue = true)]
-        public DocumentExpirySettings DocumentExpirySettings { get; set; }
+        public DocumentExpirySettings DocumentExpirySettings { get; set; } = new DocumentExpirySettings();
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

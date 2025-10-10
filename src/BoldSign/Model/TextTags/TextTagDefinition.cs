@@ -195,11 +195,16 @@ namespace BoldSign.Api.Model
         public string GroupName { get; set; }
 
         /// <summary>
-        /// Gets or sets the Tab Index.
+        ///  Gets or sets a value indicating whether is read only mode.
         /// </summary>
-        [DataMember(Name = "tabIndex", EmitDefaultValue = false)]
-        [Range(-1, int.MaxValue, ErrorMessage = "The minimum value must be -1 or higher")]
-        public int? TabIndex { get; set; }
+        [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
+        public bool IsReadOnly { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Offset Position of textTag.
+        /// </summary>
+        [DataMember(Name = "Offset", EmitDefaultValue = false)]
+        public TextTagOffset Offset { get; set; }
 
         /// <summary>
         /// Gets or sets the label.
@@ -208,17 +213,11 @@ namespace BoldSign.Api.Model
         public string Label { get; set; }
 
         /// <summary>
-        /// Gets or sets the Offset Position of textTag.
+        /// Gets or sets the image info.
         /// </summary>
-        [DataMember(Name = "offset", EmitDefaultValue = false)]
-        public TextTagOffset Offset { get; set; }
-
-        /// <summary>
-        ///  Gets or sets a value indicating whether is read only mode.
-        /// </summary>
-        /// <value>Gets or sets a value indicating wherther is read only mode.</value>
-        [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
-        public bool IsReadOnly { get; set; }
+        [DataMember(Name = "tabIndex", EmitDefaultValue = false)]
+        [Range(-1, int.MaxValue, ErrorMessage = "The minimum value must be -1 or higher")]
+        public int? TabIndex { get; set; }
 
         /// <summary>
         /// Gets or sets the data sync tag value and it's only applicable for textbox, image, dropdown, checkbox fields, it won't affect the other fields.
@@ -254,6 +253,12 @@ namespace BoldSign.Api.Model
         /// <value>Gets or sets the line height.</value>
         [DataMember(Name = "characterLimit", EmitDefaultValue = true)]
         public int CharacterLimit { get; set; }
+
+        /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "CollaborationSettings", EmitDefaultValue = false)]
+        public CollaborationSettings CollaborationSettings { get; set; }
 
         /// <summary>
         /// Gets or sets the resize option.

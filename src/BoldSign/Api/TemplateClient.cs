@@ -28,7 +28,6 @@ namespace BoldSign.Api
     public class TemplateClient : ITemplateClient
     {
         private static readonly HttpMethod PatchHttpMethod = new HttpMethod("PATCH");
-
         // verify the Filesize is within 100MB
 #pragma warning disable SA1203
         private const long MaxFileSize = 104857600;
@@ -284,190 +283,6 @@ namespace BoldSign.Api
                 null);
         }
 
-        /// <inheritdoc/>
-        public void EditTemplate(EditTemplateRequest editTemplate)
-        {
-            this.EditTemplateWithHttpInfo(editTemplate);
-        }
-
-        /// <inheritdoc/>
-        public ApiResponse<object> EditTemplateWithHttpInfo(EditTemplateRequest editTemplate)
-        {
-            if (editTemplate == null)
-            {
-                throw new ArgumentNullException(nameof(editTemplate));
-            }
-
-            var localVarPath = "/v1/template/edit";
-            var localVarQueryParams = new List<KeyValuePair<string, string>>();
-            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<string, string>();
-            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
-            var localVarFileUrlParams = new Dictionary<string, Uri>();
-            object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            string[] localVarHttpContentTypes =
-            {
-                "application/json;odata.metadata=minimal;odata.streaming=true",
-                "application/json;odata.metadata=minimal;odata.streaming=false",
-                "application/json;odata.metadata=minimal",
-                "application/json;odata.metadata=full;odata.streaming=true",
-                "application/json;odata.metadata=full;odata.streaming=false",
-                "application/json;odata.metadata=full",
-                "application/json;odata.metadata=none;odata.streaming=true",
-                "application/json;odata.metadata=none;odata.streaming=false",
-                "application/json;odata.metadata=none",
-                "application/json;odata.streaming=true",
-                "application/json;odata.streaming=false",
-                "application/json",
-                "application/xml",
-                "application/prs.odatatestxx-odata",
-                "text/json",
-                "application/_*+json",
-            };
-            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            string[] localVarHttpHeaderAccepts =
-            {
-                "application/json",
-            };
-            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-
-            if (localVarHttpHeaderAccept != null)
-            {
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            }
-
-            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", editTemplate.TemplateId)); // query parameter
-
-            if (editTemplate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(editTemplate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = editTemplate; // byte array
-            }
-
-            // authentication (Bearer) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
-            }
-
-            // make the HTTP request
-            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
-
-            var localVarStatusCode = (int)localVarResponse.StatusCode;
-
-            var exception = this.ExceptionFactory?.Invoke("EditTemplate", localVarResponse);
-
-            if (exception != null)
-            {
-                throw exception;
-            }
-
-            return new ApiResponse<object>(
-                localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
-                null);
-        }
-
-
-        /// <inheritdoc/>
-        public async Task EditTemplateAsync(EditTemplateRequest editTemplate)
-        {
-            await this.EditTemplateWithHttpInfoAsync(editTemplate).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc/>
-        public async Task<ApiResponse<object>> EditTemplateWithHttpInfoAsync(EditTemplateRequest editTemplate)
-        {
-            if (editTemplate == null)
-            {
-                throw new ArgumentNullException(nameof(editTemplate));
-            }
-
-            var localVarPath = "/v1/template/edit";
-            var localVarQueryParams = new List<KeyValuePair<string, string>>();
-            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<string, string>();
-            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
-            var localVarFileUrlParams = new Dictionary<string, Uri>();
-            object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            string[] localVarHttpContentTypes =
-            {
-                "application/json;odata.metadata=minimal;odata.streaming=true",
-                "application/json;odata.metadata=minimal;odata.streaming=false",
-                "application/json;odata.metadata=minimal",
-                "application/json;odata.metadata=full;odata.streaming=true",
-                "application/json;odata.metadata=full;odata.streaming=false",
-                "application/json;odata.metadata=full",
-                "application/json;odata.metadata=none;odata.streaming=true",
-                "application/json;odata.metadata=none;odata.streaming=false",
-                "application/json;odata.metadata=none",
-                "application/json;odata.streaming=true",
-                "application/json;odata.streaming=false",
-                "application/json",
-                "application/xml",
-                "application/prs.odatatestxx-odata",
-                "text/json",
-                "application/_*+json",
-            };
-            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            string[] localVarHttpHeaderAccepts =
-            {
-                "application/json",
-            };
-            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-
-            if (localVarHttpHeaderAccept != null)
-            {
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            }
-
-            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", editTemplate.TemplateId)); // query parameter
-
-            if (editTemplate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(editTemplate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = editTemplate; // byte array
-            }
-
-            // authentication (Bearer) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
-            }
-
-            // make the HTTP request
-            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
-
-            var localVarStatusCode = (int)localVarResponse.StatusCode;
-
-            var exception = this.ExceptionFactory?.Invoke("EditTemplate", localVarResponse);
-
-            if (exception != null)
-            {
-                throw exception;
-            }
-
-            return new ApiResponse<object>(
-                localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
-                null);
-        }
-
-
         /// <summary>
         ///     List all the templates created.
         /// </summary>
@@ -478,7 +293,7 @@ namespace BoldSign.Api
         /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
         /// <param name="createdBy">Gets or sets the created by.</param>
         /// <param name="templateLabels">Gets or sets the template labels.</param>
-        /// <param name="startDate">Gets or sets the start date.</param>
+        /// /// <param name="startDate">Gets or sets the start date.</param>
         /// <param name="endDate">Gets or sets the end date.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>TemplateRecords</returns>
@@ -499,11 +314,11 @@ namespace BoldSign.Api
         /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
         /// <param name="createdBy">Gets or sets the created by.</param>
         /// <param name="templateLabels">Gets or sets the template labels.</param>
-        /// /// /// <param name="startDate">Gets or sets the start date.</param>
-        /// <param name="endDate">Gets or sets the end date.</param>
+        /// /// <param name="startDate">Gets or sets the start date.</param>;
+        /// <param name="endDate">Gets or sets the end date.</param>;
         /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>ApiResponse of TemplateRecords</returns>
-        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
+        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
         {
             // verify the required parameter 'page' is set
             if (page < 1)
@@ -620,11 +435,11 @@ namespace BoldSign.Api
         /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
         /// <param name="createdBy">Gets or sets the created by.</param>
         /// <param name="templateLabels">Gets or sets the template labels.</param>
-        /// <param name="startDate">Gets or sets the start date.</param>;
+        /// /// <param name="startDate">Gets or sets the start date.</param>;
         /// <param name="endDate">Gets or sets the end date.</param>;
         /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of TemplateRecords</returns>
-        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
+        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
         {
             var localVarResponse = await this.ListTemplatesAsyncWithHttpInfo(page, pageSize, searchKey, templateType, onBehalfOf, createdBy, templateLabels, startDate, endDate, brandIds);
 
@@ -641,7 +456,7 @@ namespace BoldSign.Api
         /// <param name="onBehalfOf">Gets or sets the on behalf of emails.</param>
         /// <param name="createdBy">Gets or sets the created by.</param>
         /// <param name="templateLabels">Gets or sets the template labels.</param>
-        /// <param name="startDate">Gets or sets the start date.</param>;
+        /// /// <param name="startDate">Gets or sets the start date.</param>;
         /// <param name="endDate">Gets or sets the end date.</param>;
         /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <returns>Task of ApiResponse (TemplateRecords)</returns>
@@ -976,11 +791,221 @@ namespace BoldSign.Api
             // make the HTTP request
             using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
                 localVarPath,
-                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,localVarHttpContentType, localVarFileUrlParams);
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             var exception = this.ExceptionFactory?.Invoke("SendUsingTemplate", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        /// <summary>
+        /// Send a document for signature using a Template ids.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSendForSign">The merge and send for sign details. (optional).</param>
+        /// <returns>DocumentCreated.</returns>
+        public DocumentCreated MergeAndSend(MergeAndSendForSign mergeAndSendForSign = default)
+        {
+            var localVarResponse = this.MergeAndSendWithHttpInfo(mergeAndSendForSign);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Send a document for signature using a Template.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSendForSign">The merge and send for sign details. (optional).</param>
+        /// <returns>ApiResponse of DocumentCreated.</returns>
+        public ApiResponse<DocumentCreated> MergeAndSendWithHttpInfo(MergeAndSendForSign mergeAndSendForSign = default)
+        {
+            if (mergeAndSendForSign == null)
+            {
+                throw new ArgumentNullException(nameof(mergeAndSendForSign));
+            }
+
+            ValidateTitleAndMessage(mergeAndSendForSign.Title, mergeAndSendForSign.Message, mergeAndSendForSign.BrandId);
+
+            ValidateExpiryDateType(mergeAndSendForSign.ExpiryDateType, mergeAndSendForSign.ExpiryValue);
+            DocumentHelper.ValidateBothFileParamUsed(mergeAndSendForSign, true);
+            var localVarPath = "/v1-beta/template/mergeAndSend";
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes =
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (mergeAndSendForSign.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.HandleTemplateSendFiles<MergeAndSendForSignWithFiles>(mergeAndSendForSign); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = mergeAndSendForSign; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("MergeTemplate", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        /// <summary>
+        /// Send a document for signature using a Template ids.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSendForSign">The merge and send for sign details. (optional).</param>
+        /// <returns>DocumentCreated.</returns>
+        public async Task<DocumentCreated> MergeAndSendAsync(MergeAndSendForSign mergeAndSendForSign = default)
+        {
+            var localVarResponse = await this.MergeAndSendAsyncWithHttpInfo(mergeAndSendForSign).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Send a document for signature using a Template.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="mergeAndSendForSign">The merge and send for sign details. (optional).</param>
+        /// <returns>ApiResponse of DocumentCreated.</returns>
+        public async Task<ApiResponse<DocumentCreated>> MergeAndSendAsyncWithHttpInfo(MergeAndSendForSign mergeAndSendForSign = default)
+        {
+            if (mergeAndSendForSign == null)
+            {
+                throw new ArgumentNullException(nameof(mergeAndSendForSign));
+            }
+
+            ValidateTitleAndMessage(mergeAndSendForSign.Title, mergeAndSendForSign.Message, mergeAndSendForSign.BrandId);
+
+            ValidateExpiryDateType(mergeAndSendForSign.ExpiryDateType, mergeAndSendForSign.ExpiryValue);
+            DocumentHelper.ValidateBothFileParamUsed(mergeAndSendForSign, true);
+            var localVarPath = "/v1-beta/template/mergeAndSend";
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes =
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (mergeAndSendForSign.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.HandleTemplateSendFiles<MergeAndSendForSignWithFiles>(mergeAndSendForSign); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = mergeAndSendForSign; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("MergeTemplate", localVarResponse);
 
             if (exception != null)
             {
@@ -1167,194 +1192,6 @@ namespace BoldSign.Api
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             var exception = this.ExceptionFactory?.Invoke("CreateEmbeddedRequestUrl", localVarResponse);
-
-            if (exception != null)
-            {
-                throw exception;
-            }
-
-            return new ApiResponse<EmbeddedSendCreated>(
-                localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
-                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
-        }
-
-        /// <inheritdoc/>
-        public EmbeddedSendCreated MergeCreateEmbeddedRequestUrl(EmbeddedMergeTemplateRequest mergeAndSend = default)
-        {
-            var localVarResponse = this.MergeCreateEmbeddedRequestUrlWithHttpInfo(mergeAndSend);
-
-            return localVarResponse.Data;
-        }
-
-        /// <inheritdoc/>
-        public ApiResponse<EmbeddedSendCreated> MergeCreateEmbeddedRequestUrlWithHttpInfo(EmbeddedMergeTemplateRequest mergeAndSend = default)
-        {
-            if (mergeAndSend == null)
-            {
-                throw new ArgumentNullException(nameof(mergeAndSend));
-            }
-
-            DocumentHelper.ValidateBothFileParamUsed(mergeAndSend, true);
-            ValidateTitleAndMessage(mergeAndSend.Title, mergeAndSend.Message, mergeAndSend.BrandId);
-            ValidateExpiryDateType(mergeAndSend.ExpiryDateType, mergeAndSend.ExpiryValue);
-            var localVarPath = "/v1/template/mergeCreateEmbeddedRequestUrl";
-            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<string, string>();
-            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
-            var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarQueryParams = new List<KeyValuePair<string, string>>();
-            object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            string[] localVarHttpContentTypes =
-            {
-                "application/json;odata.metadata=minimal;odata.streaming=true",
-                "application/json;odata.metadata=minimal;odata.streaming=false",
-                "application/json;odata.metadata=minimal",
-                "application/json;odata.metadata=full;odata.streaming=true",
-                "application/json;odata.metadata=full;odata.streaming=false",
-                "application/json;odata.metadata=full",
-                "application/json;odata.metadata=none;odata.streaming=true",
-                "application/json;odata.metadata=none;odata.streaming=false",
-                "application/json;odata.metadata=none",
-                "application/json;odata.streaming=true",
-                "application/json;odata.streaming=false",
-                "application/json",
-                "application/xml",
-                "application/prs.odatatestxx-odata",
-                "text/json",
-                "application/_*+json",
-            };
-            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            string[] localVarHttpHeaderAccepts =
-            {
-                "application/json",
-            };
-            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-
-            if (localVarHttpHeaderAccept != null)
-            {
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            }
-
-            if (mergeAndSend.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.HandleTemplateSendFiles<EmbeddedMergeTemplateRequestWithFiles>(mergeAndSend); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = mergeAndSend; // byte array
-            }
-
-            // authentication (Bearer) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
-            }
-
-            // make the HTTP request
-            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
-
-            var localVarStatusCode = (int)localVarResponse.StatusCode;
-
-            var exception = this.ExceptionFactory?.Invoke("MergeCreateEmbeddedRequestUrl", localVarResponse);
-
-            if (exception != null)
-            {
-                throw exception;
-            }
-
-            return new ApiResponse<EmbeddedSendCreated>(
-                localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
-                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
-        }
-
-        /// <inheritdoc/>
-        public async Task<EmbeddedSendCreated> MergeCreateEmbeddedRequestUrlAsync(EmbeddedMergeTemplateRequest mergeAndSend = default)
-        {
-            var localVarResponse = await this.MergeCreateEmbeddedRequestUrlAsyncWithHttpInfo(mergeAndSend).ConfigureAwait(false);
-
-            return localVarResponse.Data;
-        }
-
-        /// <inheritdoc/>
-        public async Task<ApiResponse<EmbeddedSendCreated>> MergeCreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedMergeTemplateRequest mergeAndSend = default)
-        {
-            if (mergeAndSend == null)
-            {
-                throw new ArgumentNullException(nameof(mergeAndSend));
-            }
-
-            DocumentHelper.ValidateBothFileParamUsed(mergeAndSend, true);
-            ValidateTitleAndMessage(mergeAndSend.Title, mergeAndSend.Message, mergeAndSend.BrandId);
-            ValidateExpiryDateType(mergeAndSend.ExpiryDateType, mergeAndSend.ExpiryValue);
-            var localVarPath = "/v1/template/mergeCreateEmbeddedRequestUrl";
-            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<string, string>();
-            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
-            var localVarFileUrlParams = new Dictionary<string, Uri>();
-            var localVarQueryParams = new List<KeyValuePair<string, string>>();
-            object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            string[] localVarHttpContentTypes =
-            {
-                "application/json;odata.metadata=minimal;odata.streaming=true",
-                "application/json;odata.metadata=minimal;odata.streaming=false",
-                "application/json;odata.metadata=minimal",
-                "application/json;odata.metadata=full;odata.streaming=true",
-                "application/json;odata.metadata=full;odata.streaming=false",
-                "application/json;odata.metadata=full",
-                "application/json;odata.metadata=none;odata.streaming=true",
-                "application/json;odata.metadata=none;odata.streaming=false",
-                "application/json;odata.metadata=none",
-                "application/json;odata.streaming=true",
-                "application/json;odata.streaming=false",
-                "application/json",
-                "application/xml",
-                "application/prs.odatatestxx-odata",
-                "text/json",
-                "application/_*+json",
-            };
-            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            // to determine the Accept header
-            string[] localVarHttpHeaderAccepts =
-            {
-                "application/json",
-            };
-            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-
-            if (localVarHttpHeaderAccept != null)
-            {
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            }
-
-            if (mergeAndSend.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.HandleTemplateSendFiles<EmbeddedMergeTemplateRequestWithFiles>(mergeAndSend); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = mergeAndSend; // byte array
-            }
-
-            // authentication (Bearer) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
-            {
-                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
-            }
-
-            // make the HTTP request
-            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
-
-            var localVarStatusCode = (int)localVarResponse.StatusCode;
-
-            var exception = this.ExceptionFactory?.Invoke("MergeCreateEmbeddedRequestUrl", localVarResponse);
 
             if (exception != null)
             {
@@ -2329,7 +2166,7 @@ namespace BoldSign.Api
 
             if (exception != null)
             {
-                throw exception;
+               throw exception;
             }
 
             return new ApiResponse<object>(
@@ -2436,37 +2273,208 @@ namespace BoldSign.Api
                 null));
         }
 
-        /// <summary>
-        /// Send document using multiple templates.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <param name="mergeAndSendForSign">The merge and send details for sign.</param>
-        /// <returns>DocumentCreated.</returns>
-        public DocumentCreated MergeAndSend(MergeAndSendForSign mergeAndSendForSign = default)
+        /// <inheritdoc/>
+        public async Task EditTemplateAsync(EditTemplateRequest editTemplate)
         {
-            var localVarResponse = this.MergeAndSendWithHttpInfo(mergeAndSendForSign);
+            await this.EditTemplateWithHttpInfoAsync(editTemplate).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<object>> EditTemplateWithHttpInfoAsync(EditTemplateRequest editTemplate)
+        {
+            if (editTemplate == null)
+            {
+                throw new ArgumentNullException(nameof(editTemplate));
+            }
+
+            var localVarPath = "/v1-beta/template/edit";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes =
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", editTemplate.TemplateId)); // query parameter
+
+            if (editTemplate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(editTemplate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = editTemplate; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("EditTemplate", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <inheritdoc/>
+        public void EditTemplate(EditTemplateRequest editTemplate)
+        {
+            this.EditTemplateWithHttpInfo(editTemplate);
+        }
+
+        /// <inheritdoc/>
+        public ApiResponse<object> EditTemplateWithHttpInfo(EditTemplateRequest editTemplate)
+        {
+            if (editTemplate == null)
+            {
+                throw new ArgumentNullException(nameof(editTemplate));
+            }
+
+            var localVarPath = "/v1-beta/template/edit";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes =
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", editTemplate.TemplateId)); // query parameter
+
+            if (editTemplate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(editTemplate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = editTemplate; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("EditTemplate", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <inheritdoc/>
+        public EmbeddedSendCreated MergeCreateEmbeddedRequestUrl(EmbeddedMergeTemplateRequest mergeAndSend = default)
+        {
+            var localVarResponse = this.MergeCreateEmbeddedRequestUrlWithHttpInfo(mergeAndSend);
 
             return localVarResponse.Data;
         }
 
-        /// <summary>
-        /// Send document using multiple templates.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <param name="mergeAndSendForSign">The merge and send details for sign.</param>
-        /// <returns>ApiResponse of DocumentCreated.</returns>
-        public ApiResponse<DocumentCreated> MergeAndSendWithHttpInfo(MergeAndSendForSign mergeAndSendForSign = default)
+        /// <inheritdoc/>
+        public ApiResponse<EmbeddedSendCreated> MergeCreateEmbeddedRequestUrlWithHttpInfo(EmbeddedMergeTemplateRequest mergeAndSend = default)
         {
-            if (mergeAndSendForSign == null)
+            if (mergeAndSend == null)
             {
-                throw new ArgumentNullException(nameof(mergeAndSendForSign));
+                throw new ArgumentNullException(nameof(mergeAndSend));
             }
 
-            ValidateTitleAndMessage(mergeAndSendForSign.Title, mergeAndSendForSign.Message, mergeAndSendForSign.BrandId);
-
-            ValidateExpiryDateType(mergeAndSendForSign.ExpiryDateType, mergeAndSendForSign.ExpiryValue);
-            DocumentHelper.ValidateBothFileParamUsed(mergeAndSendForSign, true);
-            var localVarPath = "/v1/template/mergeAndSend";
+            DocumentHelper.ValidateBothFileParamUsed(mergeAndSend, true);
+            ValidateTitleAndMessage(mergeAndSend.Title, mergeAndSend.Message, mergeAndSend.BrandId);
+            ValidateExpiryDateType(mergeAndSend.ExpiryDateType, mergeAndSend.ExpiryValue);
+            var localVarPath = "/v1-beta/template/mergeCreateEmbeddedRequestUrl";
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
@@ -2508,13 +2516,13 @@ namespace BoldSign.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (mergeAndSendForSign.GetType() != typeof(byte[]))
+            if (mergeAndSend.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.HandleTemplateSendFiles<MergeAndSendForSignWithFiles>(mergeAndSendForSign); // http body (model) parameter
+                localVarPostBody = this.HandleTemplateSendFiles<EmbeddedMergeTemplateRequestWithFiles>(mergeAndSend); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = mergeAndSendForSign; // byte array
+                localVarPostBody = mergeAndSend; // byte array
             }
 
             // authentication (Bearer) required
@@ -2528,50 +2536,39 @@ namespace BoldSign.Api
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
-            var exception = this.ExceptionFactory?.Invoke("MergeTemplate", localVarResponse);
+            var exception = this.ExceptionFactory?.Invoke("MergeCreateEmbeddedRequestUrl", localVarResponse);
 
             if (exception != null)
             {
                 throw exception;
             }
 
-            return new ApiResponse<DocumentCreated>(
+            return new ApiResponse<EmbeddedSendCreated>(
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
-                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
         }
 
-        /// <summary>
-        /// Send a document for signature using a Template ids.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <param name="mergeAndSendForSign">The merge and send for sign details. (optional).</param>
-        /// <returns>DocumentCreated.</returns>
-        public async Task<DocumentCreated> MergeAndSendAsync(MergeAndSendForSign mergeAndSendForSign = default)
+        /// <inheritdoc/>
+        public async Task<EmbeddedSendCreated> MergeCreateEmbeddedRequestUrlAsync(EmbeddedMergeTemplateRequest mergeAndSend = default)
         {
-            var localVarResponse = await this.MergeAndSendAsyncWithHttpInfo(mergeAndSendForSign).ConfigureAwait(false);
+            var localVarResponse = await this.MergeCreateEmbeddedRequestUrlAsyncWithHttpInfo(mergeAndSend).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
 
-        /// <summary>
-        /// Send a document for signature using a Template.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <param name="mergeAndSendForSign">The merge and send for sign details. (optional).</param>
-        /// <returns>ApiResponse of DocumentCreated.</returns>
-        public async Task<ApiResponse<DocumentCreated>> MergeAndSendAsyncWithHttpInfo(MergeAndSendForSign mergeAndSendForSign = default)
+        /// <inheritdoc/>
+        public async Task<ApiResponse<EmbeddedSendCreated>> MergeCreateEmbeddedRequestUrlAsyncWithHttpInfo(EmbeddedMergeTemplateRequest mergeAndSend = default)
         {
-            if (mergeAndSendForSign == null)
+            if (mergeAndSend == null)
             {
-                throw new ArgumentNullException(nameof(mergeAndSendForSign));
+                throw new ArgumentNullException(nameof(mergeAndSend));
             }
 
-            ValidateTitleAndMessage(mergeAndSendForSign.Title, mergeAndSendForSign.Message, mergeAndSendForSign.BrandId);
-
-            ValidateExpiryDateType(mergeAndSendForSign.ExpiryDateType, mergeAndSendForSign.ExpiryValue);
-            DocumentHelper.ValidateBothFileParamUsed(mergeAndSendForSign, true);
-            var localVarPath = "/v1/template/mergeAndSend";
+            DocumentHelper.ValidateBothFileParamUsed(mergeAndSend, true);
+            ValidateTitleAndMessage(mergeAndSend.Title, mergeAndSend.Message, mergeAndSend.BrandId);
+            ValidateExpiryDateType(mergeAndSend.ExpiryDateType, mergeAndSend.ExpiryValue);
+            var localVarPath = "/v1-beta/template/mergeCreateEmbeddedRequestUrl";
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
@@ -2613,13 +2610,13 @@ namespace BoldSign.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (mergeAndSendForSign.GetType() != typeof(byte[]))
+            if (mergeAndSend.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.HandleTemplateSendFiles<MergeAndSendForSignWithFiles>(mergeAndSendForSign); // http body (model) parameter
+                localVarPostBody = this.HandleTemplateSendFiles<EmbeddedMergeTemplateRequestWithFiles>(mergeAndSend); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = mergeAndSendForSign; // byte array
+                localVarPostBody = mergeAndSend; // byte array
             }
 
             // authentication (Bearer) required
@@ -2633,22 +2630,27 @@ namespace BoldSign.Api
 
             var localVarStatusCode = (int)localVarResponse.StatusCode;
 
-            var exception = this.ExceptionFactory?.Invoke("MergeTemplate", localVarResponse);
+            var exception = this.ExceptionFactory?.Invoke("MergeCreateEmbeddedRequestUrl", localVarResponse);
 
             if (exception != null)
             {
                 throw exception;
             }
 
-            return new ApiResponse<DocumentCreated>(
+            return new ApiResponse<EmbeddedSendCreated>(
                 localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
-                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+                (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
         }
 
         private static void ValidateCreateTemplateProperties(CreateTemplateRequest templateDetails)
         {
-            DocumentHelper.ValidateFiles(templateDetails);
+            // verify the only files or fileUrls is set.
+            if ((templateDetails.Files?.Count > 0 && templateDetails.FileUrls?.Count > 0)
+                || (templateDetails.Files?.Count < 0 && templateDetails.FileUrls?.Count < 0))
+            {
+                throw new ApiException(400, ApiValidationMessages.FileOrFileUrl);
+            }
 
             if (templateDetails.Files?.Count > 0)
             {
@@ -2801,6 +2803,7 @@ namespace BoldSign.Api
                     {
                         continue;
                     }
+
                     string errorMessage = ApiValidationMessages.InvalidLocale;
                     string signerLanguage = documentInfos.Locale.ToString();
 
@@ -2831,6 +2834,7 @@ namespace BoldSign.Api
                 }
             }
         }
+
 
         private static void ValidateTemplateProperties(SendForSignFromTemplate send)
         {

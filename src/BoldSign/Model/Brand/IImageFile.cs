@@ -5,10 +5,13 @@
 namespace BoldSign.Model
 {
     /// <summary>
-    /// Image File.
+    /// IImageFile.
     /// </summary>
     public interface IImageFile
     {
-        string ContentType { get; set; }
+        /// <summary>
+        /// Gets or sets the content type.
+        /// </summary>
+        public string ContentType { get; set; }
     }
 }

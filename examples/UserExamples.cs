@@ -1,9 +1,10 @@
 ﻿namespace BoldSign.Examples
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using BoldSign.Api;
-    using BoldSign.Api.Model;
     using BoldSign.Model;
+    using BoldSign.Api.Model;
 
     /// <summary>
     ///     The create user examples.
@@ -58,27 +59,6 @@
         }
 
         /// <summary>
-        /// Updates user metadata.
-        /// This is an example user name, add your own user name upon usage.
-        /// This is an example user email, add your own identity email upon usage.
-        /// This is an example user metadata, add your own user metadata upon usage.
-        /// </summary>
-        public void UpdateUserWithMetadata()
-        {
-            var updateUserMetaData = new UpdateUserMetaData
-               (
-                   userId: "user-id",
-                   metaData: new Dictionary<string, string>
-                    {
-                        { "accountPlan", "Paid" },
-                        { "role", "Admin" },
-                    }
-               );
-
-            this.UserClient.UpdateUsersMetaData(updateUserMetaData);
-        }
-
-        /// <summary>
         /// Resend user Invite.
         /// </summary>
         /// <returns>Resend User Invite response.</returns>
@@ -124,6 +104,26 @@
             var userDeatils = this.UserClient.GetUserDetails(userId);
 
             return userDeatils;
+        }
+        
+        /// <summary>
+        /// Updates user role.
+        /// This is an example user id, add your own user id upon usage.
+        /// This is an example user role, add your own user role upon usage.
+        /// </summary>
+        public async Task UpdateUserMetaData()
+        {
+            UpdateUserMetaData updateUsers = new UpdateUserMetaData
+            (
+                userId: "73236919-c6bf-490a-b332-db6e565f7fd3",
+                metaData: new Dictionary<string, string>()
+                {
+                    { "role", "role" },
+                    { "company", "syncfusion" },
+                }
+            );
+
+            await UserClient.UpdateUsersMetaDataAsync(updateUsers).ConfigureAwait(false);
         }
     }
 }

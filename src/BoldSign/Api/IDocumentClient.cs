@@ -42,7 +42,6 @@ namespace BoldSign.Api
         /// <param name="signerOrder"> The signer order.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <param name="phoneNumber">The signer phone number.</param>
-        /// <returns>ApiResponse of Object(void).</returns>
         /// <param name="oldPhoneNumber">The Old Signer phone number.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         ApiResponse<object> ChangeRecipientWithHttpInfo(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
@@ -98,18 +97,6 @@ namespace BoldSign.Api
         ApiResponse<object> AddTagWithHttpInfo(DocumentTags addTags);
 
         /// <summary>
-        /// Pre fill  form fields.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        void PrefillFields(PrefillFieldRequest request);
-
-        /// <summary>
-        ///     Pre fill form fields.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        ApiResponse<object> PrefillFieldsWithHttpInfo(PrefillFieldRequest request);
-
-        /// <summary>
         /// Add tag async.
         /// </summary>
         /// <param name="addTags">Gets or sets the add tags.</param>
@@ -122,18 +109,6 @@ namespace BoldSign.Api
         /// <param name="addTags">Gets or sets the add tags.</param>
         /// <returns></returns>
         Task<ApiResponse<object>> AddTagAsyncWithHttpInfo(DocumentTags addTags);
-
-        /// <summary>
-        ///     Pre fill  form fields.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        Task PrefillFieldsAsync(PrefillFieldRequest request);
-
-        /// <summary>
-        ///     Pre fill form fields.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        Task<ApiResponse<object>> PrefillFieldsAsyncWithHttpInfo(PrefillFieldRequest request);
 
         /// <summary>
         /// Delete tag.
@@ -226,7 +201,7 @@ namespace BoldSign.Api
         Task<TeamDocumentRecords> ListTeamDocumentsAsync(int page = 1, int? pageSize = default,
             DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
             List<string> userId = default, DateTime? endDate = default, string searchKey = default,
-            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default,  List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         /// List team documents async with Http info.
@@ -248,10 +223,7 @@ namespace BoldSign.Api
         Task<ApiResponse<TeamDocumentRecords>> ListTeamDocumentsAsyncWithHttpInfo(int page = 1, int? pageSize = default,
             DateTime? startDate = default, List<Status> status = default, List<string> teamId = default,
             List<string> userId = default, DateTime? endDate = default, string searchKey = default,
-            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
-
-
-
+            List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default,  List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         ///     Delete the document when a particular document’s ID is given as input.
@@ -264,8 +236,8 @@ namespace BoldSign.Api
         /// if true, the document will be deleted permanently.
         /// if false, the document will be moved to the trash.
         /// </param>
-        /// <param name="deletePermanently">Gets or sets the delete permanently.</param>
-        void DeleteDocument(string documentId, bool deletePermanently = false);
+        /// <returns></returns>
+        void DeleteDocument(string documentId,  bool deletePermanently = false);
 
         /// <summary>
         ///     Delete the document when a particular document’s ID is given as input.
@@ -274,12 +246,12 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
-        /// /// <param name="deletePermanently">
+        /// <param name="deletePermanently">
         /// if true, the document will be deleted permanently.
         /// if false, the document will be moved to the trash.
         /// </param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<object> DeleteDocumentWithHttpInfo(string documentId, bool deletePermanently = false);
+        ApiResponse<object> DeleteDocumentWithHttpInfo(string documentId,  bool deletePermanently = false);
 
         /// <summary>
         ///     Download the audit trail document for a particular document with given document ID.
@@ -352,7 +324,7 @@ namespace BoldSign.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Gets or sets Document Id.</param>
-        /// <param name="signerEmail">Gets or sets signer email.  (optional)</param>
+        /// <param name="signerEmail">Gets or sets signer email. (optional)</param>
         /// <param name="signLinkValidTill">Gets or sets sign link expiration date (Valid Till). (optional)</param>
         /// <param name="redirectUrl">Gets or sets Redirect URL. (optional)</param>
         /// <param name="countryCode">Gets or sets Country Code. (optional)</param>
@@ -433,7 +405,7 @@ namespace BoldSign.Api
         /// <param name="brandIds">Gets or sets the brandIds.</param>
         /// <param name="dateFilterType">dateFilterType.</param>
         /// <returns>ApiResponse of DocumentRecords</returns>
-        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default, List<string> brandIds = default, DateFilterType? dateFilterType = default);
+        ApiResponse<DocumentRecords> ListDocumentsWithHttpInfo(int page = 1, int? pageSize = default, List<string> sentBy = default, List<string> recipients = default, DateTime? startDate = default, List<Status> status = default, DateTime? endDate = default, string searchKey = default, List<string> labels = default, TransmitType? transmitType = default, long? nextCursor = default,  List<string> brandIds = default, DateFilterType? dateFilterType = default);
 
         /// <summary>
         ///     List of behalf documents which can be filtered by status, page size and so on.
@@ -562,43 +534,27 @@ namespace BoldSign.Api
         /// <returns>ApiResponse of DocumentCreated</returns>
         ApiResponse<DocumentCreated> SendDocumentWithHttpInfo(SendForSign signRequestDetails);
 
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>DocumentCreated</returns>
+        DocumentCreated SendDocumentFromDraft(string  documentId);
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of DocumentCreated</returns>
+        ApiResponse<DocumentCreated> SendDocumentFromDraftWithHttpInfo(string  documentId);
+
         #endregion Synchronous Operations
 
         #region Asynchronous Operations
-
-        /// <summary>
-        /// Change recipient details of a document.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <param name="documentId">The document id.</param>
-        /// <param name="oldSignerEmail">The signer email.</param>
-        /// <param name="reason">The reason for changing recipient details.</param>
-        /// <param name="newSignerName">The new name of the recipient .</param>
-        /// <param name="newSignerEmail">The new email address  of recipient .</param>
-        /// <param name="signerOrder"> The signer order.</param>
-        /// <param name="onBehalfOf">The on behalfof email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
-        /// <param name="oldPhoneNumber">The Old Signer Phone number.</param>
-        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
-        Task ChangeRecipientasync(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
-
-        /// <summary>
-        /// Change recipient details of a document.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
-        /// <param name="documentId">The document id.</param>
-        /// <param name="oldSignerEmail">The signer email.</param>
-        /// <param name="reason">The reason for changing recipient details.</param>
-        /// <param name="newSignerName">The new name of the recipient .</param>
-        /// <param name="newSignerEmail">The new email address of recipient .</param>
-        /// <param name="signerOrder"> The signer order.</param>
-        /// <param name="onBehalfOf">The on behalfof email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <returns>ApiResponse of Object(void).</returns>
-        /// <param name="oldPhoneNumber">The Old Signer Phone number.</param>
-        /// <returns>ApiResponse of Object(void).</returns>
-        Task<ApiResponse<object>> ChangeRecipientasyncWithHttpInfo(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
 
         /// <summary>
         ///      Changes the access code for the desired document signer by verifying the email ID of the signer.
@@ -648,7 +604,7 @@ namespace BoldSign.Api
         /// if false, the document will be moved to the trash.
         /// </param>
         /// <returns>Task of void</returns>
-        Task DeleteDocumentAsync(string documentId, bool deletePermanently = false);
+        Task DeleteDocumentAsync(string documentId,  bool deletePermanently = false);
 
         /// <summary>
         ///     Delete the document.
@@ -662,7 +618,7 @@ namespace BoldSign.Api
         /// if false, the document will be moved to the trash.
         /// </param>
         /// <returns>Task of ApiResponse</returns>
-        Task<ApiResponse<object>> DeleteDocumentAsyncWithHttpInfo(string documentId, bool deletePermanently = false);
+        Task<ApiResponse<object>> DeleteDocumentAsyncWithHttpInfo(string documentId,  bool deletePermanently = false);
 
         /// <summary>
         ///    Download the audit trail document for a particular document with given document ID.
@@ -914,9 +870,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         void AddAuthentication(
             string documentId,
@@ -926,8 +882,8 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
@@ -940,9 +896,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         ApiResponse<object> AddAuthenticationWithHttpInfo(
@@ -953,8 +909,8 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
@@ -967,9 +923,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>AddAuthentication.</returns>
         Task AddAuthenticationAsync(
@@ -980,8 +936,8 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
@@ -994,9 +950,9 @@ namespace BoldSign.Api
         /// <param name="signerOrder">SignerOrder.</param>
         /// <param name="newAccessCode">NewAccesscode.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
-        /// <param name="phoneNumber">The signer phone number.</param>
-        /// <param name="authenticationRetryCount">The authentication retry count.</param>
+        /// <param name="phoneNumber">The phone number.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
+        /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
@@ -1007,8 +963,8 @@ namespace BoldSign.Api
             string newAccessCode = "",
             string onBehalfOf = default,
             PhoneNumber phoneNumber = default,
-            int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
+            int? authenticationRetryCount = default,
             AuthenticationSettings authenticationSettings = default);
 
         /// <summary>
@@ -1211,6 +1167,56 @@ namespace BoldSign.Api
         /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of ApiResponse.</returns>
         Task<ApiResponse<object>> ExtendExpiryAsyncWithHttpInfo(string documentId, string newExpiryValue, bool? warnPrior = null, string onBehalfOf = null);
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient .</param>
+        /// <param name="newSignerEmail">The new email address  of recipient .</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The Old Signer Phone number.</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
+        Task ChangeRecipientasync(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
+
+        /// <summary>
+        /// Change recipient details of a document.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="documentId">The document id.</param>
+        /// <param name="oldSignerEmail">The signer email.</param>
+        /// <param name="reason">The reason for changing recipient details.</param>
+        /// <param name="newSignerName">The new name of the recipient .</param>
+        /// <param name="newSignerEmail">The new email address of recipient .</param>
+        /// <param name="signerOrder"> The signer order.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="phoneNumber">The signer phone number.</param>
+        /// <param name="oldPhoneNumber">The Old Signer Phone number.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        Task<ApiResponse<object>> ChangeRecipientasyncWithHttpInfo(string documentId, string oldSignerEmail = null, string reason = null, string newSignerName = null, string newSignerEmail = null, int? signerOrder = null, string onBehalfOf = null, PhoneNumber phoneNumber = null, PhoneNumber oldPhoneNumber = null);
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of DocumentCreated</returns>
+        Task<DocumentCreated> SendDocumentFromDraftAsync(string  documentId);
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (DocumentCreated)</returns>
+        Task<ApiResponse<DocumentCreated>> SendDocumentFromDraftAsyncWithHttpInfo(string  documentId);
 
         #endregion Asynchronous Operations
     }

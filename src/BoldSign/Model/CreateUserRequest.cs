@@ -4,10 +4,10 @@
 
 namespace BoldSign.Model
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.Collections.Generic;
     using BoldSign.Api.Resources;
     using Newtonsoft.Json;
 
@@ -23,12 +23,13 @@ namespace BoldSign.Model
         /// <param name="emailId">Gets or sets the emailId.</param>
         /// <param name="teamId">Gets or sets the teamId(optional).</param>
         /// <param name="userRole">Gets or sets the userRole(optional).</param>
-        public CreateUserRequest(string emailId = default, string teamId = default, UserRoleType? userRole = UserRoleType.Member, Dictionary<string, string> metaData = default)
+        /// <param name="metaData">Gets or sets the metaData(optional).</param>
+        public CreateUserRequest(string emailId = default, string teamId = default, UserRoleType? userRole = UserRoleType.Member,Dictionary<string, string> metaData = default)
         {
             this.EmailId = emailId;
             this.TeamId = teamId;
             this.UserRole = userRole;
-            this.MetaData = metaData;
+            this.MetaData= metaData;
         }
 
         /// <summary>

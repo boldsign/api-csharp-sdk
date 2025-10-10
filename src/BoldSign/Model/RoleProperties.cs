@@ -35,6 +35,7 @@ namespace BoldSign.Api.Model
         /// <param name="allowRoleDelete">Gets or sets the allow permission to role delete option  of template.</param>
         /// <param name="allowRoleEdit">Gets or sets the allow permission to role edit option  of template.</param>
         /// <param name="locale">Gets or sets the locale.</param>
+        /// <param name="enableQes">Gets or sets the allow permission to enableQes.</param>
         public RoleProperties(
     string name,
     int index,
@@ -50,7 +51,8 @@ namespace BoldSign.Api.Model
     ImposeAuthentication imposeAuthentication = ImposeAuthentication.None,
     bool allowRoleEdit = true,
     bool allowRoleDelete = true,
-    Locales locale = Locales.EN)
+    Locales locale = Locales.EN,
+    bool enableQes = default)
         {
             this.Name = name;
             this.Index = index;
@@ -70,6 +72,7 @@ namespace BoldSign.Api.Model
             this.AllowRoleDelete = allowRoleDelete;
             this.AllowRoleEdit = allowRoleEdit;
             this.Locale = locale;
+            this.EnableQes = enableQes;
         }
 
         /// <summary>
@@ -160,7 +163,7 @@ namespace BoldSign.Api.Model
         public DeliveryMode DeliveryMode { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
         public bool AllowFieldConfiguration { get; set; }
@@ -184,17 +187,17 @@ namespace BoldSign.Api.Model
         public bool AllowRoleDelete { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets a value indicating whether the fields can be configured.
+        /// </summary>
+        [DataMember(Name = "enableQes", EmitDefaultValue = true)]
+        public bool EnableQes { get; set; }
+
+        /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
         [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the enableQes.
-        /// </summary>
-        [DataMember(Name = "enableQes", EmitDefaultValue = true)]
-        public bool EnableQes { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

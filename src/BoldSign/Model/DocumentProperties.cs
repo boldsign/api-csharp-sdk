@@ -379,12 +379,6 @@ namespace BoldSign.Model
         public Dictionary<string, string> MetaData { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether enable downloadFileName.
-        /// </summary>
-        [DataMember(Name = "downloadFileName", EmitDefaultValue = false)]
-        public string DownloadFileName { get; set; }
-
-        /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
@@ -392,16 +386,22 @@ namespace BoldSign.Model
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
-        /// Gets or sets the document scheduled date value.
-        /// </summary>
-        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
-        public long? ScheduledSendTime { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether enable audit trail localization.
         /// </summary>
         [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
         public bool EnableAuditTrailLocalization { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether enable downloadFileName.
+        /// </summary>
+        [DataMember(Name = "downloadFileName", EmitDefaultValue = false)]
+        public string DownloadFileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the document scheduled date value.
+        /// </summary>
+        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
+        public long? ScheduledSendTime { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

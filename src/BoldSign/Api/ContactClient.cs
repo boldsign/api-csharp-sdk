@@ -1,4 +1,4 @@
-﻿// <copyright file="ContactClient.cs" company="Syncfusion Inc">
+// <copyright file="ContactClient.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -144,7 +144,7 @@ namespace BoldSign.Api
             string searchKey = default, ContactType? contactType = ContactType.AllContacts)
         {
             // verify the required parameter 'page' is set
-            var localVarPath = "/v1/contacts/list";
+            var localVarPath = "/v1-beta/contacts/list";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -248,7 +248,7 @@ namespace BoldSign.Api
             string searchKey = default, ContactType? contactType = ContactType.AllContacts)
         {
             // verify the required parameter 'page' is set
-            var localVarPath = "/v1/contacts/list";
+            var localVarPath = "/v1-beta/contacts/list";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -347,7 +347,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.ContactIdDelete);
             }
 
-            var localVarPath = "/v1/contacts/delete";
+            var localVarPath = "/v1-beta/contacts/delete";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -441,7 +441,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.ContactIdDelete);
             }
 
-            var localVarPath = "/v1/contacts/delete";
+            var localVarPath = "/v1-beta/contacts/delete";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -529,7 +529,7 @@ namespace BoldSign.Api
 
             ValidateCreateContactProperties(contactsDetailsList);
 
-            var localVarPath = "/v1/contacts/create";
+            var localVarPath = "/v1-beta/contacts/create";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -622,7 +622,7 @@ namespace BoldSign.Api
 
             ValidateCreateContactProperties(contactsDetailsList);
 
-            var localVarPath = "/v1/contacts/create";
+            var localVarPath = "/v1-beta/contacts/create";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -716,7 +716,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.ContactIdMissing);
             }
 
-            var localVarPath = "/v1/contacts/update";
+            var localVarPath = "/v1-beta/contacts/update";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -793,7 +793,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.ContactIdMissing);
             }
 
-            var localVarPath = "/v1/contacts/update";
+            var localVarPath = "/v1-beta/contacts/update";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -867,7 +867,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.ContactIdMissing);
             }
 
-            var localVarPath = "/v1/contacts/get";
+            var localVarPath = "/v1-beta/contacts/get";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -933,7 +933,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.ContactIdMissing);
             }
 
-            var localVarPath = "/v1/contacts/get";
+            var localVarPath = "/v1-beta/contacts/get";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();

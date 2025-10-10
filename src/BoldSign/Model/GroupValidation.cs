@@ -9,7 +9,7 @@ namespace BoldSign.Api.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Defines the validation type for a group of checkboxes
+    ///     Defines id  that can be set as per need.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum GroupValidation

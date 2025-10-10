@@ -1065,17 +1065,167 @@ namespace BoldSign.Api
                 localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
                 (SenderIdentityList)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SenderIdentityList)));
         }
+        
+        /// <inheritdoc/>
+        public SenderIdentityViewModel GetProperties(string id = default, string email = default)
+        {
+            var localVarResponse = this.GetPropertiesWithHttpInfo(id, email);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public ApiResponse<SenderIdentityViewModel> GetPropertiesWithHttpInfo(string id = default, string email = default)
+        {
+            if (!string.IsNullOrEmpty(email) && !IsValidEmail(email))
+            {
+                throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
+            }
+
+            var localVarPath = "/v1-beta/senderIdentities/properties";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "id", id)); // query parameter
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "email", email)); // query parameter
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("GetProperties", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<SenderIdentityViewModel>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (SenderIdentityViewModel)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SenderIdentityViewModel)));
+        }
+
+        /// <inheritdoc/>
+        public async Task<SenderIdentityViewModel> GetPropertiesAsync(string id = default, string email = default)
+        {
+            var localVarResponse = await this.GetPropertiesAsyncWithHttpInfo(id, email).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<SenderIdentityViewModel>> GetPropertiesAsyncWithHttpInfo(string id = default, string email = default)
+        {
+            if (!string.IsNullOrEmpty(email) && !IsValidEmail(email))
+            {
+                throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
+            }
+
+            var localVarPath = "/v1-beta/senderIdentities/properties";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "id", id)); // query parameter
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "email", email)); // query parameter
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("GetProperties", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<SenderIdentityViewModel>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (SenderIdentityViewModel)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SenderIdentityViewModel)));
+        }
 
         private static void ValidateCreateSenderIdentityProperties(SenderIdentityRequest senderIdentityRequest)
         {
             if (string.IsNullOrEmpty(senderIdentityRequest.Name))
             {
-                throw new ApiException(422, ApiValidationMessages.RequiredName);
+                 throw new ApiException(422, ApiValidationMessages.RequiredName);
             }
 
             if (!IsValidEmail(senderIdentityRequest.Email))
             {
-                throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
+                 throw new ApiException(422, ApiValidationMessages.InvalidEmailAddress);
             }
         }
 

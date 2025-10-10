@@ -115,8 +115,7 @@ namespace BoldSign.Model
         /// <param name="textAlign">Gets or sets the textAlign.</param>
         /// <param name="textDirection">Gets or sets the direction of the text.</param>
         /// <param name="characterSpacing">Gets or sets the space of the character.</param>
-        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default, string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default, TextAlign textAlign = Api.Model.TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default)
-        {
+        public FormField(FieldType type = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default, string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default, TextAlign textAlign = Api.Model.TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default)        {
             // to ensure "fieldType" is required (not null)
             if (type == null)
             {
@@ -381,31 +380,19 @@ namespace BoldSign.Model
         public TextDirection TextDirection { get; set; }
 
         /// <summary>
-        /// Gets or sets the space of the character.
+        /// Gets or sets the character spacing.
         /// </summary>
-        /// <value>Gets or sets the characterSpacing.</value>
-        [DataMember(Name = "characterSpacing", EmitDefaultValue = true)]
+        /// <value>Gets the value of character spacing.</value>
+        [DataMember(Name = "characterSpacing", EmitDefaultValue = false)]
         public float CharacterSpacing { get; set; }
-
-        /// <summary>
-        /// Gets or sets the formula settings.
-        /// </summary>
-        [DataMember(Name = "formulaFieldSettings", EmitDefaultValue = false)]
-        public FormulaFieldSettings FormulaFieldSettings { get; set; }
-
-        /// <summary>
-        ///     Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson() => JsonConvert.SerializeObject(this, Formatting.Indented);
 
         /// <summary>
         /// Gets or sets the background hex color.
         /// The BackgroundHexColor property allows you to set the background color of a label field using hexadecimal color codes ("#FF5733"). The default color is transparent or no background color.
         /// Default value is null.
         /// </summary>
-        /// <value>Gets or sets the Backgroundcolor Value.</value>
-        [DataMember(Name = "backgroundHexColor", EmitDefaultValue = true)]
+        /// <value>Gets or sets the BackgroundColor.</value>
+        [DataMember(Name = "backgroundHexColor", EmitDefaultValue = false)]
         public string BackgroundHexColor { get; set; }
 
         /// <summary>
@@ -415,11 +402,17 @@ namespace BoldSign.Model
         public string GroupName { get; set; }
 
         /// <summary>
-        /// Gets or sets the Tab Index.
+        /// Gets or sets the image info.
         /// </summary>
         [DataMember(Name = "tabIndex", EmitDefaultValue = false)]
         [Range(-1, int.MaxValue, ErrorMessage = "The minimum value must be -1 or higher")]
         public int? TabIndex { get; set; }
+
+        /// <summary>
+        /// Gets or sets the formula settings.
+        /// </summary>
+        [DataMember(Name = "formulaFieldSettings", EmitDefaultValue = false)]
+        public FormulaFieldSettings FormulaFieldSettings { get; set; }
 
         /// <summary>
         /// Gets or sets the resize option.
@@ -441,5 +434,16 @@ namespace BoldSign.Model
         [DataMember(Name = "allowEditFormField", EmitDefaultValue = true)]
         public bool? AllowEditFormField { get; set; }
 
+        /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "CollaborationSettings", EmitDefaultValue = false)]
+        public CollaborationSettings CollaborationSettings { get; set; }
+
+        /// <summary>
+        ///     Returns the JSON string presentation of the object
+        /// </summary>
+        /// <returns>JSON string presentation of the object</returns>
+        public virtual string ToJson() => JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 }

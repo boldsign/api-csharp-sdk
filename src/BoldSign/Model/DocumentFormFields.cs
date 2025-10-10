@@ -62,8 +62,7 @@ namespace BoldSign.Model
         /// <param name="textDirection">Gets or sets the direction of the text.</param>
         /// <param name="characterSpacing">Gets or sets the space of the character.</param>
         /// <param name="label">Gets or sets the label value.</param>
-        /// <param name="timeFormat">Gets or sets the timeFormat value..</param>
-        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), ImageInfo imageInfo = default(ImageInfo), AttachmentInfo attachmentInfo = default(AttachmentInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default(string), string dataSyncTag = default(string), Api.Model.FileInfo fileInfo = default(Api.Model.FileInfo), List<string> dropdownOptions = default(List<string>), bool? isReadOnly = default(bool?), List<ConditionalRule> conditionalRules = default(List<ConditionalRule>), TextAlign textAlign = TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default, string label = default(string), string timeFormat = default(string))
+        public DocumentFormFields(string id = default(string), string type = default(string), string value = default(string), string font = default(string), bool? isRequired = default(bool?), float? lineHeight = default(float?), float? fontSize = default(float?), string fontColor = default(string), bool? isUnderline = default(bool?), bool? isItalic = default(bool?), bool? isBold = default(bool?), string placeholder = default(string), string dateFormat = default(string), ValidationType validationType = default(ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), ImageInfo imageInfo = default(ImageInfo), AttachmentInfo attachmentInfo = default(AttachmentInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string hyperlinkText = default(string), string dataSyncTag = default(string), Api.Model.FileInfo fileInfo = default(Api.Model.FileInfo), List<string> dropdownOptions = default(List<string>), bool? isReadOnly = default(bool?), List<ConditionalRule> conditionalRules = default(List<ConditionalRule>), TextAlign textAlign = TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default, string label = default)
         {
             this.Id = id;
             this.Type = type;
@@ -94,7 +93,6 @@ namespace BoldSign.Model
             this.TextDirection = textDirection;
             this.CharacterSpacing = characterSpacing;
             this.Label = label;
-            this.TimeFormat = timeFormat;
         }
 
         /// <summary>
@@ -103,6 +101,12 @@ namespace BoldSign.Model
         /// <value>Gets or sets the id.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form field id.
+        /// </summary>
+        [DataMember(Name = "formFieldId", EmitDefaultValue = false)]
+        public string FormFieldId { get; set; }
 
         /// <summary>
         /// Gets or sets the element type.
@@ -189,7 +193,7 @@ namespace BoldSign.Model
         public string GroupName { get; set; }
 
         /// <summary>
-        ///     Gets or sets the Label for radio button fields.
+        /// Gets or sets the Label for radio button fields.
         /// </summary>
         [DataMember(Name = "label", EmitDefaultValue = true)]
         public string Label { get; set; }
@@ -207,13 +211,6 @@ namespace BoldSign.Model
         /// <value>Gets or sets the DateFormat value.</value>
         [DataMember(Name = "dateFormat", EmitDefaultValue = false)]
         public string DateFormat { get; set; }
-
-        /// <summary>
-        /// Gets or sets the TimeFormat value.
-        /// </summary>
-        /// <value>Gets the value of TimeFormat.</value>
-        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
-        public string TimeFormat { get; set; }
 
         /// <summary>
         /// Gets or sets the textbox ValidationType value.
@@ -318,7 +315,7 @@ namespace BoldSign.Model
         /// The BackgroundHexColor property allows you to set the background color of a label field using hexadecimal color codes ("#FF5733"). The default color is transparent or no background color.
         /// Default value is null.
         /// </summary>
-        /// <value>Gets the value of backgroundColor.</value>
+        /// <value>Gets or sets the BackgroundColor.</value>
         [DataMember(Name = "backgroundHexColor", EmitDefaultValue = false)]
         public string BackgroundHexColor { get; set; }
 
@@ -351,6 +348,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "allowDeleteFormField", EmitDefaultValue = true)]
         public bool AllowDeleteFormField { get; set; }
+
+        /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "collaborationSettings", EmitDefaultValue = true)]
+        public CollaborationSettings CollaborationSettings { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the form field is hidden.

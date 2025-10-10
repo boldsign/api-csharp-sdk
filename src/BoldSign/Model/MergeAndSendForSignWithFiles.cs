@@ -1,3 +1,4 @@
+// <copyright file="MergeAndSendForSignWithFiles.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 

@@ -42,7 +42,7 @@ namespace BoldSign.Model
         /// <param name="language">Gets or sets the Language.</param>
         /// <param name="authenticationType">Gets or sets the authentication Type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
-        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: Roles(string roleSignerName = default, string roleSignerEmailAddress = default, int roleSignerIndex = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Locales locale = Locales.EN)")]
+        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: Roles(string roleSignerName = default, string roleSignerEmailAddress = default, int roleSignerIndex = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, Locales locale = Locales.EN)")]
         public Roles(int roleIndex = default, string signerName = default, string signerEmail = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Languages language = Languages.None, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
         {
             this.SignerName = signerName;
@@ -76,12 +76,12 @@ namespace BoldSign.Model
         /// <param name="signerType">signerType.</param>
         /// <param name="hostEmail">Gets or sets the hostEmail.</param>
         /// <param name="formFields">Gets or sets document Form fields such as Sign, Checkbox, Radio buttons etc..</param>
-        /// <param name="existingFormFields">Gets or sets value for the existing Form fields..</param>
-        /// <param name="locale">Gets or sets the locale.</param>
+        /// <param name="existingFormFields">Gets or sets value for the existing Form fields.</param>
         /// <param name="authenticationType">Gets or sets the authentication Type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
+        /// <param name="locale">Gets or sets the locale.</param>
         /// <param name="identityVerificationSettings">Gets or sets the identity verification settings.</param>
-        public Roles(string roleSignerName = default, string roleSignerEmailAddress = default, int roleSignerIndex = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Locales locale = Locales.Default, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdentityVerificationSettings identityVerificationSettings = default)
+        public Roles(string roleSignerName = default, string roleSignerEmailAddress = default, int roleSignerIndex = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, Locales locale = Locales.Default, IdentityVerificationSettings identityVerificationSettings = default)
         {
             this.SignerName = roleSignerName;
             this.SignerEmail = roleSignerEmailAddress;
@@ -95,9 +95,9 @@ namespace BoldSign.Model
             this.HostEmail = hostEmail;
             this.FormFields = formFields;
             this.ExistingFormFields = existingFormFields;
-            this.Locale = locale;
             this.AuthenticationType = authenticationType;
             this.PhoneNumber = phoneNumber;
+            this.Locale = locale;
             this.IdentityVerificationSettings = identityVerificationSettings;
         }
 
@@ -165,6 +165,13 @@ namespace BoldSign.Model
         public string AuthenticationCode { get; set; }
 
         /// <summary>
+        ///     Gets or sets the identity verification settings.
+        /// </summary>
+        /// <value>Gets the value of identity verification settings.</value>
+        [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
+        public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
+
+        /// <summary>
         ///     Gets or sets the signer type.
         /// </summary>
         /// <value>Gets or sets the signerEmail.</value>
@@ -193,7 +200,7 @@ namespace BoldSign.Model
         public string SignerRole { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = true)]
         public bool? AllowFieldConfiguration { get; set; }
@@ -217,7 +224,7 @@ namespace BoldSign.Model
         /// </summary>
         /// <value>Gets or sets the language of the signer.</value>
         [DataMember(Name = "language", EmitDefaultValue = true)]
-        [Obsolete("language is deprecated, please use locale instead")]
+        [Obsolete("Language is deprecated, please use locale instead")]
         public Languages Language { get; set; }
 
         /// <summary>
@@ -236,7 +243,6 @@ namespace BoldSign.Model
         /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
-        /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
         [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
@@ -251,13 +257,6 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "enableQes", EmitDefaultValue = false)]
         public bool? EnableQes { get; set; }
-
-        /// <summary>
-        /// Gets or sets the identity verification settings.
-        /// </summary>
-        /// <value>Gets the value of identity verification settings.</value>
-        [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
-        public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
 
         /// <summary>
         /// Gets or sets a value for authentication settings.

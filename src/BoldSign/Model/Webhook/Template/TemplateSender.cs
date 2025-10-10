@@ -16,5 +16,11 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("name", DefaultValueHandling = DefaultValueHandling.Include)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets sender team id.
+        /// </summary>
+        [JsonProperty("teamId", DefaultValueHandling = DefaultValueHandling.Include)]
+        public string TeamId { get; set; }
     }
 }

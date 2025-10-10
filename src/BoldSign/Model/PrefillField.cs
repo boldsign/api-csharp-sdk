@@ -1,4 +1,4 @@
-// <copyright file="PrefillField.cs" company="Syncfusion Inc">
+﻿// <copyright file="PrefillField.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -24,4 +24,3 @@ namespace BoldSign.Api.Model
         public string Value { get; set; }
     }
 }
-

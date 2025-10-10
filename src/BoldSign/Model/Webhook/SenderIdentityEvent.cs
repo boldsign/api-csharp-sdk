@@ -82,5 +82,11 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [JsonProperty("metaData")]
         public Dictionary<string, string> MetaData { get; set; }
+
+        /// <summary>
+        /// Gets or sets the creator data.
+        /// </summary>
+        [JsonProperty("createdBy")]
+        public SenderIdentityCreator CreatedBy { get; set; }
     }
 }

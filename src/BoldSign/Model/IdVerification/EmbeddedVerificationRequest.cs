@@ -1,4 +1,4 @@
-// <copyright file="EmbeddedVerificationRequest.cs" company="Syncfusion Inc">
+﻿// <copyright file="EmbeddedVerificationRequest.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -70,9 +70,7 @@ namespace BoldSign.Model.IdVerification
         /// Gets or sets the redirect url.
         /// </summary>
         [DataMember(Name = "redirectUrl", EmitDefaultValue = false)]
-#pragma warning disable CA1056 // Uri properties should not be strings
         public string RedirectUrl { get; set; }
-#pragma warning restore CA1056 // Uri properties should not be strings
 
         /// <summary>
         /// Gets or sets the signer order.
