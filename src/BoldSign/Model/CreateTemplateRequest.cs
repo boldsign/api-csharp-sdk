@@ -38,6 +38,12 @@ namespace BoldSign.Api.Model
         public List<IDocumentFile> Files { get; set; } = new List<IDocumentFile>();
 
         /// <summary>
+        /// Gets or sets list of allow new files.
+        /// </summary>
+        [JsonProperty("allowNewFiles")]
+        public bool AllowNewFiles { get; set; } = true;
+
+        /// <summary>
         /// Gets or sets the FileUrl.
         /// </summary>
         [JsonProperty("fileUrls")]
@@ -90,12 +96,6 @@ namespace BoldSign.Api.Model
         /// </summary>
         [JsonProperty("allowNewRoles")]
         public bool AllowNewRoles { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets list of allow new files.
-        /// </summary>
-        [JsonProperty("allowNewFiles")]
-        public bool AllowNewFiles { get; set; } = true;
 
         /// <summary>
         /// Gets or sets a value indicating whether  the enable  reassign value option is enabled or disabled.

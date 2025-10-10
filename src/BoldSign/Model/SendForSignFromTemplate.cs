@@ -47,7 +47,6 @@ namespace BoldSign.Model
         /// <param name="enableSigningOrder">Gets or sets the enableSigningOrder.</param>
         /// <param name="documentInfo">Gets or sets the documentInfo.</param>
         /// <param name="roleRemovalIndices">Gets or sets the role removal indices.</param>
-        /// <param name="documentDownloadOption">Gets or sets the document download option.</param>
         public SendForSignFromTemplate(
             string templateId = default,
             string title = default,
@@ -253,6 +252,7 @@ namespace BoldSign.Model
         [JsonProperty("fileUrls")]
         public List<Uri> FileUrls { get; set; } = new List<Uri>();
 
+
         /// <summary>
         /// Gets or sets form group values for grouped form fields.
         /// </summary>
@@ -273,6 +273,12 @@ namespace BoldSign.Model
         public List<string> RemoveFormFields { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
+        /// </summary>
+        [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
+        public bool? EnableAuditTrailLocalization { get; set; }
+
+        /// <summary>
         /// Gets or sets the download file name.
         /// </summary>
         [DataMember(Name = "downloadFileName", EmitDefaultValue = true)]
@@ -289,12 +295,6 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "allowScheduledSend", EmitDefaultValue = false)]
         public bool AllowScheduledSend { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
-        /// </summary>
-        [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
-        public bool? EnableAuditTrailLocalization { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

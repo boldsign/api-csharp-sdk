@@ -22,7 +22,7 @@ namespace BoldSign.Model
         /// <param name="name">Gets or sets name.</param>
         /// <param name="email">Gets or sets email.</param>
         /// <param name="notificationSettings">Gets or sets notification settings.</param>
-        /// <param name="brandId">Gets or sets brand Id.</param>
+        /// <param name="brandId">Gets or sets brand id.</param>
         /// <param name="redirectUrl">Gets or sets redirect url.</param>
         public SenderIdentityRequest(string name, string email, NotificationSettings notificationSettings, string brandId = null, Uri redirectUrl = null)
         {

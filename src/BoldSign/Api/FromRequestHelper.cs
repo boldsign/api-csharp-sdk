@@ -9,6 +9,7 @@ namespace BoldSign.Api
     using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
+    using BoldSign.Api.Model.EditDocument;
 
     internal static class FromRequestHelper
     {
@@ -142,6 +143,7 @@ namespace BoldSign.Api
             {
                 localVarFormParams.Add(nameof(signRequestDetails.DisableExpiryAlert), signRequestDetails.DisableExpiryAlert.Value ? "true" : "false");
             }
+
             localVarFormParams.Add(nameof(signRequestDetails.EnablePrintAndSign), signRequestDetails.EnablePrintAndSign ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.EnableReassign), signRequestDetails.EnableReassign ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.AllowScheduledSend), signRequestDetails.AllowScheduledSend ? "true" : "false");
@@ -150,7 +152,6 @@ namespace BoldSign.Api
             {
                 localVarFormParams.Add(nameof(signRequestDetails.DocumentDownloadOption), signRequestDetails.DocumentDownloadOption.ToString());
             }
-
             if (signRequestDetails.MetaData != null)
             {
                 localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.MetaData, nameof(signRequestDetails.MetaData));
@@ -158,11 +159,12 @@ namespace BoldSign.Api
 
             if (signRequestDetails.EnableAuditTrailLocalization != null)
             {
-                localVarFormParams.Add(nameof(signRequestDetails.EnableAuditTrailLocalization), signRequestDetails.EnableAuditTrailLocalization == true ? "true" : "false");
+                localVarFormParams.Add(nameof(signRequestDetails.EnableAuditTrailLocalization),signRequestDetails.EnableAuditTrailLocalization == true ? "true" : "false");
             }
 
             return localVarFormParams;
         }
+
         /// <summary>
         /// Represents a ConvertToFormRequest.
         /// </summary>
@@ -237,7 +239,7 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(embeddedRequest.ShowSaveButton), embeddedRequest.ShowSaveButton ? "true" : "false");
 
 #pragma warning disable CS0618//Type or member is obsolete
-                if (embeddedRequest.ShowSendButton != null)
+                if(embeddedRequest.ShowSendButton != null)
                 {
                     localVarFormParams.Add(nameof(embeddedRequest.ShowSendButton), embeddedRequest.ShowSendButton == true ? "true" : "false");
                 }
@@ -270,7 +272,6 @@ namespace BoldSign.Api
             {
                 localVarFormParams.Add(nameof(templateRequest.OnBehalfOf), templateRequest.OnBehalfOf);
             }
-
             if (templateRequest.Labels != null)
             {
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.Labels.ToList(), nameof(templateRequest.Labels));
@@ -279,6 +280,154 @@ namespace BoldSign.Api
             if (templateRequest.TemplateLabels != null)
             {
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.TemplateLabels.ToList(), nameof(templateRequest.TemplateLabels));
+            }
+
+            return localVarFormParams;
+        }
+
+        public static Dictionary<string, string> ConvertToFormRequestForEditDocument(EditDocumentRequest editDocumentRequest, Dictionary<string, string> localVarFormParams)
+        {
+            if (editDocumentRequest.Title != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.Title), editDocumentRequest.Title);
+            }
+
+            if (editDocumentRequest.ExpiryValue != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.ExpiryValue), editDocumentRequest.ExpiryValue.Value.ToString(CultureInfo.CurrentCulture));
+            }
+
+            if (editDocumentRequest.ExpiryDateType != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.ExpiryDateType), editDocumentRequest.ExpiryDateType.ToString());
+            }
+
+            if (editDocumentRequest.ScheduledSendTime != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.ScheduledSendTime), editDocumentRequest.ScheduledSendTime.Value.ToString(CultureInfo.CurrentCulture));
+            }
+
+            if (editDocumentRequest.Message != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.Message), editDocumentRequest.Message);
+            }
+
+            if (editDocumentRequest.Signers != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, editDocumentRequest.Signers.ToList(), nameof(editDocumentRequest.Signers));
+            }
+
+            if (editDocumentRequest.CC != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, editDocumentRequest.CC.ToList(), nameof(editDocumentRequest.CC));
+            }
+
+            if (editDocumentRequest.DocumentInfo != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, editDocumentRequest.DocumentInfo.ToList(), nameof(editDocumentRequest.DocumentInfo));
+            }
+
+            if (editDocumentRequest.TextTagDefinitions != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, editDocumentRequest.TextTagDefinitions.ToList(), nameof(editDocumentRequest.TextTagDefinitions));
+            }
+
+            if (editDocumentRequest.FormGroups != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, editDocumentRequest.FormGroups.ToList(), nameof(editDocumentRequest.FormGroups));
+            }
+
+            if (editDocumentRequest.Labels != null)
+            {
+                var i = -1;
+                foreach (var tag in editDocumentRequest.Labels)
+                {
+                    if (string.IsNullOrEmpty(tag))
+                    {
+                        throw new ApiException(400, ApiValidationMessages.EmptyLabels);
+                    }
+
+                    localVarFormParams.Add($"{nameof(editDocumentRequest.Labels)}[{++i}]", tag?.ToString());
+                }
+            }
+
+            if (editDocumentRequest.BrandId != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.BrandId), editDocumentRequest.BrandId);
+            }
+
+            if (!string.IsNullOrEmpty(editDocumentRequest.OnBehalfOf))
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.OnBehalfOf), editDocumentRequest.OnBehalfOf);
+            }
+
+            if (editDocumentRequest.DownloadFileName != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.DownloadFileName), editDocumentRequest.DownloadFileName);
+            }
+
+            if (editDocumentRequest.ReminderSettings != null)
+            {
+                localVarFormParams.Add($"{nameof(editDocumentRequest.ReminderSettings)}.{nameof(editDocumentRequest.ReminderSettings.EnableAutoReminder)}", editDocumentRequest.ReminderSettings.EnableAutoReminder.ToString());
+                localVarFormParams.Add($"{nameof(editDocumentRequest.ReminderSettings)}.{nameof(editDocumentRequest.ReminderSettings.ReminderDays)}", editDocumentRequest.ReminderSettings.ReminderDays.ToString());
+                localVarFormParams.Add($"{nameof(editDocumentRequest.ReminderSettings)}.{nameof(editDocumentRequest.ReminderSettings.ReminderCount)}", editDocumentRequest.ReminderSettings.ReminderCount.ToString());
+            }
+
+            if (editDocumentRequest.RecipientNotificationSettings != null)
+            {
+                InitializeRecipientNotificationSettings(localVarFormParams, editDocumentRequest.RecipientNotificationSettings);
+            }
+
+            if (editDocumentRequest.EnableSigningOrder != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.EnableSigningOrder), editDocumentRequest.EnableSigningOrder == true ? "true" : "false");
+            }
+
+            localVarFormParams.Add(nameof(editDocumentRequest.UseTextTags), editDocumentRequest.UseTextTags ? "true" : "false");
+
+            if (editDocumentRequest.DisableSMS != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.DisableSMS), editDocumentRequest.DisableSMS == true ? "true" : "false");
+            }
+
+            if (editDocumentRequest.DisableEmails != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.DisableEmails), editDocumentRequest.DisableEmails == true ? "true" : "false");
+            }
+
+            if (editDocumentRequest.HideDocumentId != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.HideDocumentId), editDocumentRequest.HideDocumentId == true ? "true" : "false");
+            }
+
+            if (editDocumentRequest.DisableExpiryAlert != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.DisableExpiryAlert), editDocumentRequest.DisableExpiryAlert.Value ? "true" : "false");
+            }
+
+            if (editDocumentRequest.EnablePrintAndSign != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.EnablePrintAndSign), editDocumentRequest.EnablePrintAndSign == true ? "true" : "false");
+            }
+
+            if (editDocumentRequest.EnableReassign != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.EnableReassign), editDocumentRequest.EnableReassign == true ? "true" : "false");
+            }
+
+            if (editDocumentRequest.DocumentDownloadOption != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.DocumentDownloadOption), editDocumentRequest.DocumentDownloadOption.ToString());
+            }
+
+            if (editDocumentRequest.MetaData != null)
+            {
+                localVarFormParams = ToFormParameter(localVarFormParams, editDocumentRequest.MetaData, nameof(editDocumentRequest.MetaData));
+            }
+
+            if (editDocumentRequest.EnableAuditTrailLocalization != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.EnableAuditTrailLocalization), editDocumentRequest.EnableAuditTrailLocalization == true ? "true" : "false");
             }
 
             return localVarFormParams;
@@ -366,6 +515,30 @@ namespace BoldSign.Api
 
                 var name = $"{parameterName}[{prop.Name}]";
 
+                if (prop.Name == "AcceptedFileTypes" && value is List<string>)
+                {
+                    var acceptedFileTypes = (List<string>)value;
+
+                    var i = -1;
+                    foreach (var acceptedFileType in acceptedFileTypes)
+                    {
+                        localVarFormParams.Add(name + "[" + ++i + "]", acceptedFileType?.ToString());
+                    }
+                }
+
+                if (prop.Name == "DropdownOptions" && value is List<string>)
+                {
+                    var dropdownOptions = (List<string>)value;
+
+                    var i = -1;
+                    foreach (var dropdownOption in dropdownOptions)
+                    {
+                        localVarFormParams.Add(name + "[" + ++i + "]", dropdownOption?.ToString());
+                    }
+                }
+
+                var propertyType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+
                 if (value is IEnumerable<string> items)
                 {
                     var i = 0;
@@ -374,10 +547,7 @@ namespace BoldSign.Api
                         localVarFormParams.Add($"{name}[{i++}]", item);
                     }
                 }
-
-                var propertyType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
-
-                if (value is Enum)
+                else if (value is Enum)
                 {
                     var enumValues = Enum.GetValues(propertyType);
 

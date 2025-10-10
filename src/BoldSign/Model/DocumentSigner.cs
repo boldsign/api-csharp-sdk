@@ -42,8 +42,8 @@ namespace BoldSign.Model
         /// <param name="language">Gets or sets the Language.</param>
         /// <param name="authenticationType">Gets or sets the authentication type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
-        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN)")]
-        public DocumentSigner(string name, string emailAddress, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, SignerType signerType = BoldSign.Model.SignerType.Signer, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Languages language = Languages.None, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
+        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, Locales locale = Locales.EN)")]
+        public DocumentSigner(string name, string emailAddress, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, SignerType signerType = BoldSign.Model.SignerType.Signer, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Languages language = Languages.None,  AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
         {
             // to ensure "name" is required (not null)
             if (string.IsNullOrEmpty(name))
@@ -78,18 +78,18 @@ namespace BoldSign.Model
         /// </summary>
         /// <param name="signerName">Gets or sets the signer Name. (required).</param>
         /// <param name="signerType">signerType.</param>
-        /// <param name="signerEmail">Gets or sets the signer Email.</param>
+        /// <param name="signerEmail">Gets or sets the signer Email .</param>
         /// <param name="privateMessage">Gets or sets the private message.</param>
         /// <param name="authenticationCode">Gets or sets the authentication code.</param>
         /// <param name="signerOrder">Gets or sets the signer order.</param>
         /// <param name="enableEmailOTP">Gets or sets a value indicating whether to enable email OTP.</param>
         /// <param name="formFields">Gets or sets the formFields.</param>
         /// <param name="hostEmail">Gets or sets the hostEmail.</param>
-        /// <param name="locale">Gets or sets the locale.</param>
         /// <param name="authenticationType">Gets or sets the authentication type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
+        /// <param name="locale">Gets or sets the locale.</param>
         /// <param name="identityVerificationSettings">Gets or sets the identity verification settings.</param>
-        public DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN,  AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdentityVerificationSettings identityVerificationSettings = default)
+        public DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default,  string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, Locales locale = Locales.EN, IdentityVerificationSettings identityVerificationSettings = default)
         {
             // to ensure "name" is required (not null)
             if (string.IsNullOrEmpty(signerName))
@@ -97,8 +97,8 @@ namespace BoldSign.Model
                 throw new InvalidDataException("signerName is a required property for DocumentSigner and cannot be null");
             }
 
-            this.Name = signerName;
             this.SignerType = signerType;
+            this.Name = signerName;
             this.EmailAddress = signerEmail;
             this.PrivateMessage = privateMessage;
             this.AuthenticationCode = authenticationCode;
@@ -106,9 +106,9 @@ namespace BoldSign.Model
             this.EnableEmailOTP = enableEmailOTP;
             this.FormFields = formFields;
             this.HostEmail = hostEmail;
-            this.Locale = locale;
             this.AuthenticationType = authenticationType;
             this.PhoneNumber = phoneNumber;
+            this.Locale = locale;
             this.IdentityVerificationSettings = identityVerificationSettings;
         }
 
@@ -119,6 +119,12 @@ namespace BoldSign.Model
         {
 
         }
+
+        /// <summary>
+        /// Gets or sets the signer id.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
 
         /// <summary>
         ///  Gets or sets the type of signer.
@@ -155,11 +161,31 @@ namespace BoldSign.Model
         public string PrivateMessage { get; set; }
 
         /// <summary>
+        /// Gets or sets the authentication type.
+        /// Defaults to None.
+        /// </summary>
+        [DataMember(Name = "authenticationType", EmitDefaultValue = true)]
+        public AuthenticationType AuthenticationType { get; set; } = AuthenticationType.None;
+
+        /// <summary>
+        /// Gets or sets the phone number.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
         ///     Gets or sets the authentication code.
         /// </summary>
         /// <value>Gets or sets the authentication code.</value>
         [DataMember(Name = "authenticationCode", EmitDefaultValue = true)]
         public string AuthenticationCode { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the identity verification settings.
+        /// </summary>
+        /// <value>Gets the value of identity verification settings.</value>
+        [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
+        public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
 
         /// <summary>
         ///     Gets or sets the order in which the signers needs to sign the document.
@@ -176,8 +202,9 @@ namespace BoldSign.Model
         public bool EnableEmailOTP { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
+        /// <value>Gets or sets a value indicating whether gets or sets the allow configure fields.</value>
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
         public bool AllowFieldConfiguration { get; set; }
 
@@ -210,19 +237,6 @@ namespace BoldSign.Model
         public DeliveryMode DeliveryMode { get; set; } = DeliveryMode.Email;
 
         /// <summary>
-        /// Gets or sets the authentication type.
-        /// Defaults to None.
-        /// </summary>
-        [DataMember(Name = "authenticationType", EmitDefaultValue = true)]
-        public AuthenticationType AuthenticationType { get; set; } = AuthenticationType.None;
-
-        /// <summary>
-        /// Gets or sets the phone number.
-        /// </summary>
-        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
-        public PhoneNumber PhoneNumber { get; set; }
-
-        /// <summary>
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         /// <value>Gets or sets the Recipient Notification Settings of the signer.</value>
@@ -240,13 +254,6 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "enableQes", EmitDefaultValue = false)]
         public bool? EnableQes { get; set; }
-
-        /// <summary>
-        /// Gets or sets the identity verification settings.
-        /// </summary>
-        /// <value>Gets the value of identity verification settings.</value>
-        [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
-        public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
 
         /// <summary>
         /// Gets or sets a value for authentication settings.

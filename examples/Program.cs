@@ -23,6 +23,7 @@
             var customFieldExamples = new CustomFieldExamples(new CustomFieldClient(apiClient));
             var idVerificationExamples = new IdVerificationExamples(new IdVerificationClient(apiClient));
             await documentExamples.CreateDocument().ConfigureAwait(false);
+            documentExamples.ListTeamDocuments();
 
             // webhook event helpers
             var jsonPayload = "{}";
@@ -41,7 +42,7 @@
                     var senderIdentityEvent = webhookEvent.Data as SenderIdentityEvent;
 
                     break;
-
+                
                 // if its a identity verification event, cast as IdentityVerificationEvent
                 case WebHookEventType.IdentityVerificationInitiated:
                     var identityVerificationEvent = webhookEvent.Data as IdentityVerificationEvent;

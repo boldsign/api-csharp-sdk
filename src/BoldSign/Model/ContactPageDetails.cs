@@ -1,4 +1,4 @@
-﻿// <copyright file="ContactPageDetails.cs" company="Syncfusion Inc">
+// <copyright file="ContactPageDetails.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -28,10 +28,12 @@ namespace BoldSign.Model
         /// </summary>
         /// <param name="pageSize">Gets or sets the page size..</param>
         /// <param name="page">Gets or sets the page..</param>
-        public ContactPageDetails(int pageSize = default, int page = default)
+        /// <param name="totalRecordsCount">Get or sets the page..</param>
+        public ContactPageDetails(int pageSize = default, int page = default, int totalRecordsCount = default)
         {
             this.PageSize = pageSize;
             this.Page = page;
+            this.TotalRecordsCount = totalRecordsCount;
         }
 
         /// <summary>
@@ -47,6 +49,13 @@ namespace BoldSign.Model
         /// <value>Gets the value of page.</value>
         [DataMember(Name = "page", EmitDefaultValue = false)]
         public int Page { get; set; }
+
+        ///<summary>
+        ///  Gets or sets the totalRecordsCount.
+        /// </summary>
+        /// <value>Gets the value of total records count.</value>
+        [DataMember(Name = "totalRecordsCount", EmitDefaultValue = false)]
+        public int TotalRecordsCount { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

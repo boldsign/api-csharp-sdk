@@ -43,12 +43,13 @@ namespace BoldSign.Model
         /// <param name="formFields">Gets or sets the form fields..</param>
         /// <param name="hostEmail">Gets or sets the host email.</param>
         /// <param name="hostName">Gets or sets the host name.</param>
+        /// <param name="authenticationType">Authentication type.</param>
         /// <param name="language">Gets or sets the Language.</param>
         /// <param name="locale">Gets or sets the locale.</param>
-        /// <param name="authenticationType">Authentication type.</param>
         /// <param name="phoneNumber">The phone number.</param>
         /// <param name="idVerification">Gets or sets id verification details.</param>
-        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>), string hostEmail = default(string), string hostName = default(string), Languages language = Languages.English, string locale = default(string), AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdVerification.IdVerification idVerification = default)
+        /// <param name="enableQes">Gets or sets enableQes.</param>
+        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>), string hostEmail = default(string), string hostName = default(string), AuthenticationType authenticationType = AuthenticationType.None, Languages language = Languages.English, string locale = default(string), PhoneNumber phoneNumber = default, IdVerification.IdVerification idVerification = default, bool enableQes = default(bool))
         {
             this.SignerName = signerName;
             this.SignerRole = signerRole;
@@ -64,6 +65,7 @@ namespace BoldSign.Model
                 this.IsAuthenticationFailed = isAuthenticationFailed;
             }
             this.EnableEmailOTP = enableEmailOTP;
+            this.AuthenticationType = authenticationType;
             // use default value if no "isDeliveryFailed" provided
             if (isDeliveryFailed == null)
             {
@@ -99,10 +101,16 @@ namespace BoldSign.Model
             this.HostName = hostName;
             this.Language = language;
             this.Locale = locale;
-            this.AuthenticationType = authenticationType;
             this.PhoneNumber = phoneNumber;
             this.IdVerification = idVerification;
+            this.EnableQes = enableQes;
         }
+
+        /// <summary>
+        /// Gets or sets the signer id.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the signer name.
@@ -151,6 +159,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets a value indicating whether email OTP authentication is enabled.</value>
         [DataMember(Name = "enableEmailOTP", EmitDefaultValue = false)]
         public bool? EnableEmailOTP { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value of authentication type.
+        /// </summary>
+        /// <value>Gets or sets the authentication type.</value>
+        [DataMember(Name = "authenticationType", EmitDefaultValue = false)]
+        public AuthenticationType AuthenticationType { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether delivery is failed.
@@ -208,9 +223,8 @@ namespace BoldSign.Model
         public string PrivateMessage { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
-        /// <value>Gets or sets a value indicating whether gets or sets the allow field configuration.</value>
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
         public bool AllowFieldConfiguration { get; set; }
 
@@ -236,18 +250,24 @@ namespace BoldSign.Model
         public string Locale { get; set; }
 
         /// <summary>
-        /// Gets or sets a value of authentication type.
-        /// </summary>
-        /// <value>Gets or sets the authentication type.</value>
-        [DataMember(Name = "authenticationType", EmitDefaultValue = false)]
-        public AuthenticationType AuthenticationType { get; set; }
-
-        /// <summary>
         /// Gets or sets the phone number.
         /// </summary>
         /// <value>Gets or sets phone number.</value>
         [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
         public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id verification details.
+        /// </summary>
+        /// <value>Gets or sets id verification details.</value>
+        [DataMember(Name = "idVerification", EmitDefaultValue = false)]
+        public IdVerification.IdVerification IdVerification { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets or sets a value enableQes.
+        /// </summary>
+        [DataMember(Name = "enableQes", EmitDefaultValue = true)]
+        public bool EnableQes { get; set; }
 
         /// <summary>
         /// Gets or sets the Recipient Notification Settings.
@@ -263,29 +283,16 @@ namespace BoldSign.Model
         public int? AuthenticationRetryCount { get; set; }
 
         /// <summary>
-        /// Gets or sets the id verification details.
+        /// Gets or Sets a delivery mode.
         /// </summary>
-        /// <value>Gets or sets id verification details.</value>
-        [DataMember(Name = "idVerification", EmitDefaultValue = false)]
-        public IdVerification.IdVerification IdVerification { get; set; }
-
-        /// <summary>
-        /// Gets or sets the enableQes.
-        /// </summary>
-        [DataMember(Name = "enableQes", EmitDefaultValue = true)]
-        public bool EnableQes { get; set; }
+        [DataMember(Name = "deliveryMode", EmitDefaultValue = true)]
+        public DeliveryMode DeliveryMode { get; set; }
 
         /// <summary>
         /// Gets or sets the authentication settings for the signer.
         /// </summary>
         [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
         public SignerAuthenticationSettings SignerAuthenticationSettings { get; set; }
-
-        /// <summary>
-        /// Gets or Sets a delivery mode.
-        /// </summary>
-        [DataMember(Name = "deliveryMode", EmitDefaultValue = true)]
-        public DeliveryMode DeliveryMode { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

@@ -61,8 +61,7 @@ namespace BoldSign.Api.Model
         /// <param name="type">Gets or sets the fieldType.</param>
         /// <param name="hyperlinkText">Gets or sets the hyperlinkText.</param>
         /// <param name="label">Gets or sets the label value.</param>
-        /// <param name="timeFormat">Gets or sets the timeFormat.</param>
-        public TemplateFormField(FieldType fieldType = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string groupName = default, List<string> dropdownOptions = default(List<string>), string placeholder = default(string), string dateFormat = default, BoldSign.Model.ValidationType validationType = default(BoldSign.Model.ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default(List<ConditionalRule>), TextAlign textAlign = TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default, string type = default, string hyperlinkText = default, string label = default, string timeFormat = default)
+        public TemplateFormField(FieldType fieldType = default, int pageNumber = default, Rectangle bounds = default, bool isRequired = default, string value = default, FontFamily font = FontFamily.Helvetica, int fontSize = default, string fontHexColor = default, bool isBoldFont = default, bool isItalicFont = default, bool isUnderLineFont = default, int lineHeight = default, int characterLimit = default, string id = default, AttachmentInfo attachmentInfo = default(AttachmentInfo), ImageInfo imageInfo = default(ImageInfo), EditableDateFieldSettings editableDateFieldSettings = default(EditableDateFieldSettings), string groupName = default, List<string> dropdownOptions = default(List<string>), string placeholder = default(string), string dateFormat = default, BoldSign.Model.ValidationType validationType = default(BoldSign.Model.ValidationType), string validationCustomRegex = default(string), string validationCustomRegexMessage = default(string), string dataSyncTag = default, bool isReadOnly = default, List<ConditionalRule> conditionalRules = default(List<ConditionalRule>), TextAlign textAlign = TextAlign.Left, TextDirection textDirection = TextDirection.LTR, float characterSpacing = default, string type = default, string hyperlinkText = default, string label = default)
         {
             this.mType = fieldType;
             this.PageNumber = pageNumber;
@@ -97,7 +96,6 @@ namespace BoldSign.Api.Model
             this.FieldType = type;
             this.HyperlinkText = hyperlinkText;
             this.Label = label;
-            this.TimeFormat = timeFormat;
         }
 
         /// <summary>
@@ -246,17 +244,6 @@ namespace BoldSign.Api.Model
         public string DateFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets the TimeFormat and it's only applicable for DateSigned field.
-        /// Please use the pre-defined TimeFormat.
-        /// <Example>Supported formats:
-        /// hh:mm tt, h:mm tt, HH:mm, H:mm.
-        /// </Example>
-        /// <value>The default value is time format specified in the business profile.</value>
-        /// </summary>
-        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
-        public string TimeFormat { get; set; }
-
-        /// <summary>
         /// Gets or Sets Placeholder value.
         /// </summary>
         [DataMember(Name = "placeholder", EmitDefaultValue = false)]
@@ -286,7 +273,7 @@ namespace BoldSign.Api.Model
         public string GroupName { get; set; }
 
         /// <summary>
-        ///     Gets or sets the Label for radio button fields.
+        /// Gets or sets the Label for radio button fields.
         /// </summary>
         [DataMember(Name = "label", EmitDefaultValue = true)]
         public string Label { get; set; }
@@ -327,7 +314,7 @@ namespace BoldSign.Api.Model
         /// Gets or sets the character spacing.
         /// </summary>
         /// <value>Gets the value of character spacing.</value>
-        [DataMember(Name = "characterSpacing", EmitDefaultValue = true)]
+        [DataMember(Name = "characterSpacing", EmitDefaultValue = false)]
         public float CharacterSpacing { get; set; }
 
         /// <summary>
@@ -338,18 +325,11 @@ namespace BoldSign.Api.Model
         public string FieldType { get; set; }
 
         /// <summary>
-        /// Gets or sets the hyperlink text.
-        /// </summary>
-        /// <value>Gets the value of hyperlink text.</value>
-        [DataMember(Name = "hyperlinkText", EmitDefaultValue = true)]
-        public string HyperlinkText { get; set; }
-
-        /// <summary>
         /// Gets or sets the background hex color.
         /// The BackgroundHexColor property allows you to set the background color of a label field using hexadecimal color codes ("#FF5733"). The default color is transparent or no background color.
         /// Default value is null.
         /// </summary>
-        /// <value>Gets the value of backgroundColor.</value>
+        /// <value>Gets or sets the BackgroundColor.</value>
         [DataMember(Name = "backgroundHexColor", EmitDefaultValue = false)]
         public string BackgroundHexColor { get; set; }
 
@@ -358,6 +338,13 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "tabIndex", EmitDefaultValue = true)]
         public int TabIndex { get; set; }
+
+        /// <summary>
+        /// Gets or sets the hyperlink text.
+        /// </summary>
+        /// <value>Gets the value of hyperlink text.</value>
+        [DataMember(Name = "hyperlinkText", EmitDefaultValue = true)]
+        public string HyperlinkText { get; set; }
 
         /// <summary>
         /// Gets or sets the formula settings.
@@ -382,6 +369,12 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "allowDeleteFormField", EmitDefaultValue = true)]
         public bool AllowDeleteFormField { get; set; }
+
+        /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "collaborationSettings", EmitDefaultValue = true)]
+        public CollaborationSettings CollaborationSettings { get; set; }
 
     }
 }

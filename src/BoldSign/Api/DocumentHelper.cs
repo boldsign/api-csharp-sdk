@@ -44,6 +44,7 @@ namespace BoldSign.Api
                 throw new ApiException(422, errorMessage);
             }
 
+
             if (ValidateBothFileParamUsed(request, false) || (!isFillingEmbedded && files.Count == 0 && fileUrls.Count == 0))
             {
                 var errorMessage = files.Count > 0 && fileUrls.Count > 0

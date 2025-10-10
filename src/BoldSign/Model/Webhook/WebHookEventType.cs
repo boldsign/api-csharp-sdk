@@ -132,6 +132,7 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [EnumMember(Value = "TemplateCreated")]
         TemplateCreated = 19,
+
         /// <summary>
         /// Create template failed event.
         /// </summary>
@@ -169,15 +170,27 @@ namespace BoldSign.Model.Webhook
         IdentityVerificationFailed = 25,
 
         /// <summary>
-        /// Template send failed event.
-        /// </summary>
-        [EnumMember(Value = "TemplateSendFailed")]
-        TemplateSendFailed = 26,
-
-        /// <summary>
         /// Reminder sent event
         /// </summary>
         [EnumMember(Value = "Reminder")]
-        Reminder = 27,
+        Reminder = 26,
+
+        /// <summary>
+        /// Template send failed event.
+        /// </summary>
+        [EnumMember(Value = "TemplateSendFailed")]
+        TemplateSendFailed = 27,
+
+        /// <summary>
+        /// Document edited event.
+        /// </summary>
+        [EnumMember(Value = "Edited")]
+        Edited = 28,
+
+        /// <summary>
+        /// Document edit failed event.
+        /// </summary>
+        [EnumMember(Value = "EditFailed")]
+        EditFailed = 29,
     }
 }

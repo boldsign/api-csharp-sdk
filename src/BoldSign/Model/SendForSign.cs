@@ -203,8 +203,14 @@ namespace BoldSign.Model
         /// Gets or sets the Recipient Notification Settings.
         /// </summary>
         [JsonProperty("recipientNotificationSettings")]
-        [Display(Description = "Recipient Notification Settings of the document.")]
+        [Display(Description = "Recipient Notification Settings of the Template.")]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
+        /// </summary>
+        [JsonProperty("enableAuditTrailLocalization")]
+        public bool? EnableAuditTrailLocalization { get; set; }
 
         /// <summary>
         //// Gets or sets the download file name.
@@ -223,11 +229,5 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("allowScheduledSend")]
         public bool AllowScheduledSend { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
-        /// </summary>
-        [JsonProperty("enableAuditTrailLocalization")]
-        public bool? EnableAuditTrailLocalization { get; set; }
     }
 }

@@ -32,6 +32,13 @@ namespace BoldSign.Api.Model.Webhook.Template
         public string SignerEmail { get; set; }
 
         /// <summary>
+        /// Gets or sets the signer phone number.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        [JsonProperty("phoneNumber")]
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether authentication is enabled for the signer.
         /// </summary>
         [JsonProperty("enableAccessCode")]
@@ -93,8 +100,9 @@ namespace BoldSign.Api.Model.Webhook.Template
         public string ImposeAuthentication { get; set; } = "None";
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
+        /// <value>Gets or sets a value indicating whether gets or sets the allow configure fields.</value>
         [JsonProperty("allowFieldConfiguration")]
         public bool AllowFieldConfiguration { get; set; }
     }

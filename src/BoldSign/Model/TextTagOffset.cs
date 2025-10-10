@@ -1,14 +1,14 @@
-// <copyright file="TextTagOffset.cs" company="Syncfusion Inc">
+﻿// <copyright file="TextTagOffset.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
-namespace BoldSign.Api.Model
+namespace BoldSign.Model
 {
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Text Tag offset.
+    /// The textTagOffset properties are offsetY, offsetX, and so on.
     /// </summary>
     [DataContract]
     public class TextTagOffset
@@ -28,9 +28,9 @@ namespace BoldSign.Api.Model
         public double OffsetY { get; set; }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object.
+        /// Returns the JSON string presentation of the object
         /// </summary>
-        /// <returns>JSON string presentation of the object.</returns>
+        /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson() => JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 }

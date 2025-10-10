@@ -55,6 +55,13 @@ namespace BoldSign.Model.Webhook
         public string SignerEmail { get; set; }
 
         /// <summary>
+        /// Gets or sets the signer phone number.
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        [JsonProperty("phoneNumber")]
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
         /// Gets or Sets Status
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
@@ -156,20 +163,6 @@ namespace BoldSign.Model.Webhook
         public string AuthenticationType { get; set; } = "None";
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
-        /// </summary>
-        /// <value>Gets or sets a value indicating whether gets or sets the allow field configuration.</value>
-        [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
-        [JsonProperty("allowFieldConfiguration")]
-        public bool AllowFieldConfiguration { get; set; }
-
-        /// <summary>
-        /// Gets or sets the authentication retry count.
-        /// </summary>
-        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
-        public int? AuthenticationRetryCount { get; set; }
-
-        /// <summary>
         /// Gets or sets the id verification details.
         /// </summary>
         /// <value>Gets or sets id verification details.</value>
@@ -178,10 +171,12 @@ namespace BoldSign.Model.Webhook
         public IdVerification IdVerification { get; set; }
 
         /// <summary>
-        /// Gets or sets the authentication settings for the signer.
+        /// Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
-        [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
-        public SignerAuthenticationSettings SignerAuthenticationSettings { get; set; }
+        /// <value>Gets or sets a value indicating whether gets or sets the allow configure fields.</value>
+        [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
+        [JsonProperty("allowFieldConfiguration")]
+        public bool AllowFieldConfiguration { get; set; }
 
         /// <summary>
         /// Gets or sets the last reminder sent on date time.
@@ -190,5 +185,17 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "lastReminderSentOn", EmitDefaultValue = false)]
         [JsonProperty("lastReminderSentOn")]
         public long? LastReminderSentOn { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of retries.
+        /// </summary>
+        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
+        public int? AuthenticationRetryCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication settings for the signer.
+        /// </summary>
+        [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
+        public SignerAuthenticationSettings SignerAuthenticationSettings { get; set; }
     }
 }

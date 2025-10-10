@@ -39,7 +39,7 @@ namespace BoldSign.Model
         /// <param name="expiryDate">Gets or sets the expiryDate..</param>
         /// <param name="enableSigningOrder">Gets or sets a value indicating whether to enable signing order..</param>
         /// <param name="labels">Gets or sets the labels.</param>
-        /// <param name="cursor">Gets or sets the cursor.</param>
+        /// <param name="cursor">Gets or sets the cursor value..</param>
         /// <param name="brandId">Gets or sets the brandId.</param>
         /// <param name="scheduledSendTime">Gets or sets the scheduledSendTime.</param>
         public Document(string documentId = default, DocumentSenderDetail senderDetail = default, List<DocumentCcDetails> ccDetails = default, long createdDate = default, long? activityDate = default, string activityBy = default, string messageTitle = default, DocumentStatus? status = default, List<DocumentSignerDetails> signerDetails = default, long? expiryDate = default, bool enableSigningOrder = default, List<string> labels = default, long? cursor = default, string brandId = default, long? scheduledSendTime = default)

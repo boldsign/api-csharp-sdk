@@ -39,7 +39,7 @@ namespace BoldSign.Model
         /// <param name="hostEmail">Gets or sets the host user email..</param>
         /// <param name="hostName">Gets or sets the host user name..</param>
         /// <param name="hostUserId">Gets or sets the host user id..</param>
-        /// <param name="imposeAuthentication">impose Authentication.</param>
+        /// <param name="imposeAuthentication">Impose Authentication.</param>
         public TemplateSignerDetails(string signerName = default, string signerRole = default, string signerEmail = default, SignerStatus? status = default, bool enableAccessCode = default, bool enableEmailOTP = default, string userId = default, int order = default, SignerType? signerType = default, string hostEmail = default, string hostName = default, string hostUserId = default, ImposeAuthentication imposeAuthentication = ImposeAuthentication.None)
         {
             this.SignerName = signerName;
@@ -55,13 +55,13 @@ namespace BoldSign.Model
             this.Status = status;
             this.EnableAccessCode = enableAccessCode;
             this.EnableEmailOTP = enableEmailOTP;
+            this.ImposeAuthentication = imposeAuthentication;
             this.UserId = userId;
             this.Order = order;
             this.SignerType = signerType;
             this.HostEmail = hostEmail;
             this.HostName = hostName;
             this.HostUserId = hostUserId;
-            this.ImposeAuthentication = imposeAuthentication;
         }
 
         /// <summary>
@@ -119,6 +119,20 @@ namespace BoldSign.Model
         public ImposeAuthentication ImposeAuthentication { get; set; }
 
         /// <summary>
+        /// Gets or Sets a delivery mode.
+        /// </summary>
+        /// <value>Gets or sets the delivery mode.</value>
+        [DataMember(Name = "deliveryMode", EmitDefaultValue = true)]
+        public DeliveryMode DeliveryMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the phone number.
+        /// </summary>
+        /// <value>Gets or sets a phone number.</value>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        public PhoneNumber PhoneNumber { get; set; }
+
+        /// <summary>
         ///     Gets or sets the user Id.
         /// </summary>
         /// <value>Gets or sets the user id.</value>
@@ -154,21 +168,7 @@ namespace BoldSign.Model
         public string HostUserId { get; set; }
 
         /// <summary>
-        /// Gets or Sets a delivery mode.
-        /// </summary>
-        /// <value>Gets or sets the delivery mode.</value>
-        [DataMember(Name = "deliveryMode", EmitDefaultValue = true)]
-        public DeliveryMode DeliveryMode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the phone number.
-        /// </summary>
-        /// <value>Gets or sets a phone number.</value>
-        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
-        public PhoneNumber PhoneNumber { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether gets or sets the allow field configuration.
+        ///     Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
         public bool AllowFieldConfiguration { get; set; }

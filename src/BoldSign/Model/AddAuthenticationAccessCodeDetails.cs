@@ -108,17 +108,17 @@ namespace BoldSign.Model
         public PhoneNumber PhoneNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the authentication retry count.
-        /// </summary>
-        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
-        public int? AuthenticationRetryCount { get; set; }
-
-        /// <summary>
         ///     Gets or sets the identity verification settings.
         /// </summary>
         /// <value>Gets the value of identity verification settings.</value>
         [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
         public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication retry count.
+        /// </summary>
+        [DataMember(Name = "authenticationRetryCount", EmitDefaultValue = false)]
+        public int? AuthenticationRetryCount { get; set; }
 
         /// <summary>
         /// Gets or sets a value for authentication settings.

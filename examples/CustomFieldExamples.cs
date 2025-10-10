@@ -93,7 +93,7 @@ namespace BoldSign.Examples
 
             this.CustomFieldClient.GetBrandBasedCustomFields(brandId);
         }
-
+        
         /// <summary>
         /// Generates a URL to embed manipulation of custom field process.
         /// </summary>

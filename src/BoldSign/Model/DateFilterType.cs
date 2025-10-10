@@ -19,7 +19,7 @@ namespace BoldSign.Model
     using Newtonsoft.Json.Converters;
 
     /// <summary>
-    ///     Defines DocumentList as Sent, Received and Both.
+    ///     Defines DateFilterType as SentBetween and Expiring.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum DateFilterType

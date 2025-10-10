@@ -25,6 +25,7 @@ namespace BoldSign.Api
     using System.Web;
     using BoldSign.Api.Extensions;
     using BoldSign.Api.Model;
+    using BoldSign.Api.Model.EditDocument;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
     using Newtonsoft.Json;
@@ -224,27 +225,27 @@ namespace BoldSign.Api
                 switch (singleFileParam.Value)
                 {
                     case ImageFileStream brandingFileStream:
-                        {
-                            HandleFileStream(brandingFileStream, key, form);
-                            break;
-                        }
+                    {
+                        HandleFileStream(brandingFileStream, key, form);
+                        break;
+                    }
 
                     case ImageFileBytes brandingFileBytes:
-                        {
-                            HandleFileBytes(brandingFileBytes, key, form);
-                            break;
-                        }
+                    {
+                        HandleFileBytes(brandingFileBytes, key, form);
+                        break;
+                    }
 
                     case ImageFilePath brandingFilePath:
-                        {
-                            HandleFilePath(brandingFilePath, key, form);
-                            break;
-                        }
+                    {
+                        HandleFilePath(brandingFilePath, key, form);
+                        break;
+                    }
 
                     default:
-                        {
-                            throw new InvalidOperationException(ApiValidationMessages.InvalidBrandFileInstance);
-                        }
+                    {
+                        throw new InvalidOperationException(ApiValidationMessages.InvalidBrandFileInstance);
+                    }
                 }
             }
 
@@ -252,6 +253,90 @@ namespace BoldSign.Api
             foreach (var param in fileUrlsParams)
             {
                 form.AddFormParameter(param.Key, param.Value?.AbsoluteUri);
+            }
+
+            // http body (model or byte[]) parameter
+            if (postBody != null)
+            {
+                var requestBodyContent = new StringContent(postBody.ToString(), Encoding.UTF8, contentType);
+                request.Content = requestBodyContent;
+                return request;
+            }
+
+            if (!this.noContentMethods.Contains(method) && form.Any())
+            {
+                request.Content = form;
+            }
+
+            return request;
+        }
+
+        // Creates and sets up a RestRequest prior to a call.
+        /// <summary>
+        ///  Creates and sets up a RestRequest prior to a call.
+        /// </summary>
+        /// <param name="path">Gets or sets a path.</param>
+        /// <param name="method">Gets or sets a method.</param>
+        /// <param name="queryParams">Gets or sets a queryParams.</param>
+        /// <param name="postBody">Gets or sets a postBody.</param>
+        /// <param name="headerParams">Gets or sets a headerParams.</param>
+        /// <param name="formParams">Gets or sets a formParams.</param>
+        /// <param name="fileParams">Gets or sets a fileParams.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <returns>request.</returns>
+        internal HttpRequestMessage PrepareRequestForEdit(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<EditDocumentFile>> fileParams, string contentType)
+        {
+            var pathUrl = BuildUri(path, queryParams);
+            var request = new HttpRequestMessage(method, pathUrl);
+            var form = new MultipartFormDataContent();
+
+            // add header parameter, if any
+            foreach (var param in headerParams)
+            {
+                request.Headers.Add(param.Key, param.Value);
+            }
+
+            // add form parameter, if any
+            foreach (var param in formParams)
+            {
+                form.AddFormParameter(param.Key, param.Value);
+            }
+
+            // add file parameter, if any
+            foreach (var param in fileParams)
+            {
+                var i = -1;
+                foreach (var file in param.Value)
+                {
+                    var index = ++i;
+                    form.AddFormParameter($"{param.Key}[{index}].{nameof(file.Id)}", file.Id);
+                    form.AddFormParameter($"{param.Key}[{index}].{nameof(file.EditAction)}", file.EditAction?.ToString());
+
+                    if (file.File != null)
+                    {
+                        if (file.File is DocumentFilePath documentFilePath)
+                        {
+                            var content = GetDocumentFromFilePath(documentFilePath);
+                            var fileContent = new ByteArrayContent(content);
+                            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFilePath.ContentType);
+                            var fileName = Path.GetFileName(documentFilePath.FilePath);
+                            form.Add(fileContent, $"{param.Key}[{index}].{nameof(file.File)}", fileName);
+                        }
+                        else
+                        {
+                            var documentFile = GetDocumentFileWithValidation(file.File);
+
+                            var byteArrayContent = new ByteArrayContent(documentFile.FileData);
+                            byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFile.ContentType);
+                            form.Add(byteArrayContent, $"{param.Key}[{index}].{nameof(file.File)}", documentFile.FileName);
+                        }
+                    }
+
+                    if (file.FileUrl != null)
+                    {
+                        form.AddFormParameter($"{param.Key}[{index}].{nameof(file.FileUrl)}", file.FileUrl?.AbsoluteUri); 
+                    }
+                }
             }
 
             // http body (model or byte[]) parameter
@@ -435,6 +520,62 @@ namespace BoldSign.Api
         }
 
         /// <summary>
+        /// Makes the HTTP request (Sync).
+        /// </summary>
+        /// <param name="path">URL path.</param>
+        /// <param name="method">HTTP method.</param>
+        /// <param name="queryParams">Query parameters.</param>
+        /// <param name="postBody">HTTP body (POST request).</param>
+        /// <param name="headerParams">Header parameters.</param>
+        /// <param name="formParams">Form parameters.</param>
+        /// <param name="fileParams">File parameters.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <returns>Object.</returns>
+        internal HttpResponseMessage CallApiForEdit(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<EditDocumentFile>> fileParams, string contentType)
+        {
+            using var request = this.PrepareRequestForEdit(path, method, queryParams, postBody, headerParams, formParams, fileParams, contentType);
+
+            // set user agent
+            if (this.HttpClient.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                this.HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(this.Configuration.UserAgent);
+            }
+
+            this.InterceptRequest();
+            var response = this.HttpClient.SendAsync(request).GetAwaiter().GetResult();
+            this.InterceptResponse();
+
+            return response;
+        }
+
+        /// <summary>
+        /// Makes the asynchronous HTTP request.
+        /// </summary>
+        /// <param name="path">URL path.</param>
+        /// <param name="method">HTTP method.</param>
+        /// <param name="queryParams">Query parameters.</param>
+        /// <param name="postBody">HTTP body (POST request).</param>
+        /// <param name="headerParams">Header parameters.</param>
+        /// <param name="formParams">Form parameters.</param>
+        /// <param name="fileParams">File parameters.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <returns>The Task instance.</returns>
+        internal async Task<HttpResponseMessage> CallApiForEditAsync(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<EditDocumentFile>> fileParams, string contentType)
+        {
+            using var request = this.PrepareRequestForEdit(path, method, queryParams, postBody, headerParams, formParams, fileParams, contentType);
+            if (this.HttpClient.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                this.HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(this.Configuration.UserAgent);
+            }
+
+            this.InterceptRequest();
+            var response = await this.HttpClient.SendAsync(request).ConfigureAwait(false);
+            this.InterceptResponse();
+
+            return response;
+        }
+
+        /// <summary>
         ///     Escape string (url-encoded).
         /// </summary>
         /// <param name="str">String to be escaped.</param>
@@ -468,19 +609,19 @@ namespace BoldSign.Api
         internal string ParameterToString(object obj)
         {
             if (obj is DateTime)
-            // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
-            // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
-            // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
-            // For example: 2009-06-15T13:45:30.0000000
+                // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
+                // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
+                // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
+                // For example: 2009-06-15T13:45:30.0000000
             {
                 return ((DateTime)obj).ToString(this.Configuration.DateTimeFormat);
             }
 
             if (obj is DateTimeOffset)
-            // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
-            // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
-            // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
-            // For example: 2009-06-15T13:45:30.0000000
+                // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
+                // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
+                // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
+                // For example: 2009-06-15T13:45:30.0000000
             {
                 return ((DateTimeOffset)obj).ToString(this.Configuration.DateTimeFormat);
             }

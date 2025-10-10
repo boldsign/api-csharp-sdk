@@ -1,4 +1,4 @@
-// <copyright file="IdVerificationClient.cs" company="Syncfusion Inc">
+﻿// <copyright file="IdVerificationClient.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -97,7 +97,7 @@ namespace BoldSign.Api
             {
                 if (this.exceptionFactory != null && this.exceptionFactory.GetInvocationList().Length > 1)
                 {
-                    throw new InvalidOperationException(ApiValidationMessages.ExceptionFactoryUnsupported);
+                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
 
                 return this.exceptionFactory;
@@ -129,7 +129,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.DocumentIdReport);
             }
 
-            var localVarPath = "/v1/identityVerification/report";
+            var localVarPath = "/v1-beta/identityVerification/report";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -215,7 +215,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.DocumentIdReport);
             }
 
-            var localVarPath = "/v1/identityVerification/report";
+            var localVarPath = "/v1-beta/identityVerification/report";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -306,7 +306,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.FileIdImage);
             }
 
-            var localVarPath = "/v1/identityVerification/image";
+            var localVarPath = "/v1-beta/identityVerification/image";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -398,7 +398,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.FileIdImage);
             }
 
-            var localVarPath = "/v1/identityVerification/image";
+            var localVarPath = "/v1-beta/identityVerification/image";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -483,7 +483,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.DocumentIdVerificationUrl);
             }
 
-            var localVarPath = "/v1/identityVerification/createEmbeddedVerificationUrl";
+            var localVarPath = "/v1-beta/identityVerification/createEmbeddedVerificationUrl";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
@@ -569,7 +569,7 @@ namespace BoldSign.Api
                 throw new ApiException(400, ApiValidationMessages.DocumentIdVerificationUrl);
             }
 
-            var localVarPath = "/v1/identityVerification/createEmbeddedVerificationUrl";
+            var localVarPath = "/v1-beta/identityVerification/createEmbeddedVerificationUrl";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();

@@ -1,4 +1,4 @@
-﻿namespace BoldSign.Examples
+namespace BoldSign.Examples
 {
     using System.Collections.Generic;
     using BoldSign.Api;

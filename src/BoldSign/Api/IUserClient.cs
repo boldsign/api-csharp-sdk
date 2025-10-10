@@ -6,8 +6,8 @@ namespace BoldSign.Api
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using BoldSign.Api.Model;
     using BoldSign.Model;
+    using BoldSign.Api.Model;
 
     /// <summary>
     ///    Represents a function to interact with the API endpoints. The function perform action such as invite the user and so on.
@@ -205,31 +205,30 @@ namespace BoldSign.Api
         /// <returns>A Task.</returns>
         Task<ApiResponse<UserRecords>> ListUsersAsyncWithHttpInfo(int page, int? pageSize = default, string search = default);
 
-        /// <summary>
-        /// Updates the user's metadata.
-        /// </summary>
-        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        // <summary>
+        /// Gets the user list.
+        /// <param name="updateUserMetaData">The users metaData.</param>
         /// <returns>A Task.</returns>
         Task UpdateUsersMetaDataAsync(UpdateUserMetaData updateUserMetaData);
 
         /// <summary>
-        /// Updates the user's metadata.
+        /// Gets the user list.
         /// </summary>
-        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        /// <param name="updateUserMetaData">The users metaData.</param>
         /// <returns>A Task.</returns>
         Task<ApiResponse<object>> UpdateUserMetaDataAsyncWithHttpInfo(UpdateUserMetaData updateUserMetaData);
 
         /// <summary>
-        /// Updates the user's metadata.
+        /// Gets the user list.
         /// </summary>
-        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        /// <param name="updateUserMetaData">The users metaData.</param>
         void UpdateUsersMetaData(UpdateUserMetaData updateUserMetaData);
 
         /// <summary>
-        /// Updates the user's metadata.
+        /// Gets the user list.
         /// </summary>
-        /// <param name="updateUserMetaData">The user's metadata request payload.</param>
+        /// <param name="updateUserMetaData">The users metaData.</param>
         /// <returns>A Task.</returns>
-        ApiResponse<object> UpdateUserMetaDataWithHttpInfo(UpdateUserMetaData updateUserMetaData);
+        ApiResponse<object> UpdateUserWithHttpInfo(UpdateUserMetaData updateUserMetaData);
     }
 }

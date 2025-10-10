@@ -663,7 +663,6 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.ShowBuiltInFormFields), createBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ShowSharedCustomFields), createBrandData.ShowSharedCustomFields ? "true" : "false");
             AddDocumentExpirySettingsToFormParams(createBrandData, localVarFormParams);
-
             if (createBrandData.HideDecline != null)
             {
                 localVarFormParams.Add(nameof(createBrandData.HideDecline), createBrandData.HideDecline.Value ? "true" : "false");
@@ -765,6 +764,7 @@ namespace BoldSign.Api
             {
                 localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(editBrandData.BrandLogo), editBrandData.BrandLogo);
             }
+
             AddCustomDomainSettingsToFormParams(editBrandData, localVarFormParams);
             localVarFormParams.Add(nameof(editBrandData.BackgroundColor), editBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonColor), editBrandData.ButtonColor);
@@ -885,6 +885,7 @@ namespace BoldSign.Api
             {
                 localVarSingleFileParams = new KeyValuePair<string, IImageFile>(nameof(editBrandData.BrandLogo), editBrandData.BrandLogo);
             }
+
             AddCustomDomainSettingsToFormParams(editBrandData, localVarFormParams);
             localVarFormParams.Add(nameof(editBrandData.BackgroundColor), editBrandData.BackgroundColor);
             localVarFormParams.Add(nameof(editBrandData.ButtonColor), editBrandData.ButtonColor);

@@ -1,4 +1,4 @@
-﻿// <copyright file="TemplateRole.cs" company="Syncfusion Inc">
+// <copyright file="TemplateRole.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
@@ -36,7 +36,7 @@ namespace BoldSign.Api.Model
         /// <param name="imposeAuthentication">Gets or sets the authentication type of template.</param>
         /// <param name="allowRoleDelete">Gets or sets the allow permission to role delete option  of template.</param>
         /// <param name="allowRoleEdit">Gets or sets the allow permission to role edit option  of template.</param>
-        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: TemplateRole(int roleIndex, string name, string defaultSignerName = default, string defaultSignerEmail = default, int signerOrder = default, SignerType signerType = SignerType.Signer, List<FormField> formFields = default, string hostEmail = default, ImposeAuthentication imposeAuthentication = ImposeAuthentication.None, bool allowRoleEdit = true, bool allowRoleDelete = true, Locales locale = Locales.EN)")]
+        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: TemplateRole( int roleIndex, string name, string defaultSignerName = default, string defaultSignerEmail = default, int signerOrder = default, SignerType signerType = SignerType.Signer, List<FormField> formFields = default, string hostEmail = default, ImposeAuthentication imposeAuthentication = ImposeAuthentication.None, bool allowRoleEdit = true, bool allowRoleDelete = true, Locales locale = Locales.EN)")]
         public TemplateRole(
             string name,
             int index,
@@ -89,7 +89,7 @@ namespace BoldSign.Api.Model
         /// <param name="allowRoleDelete">Gets or sets the allow permission to role delete option  of template.</param>
         /// <param name="allowRoleEdit">Gets or sets the allow permission to role edit option  of template.</param>
         /// <param name="locale">Gets or sets the locale.</param>
-         public TemplateRole(
+        public TemplateRole(
             int roleIndex,
             string name,
             string defaultSignerName = default,
@@ -108,6 +108,7 @@ namespace BoldSign.Api.Model
             {
                 throw new InvalidDataException(ApiValidationMessages.RoleName);
             }
+
             this.Index = roleIndex;
             this.Name = name;
             this.DefaultSignerName = defaultSignerName;
@@ -122,15 +123,16 @@ namespace BoldSign.Api.Model
             this.Locale = locale;
         }
 
-         /// <summary>
-         /// Initializes a new instance of the <see cref="TemplateRole" /> class.
-         /// </summary>
-         public TemplateRole()
-         {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TemplateRole" /> class.
+        /// </summary>
+        public TemplateRole()
+        {
 
-         }
+        }
 
-         /// <summary>
+
+        /// <summary>
         /// Gets or sets the role Name.
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
@@ -193,7 +195,7 @@ namespace BoldSign.Api.Model
         public ImposeAuthentication ImposeAuthentication { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether gets or sets the allow field configuration.
+        /// Gets or sets a value indicating whether gets or sets the allow configure fields.
         /// </summary>
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
         public bool AllowFieldConfiguration { get; set; }

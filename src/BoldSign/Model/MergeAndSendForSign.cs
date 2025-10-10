@@ -14,7 +14,7 @@ namespace BoldSign.Api.Model
     /// The merge and send for sign.
     /// </summary>
     [DataContract]
-    public class MergeAndSendForSign: IDocumentUpload
+    public class MergeAndSendForSign : IDocumentUpload
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MergeAndSendForSign" /> class.
@@ -244,22 +244,16 @@ namespace BoldSign.Api.Model
         public List<string> RemoveFormFields { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
+        /// </summary>
+        [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
+        public bool? EnableAuditTrailLocalization { get; set; }
+
+        /// <summary>
         /// Gets or sets the download file name.
         /// </summary>
         [DataMember(Name = "downloadFileName", EmitDefaultValue = true)]
         public string DownloadFileName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the document scheduled date value.
-        /// </summary>
-        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
-        public long? ScheduledSendTime { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to show send later option in embedded page.
-        /// </summary>
-        [DataMember(Name = "AllowScheduledSend", EmitDefaultValue = false)]
-        public bool AllowScheduledSend { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to convert the text tags to form fields.
@@ -274,10 +268,16 @@ namespace BoldSign.Api.Model
         public List<TextTagDefinition> TextTagDefinitions { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to enable a localization support for audit trail.
+        /// Gets or sets the document scheduled date value.
         /// </summary>
-        [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]
-        public bool? EnableAuditTrailLocalization { get; set; }
+        [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
+        public long? ScheduledSendTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show send later option in embedded page.
+        /// </summary>
+        [DataMember(Name = "AllowScheduledSend", EmitDefaultValue = false)]
+        public bool AllowScheduledSend { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

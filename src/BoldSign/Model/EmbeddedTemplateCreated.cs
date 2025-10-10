@@ -1,4 +1,4 @@
-﻿// <copyright file="EmbeddedTemplateCreated.cs" company="Syncfusion Inc">
+// <copyright file="EmbeddedTemplateCreated.cs" company="Syncfusion Inc">
 // Copyright (c) Syncfusion Inc. All rights reserved.
 // </copyright>
 
