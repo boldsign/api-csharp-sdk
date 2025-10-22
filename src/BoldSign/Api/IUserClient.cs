@@ -230,5 +230,37 @@ namespace BoldSign.Api
         /// <param name="updateUserMetaData">The users metaData.</param>
         /// <returns>A Task.</returns>
         ApiResponse<object> UpdateUserWithHttpInfo(UpdateUserMetaData updateUserMetaData);
+
+        /// <summary>
+        /// user team change.
+        /// </summary>
+        /// <param name="userId">The userId.</param>
+        /// <param name="changeTeam">The change team.</param>
+        void ChangeTeam(string userId, ChangeTeam changeTeam);
+
+        /// <summary>
+        /// user team change.
+        /// </summary>
+        /// <param name="userId">The userId.</param>
+        /// <param name="changeTeam">The users change team data.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        ApiResponse<object> ChangeTeamWithHttpInfo(string userId, ChangeTeam changeTeam);
+
+        /// <summary>
+        /// Updates user role.
+        /// </summary>
+        /// <param name="userId">The userId.</param>
+        /// <param name="changeTeam">The users change team data.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        Task ChangeTeamAsync(string userId, ChangeTeam changeTeam);
+
+        /// <summary>
+        /// Updates user role.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="userId">The userId.</param>
+        /// <param name="changeTeam">The users change team data.</param>
+        /// <returns>ApiResponse of Object(void).</returns>
+        Task<ApiResponse<object>> ChangeTeamAsyncWithHttpInfo(string userId, ChangeTeam changeTeam);
     }
 }

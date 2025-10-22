@@ -130,8 +130,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>System.IO.Stream.</returns>
-        Stream DownloadTemplate(string templateId, string onBehalfOf = default);
+        Stream DownloadTemplate(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default);
 
         /// <summary>
         ///    Download the template for given template ID.
@@ -139,8 +140,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>ApiResponse of System.IO.Stream.</returns>
-        ApiResponse<Stream> DownloadTemplateWithHttpInfo(string templateId, string onBehalfOf = default);
+        ApiResponse<Stream> DownloadTemplateWithHttpInfo(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default);
 
         #endregion Synchronous Operations
 
@@ -358,8 +360,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>Task of System.IO.Stream.</returns>
-        Task<Stream> DownloadTemplateAsync(string templateId, string onBehalfOf = default);
+        Task<Stream> DownloadTemplateAsync(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default);
 
         /// <summary>
         ///     Download the template for given template ID.
@@ -367,8 +370,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream).</returns>
-        Task<ApiResponse<Stream>> DownloadTemplateAsyncWithHttpInfo(string templateId, string onBehalfOf = default);
+        Task<ApiResponse<Stream>> DownloadTemplateAsyncWithHttpInfo(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default);
 
         /// <summary>
         ///     Get summary of the template for the given template ID.

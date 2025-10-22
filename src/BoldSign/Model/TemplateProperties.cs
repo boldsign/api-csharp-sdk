@@ -292,6 +292,12 @@ namespace BoldSign.Model
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating Form Field Permission.
+        /// </summary>
+        [DataMember(Name = "formFieldPermission", EmitDefaultValue = false)]
+        public FormFieldPermission FormFieldPermission { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>
