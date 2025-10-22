@@ -105,5 +105,25 @@
             var senderIdentities = this.senderIdentityClient.ListSenderIdentities(page: 1, pageSize: 20);
             return senderIdentities;
         }
+
+        /// <summary>
+        /// Get the properties by using sender identity ID.
+        /// </summary>
+        public SenderIdentityViewModel GetPropertiesWithId()
+        {
+            var id = "34551f8f-xxxx-xxxx-xxxx-df3b38d58430";
+            var properties = this.senderIdentityClient.GetProperties(id: id);
+            return properties;
+        }
+
+        /// <summary>
+        /// Get the properties by using sender identity email address.
+        /// </summary>
+        public SenderIdentityViewModel GetPropertiesWithEmail()
+        {
+            var email = "identity@email.com";
+            var properties = this.senderIdentityClient.GetProperties(email: email);
+            return properties;
+        }
     }
 }

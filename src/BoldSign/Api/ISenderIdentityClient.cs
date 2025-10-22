@@ -208,5 +208,37 @@ namespace BoldSign.Api
         /// <param name="brandIds">The list of brand IDs to filter associated with the sender identity.</param>
         /// <returns>A Task.</returns>
         Task<ApiResponse<SenderIdentityList>> ListSenderIdentitiesAsyncWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> brandIds = default);
+
+        /// <summary>
+        /// Retrieves the sender identity properties using either the sender identity ID or email address.
+        /// </summary>
+        /// <param name="id">The sender identity id.</param>
+        /// <param name="email">The sender identity email.</param>
+        /// <returns>The sender identity view model.</returns>
+        SenderIdentityViewModel GetProperties(string id = default, string email = default);
+
+        /// <summary>
+        /// Retrieves the sender identity properties using either the sender identity ID or email address.
+        /// </summary>
+        /// <param name="id">The sender identity id.</param>
+        /// <param name="email">The sender identity email.</param>
+        /// <returns>ApiResponse of SenderIdentityViewModel.</returns>
+        ApiResponse<SenderIdentityViewModel> GetPropertiesWithHttpInfo(string id = default, string email = default);
+
+        /// <summary>
+        /// Retrieves the sender identity properties using either the sender identity ID or email address.
+        /// </summary>
+        /// <param name="id">The sender identity id.</param>
+        /// <param name="email">The sender identity email.</param>
+        /// <returns>The sender identity view model.</returns>
+        Task<SenderIdentityViewModel> GetPropertiesAsync(string id = default, string email = default);
+
+        /// <summary>
+        /// Retrieves the sender identity properties using either the sender identity ID or email address.
+        /// </summary>
+        /// <param name="id">The sender identity id.</param>
+        /// <param name="email">The sender identity email.</param>
+        /// <returns>ApiResponse of SenderIdentityViewModel.</returns>
+        Task<ApiResponse<SenderIdentityViewModel>> GetPropertiesAsyncWithHttpInfo(string id = default, string email = default);
     }
 }

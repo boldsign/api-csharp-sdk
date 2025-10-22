@@ -88,5 +88,25 @@ namespace BoldSign.Model
         /// Russian.
         /// </summary>
         Russian = 15,
+
+        /// <summary>
+        /// Japanese.
+        /// </summary>
+        Japanese = 16,
+
+        /// <summary>
+        /// Thai.
+        /// </summary>
+        Thai = 17,
+
+        /// <summary>
+        /// Simplified Chinese.
+        /// </summary>
+        SimplifiedChinese = 18,
+
+        /// <summary>
+        /// Traditional Chinese.
+        /// </summary>
+        TraditionalChinese = 19,
     }
 }

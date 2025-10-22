@@ -1702,10 +1702,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>System.IO.Stream.</returns>
-        public Stream DownloadTemplate(string templateId, string onBehalfOf = default)
+        public Stream DownloadTemplate(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default)
         {
-            var localVarResponse = this.DownloadTemplateWithHttpInfo(templateId, onBehalfOf);
+            var localVarResponse = this.DownloadTemplateWithHttpInfo(templateId, onBehalfOf, includeFormFieldValues);
 
             return localVarResponse.Data;
         }
@@ -1716,8 +1717,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>ApiResponse of System.IO.Stream.</returns>
-        public ApiResponse<Stream> DownloadTemplateWithHttpInfo(string templateId, string onBehalfOf = default)
+        public ApiResponse<Stream> DownloadTemplateWithHttpInfo(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default)
         {
             // verify the required parameter 'templateId' is set
             if (templateId == null)
@@ -1770,6 +1772,8 @@ namespace BoldSign.Api
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", onBehalfOf)); // query parameter
             }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "includeFormFieldValues", includeFormFieldValues)); // query parameter
 
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
@@ -1801,10 +1805,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>Task of System.IO.Stream.</returns>
-        public async Task<Stream> DownloadTemplateAsync(string templateId, string onBehalfOf = default)
+        public async Task<Stream> DownloadTemplateAsync(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default)
         {
-            var localVarResponse = await this.DownloadTemplateAsyncWithHttpInfo(templateId, onBehalfOf).ConfigureAwait(false);
+            var localVarResponse = await this.DownloadTemplateAsyncWithHttpInfo(templateId, onBehalfOf, includeFormFieldValues).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
@@ -1815,8 +1820,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <param name="templateId">Template Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="includeFormFieldValues">Include form field data.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream).</returns>
-        public async Task<ApiResponse<Stream>> DownloadTemplateAsyncWithHttpInfo(string templateId, string onBehalfOf = default)
+        public async Task<ApiResponse<Stream>> DownloadTemplateAsyncWithHttpInfo(string templateId, string onBehalfOf = default, bool includeFormFieldValues = default)
         {
             // verify the required parameter 'templateId' is set
             if (templateId == null)
@@ -1869,6 +1875,8 @@ namespace BoldSign.Api
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", onBehalfOf)); // query parameter
             }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "includeFormFieldValues", includeFormFieldValues)); // query parameter
 
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
