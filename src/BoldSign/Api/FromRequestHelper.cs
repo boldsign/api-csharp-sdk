@@ -228,6 +228,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.FormGroups.ToList(), nameof(templateRequest.FormGroups));
             }
 
+            if (templateRequest.FormFieldPermission != null)
+            {
+                InitializeFormFieldPermissionSettings(localVarFormParams, templateRequest.FormFieldPermission);
+            }
+
             if (templateRequest is CreateEmbeddedTemplateRequest embeddedRequest)
             {
                 if (embeddedRequest.RedirectUrl != null)
@@ -267,7 +272,6 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(templateRequest.AllowMessageEditing), templateRequest.AllowMessageEditing ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.UseTextTags), templateRequest.UseTextTags ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.AutoDetectFields), templateRequest.AutoDetectFields ? "true" : "false");
-
             if (!string.IsNullOrEmpty(templateRequest.OnBehalfOf))
             {
                 localVarFormParams.Add(nameof(templateRequest.OnBehalfOf), templateRequest.OnBehalfOf);
@@ -471,6 +475,19 @@ namespace BoldSign.Api
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditRecipient)}", recipientNotificationSettings.EditRecipient ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditDocument)}", recipientNotificationSettings.EditDocument ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Viewed)}", recipientNotificationSettings.Viewed ? "true" : "false");
+        }
+
+        /// <summary>
+        /// Initialize formField permission settings.
+        /// </summary>
+        /// <param name="localVarFormParams">localVarFormParams.</param>
+        /// <param name="formFieldPermission">formFieldPermission.</param>
+        private static void InitializeFormFieldPermissionSettings(Dictionary<string, string> localVarFormParams, FormFieldPermission formFieldPermission)
+        {
+            const string baseKey = "FormFieldPermission";
+            localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanAdd)}", formFieldPermission.CanAdd ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanModify)}", formFieldPermission.CanModify ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanModifyDefaultValue)}", formFieldPermission.CanModifyDefaultValue ? "true" : "false");
         }
 
         private static Dictionary<string, string> ToFormParameter(Dictionary<string, string> localVarFormParams, List<string> array, string parameterName)

@@ -125,5 +125,19 @@
 
             await UserClient.UpdateUsersMetaDataAsync(updateUsers).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Changes a user's team.
+        /// </summary>
+        public void ChangeTeam()
+        {
+            var userId = "66b2cab9-b20c-4aff-a600-adecab6fc2b4";
+            var changeTeamRequest = new ChangeTeam()
+            {
+                ToTeamId = "ea2cd866-ce19-458d-8835-7f1a65b470f2",
+                TransferDocumentsToUserId = "99bccbe3-6599-44a0-b6b1-999e627de892",
+            };
+            this.UserClient.ChangeTeamAsync(userId, changeTeamRequest);
+        }
     }
 }
