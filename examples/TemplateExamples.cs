@@ -43,7 +43,7 @@
 
             this.templateApi.DeleteTemplate(templateId);
         }
-
+        
         /// <summary>
         /// Edits a template.
         /// </summary>
@@ -77,7 +77,7 @@
                         locale: Locales.EN),
                 },
                 EnableSigningOrder = true,
-
+           
 
             };
 
@@ -165,7 +165,7 @@
                 message: "This document description",
                 roles:new List<Roles>()
                 {
-
+                    
                     new Roles()
                     {
                         RoleIndex = 1,
@@ -214,7 +214,7 @@
                     formFields: formFields,
                     locale: Locales.EN)
             };
-
+           
             var templateDetails = new MergeAndSendForSign(
                 templateIds: mergeTemplateIds,
                 title: "Create Document from Merged Templates",
@@ -319,7 +319,7 @@
 
             return templateProperties;
         }
-
+        
         /// <summary>
         /// Add the template tag.
         /// </summary>
@@ -342,7 +342,7 @@
 
             this.templateApi.AddTag(addTags);
         }
-
+        
         /// <summary>
         /// Delete the template properties.
         /// </summary>
@@ -365,7 +365,7 @@
 
             this.templateApi.DeleteTag(addTags);
         }
-
+        
         /// <summary>
         ///  Generates a edit URL to embeds template edit process into your application.
         /// </summary>
@@ -562,7 +562,7 @@
 
             return templateCreated;
         }
-
+        
         /// <summary>
         ///     Creates the template.
         /// </summary>
@@ -646,7 +646,7 @@
 
             return templateCreated;
         }
-
+        
         /// <summary>
         ///     Creates the template with formula field.
         /// </summary>
@@ -745,11 +745,11 @@
             formulaField1.FormulaFieldSettings = new FormulaFieldSettings {
                 FormulaExpression = "[textbox1] + 1",
                 DecimalPrecision = 1
-            };
+            };    
             formulaField2.FormulaFieldSettings = new FormulaFieldSettings {
                 FormulaExpression = "If([textbox1]>1,1,2)",
                 DecimalPrecision = 1
-            };
+            };        
             formulaField3.FormulaFieldSettings = new FormulaFieldSettings {
                 FormulaExpression = "Floor([textbox1]/2)",
                 DecimalPrecision = 1
@@ -919,7 +919,7 @@
             // url to send the document from your web application
             var templateCreateUrl = templateCreated.CreateUrl;
         }
-
+        
         /// <summary>
         /// <para>Creates the document using merge the templates.</para>
         /// </summary>
@@ -997,7 +997,7 @@
 
             return documentCreated;
         }
-
+        
         /// <summary>
         ///     Remove the fields via send document using template.
         /// </summary>

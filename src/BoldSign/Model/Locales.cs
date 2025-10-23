@@ -109,5 +109,33 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Default")]
         Default,
+
+        /// <summary>
+        /// Japanese.
+        /// </summary>
+        [EnumMember(Value = "JA")]
+        JA,
+
+        /// <summary>
+        /// Thai.
+        /// </summary>
+        [EnumMember(Value = "TH")]
+        TH,
+
+        /// <summary>
+        /// Simplified Chinese.
+        /// </summary>
+        [EnumMember(Value = "ZH_CN")]
+#pragma warning disable CA1707
+        ZH_CN,
+#pragma warning restore CA1707
+
+        /// <summary>
+        /// Traditional Chinese.
+        /// </summary>
+        [EnumMember(Value = "ZH_TW")]
+#pragma warning disable CA1707
+        ZH_TW,
+#pragma warning restore CA1707
     }
 }
