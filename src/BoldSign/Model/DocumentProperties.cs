@@ -404,6 +404,12 @@ namespace BoldSign.Model
         public long? ScheduledSendTime { get; set; }
 
         /// <summary>
+        /// Gets or sets allowed signature types.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        public List<string> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

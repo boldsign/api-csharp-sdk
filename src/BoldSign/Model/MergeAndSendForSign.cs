@@ -280,6 +280,12 @@ namespace BoldSign.Api.Model
         public bool AllowScheduledSend { get; set; }
 
         /// <summary>
+        /// Gets or sets the allowed signature types.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        public List<SignatureType> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

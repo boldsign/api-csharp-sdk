@@ -9,6 +9,7 @@ namespace BoldSign.Api
     using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
+    using BoldSign.Model.IdVerification;
     using BoldSign.Api.Model.EditDocument;
 
     internal static class FromRequestHelper
@@ -71,6 +72,11 @@ namespace BoldSign.Api
 
                     localVarFormParams.Add($"{nameof(signRequestDetails.Labels)}[{++i}]", tag?.ToString());
                 }
+            }
+
+            if (signRequestDetails.AllowedSignatureTypes != null)
+            {
+                AllowedSignatureTypesToFormParameter(signRequestDetails.AllowedSignatureTypes, localVarFormParams);
             }
 
             if (signRequestDetails.BrandId != null)
@@ -218,6 +224,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.TextTagDefinitions.ToList(), nameof(templateRequest.TextTagDefinitions));
             }
 
+            if (templateRequest.AllowedSignatureTypes != null)
+            {
+                AllowedSignatureTypesToFormParameter(templateRequest.AllowedSignatureTypes, localVarFormParams);
+            }
+
             if (templateRequest.RecipientNotificationSettings != null)
             {
                 InitializeRecipientNotificationSettings(localVarFormParams, templateRequest.RecipientNotificationSettings);
@@ -319,6 +330,11 @@ namespace BoldSign.Api
             if (editDocumentRequest.Signers != null)
             {
                 localVarFormParams = ToFormParameter(localVarFormParams, editDocumentRequest.Signers.ToList(), nameof(editDocumentRequest.Signers));
+            }
+
+            if (editDocumentRequest.AllowedSignatureTypes != null)
+            {
+                AllowedSignatureTypesToFormParameter(editDocumentRequest.AllowedSignatureTypes, localVarFormParams);
             }
 
             if (editDocumentRequest.CC != null)
@@ -554,6 +570,15 @@ namespace BoldSign.Api
                     }
                 }
 
+                if (prop.Name == "AllowedDocumentTypes" && value is List<AllowedDocumentType> allowedDocumentTypes)
+                {
+                    var i = -1;
+                    foreach (var allowedDocumentType in allowedDocumentTypes)
+                    {
+                        localVarFormParams.Add($"{name}[{++i}]", allowedDocumentType.ToString());
+                    }
+                }
+
                 var propertyType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
 
                 if (value is IEnumerable<string> items)
@@ -597,6 +622,18 @@ namespace BoldSign.Api
                 {
                     ToFormParameter(localVarFormParams, value, name);
                 }
+            }
+
+            return localVarFormParams;
+        }
+
+        private static Dictionary<string, string> AllowedSignatureTypesToFormParameter(List<SignatureType> signatureTypes,  Dictionary<string,string> localVarFormParams)
+        {
+            var index = 0;
+            foreach (var tag in signatureTypes)
+            {
+                localVarFormParams.Add($"{nameof(SendForSign.AllowedSignatureTypes)}[{index}]", tag.ToString());
+                index++;
             }
 
             return localVarFormParams;

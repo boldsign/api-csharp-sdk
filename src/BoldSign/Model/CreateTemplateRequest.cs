@@ -170,6 +170,12 @@ namespace BoldSign.Api.Model
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets the allowed signature types.
+        /// </summary>
+        [JsonProperty("allowedSignatureTypes")]
+        public List<SignatureType> AllowedSignatureTypes { get; set; }
+
+        /// </summary>
         /// Gets or sets a value indicating field permission.
         /// </summary>
         [JsonProperty("formFieldPermission")]

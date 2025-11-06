@@ -14,6 +14,7 @@
 
 namespace BoldSign.Model
 {
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
     using BoldSign.Model.IdVerification;
     using Newtonsoft.Json;
@@ -81,6 +82,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "holdForPrefill", EmitDefaultValue = false)]
         public bool? HoldForPrefill { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed document types list.
+        /// </summary>
+        [DataMember(Name = "allowedDocumentTypes", EmitDefaultValue = false)]
+        public List<AllowedDocumentType> AllowedDocumentTypes { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object.

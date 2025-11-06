@@ -5,6 +5,7 @@
 namespace BoldSign.Api.Model
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
 
     /// <summary>
@@ -17,6 +18,7 @@ namespace BoldSign.Api.Model
         /// Gets or sets the to team ID.
         /// </summary>
         [DataMember(Name = "toTeamId")]
+        [Required(ErrorMessage = "ToTeamId is required")]
         public string ToTeamId { get; set; }
 
         /// <summary>

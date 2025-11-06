@@ -229,5 +229,11 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("allowScheduledSend")]
         public bool AllowScheduledSend { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed signature types.
+        /// </summary>
+        [JsonProperty("allowedSignatureTypes")]
+        public List<SignatureType> AllowedSignatureTypes { get; set; }
     }
 }

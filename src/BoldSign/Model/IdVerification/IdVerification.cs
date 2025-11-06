@@ -14,6 +14,7 @@
 
 namespace BoldSign.Model.IdVerification
 {
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
@@ -94,6 +95,18 @@ namespace BoldSign.Model.IdVerification
         /// </summary>
         [DataMember(Name = "prefillCompleted", EmitDefaultValue = false)]
         public bool? PrefillCompleted { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed document types of id verification process.
+        /// </summary>
+        [DataMember(Name = "allowedDocumentTypes", EmitDefaultValue = false)]
+        public List<string> AllowedDocumentTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed countries of id verification process.
+        /// </summary>
+        [DataMember(Name = "allowedCountries", EmitDefaultValue = false)]
+        public List<string> AllowedCountries { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object.

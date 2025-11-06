@@ -87,7 +87,14 @@
         /// </summary>
         public UserRecords ListUsers()
         {
-            var users = this.UserClient.ListUsers(page: 1, pageSize: 20);
+            // This is an example user id, add your own user id upon usage.
+            var ids = new List<string>
+            {
+              "your-user-id-1",
+              "your-user-id-2"
+            };
+
+            var users = this.UserClient.ListUsers(page: 1, pageSize: 20, userId: ids);
 
             return users;
         }
