@@ -9,6 +9,7 @@ namespace BoldSign.Api
     using BoldSign.Api.Model;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
+    using BoldSign.Model.IdVerification;
 
     internal static class FromRequestHelper
     {
@@ -372,6 +373,15 @@ namespace BoldSign.Api
                     foreach (var item in items)
                     {
                         localVarFormParams.Add($"{name}[{i++}]", item);
+                    }
+                }
+
+                if (prop.Name == "AllowedDocumentTypes" && value is List<AllowedDocumentType> allowedDocumentTypes)
+                {
+                    var i = -1;
+                    foreach (var allowedDocumentType in allowedDocumentTypes)
+                    {
+                        localVarFormParams.Add($"{name}[{++i}]", allowedDocumentType.ToString());
                     }
                 }
 
