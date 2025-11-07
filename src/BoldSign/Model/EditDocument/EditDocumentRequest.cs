@@ -204,5 +204,13 @@ namespace BoldSign.Api.Model.EditDocument
         /// </summary>
         [DataMember(Name = "scheduledSendTime", EmitDefaultValue = false)]
         public long? ScheduledSendTime { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the allowed signature types.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        public List<SignatureType> AllowedSignatureTypes { get; set; }
+
     }
 }

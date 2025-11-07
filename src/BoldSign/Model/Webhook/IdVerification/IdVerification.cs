@@ -14,6 +14,7 @@
 
 namespace BoldSign.Api.Model.Webhook.IdVerification
 {
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
     using Newtonsoft.Json;
 
@@ -69,6 +70,12 @@ namespace BoldSign.Api.Model.Webhook.IdVerification
         /// </summary>
         [DataMember(Name = "prefillCompleted", EmitDefaultValue = false)]
         public bool? PrefillCompleted { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed document types of id verification process.
+        /// </summary>
+        [DataMember(Name = "allowedDocumentTypes", EmitDefaultValue = false)]
+        public List<string> AllowedDocumentTypes { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object.

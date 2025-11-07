@@ -462,4 +462,7 @@
   <data name="BrandIdGet" xml:space="preserve">
       <value>Missing required parameter 'brandId' when calling BrandingApi-&amp;gt;GetBrand</value>
   </data>
+  <data name="UserIdsLimit" xml:space="preserve">
+      <value>Maximum of 100 userIds allowed per request.</value>
+  </data>
 </root>
