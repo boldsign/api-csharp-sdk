@@ -119,7 +119,7 @@ namespace BoldSign.Model
         public string Value { get; set; }
 
         /// <summary>
-        /// Gets or sets the Font type among the three available types courier, helvetica, times new roman.
+        /// Gets or sets the Font type among the three available types courier, helvetica, times new roman, carlito.
         /// </summary>
         /// <value>Gets or sets the element type.</value>
         [DataMember(Name = "font", EmitDefaultValue = false)]

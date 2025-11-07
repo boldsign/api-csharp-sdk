@@ -1102,5 +1102,14 @@ namespace BoldSign.Api.Resources {
                 return ResourceManager.GetString("WrongSignature", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string Maximum of 100 userIds allowed per request.
+        /// </summary>
+        internal static string UserIdsLimit {
+            get {
+                return ResourceManager.GetString("UserIdsLimit", resourceCulture);
+            }
+        }
     }
 }

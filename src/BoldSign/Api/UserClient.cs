@@ -891,11 +891,12 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>A Task.</returns>
         ///
-        public UserRecords ListUsers(int page, int? pageSize, string search = default)
+        public UserRecords ListUsers(int page, int? pageSize, string search = default, List<string> userId = default)
         {
-            var localVarResponse = this.ListUsersWithHttpInfo(page, pageSize, search);
+            var localVarResponse = this.ListUsersWithHttpInfo(page, pageSize, search, userId);
 
             return localVarResponse.Data;
         }
@@ -906,8 +907,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>A Task.</returns>
-        public ApiResponse<UserRecords> ListUsersWithHttpInfo(int page, int? pageSize, string search = default)
+        public ApiResponse<UserRecords> ListUsersWithHttpInfo(int page, int? pageSize, string search = default, List<string> userId = default)
         {
             // verify the required parameter 'page' is set
             var localVarPath = "/v1/users/list";
@@ -944,6 +946,15 @@ namespace BoldSign.Api
             if (search != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "Search", search)); // query parameter
+            }
+
+            if (userId != null && userId.Count > 0)
+            {
+                if (userId.Count > 100)
+                {
+                    throw new ApiException(400, ApiValidationMessages.UserIdsLimit);
+                }
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "UserId", userId));
             }
 
             // authentication (Bearer) required
@@ -976,10 +987,11 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>Task of UserRecords.</returns>
-        public async Task<UserRecords> ListUsersAsync(int page, int? pageSize = default, string search = default)
+        public async Task<UserRecords> ListUsersAsync(int page, int? pageSize = default, string search = default, List<string> userId = default)
         {
-            var localVarResponse = await this.ListUsersAsyncWithHttpInfo(page, pageSize, search).ConfigureAwait(false);
+            var localVarResponse = await this.ListUsersAsyncWithHttpInfo(page, pageSize, search, userId).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
@@ -990,8 +1002,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>Task of ApiResponse (UserRecords).</returns>
-        public async Task<ApiResponse<UserRecords>> ListUsersAsyncWithHttpInfo(int page, int? pageSize = default, string search = default)
+        public async Task<ApiResponse<UserRecords>> ListUsersAsyncWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> userId = default)
         {
             // verify the required parameter 'page' is set
             var localVarPath = "/v1/users/list";
@@ -1028,6 +1041,16 @@ namespace BoldSign.Api
             if (search != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "Search", search)); // query parameter
+            }
+
+            if (userId != null && userId.Count > 0)
+            {
+                if (userId.Count > 100)
+                {
+                    throw new ApiException(400, ApiValidationMessages.UserIdsLimit);
+                }
+
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "UserId", userId));
             }
 
             // authentication (Bearer) required

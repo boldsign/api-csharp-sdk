@@ -465,4 +465,7 @@
   <data name="DocumentIdVerificationUrl" xml:space="preserve">
       <value>Missing required parameter 'documentId' when calling IdVerificationApi-&amp;gt;CreateEmbeddedVerificationUrl</value>
   </data>
+  <data name="UserIdsLimit" xml:space="preserve">
+      <value>Maximum of 100 userIds allowed per request.</value>
+  </data>
 </root>

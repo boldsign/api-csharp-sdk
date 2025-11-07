@@ -175,8 +175,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>A Task.</returns>
-        UserRecords ListUsers(int page, int? pageSize = default, string search = default);
+        UserRecords ListUsers(int page, int? pageSize = default, string search = default, List<string> userId = default);
 
         /// <summary>
         /// Gets the user list.
@@ -184,8 +185,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>A Task.</returns>
-        ApiResponse<UserRecords> ListUsersWithHttpInfo(int page, int? pageSize = default, string search = default);
+        ApiResponse<UserRecords> ListUsersWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> userId = default);
 
         /// <summary>
         /// Gets the user list.
@@ -193,8 +195,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>A Task.</returns>
-        Task<UserRecords> ListUsersAsync(int page, int? pageSize = default, string search = default);
+        Task<UserRecords> ListUsersAsync(int page, int? pageSize = default, string search = default, List<string> userId = default);
 
         /// <summary>
         /// Gets the user list.
@@ -202,8 +205,9 @@ namespace BoldSign.Api
         /// <param name="page">The page number.</param>
         /// <param name="pageSize">The page size.</param>
         /// <param name="search">The search key.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns>A Task.</returns>
-        Task<ApiResponse<UserRecords>> ListUsersAsyncWithHttpInfo(int page, int? pageSize = default, string search = default);
+        Task<ApiResponse<UserRecords>> ListUsersAsyncWithHttpInfo(int page, int? pageSize = default, string search = default, List<string> userId = default);
 
         /// <summary>
         /// Updates the user's metadata.
