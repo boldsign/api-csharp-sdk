@@ -108,5 +108,10 @@ namespace BoldSign.Model
         /// Traditional Chinese.
         /// </summary>
         TraditionalChinese = 19,
+
+        /// <summary>
+        /// Korean.
+        /// </summary>
+        Korean = 20,
     }
 }
