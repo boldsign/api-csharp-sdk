@@ -137,5 +137,11 @@ namespace BoldSign.Model
 #pragma warning disable CA1707
         ZH_TW,
 #pragma warning restore CA1707
+
+        /// <summary>
+        /// Korean.
+        /// </summary>
+        [EnumMember(Value = "KO")]
+        KO,
     }
 }
