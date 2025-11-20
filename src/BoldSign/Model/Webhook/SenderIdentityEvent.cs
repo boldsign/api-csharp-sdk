@@ -88,5 +88,11 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [JsonProperty("createdBy")]
         public SenderIdentityCreator CreatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the locale.
+        /// </summary>
+        [JsonProperty("locale")]
+        public string Locale { get; set; }
     }
 }

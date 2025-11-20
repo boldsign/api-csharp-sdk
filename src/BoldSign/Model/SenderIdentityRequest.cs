@@ -72,6 +72,13 @@ namespace BoldSign.Model
         public Dictionary<string, string> MetaData { get; set; }
 
         /// <summary>
+        /// Gets or sets locale such as EN, FR, ES.
+        /// Optional for edit.
+        /// </summary>
+        [DataMember(Name = "locale", EmitDefaultValue = true)]
+        public Locales? Locale { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>
