@@ -430,7 +430,7 @@
     <value>The 'AllowFieldConfiguration' property is unsupported for the Reviewer role.</value>
   </data>
   <data name="UpdateSenderIdentityRequiredFailed" xml:space="preserve">
-      <value>To update the sender identity, at least one of the following is required: name, notificationSettings, redirectUrl, or metadata.</value>
+      <value>To update the sender identity, at least one of the following is required: name, notificationSettings, redirectUrl, metadata, or locale.</value>
   </data>
   <data name="DocumentIdReport" xml:space="preserve">
       <value>Missing required parameter 'documentId' when calling IdVerificationApi-&gt;GetReport</value>

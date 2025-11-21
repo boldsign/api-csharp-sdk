@@ -1059,7 +1059,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To update the sender identity, at least one of the following is required: name, notificationSettings, redirectUrl, or metadata..
+        ///   Looks up a localized string similar to To update the sender identity, at least one of the following is required: name, notificationSettings, redirectUrl, metadata or locale..
         /// </summary>
         internal static string UpdateSenderIdentityRequiredFailed {
             get {
