@@ -229,5 +229,11 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("enableAuditTrailLocalization")]
         public bool? EnableAuditTrailLocalization { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed signature types.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        public List<SignatureType> AllowedSignatureTypes { get; set; }
     }
 }

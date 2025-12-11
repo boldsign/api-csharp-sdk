@@ -359,6 +359,12 @@ namespace BoldSign.Model
         public bool Hidden { get; set; }
 
         /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "collaborationSettings", EmitDefaultValue = true)]
+        public CollaborationSettings CollaborationSettings { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

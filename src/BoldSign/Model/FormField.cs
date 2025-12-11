@@ -441,5 +441,11 @@ namespace BoldSign.Model
         [DataMember(Name = "allowEditFormField", EmitDefaultValue = true)]
         public bool? AllowEditFormField { get; set; }
 
+        /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "CollaborationSettings", EmitDefaultValue = false)]
+        public CollaborationSettings CollaborationSettings { get; set; }
+
     }
 }

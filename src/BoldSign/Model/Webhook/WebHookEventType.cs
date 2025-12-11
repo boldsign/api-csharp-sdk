@@ -179,5 +179,11 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [EnumMember(Value = "Reminder")]
         Reminder = 27,
+
+        /// <summary>
+        /// Template Edited event.
+        /// </summary>
+        [EnumMember(Value = "TemplateEdited")]
+        TemplateEdited = 28,
     }
 }

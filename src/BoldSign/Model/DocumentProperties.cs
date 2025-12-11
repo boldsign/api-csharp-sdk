@@ -398,6 +398,12 @@ namespace BoldSign.Model
         public long? ScheduledSendTime { get; set; }
 
         /// <summary>
+        /// Gets or sets allowed signature types.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        public List<string> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether enable audit trail localization.
         /// </summary>
         [DataMember(Name = "enableAuditTrailLocalization", EmitDefaultValue = false)]

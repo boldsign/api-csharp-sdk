@@ -168,5 +168,18 @@ namespace BoldSign.Api.Model
         [JsonProperty("recipientNotificationSettings")]
         [Display(Description = "Recipient Notification Settings of the Template.")]
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed signature types.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        public List<SignatureType> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating field permission.
+        /// </summary>
+        [JsonProperty("formFieldPermission")]
+        [Display(Description = "Field permission settings for the template.")]
+        public FormFieldPermission FormFieldPermission { get; set; }
     }
 }

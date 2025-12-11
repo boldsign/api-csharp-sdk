@@ -5170,6 +5170,169 @@ namespace BoldSign.Api
                 null);
         }
 
+         /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>DocumentProperties</returns>
+        public async Task<DocumentCreated> SendDocumentFromDraftAsync(string documentId)
+        {
+            var localVarResponse = await this.SendDocumentFromDraftAsyncWithHttpInfo(documentId).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>ApiResponse of DocumentProperties</returns>
+        public async Task<ApiResponse<DocumentCreated>> SendDocumentFromDraftAsyncWithHttpInfo(string documentId)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->draftSend");
+            }
+
+            var localVarPath = "/v1/document/draftSend";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new string[]
+            {
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "documentId", documentId)); // query parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("draftSend", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>DocumentProperties</returns>
+        public DocumentCreated SendDocumentFromDraft(string documentId)
+        {
+            var localVarResponse = this.SendDocumentFromDraftWithHttpInfo(documentId);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <returns>ApiResponse of DocumentProperties</returns>
+        public ApiResponse<DocumentCreated> SendDocumentFromDraftWithHttpInfo(string documentId)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->draftSend");
+            }
+
+            var localVarPath = "/v1/document/draftSend";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new string[]
+            {
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "documentId", documentId)); // query parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("draftSend", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentCreated>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
+        }
+
+
         private static void ValidateSendProperties(SendForSign sendRequest)
         {
             DocumentHelper.ValidateFiles(sendRequest);
