@@ -987,6 +987,20 @@ namespace BoldSign.Examples
 
             await this.DocumentClient.PrefillFieldsAsync(prefillFieldRequest);
         }
+        
+        /// <summary>
+        /// Sends the draft document from API.
+        /// </summary>
+        /// <returns>A Document Created object.</returns>
+        public DocumentCreated SendDocumentFromDraftApi()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "1e2439c8-40dd-444d-9fb5-f9ec02df0369";
+
+            var documentCreated = this.DocumentClient.SendDocumentFromDraft(documentId);
+
+            return documentCreated;
+        }
 
     }
 }

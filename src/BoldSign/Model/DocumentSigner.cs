@@ -255,6 +255,12 @@ namespace BoldSign.Model
         public AuthenticationSettings AuthenticationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets the signer id.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

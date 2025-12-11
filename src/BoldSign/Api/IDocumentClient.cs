@@ -562,6 +562,24 @@ namespace BoldSign.Api
         /// <returns>ApiResponse of DocumentCreated</returns>
         ApiResponse<DocumentCreated> SendDocumentWithHttpInfo(SendForSign signRequestDetails);
 
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>DocumentCreated</returns>
+        DocumentCreated SendDocumentFromDraft(string  documentId);
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of DocumentCreated</returns>
+        ApiResponse<DocumentCreated> SendDocumentFromDraftWithHttpInfo(string  documentId);
+
         #endregion Synchronous Operations
 
         #region Asynchronous Operations
@@ -1211,6 +1229,24 @@ namespace BoldSign.Api
         /// <param name="onBehalfOf">The on behalfof email.</param>
         /// <returns>Task of ApiResponse.</returns>
         Task<ApiResponse<object>> ExtendExpiryAsyncWithHttpInfo(string documentId, string newExpiryValue, bool? warnPrior = null, string onBehalfOf = null);
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of DocumentCreated</returns>
+        Task<DocumentCreated> SendDocumentFromDraftAsync(string  documentId);
+
+        /// <summary>
+        /// Sends the draft document from API for sign.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (DocumentCreated)</returns>
+        Task<ApiResponse<DocumentCreated>> SendDocumentFromDraftAsyncWithHttpInfo(string  documentId);
 
         #endregion Asynchronous Operations
     }

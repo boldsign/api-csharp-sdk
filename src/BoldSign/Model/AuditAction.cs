@@ -487,5 +487,16 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "QESWithdrawn")]
         QESWithdrawn = 78,
+
+        /// <summary>
+        /// Indicates that the document has been resend after collaborative editing for approval.
+        /// </summary>
+        [EnumMember(Value = "ResentForApproval")]
+        ResentForApproval = 79,
+        /// <summary>
+        /// Indicates that the document fields has been changed during collaboration.
+        /// </summary>
+        [EnumMember(Value = "DocumentFieldMarkup")]
+        DocumentFieldMarkup = 80,
     }
 }

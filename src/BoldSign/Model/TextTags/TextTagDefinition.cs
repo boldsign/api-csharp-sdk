@@ -260,5 +260,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "resizeOption", EmitDefaultValue = true)]
         public ResizeOptions? ResizeOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "CollaborationSettings", EmitDefaultValue = false)]
+        public CollaborationSettings CollaborationSettings { get; set; }
     }
 }

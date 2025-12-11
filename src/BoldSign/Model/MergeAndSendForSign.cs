@@ -262,6 +262,12 @@ namespace BoldSign.Api.Model
         public bool AllowScheduledSend { get; set; }
 
         /// <summary>
+        /// Gets or sets the allowed signature types.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        public List<SignatureType> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether to convert the text tags to form fields.
         /// </summary>
         [DataMember(Name = "useTextTags", EmitDefaultValue = false)]

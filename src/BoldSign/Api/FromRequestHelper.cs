@@ -73,6 +73,11 @@ namespace BoldSign.Api
                 }
             }
 
+            if (signRequestDetails.AllowedSignatureTypes != null)
+            {
+                AllowedSignatureTypesToFormParameter(signRequestDetails.AllowedSignatureTypes, localVarFormParams);
+            }
+
             if (signRequestDetails.BrandId != null)
             {
                 localVarFormParams.Add(nameof(signRequestDetails.BrandId), signRequestDetails.BrandId);
@@ -217,6 +222,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.TextTagDefinitions.ToList(), nameof(templateRequest.TextTagDefinitions));
             }
 
+            if (templateRequest.AllowedSignatureTypes != null)
+            {
+                AllowedSignatureTypesToFormParameter(templateRequest.AllowedSignatureTypes, localVarFormParams);
+            }
+
             if (templateRequest.RecipientNotificationSettings != null)
             {
                 InitializeRecipientNotificationSettings(localVarFormParams, templateRequest.RecipientNotificationSettings);
@@ -225,6 +235,11 @@ namespace BoldSign.Api
             if (templateRequest.FormGroups != null)
             {
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.FormGroups.ToList(), nameof(templateRequest.FormGroups));
+            }
+
+            if (templateRequest.FormFieldPermission != null)
+            {
+                InitializeFormFieldPermissionSettings(localVarFormParams, templateRequest.FormFieldPermission);
             }
 
             if (templateRequest is CreateEmbeddedTemplateRequest embeddedRequest)
@@ -323,6 +338,31 @@ namespace BoldSign.Api
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditRecipient)}", recipientNotificationSettings.EditRecipient ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditDocument)}", recipientNotificationSettings.EditDocument ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Viewed)}", recipientNotificationSettings.Viewed ? "true" : "false");
+        }
+
+        private static Dictionary<string, string> AllowedSignatureTypesToFormParameter(List<SignatureType> signatureTypes,  Dictionary<string,string> localVarFormParams)
+        {
+            var index = 0;
+            foreach (var tag in signatureTypes)
+            {
+                localVarFormParams.Add($"{nameof(SendForSign.AllowedSignatureTypes)}[{index}]", tag.ToString());
+                index++;
+            }
+            return localVarFormParams;
+        }
+
+
+        /// <summary>
+        /// Initialize formField permission settings.
+        /// </summary>
+        /// <param name="localVarFormParams">localVarFormParams.</param>
+        /// <param name="formFieldPermission">formFieldPermission.</param>
+        private static void InitializeFormFieldPermissionSettings(Dictionary<string, string> localVarFormParams, FormFieldPermission formFieldPermission)
+        {
+            const string baseKey = "FormFieldPermission";
+            localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanAdd)}", formFieldPermission.CanAdd ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanModify)}", formFieldPermission.CanModify ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanModifyDefaultValue)}", formFieldPermission.CanModifyDefaultValue ? "true" : "false");
         }
 
         private static Dictionary<string, string> ToFormParameter(Dictionary<string, string> localVarFormParams, List<string> array, string parameterName)

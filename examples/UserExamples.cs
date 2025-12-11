@@ -132,5 +132,19 @@
 
             return userDeatils;
         }
+
+        /// <summary>
+        /// Changes a user's team.
+        /// </summary>
+        public void ChangeTeam()
+        {
+            var userId = "your-user-id";
+            var changeTeamRequest = new ChangeTeam()
+            {
+                ToTeamId = "your-team-id",
+                TransferDocumentsToUserId = "your-user-id",
+            };
+            this.UserClient.ChangeTeamAsync(userId, changeTeamRequest);
+        }
     }
 }

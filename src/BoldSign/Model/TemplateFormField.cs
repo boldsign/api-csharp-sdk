@@ -383,5 +383,11 @@ namespace BoldSign.Api.Model
         [DataMember(Name = "allowDeleteFormField", EmitDefaultValue = true)]
         public bool AllowDeleteFormField { get; set; }
 
+        /// <summary>
+        /// Gets or sets field collaboration settings.
+        /// </summary>
+        [DataMember(Name = "collaborationSettings", EmitDefaultValue = true)]
+        public CollaborationSettings CollaborationSettings { get; set; }
+
     }
 }
