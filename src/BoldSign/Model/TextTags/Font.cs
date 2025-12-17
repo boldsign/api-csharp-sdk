@@ -64,7 +64,7 @@ namespace BoldSign.Api.Model
         /// <summary>
         /// Gets or sets Size.
         /// </summary>
-        public float Size { get; set; } = 13;
+        public float? Size { get; set; }
 
         /// <summary>
         /// Gets or sets Style.
@@ -75,7 +75,7 @@ namespace BoldSign.Api.Model
         /// <summary>
         /// Gets or sets LineHeight.
         /// </summary>
-        public int LineHeight { get; set; } = 17;
+        public int? LineHeight { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the font style is bold.
