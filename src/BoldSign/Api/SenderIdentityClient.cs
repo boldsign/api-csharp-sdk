@@ -133,6 +133,8 @@ namespace BoldSign.Api
 
             ValidateCreateSenderIdentityProperties(createSenderIdentityRequest);
 
+            createSenderIdentityRequest.Locale ??= Locales.EN;
+
             var localVarPath = "/v1/senderIdentities/create";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
             var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
@@ -225,6 +227,8 @@ namespace BoldSign.Api
             }
 
             ValidateCreateSenderIdentityProperties(createSenderIdentityRequest);
+
+            createSenderIdentityRequest.Locale ??= Locales.EN;
 
             var localVarPath = "/v1/senderIdentities/create";
             var localVarQueryParams = new List<KeyValuePair<string, string>>();
@@ -1234,7 +1238,7 @@ namespace BoldSign.Api
             if (string.IsNullOrEmpty(editSenderIdentityRequest.Name) &&
                 string.IsNullOrEmpty(editSenderIdentityRequest.RedirectUrl?.ToString()) &&
                 (editSenderIdentityRequest.MetaData == null || editSenderIdentityRequest.MetaData.Count == 0) &&
-                editSenderIdentityRequest.NotificationSettings == null)
+                editSenderIdentityRequest.NotificationSettings == null && editSenderIdentityRequest.Locale == null)
             {
                 throw new ApiException(422, ApiValidationMessages.UpdateSenderIdentityRequiredFailed);
             }

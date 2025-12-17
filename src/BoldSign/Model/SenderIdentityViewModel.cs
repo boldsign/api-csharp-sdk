@@ -88,5 +88,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "metaData")]
         public Dictionary<string, string> MetaData { get; set; }
+
+        /// <summary>
+        /// Gets or sets the locale.
+        /// </summary>
+        [DataMember(Name = "locale")]
+        public string Locale { get; set; }
     }
 }
