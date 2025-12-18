@@ -433,7 +433,7 @@
       <value>The 'AllowFieldConfiguration' property is unsupported for the Reviewer role.</value>
   </data>
   <data name="UpdateSenderIdentityRequiredFailed" xml:space="preserve">
-      <value>To update the sender identity, at least one of the following is required: name, notificationSettings, redirectUrl, or metadata.</value>
+      <value>To update the sender identity, at least one of the following is required: name, notificationSettings, redirectUrl, metadata, or locale.</value>
   </data>
   <data name="UnsupportedBrandLogoType" xml:space="preserve">
       <value>Unsupported file. Supported file formats are PNG, JPEG, JPG and SVG.</value>
