@@ -144,5 +144,23 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("templateLabels")]
         public IEnumerable<string> TemplateLabels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the behalf of details.
+        /// </summary>
+        [JsonProperty("behalfOf")]
+        public BehalfOf BehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating field permission.
+        /// </summary>
+        [JsonProperty("formFieldPermission")]
+        public FormFieldPermission FormFieldPermission { get; set; }
+
+        /// <summary>
+        /// Gets or sets the contact group settings details.
+        /// </summary>
+        [JsonProperty("groupSignerSettings")]
+        public GroupSignerSettings GroupSignerSettings  { get; set; }
     }
 }

@@ -49,7 +49,8 @@ namespace BoldSign.Model
         /// <param name="phoneNumber">The phone number.</param>
         /// <param name="idVerification">Gets or sets id verification details.</param>
         /// <param name="enableQes">Gets or sets enableQes.</param>
-        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>), string hostEmail = default(string), string hostName = default(string), AuthenticationType authenticationType = AuthenticationType.None, Languages language = Languages.English, string locale = default(string), PhoneNumber phoneNumber = default, IdVerification.IdVerification idVerification = default, bool enableQes = default(bool))
+        /// <param name="GroupSigners">Gets or sets GroupSigners.</param>
+        public DocumentSignerDetails(string signerName = default(string), string signerRole = default(string), string signerEmail = default(string), SignerStatus status = default(SignerStatus), bool? isAuthenticationFailed = false, bool? enableEmailOTP = default(bool?), bool? isDeliveryFailed = false, bool? isViewed = false, int? order = 0, SignerType signerType = default(SignerType), bool? isReassigned = default(bool?), string privateMessage = default(string), List<DocumentFormFields> formFields = default(List<DocumentFormFields>), string hostEmail = default(string), string hostName = default(string), AuthenticationType authenticationType = AuthenticationType.None, Languages language = Languages.English, string locale = default(string), PhoneNumber phoneNumber = default, IdVerification.IdVerification idVerification = default, bool enableQes = default(bool),  IEnumerable<GroupSigner> GroupSigners = default)
         {
             this.SignerName = signerName;
             this.SignerRole = signerRole;
@@ -104,6 +105,7 @@ namespace BoldSign.Model
             this.PhoneNumber = phoneNumber;
             this.IdVerification = idVerification;
             this.EnableQes = enableQes;
+            this.GroupSigners = GroupSigners;
         }
 
         /// <summary>
@@ -250,6 +252,20 @@ namespace BoldSign.Model
         public string Locale { get; set; }
 
         /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        /// <value>Gets or sets the sign type of the signer.</value>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public SignType SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group id.
+        /// </summary>
+        /// <value>Gets or sets the group id.</value>
+        [DataMember(Name = "groupId", EmitDefaultValue = false)]
+        public string GroupId { get; set; }
+
+        /// <summary>
         /// Gets or sets the phone number.
         /// </summary>
         /// <value>Gets or sets phone number.</value>
@@ -293,6 +309,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]
         public SignerAuthenticationSettings SignerAuthenticationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the GroupSigners.
+        /// </summary>
+        [DataMember(Name = "groupSigners", EmitDefaultValue = false)]
+        public  IEnumerable<GroupSigner> GroupSigners { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object

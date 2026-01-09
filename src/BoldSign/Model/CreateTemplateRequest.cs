@@ -175,11 +175,17 @@ namespace BoldSign.Api.Model
         [JsonProperty("allowedSignatureTypes")]
         public List<SignatureType> AllowedSignatureTypes { get; set; }
 
-        /// </summary>
+        /// <summary>
         /// Gets or sets a value indicating field permission.
         /// </summary>
         [JsonProperty("formFieldPermission")]
         [Display(Description = "Field permission settings for the template.")]
         public FormFieldPermission FormFieldPermission { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group signer settings for group signers.
+        /// </summary>
+        [JsonProperty("groupSignerSettings")]
+        public GroupSignerSettings GroupSignerSettings { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace BoldSign.Examples
+namespace BoldSign.Examples
 {
     using BoldSign.Api;
     using BoldSign.Api.Model;
@@ -925,7 +925,6 @@
             var templateId = "077a0ef6-9673-4806-88bb-d2e552558ca0";
 
             var templateProperties = this.templateApi.GetProperties(templateId);
-
             return templateProperties;
         }
 
@@ -1156,6 +1155,51 @@
             };
             var documentCreated = await this.templateApi.MergeAndSendAsync(templateDetails).ConfigureAwait(false);
             return documentCreated;
+        }
+        
+        /// <summary>
+        /// Share a template with teams and organization using ShareTemplateRequest/Response.
+        /// </summary>
+        /// <returns>A ShareTemplateResponse.</returns>
+        public async Task ShareTemplate()
+        {
+            // Replace with your actual template id
+            var templateId = "eac94b7e-25ed-4fd3-bd42-bd7b86e17764";
+
+            // Build team share operations (Grant/Revoke with access level)
+            var teams = new List<TemplateTeamShareRequest>
+            {
+                new TemplateTeamShareRequest 
+                {
+                    // use your own team ids.
+                    TeamId = "62e165d7-1baf-4224-9d40-894a34656ebc",
+                    Action = TemplateShareAction.Grant,
+                    AccessLevel = TemplateAccessType.Use,
+                }
+            };
+
+            var shareTemplate = new ShareTemplateRequest()
+            {
+                Teams = teams
+            };
+            await this.templateApi.ShareTemplateAsync(templateId, shareTemplate).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///  Generates a embed tempalte preview URL..
+        /// </summary>
+        /// <returns>A Embedded Template Preview.</returns>
+        public async Task<Uri> CreateEmbeddedPreviewUrl()
+        {
+            var embeddedTemplatePreviewRequest = new EmbeddedTemplatePreviewRequest()
+            {
+                // This is an example, add your own template id created from the embedded request.
+                TemplateId = "bf48577c-8a4d-4840-b719-206fffef0c27",
+                ShowToolbar = false,
+                LinkValidTill = DateTime.Now.AddDays(2),
+            };
+            var embeddedTemplatePreview = await this.templateApi.CreateEmbeddedPreviewUrlAsync(embeddedTemplatePreviewRequest).ConfigureAwait(false);
+            return embeddedTemplatePreview.TemplateUrl;
         }
     }
 }

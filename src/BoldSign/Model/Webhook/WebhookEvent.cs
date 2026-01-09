@@ -13,6 +13,7 @@ namespace BoldSign.Model.Webhook
     using System;
     using System.Runtime.Serialization;
     using BoldSign.Api.Converters;
+    using BoldSign.Api.Model.Webhook;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -26,6 +27,13 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "event", EmitDefaultValue = false)]
         [JsonProperty("event")]
         public WebhookEventMetadata Event { get; set; }
+
+        /// <summary>
+        /// Gets or sets the webhook context object.
+        /// </summary>
+        [DataMember(Name = "context", EmitDefaultValue = false)]
+        [JsonProperty("context")]
+        public WebhookContext Context { get; set; }
 
         /// <summary>
         /// Gets or sets the BoldSign webhook payload.

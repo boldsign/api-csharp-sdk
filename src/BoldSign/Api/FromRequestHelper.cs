@@ -106,6 +106,11 @@ namespace BoldSign.Api
                 InitializeRecipientNotificationSettings(localVarFormParams, signRequestDetails.RecipientNotificationSettings);
             }
 
+            if (signRequestDetails.GroupSignerSettings != null)
+            {
+                InitializeGroupSignerSettings(localVarFormParams, signRequestDetails.GroupSignerSettings);
+            }
+
             if (signRequestDetails is IEmbeddedRequest embeddedRequest)
             {
                 if (embeddedRequest.RedirectUrl != null)
@@ -232,6 +237,11 @@ namespace BoldSign.Api
             if (templateRequest.RecipientNotificationSettings != null)
             {
                 InitializeRecipientNotificationSettings(localVarFormParams, templateRequest.RecipientNotificationSettings);
+            }
+
+            if (templateRequest.GroupSignerSettings != null)
+            {
+                InitializeGroupSignerSettings(localVarFormParams, templateRequest.GroupSignerSettings);
             }
 
             if (templateRequest.FormGroups != null)
@@ -398,6 +408,11 @@ namespace BoldSign.Api
                 InitializeRecipientNotificationSettings(localVarFormParams, editDocumentRequest.RecipientNotificationSettings);
             }
 
+            if (editDocumentRequest.GroupSignerSettings != null)
+            {
+                InitializeGroupSignerSettings(localVarFormParams, editDocumentRequest.GroupSignerSettings);
+            }
+
             if (editDocumentRequest.EnableSigningOrder != null)
             {
                 localVarFormParams.Add(nameof(editDocumentRequest.EnableSigningOrder), editDocumentRequest.EnableSigningOrder == true ? "true" : "false");
@@ -504,6 +519,23 @@ namespace BoldSign.Api
             localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanAdd)}", formFieldPermission.CanAdd ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanModify)}", formFieldPermission.CanModify ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(FormFieldPermission.CanModifyDefaultValue)}", formFieldPermission.CanModifyDefaultValue ? "true" : "false");
+        }
+
+        /// <summary>
+        /// Initialize Group Signer Settings.
+        /// </summary>
+        /// <param name="localVarFormParams">localVarFormParams.</param>
+        /// <param name="groupSignerSettings">groupSignerSettings.</param>
+        private static void InitializeGroupSignerSettings(Dictionary<string, string> localVarFormParams, GroupSignerSettings groupSignerSettings)
+        {
+            const string baseKey = "GroupSignerSettings";
+
+            localVarFormParams.Add($"{baseKey}.{nameof(groupSignerSettings.Enabled)}", groupSignerSettings.Enabled ? "true" : "false");
+
+            if (groupSignerSettings.AllowedDirectories != null)
+            {
+                ToFormParameter(localVarFormParams, groupSignerSettings.AllowedDirectories, $"{baseKey}.{nameof(groupSignerSettings.AllowedDirectories)}");
+            }
         }
 
         private static Dictionary<string, string> ToFormParameter(Dictionary<string, string> localVarFormParams, List<string> array, string parameterName)

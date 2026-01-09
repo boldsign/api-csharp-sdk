@@ -149,6 +149,20 @@ namespace BoldSign.Api.Model.EditDocument
         public Locales? Locale { get; set; }
 
         /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        /// <value>Gets or sets the sign type of the signer.</value>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public SignType? SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group id.
+        /// </summary>
+        /// <value>Gets or sets the group id.</value>
+        [DataMember(Name = "groupId", EmitDefaultValue = false)]
+        public string GroupId { get; set; }
+
+        /// <summary>
         /// Gets or sets the recipient notification settings.
         /// </summary>
         [DataMember(Name = "recipientNotificationSettings", EmitDefaultValue = false)]

@@ -1102,5 +1102,81 @@ namespace BoldSign.Api.Resources {
                 return ResourceManager.GetString("UserIdsLimit", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Directories cannot contain empty values.
+        /// </summary>
+        internal static string DirectoriesCannotContainEmptyValues
+        {
+            get
+            {
+                return ResourceManager.GetString("DirectoriesCannotContainEmptyValues", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Each directory must be less than 40 characters and cannot contain spaces.
+        /// </summary>
+        internal static string DirectoryMaxLengthAndNoSpaces
+        {
+            get
+            {
+                return ResourceManager.GetString("DirectoryMaxLengthAndNoSpaces", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to A maximum of five directories is allowed.
+        /// </summary>
+        internal static string MaxFiveDirectoriesAllowed
+        {
+            get
+            {
+                return ResourceManager.GetString("MaxFiveDirectoriesAllowed", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate directories are not allowed.
+        /// </summary>
+        internal static string DuplicateDirectoriesFound
+        {
+            get
+            {
+                return ResourceManager.GetString("DuplicateDirectoriesFound", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Directories can only contain letters, digits, or underscores.
+        /// </summary>
+        internal static string DirectoriesInvalidSpecialCharacters
+        {
+            get
+            {
+                return ResourceManager.GetString("DirectoriesInvalidSpecialCharacters", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;GroupContactId&apos; when calling GroupContactingApi-&gt;DeleteGroupContact.
+        /// </summary>
+        internal static string GroupContactIdDelete {
+            get {
+                return ResourceManager.GetString("GroupContactIdDelete", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required parameter &apos;id&apos; when calling GroupContactingApi.
+        /// </summary>
+        internal static string GroupContactIdMissing {
+            get {
+                return ResourceManager.GetString("GroupContactIdMissing", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Provide a valid Name.
+        /// </summary>
+        internal static string GroupContactNameRequired {
+            get {
+                return ResourceManager.GetString("GroupContactNameRequired", resourceCulture);
+            }
+        }
     }
 }

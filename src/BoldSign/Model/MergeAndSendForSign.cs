@@ -286,6 +286,12 @@ namespace BoldSign.Api.Model
         public List<SignatureType> AllowedSignatureTypes { get; set; }
 
         /// <summary>
+        /// Gets or sets the group signer settings for group signers.
+        /// </summary>
+        [DataMember(Name = "groupSignerSettings", EmitDefaultValue = false)]
+        public GroupSignerSettings GroupSignerSettings { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

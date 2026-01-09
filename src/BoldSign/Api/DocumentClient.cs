@@ -5819,5 +5819,295 @@ namespace BoldSign.Api
             }
         }
 
+        /// <inheritdoc />
+        public EmbeddedDocumentEditResponse CreateEmbeddedEditUrl(EmbeddedDocumentEditRequest editDocumentRequest)
+        {
+            var localVarResponse = this.CreateEmbeddedEditUrlWithHttpInfo(editDocumentRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc />
+        public ApiResponse<EmbeddedDocumentEditResponse> CreateEmbeddedEditUrlWithHttpInfo(EmbeddedDocumentEditRequest editDocumentRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (editDocumentRequest == null || editDocumentRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->Embed Edit Document");
+            }
+            var localVarPath = "/v1-beta/document/createEmbeddedEditUrl";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            // query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", editDocumentRequest.DocumentId));
+            if (editDocumentRequest.RedirectUrl != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.RedirectUrl), editDocumentRequest.RedirectUrl.ToString());
+            }
+
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowToolbar), editDocumentRequest.ShowToolbar ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowSendButton), editDocumentRequest.ShowSendButton ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowPreviewButton), editDocumentRequest.ShowPreviewButton ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowNavigationButtons), editDocumentRequest.ShowNavigationButtons ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.SendViewOption), editDocumentRequest.SendViewOption.ToString());
+            localVarFormParams.Add(nameof(editDocumentRequest.Locale), editDocumentRequest.Locale.ToString());
+            localVarFormParams.Add(nameof(editDocumentRequest.OnBehalfOf), editDocumentRequest.OnBehalfOf);
+            if (editDocumentRequest.LinkValidTill.HasValue)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.LinkValidTill), editDocumentRequest.LinkValidTill.ToString());
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("EmbedEditDocument", localVarResponse);
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedDocumentEditResponse>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedDocumentEditResponse)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedDocumentEditResponse)));
+        }
+
+        /// <inheritdoc />
+        public async Task<EmbeddedDocumentEditResponse> CreateEmbeddedEditUrlAsync(EmbeddedDocumentEditRequest editDocumentRequest)
+        {
+            var localVarResponse = await this.CreateEmbeddedEditUrlAsyncWithHttpInfo(editDocumentRequest).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc />
+        public async Task<ApiResponse<EmbeddedDocumentEditResponse>> CreateEmbeddedEditUrlAsyncWithHttpInfo(EmbeddedDocumentEditRequest editDocumentRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (editDocumentRequest == null || editDocumentRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->Embed Edit Document");
+            }
+
+            var localVarPath = "/v1-beta/document/createEmbeddedEditUrl";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            // query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", editDocumentRequest.DocumentId));
+            if (editDocumentRequest.RedirectUrl != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.RedirectUrl), editDocumentRequest.RedirectUrl.ToString());
+            }
+
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowToolbar), editDocumentRequest.ShowToolbar ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowSendButton), editDocumentRequest.ShowSendButton ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowPreviewButton), editDocumentRequest.ShowPreviewButton ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.ShowNavigationButtons), editDocumentRequest.ShowNavigationButtons ? "true" : "false");
+            localVarFormParams.Add(nameof(editDocumentRequest.SendViewOption), editDocumentRequest.SendViewOption.ToString());
+            localVarFormParams.Add(nameof(editDocumentRequest.Locale), editDocumentRequest.Locale.ToString());
+            localVarFormParams.Add(nameof(editDocumentRequest.OnBehalfOf), editDocumentRequest.OnBehalfOf);
+            if (editDocumentRequest.LinkValidTill.HasValue)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.LinkValidTill), editDocumentRequest.LinkValidTill.ToString());
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("EmbedEditDocument", localVarResponse);
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedDocumentEditResponse>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedDocumentEditResponse)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedDocumentEditResponse)));
+        }
+
+        public DocumentEditingCancellationResponse CancelEditing(CancelDocumentEditingRequest CancelDocumentEditingRequest)
+        {
+            var localVarResponse = this.CancelEditingWithHttpInfo(CancelDocumentEditingRequest);
+            return localVarResponse.Data;
+        }
+
+        public ApiResponse<DocumentEditingCancellationResponse> CancelEditingWithHttpInfo(CancelDocumentEditingRequest CancelDocumentEditingRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (CancelDocumentEditingRequest == null || CancelDocumentEditingRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->Cancel Edit Document");
+            }
+            var localVarPath = "/v1-beta/document/cancelEditing";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            // query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", CancelDocumentEditingRequest.DocumentId));
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", CancelDocumentEditingRequest.OnBehalfOf));
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("CancelEditDocument", localVarResponse);
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentEditingCancellationResponse>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentEditingCancellationResponse)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentEditingCancellationResponse)));
+        }
+
+        public async Task<DocumentEditingCancellationResponse> CancelEditingAsync(CancelDocumentEditingRequest CancelDocumentEditingRequest)
+        {
+            var localVarResponse = await this.CancelEditingAsyncWithHttpInfo(CancelDocumentEditingRequest).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        public async Task<ApiResponse<DocumentEditingCancellationResponse>> CancelEditingAsyncWithHttpInfo(CancelDocumentEditingRequest CancelDocumentEditingRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (CancelDocumentEditingRequest == null || CancelDocumentEditingRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->Cancel Edit Document");
+            }
+            var localVarPath = "/v1-beta/document/cancelEditing";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            // query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", CancelDocumentEditingRequest.DocumentId));
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", CancelDocumentEditingRequest.OnBehalfOf));
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(localVarPath, HttpMethod.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams).ConfigureAwait(false);
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("CancelEditDocument", localVarResponse);
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentEditingCancellationResponse>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentEditingCancellationResponse)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentEditingCancellationResponse)));
+        }
+
     }
 }

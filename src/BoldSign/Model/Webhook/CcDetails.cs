@@ -38,5 +38,11 @@ namespace BoldSign.Model.Webhook
         [JsonProperty("emailAddress")]
         public string EmailAddress { get; set; }
 
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        [JsonProperty("id")]
+        public string Id { get; set; }
     }
 }
