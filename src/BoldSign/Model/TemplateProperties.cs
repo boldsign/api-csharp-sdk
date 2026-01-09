@@ -14,6 +14,7 @@
 
 namespace BoldSign.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
     using BoldSign.Api.Model;
@@ -302,6 +303,18 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
         public List<string> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group signer settings for group signers.
+        /// </summary>
+        [DataMember(Name = "groupSignerSettings", EmitDefaultValue = false)]
+        public GroupSignerSettings GroupSignerSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the template sharing for teams.
+        /// </summary>
+        [DataMember(Name = "sharing", EmitDefaultValue = false)]
+        public TemplateSharing Sharing { get; set; }
 
         /// <summary>
         /// Returns the JSON string presentation of the object.

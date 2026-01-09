@@ -40,7 +40,8 @@ namespace BoldSign.Model
         /// <param name="hostName">Gets or sets the host user name..</param>
         /// <param name="hostUserId">Gets or sets the host user id..</param>
         /// <param name="imposeAuthentication">Impose Authentication.</param>
-        public TemplateSignerDetails(string signerName = default, string signerRole = default, string signerEmail = default, SignerStatus? status = default, bool enableAccessCode = default, bool enableEmailOTP = default, string userId = default, int order = default, SignerType? signerType = default, string hostEmail = default, string hostName = default, string hostUserId = default, ImposeAuthentication imposeAuthentication = ImposeAuthentication.None)
+        /// <param name="GroupSigners">GroupSigners.</param>
+        public TemplateSignerDetails(string signerName = default, string signerRole = default, string signerEmail = default, SignerStatus? status = default, bool enableAccessCode = default, bool enableEmailOTP = default, string userId = default, int order = default, SignerType? signerType = default, string hostEmail = default, string hostName = default, string hostUserId = default, ImposeAuthentication imposeAuthentication = ImposeAuthentication.None, TemplateGroupSigner[] GroupSigners = default)
         {
             this.SignerName = signerName;
             this.SignerRole = signerRole;
@@ -62,6 +63,7 @@ namespace BoldSign.Model
             this.HostEmail = hostEmail;
             this.HostName = hostName;
             this.HostUserId = hostUserId;
+            this.GroupSigners = GroupSigners;
         }
 
         /// <summary>
@@ -172,6 +174,26 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "allowFieldConfiguration", EmitDefaultValue = false)]
         public bool AllowFieldConfiguration { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        /// <value>Gets or sets the sign type of the signer.</value>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public SignType SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group id.
+        /// </summary>
+        /// <value>Gets or sets the group id of the signer.</value>
+        [DataMember(Name = "groupId", EmitDefaultValue = false)]
+        public string GroupId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group Signers.
+        /// </summary>
+         [DataMember(Name = "groupSigners", EmitDefaultValue = false)]
+        public TemplateGroupSigner[] GroupSigners { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object
