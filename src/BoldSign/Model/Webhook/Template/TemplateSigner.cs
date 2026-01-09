@@ -4,6 +4,7 @@
 
 namespace BoldSign.Api.Model.Webhook.Template
 {
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
     using BoldSign.Model;
     using Newtonsoft.Json;
@@ -30,6 +31,12 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("signerEmail")]
         public string SignerEmail { get; set; }
+
+        /// <summary>
+        /// Gets or sets the groupSigners.
+        /// </summary>
+        [JsonProperty("groupSigners")]
+        public List<TemplateGroupSigner> GroupSigners { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether authentication is enabled for the signer.
@@ -97,5 +104,17 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("allowFieldConfiguration")]
         public bool AllowFieldConfiguration { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public string SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group id.
+        /// </summary>
+        [DataMember(Name = "groupId", EmitDefaultValue = false)]
+        public string GroupId { get; set; }
     }
 }

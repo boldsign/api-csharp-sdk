@@ -187,6 +187,20 @@ namespace BoldSign.Api.Model
         public Locales Locale { get; set; }
 
         /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        /// <value>Gets or sets the sign type of the signer.</value>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public SignType SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default group id.
+        /// </summary>
+        /// <value>Gets or sets the default group id.</value>
+        [DataMember(Name = "defaultGroupId", EmitDefaultValue = false)]
+        public string DefaultGroupId { get; set; }
+
+        /// <summary>
         /// Gets or sets the Authentication Type such as None ,Access Code, EmailOTP.
         /// </summary>
         [DataMember(Name = "imposeAuthentication", EmitDefaultValue = true)]

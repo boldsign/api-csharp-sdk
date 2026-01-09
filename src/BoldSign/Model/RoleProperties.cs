@@ -35,6 +35,7 @@ namespace BoldSign.Api.Model
         /// <param name="allowRoleDelete">Gets or sets the allow permission to role delete option  of template.</param>
         /// <param name="allowRoleEdit">Gets or sets the allow permission to role edit option  of template.</param>
         /// <param name="locale">Gets or sets the locale.</param>
+        /// <param name="GroupSigners">Gets or sets GroupSigners.</param>
         public RoleProperties(
     string name,
     int index,
@@ -50,7 +51,8 @@ namespace BoldSign.Api.Model
     ImposeAuthentication imposeAuthentication = ImposeAuthentication.None,
     bool allowRoleEdit = true,
     bool allowRoleDelete = true,
-    Locales locale = Locales.EN)
+    Locales locale = Locales.EN,
+     IEnumerable<TemplateGroupSigner> GroupSigners = default)
         {
             this.Name = name;
             this.Index = index;
@@ -70,6 +72,7 @@ namespace BoldSign.Api.Model
             this.AllowRoleDelete = allowRoleDelete;
             this.AllowRoleEdit = allowRoleEdit;
             this.Locale = locale;
+            this.GroupSigners = GroupSigners;
         }
 
         /// <summary>
@@ -135,6 +138,20 @@ namespace BoldSign.Api.Model
         public Locales Locale { get; set; }
 
         /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        /// <value>Gets or sets the sign type of the signer.</value>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public SignType SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default group id.
+        /// </summary>
+        /// <value>Gets or sets the default group id.</value>
+        [DataMember(Name = "defaultGroupId", EmitDefaultValue = false)]
+        public string DefaultGroupId { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether enable access code recipients.
         /// </summary>
         [DataMember(Name = "enableAccessCode", EmitDefaultValue = true)]
@@ -195,6 +212,12 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "enableQes", EmitDefaultValue = true)]
         public bool EnableQes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the GroupSigners.
+        /// </summary>
+        [DataMember(Name = "groupSigners", EmitDefaultValue = false)]
+        public  IEnumerable<TemplateGroupSigner> GroupSigners { get; set; }
 
         /// <summary>
         ///     Returns the JSON string presentation of the object.

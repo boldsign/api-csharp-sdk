@@ -226,6 +226,20 @@ namespace BoldSign.Model
         /// <value>Gets or sets the Locale of the signer.</value>
         [DataMember(Name = "locale", EmitDefaultValue = true)]
         public Locales Locale { get; set; } = Locales.Default;
+ 
+        /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        /// <value>Gets or sets the sign type of the signer.</value>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public SignType? SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group id.
+        /// </summary>
+        /// <value>Gets or sets the group id.</value>
+        [DataMember(Name = "groupId", EmitDefaultValue = false)]
+        public string GroupId { get; set; }
 
         /// <summary>
         /// Gets or Sets the delivery mode of the signer.

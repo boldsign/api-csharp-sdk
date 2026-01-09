@@ -22,5 +22,11 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("userId", DefaultValueHandling = DefaultValueHandling.Include)]
         public string UserId { get; set; }
+
+        /// <summary>
+        ///     Gets the cc id.
+        /// </summary>
+        [JsonProperty("id", DefaultValueHandling = DefaultValueHandling.Include)]
+        public string Id { get; set; }
     }
 }

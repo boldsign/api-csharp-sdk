@@ -22,6 +22,7 @@ namespace BoldSign.Model.Webhook
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.ComponentModel.DataAnnotations;
+    using BoldSign.Api.Model.Webhook;
     using BoldSign.Api.Model.Webhook.IdVerification;
 
     /// <summary>
@@ -53,6 +54,21 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "signerEmail", EmitDefaultValue = false)]
         [JsonProperty("signerEmail")]
         public string SignerEmail { get; set; }
+
+        /// <summary>
+        /// Gets or sets the id of the signer.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the groupSigners.
+        /// </summary>
+        [DataMember(Name = "groupSigners", EmitDefaultValue = false)]
+        [JsonProperty("groupSigners")]
+        public List<DocumentGroupSigner> GroupSigners { get; set; }
+
 
         /// <summary>
         /// Gets or Sets Status
@@ -190,5 +206,17 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "lastReminderSentOn", EmitDefaultValue = false)]
         [JsonProperty("lastReminderSentOn")]
         public long? LastReminderSentOn { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public string SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group id.
+        /// </summary>
+        [DataMember(Name = "groupId", EmitDefaultValue = false)]
+        public string GroupId { get; set; }
     }
 }

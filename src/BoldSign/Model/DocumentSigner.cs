@@ -42,7 +42,7 @@ namespace BoldSign.Model
         /// <param name="language">Gets or sets the Language.</param>
         /// <param name="authenticationType">Gets or sets the authentication type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
-        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN)")]
+        [Obsolete("The language-based constructor is deprecated. Please use the new constructor: DocumentSigner(string signerName = default, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN)")]
         public DocumentSigner(string name, string emailAddress, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, SignerType signerType = BoldSign.Model.SignerType.Signer, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Languages language = Languages.None, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
         {
             // to ensure "name" is required (not null)
@@ -89,14 +89,8 @@ namespace BoldSign.Model
         /// <param name="authenticationType">Gets or sets the authentication type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
         /// <param name="identityVerificationSettings">Gets or sets the identity verification settings.</param>
-        public DocumentSigner(string signerName, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN,  AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdentityVerificationSettings identityVerificationSettings = default)
+        public DocumentSigner(string signerName = default, SignerType signerType = BoldSign.Model.SignerType.Signer, string signerEmail = default, string privateMessage = default, string authenticationCode = default, int signerOrder = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), string hostEmail = default, Locales locale = Locales.EN,  AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdentityVerificationSettings identityVerificationSettings = default)
         {
-            // to ensure "name" is required (not null)
-            if (string.IsNullOrEmpty(signerName))
-            {
-                throw new InvalidDataException("signerName is a required property for DocumentSigner and cannot be null");
-            }
-
             this.Name = signerName;
             this.SignerType = signerType;
             this.EmailAddress = signerEmail;
@@ -202,6 +196,20 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "locale", EmitDefaultValue = false)]
         public Locales Locale { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sign type.
+        /// </summary>
+        /// <value>Gets or sets the sign type of the signer.</value>
+        [DataMember(Name = "signType", EmitDefaultValue = false)]
+        public SignType? SignType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group id.
+        /// </summary>
+        /// <value>Gets or sets the group id.</value>
+        [DataMember(Name = "groupId", EmitDefaultValue = false)]
+        public string GroupId { get; set; }
 
         /// <summary>
         /// Gets or Sets the delivery mode of the signer.
