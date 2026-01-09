@@ -207,7 +207,7 @@ namespace BoldSign.Model
         public RecipientNotificationSettings RecipientNotificationSettings { get; set; }
 
         /// <summary>
-        //// Gets or sets the download file name.
+        /// Gets or sets the download file name.
         /// </summary>
         [JsonProperty("downloadFileName")]
         public string DownloadFileName { get; set; }
@@ -235,5 +235,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
         public List<SignatureType> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group signer settings for group signers.
+        /// </summary>
+        [JsonProperty("groupSignerSettings")]
+        public GroupSignerSettings GroupSignerSettings { get; set; }
     }
 }

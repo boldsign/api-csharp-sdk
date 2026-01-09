@@ -186,5 +186,26 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "failedDeliveryMode", EmitDefaultValue = false)]
         [JsonProperty("failedDeliveryMode")]
         public FailedDeliveryMode? FailedDeliveryMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the behalf of details.
+        /// </summary>
+        [DataMember(Name = "behalfOf", EmitDefaultValue = false)]
+        [JsonProperty("behalfOf")]
+        public BehalfOf BehalfOf { get; set; }
+
+        /// <summary>
+        /// Gets or sets the failed delivery mode.
+        /// </summary>
+        [DataMember(Name = "allowedSignatureTypes", EmitDefaultValue = false)]
+        [JsonProperty("allowedSignatureTypes")]
+        public List<string> AllowedSignatureTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the group signer settings details.
+        /// </summary>
+        [DataMember(Name = "groupSignerSettings", EmitDefaultValue = false)]
+        [JsonProperty("groupSignerSettings")]
+        public GroupSignerSettings GroupSignerSettings  { get; set; }
     }
 }

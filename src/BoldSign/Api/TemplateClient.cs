@@ -481,10 +481,11 @@ namespace BoldSign.Api
         /// <param name="startDate">Gets or sets the start date.</param>
         /// <param name="endDate">Gets or sets the end date.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>TemplateRecords</returns>
-        public TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
+        public TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default)
         {
-            var localVarResponse = this.ListTemplatesWithHttpInfo(page, pageSize, searchKey, templateType, onBehalfOf, createdBy, templateLabels, startDate, endDate, brandIds);
+            var localVarResponse = this.ListTemplatesWithHttpInfo(page, pageSize, searchKey, templateType, onBehalfOf, createdBy, templateLabels, startDate, endDate, brandIds, sharedWithTeamId);
 
             return localVarResponse.Data;
         }
@@ -502,8 +503,9 @@ namespace BoldSign.Api
         /// /// /// <param name="startDate">Gets or sets the start date.</param>
         /// <param name="endDate">Gets or sets the end date.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>ApiResponse of TemplateRecords</returns>
-        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
+        public ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default)
         {
             // verify the required parameter 'page' is set
             if (page < 1)
@@ -582,6 +584,11 @@ namespace BoldSign.Api
             if (brandIds != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
+            if (sharedWithTeamId != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "sharedWithTeamId", sharedWithTeamId)); // query parameter
             }
 
             // authentication (Bearer) required
@@ -623,10 +630,11 @@ namespace BoldSign.Api
         /// <param name="startDate">Gets or sets the start date.</param>;
         /// <param name="endDate">Gets or sets the end date.</param>;
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>Task of TemplateRecords</returns>
-        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
+        public async Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default)
         {
-            var localVarResponse = await this.ListTemplatesAsyncWithHttpInfo(page, pageSize, searchKey, templateType, onBehalfOf, createdBy, templateLabels, startDate, endDate, brandIds);
+            var localVarResponse = await this.ListTemplatesAsyncWithHttpInfo(page, pageSize, searchKey, templateType, onBehalfOf, createdBy, templateLabels, startDate, endDate, brandIds, sharedWithTeamId);
 
             return localVarResponse.Data;
         }
@@ -644,8 +652,9 @@ namespace BoldSign.Api
         /// <param name="startDate">Gets or sets the start date.</param>;
         /// <param name="endDate">Gets or sets the end date.</param>;
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>Task of ApiResponse (TemplateRecords)</returns>
-        public async Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default)
+        public async Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default)
         {
             // verify the required parameter 'page' is set
             if (page < 1)
@@ -724,6 +733,11 @@ namespace BoldSign.Api
             if (brandIds != null)
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "BrandIds", brandIds)); // query parameter
+            }
+
+            if (sharedWithTeamId != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "sharedWithTeamId", sharedWithTeamId)); // query parameter
             }
 
             // authentication (Bearer) required
@@ -2654,6 +2668,121 @@ namespace BoldSign.Api
                 (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
         }
 
+        /// <inheritdoc/>
+        public EmbeddedTemplatePreview CreateEmbeddedPreviewUrl(EmbeddedTemplatePreviewRequest embedTemplatePreview)
+        {
+            var localVarResponse = this.CreateEmbeddedPreviewUrlWithHttpInfo(embedTemplatePreview);
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public ApiResponse<EmbeddedTemplatePreview> CreateEmbeddedPreviewUrlWithHttpInfo(EmbeddedTemplatePreviewRequest embedTemplatePreview)
+        {
+            if (embedTemplatePreview == null)
+            {
+                throw new ArgumentNullException(nameof(embedTemplatePreview));
+            }
+
+            // verify the required parameter 'templateId' is set
+            if (string.IsNullOrEmpty(embedTemplatePreview.TemplateId))
+            {
+                throw new ApiException(422, ApiValidationMessages.EmbeddedTemplateIdNull);
+            }
+
+            const string localVarPath = "/v1/template/createEmbeddedPreviewUrl";
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            this.PrepareEmbeddedTemplatePreview(
+                embedTemplatePreview,
+                out var localVarQueryParams,
+                out var localVarHeaderParams,
+                out var localVarHttpContentType,
+                out var localVarFormParams);
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                HttpMethod.Post,
+                localVarQueryParams,
+                null,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("createEmbeddedPreviewUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedTemplatePreview>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedTemplatePreview)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedTemplatePreview)));
+        }
+
+        /// <inheritdoc/>
+        public async Task<EmbeddedTemplatePreview> CreateEmbeddedPreviewUrlAsync(EmbeddedTemplatePreviewRequest embeddedTemplatePreviewRequest)
+        {
+            var localVarResponse = await this.CreateEmbeddedPreviewUrlWithHttpInfoAsync(embeddedTemplatePreviewRequest).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<EmbeddedTemplatePreview>> CreateEmbeddedPreviewUrlWithHttpInfoAsync(EmbeddedTemplatePreviewRequest embeddedTemplatePreviewRequest)
+        {
+            if (embeddedTemplatePreviewRequest == null)
+            {
+                throw new ArgumentNullException(nameof(embeddedTemplatePreviewRequest));
+            }
+
+            // verify the required parameter 'templateId' is set
+            if (string.IsNullOrEmpty(embeddedTemplatePreviewRequest.TemplateId))
+            {
+                throw new ApiException(422, ApiValidationMessages.EmbeddedTemplateIdNull);
+            }
+
+            const string localVarPath = "/v1/template/createEmbeddedPreviewUrl";
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            this.PrepareEmbeddedTemplatePreview(
+                embeddedTemplatePreviewRequest,
+                out var localVarQueryParams,
+                out var localVarHeaderParams,
+                out var localVarHttpContentType,
+                out var localVarFormParams);
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                HttpMethod.Post,
+                localVarQueryParams,
+                null,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams)
+                .ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("createEmbeddedPreviewUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedTemplatePreview>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedTemplatePreview)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedTemplatePreview)));
+        }
+
         private static void ValidateCreateTemplateProperties(CreateTemplateRequest templateDetails)
         {
             DocumentHelper.ValidateFiles(templateDetails);
@@ -3103,6 +3232,51 @@ namespace BoldSign.Api
             withFiles = ApiClient.HandleJsonFileParams(documentUpload, withFiles);
 
             return this.Configuration.ApiClient.Serialize(withFiles);
+        }
+
+        private void PrepareEmbeddedTemplatePreview(
+            EmbeddedTemplatePreviewRequest embeddedPreviewTemplate,
+            out List<KeyValuePair<string, string>> localVarQueryParams,
+            out Dictionary<string, string> localVarHeaderParams,
+            out string localVarHttpContentType,
+            out Dictionary<string, string> localVarFormParams)
+        {
+            localVarQueryParams = new List<KeyValuePair<string, string>>();
+            localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            localVarFormParams = new Dictionary<string, string>();
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+
+            localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (embeddedPreviewTemplate is EmbeddedTemplatePreviewRequest embeddedRequest)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "TemplateId", embeddedRequest.TemplateId));
+                localVarFormParams.Add(nameof(embeddedRequest.ShowToolbar), embeddedRequest.ShowToolbar ? "true" : "false");
+                if (embeddedRequest.LinkValidTill.HasValue)
+                {
+                    localVarFormParams.Add(nameof(embeddedRequest.LinkValidTill), embeddedRequest.LinkValidTill.ToString());
+                }
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
         }
     }
 }

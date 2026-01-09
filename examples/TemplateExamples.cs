@@ -1135,5 +1135,22 @@
             var documentCreated = await this.templateApi.MergeAndSendAsync(templateDetails).ConfigureAwait(false);
             return documentCreated;
         }
+
+        /// <summary>
+        ///  Generates a embed tempalte preview URL..
+        /// </summary>
+        /// <returns>A Embedded Template Preview.</returns>
+        public async Task<Uri> CreateEmbeddedPreviewUrl()
+        {
+            var embeddedTemplatePreviewRequest = new EmbeddedTemplatePreviewRequest()
+            {
+                // This is an example, add your own template id created from the embedded request.
+                TemplateId = "bf48577c-8a4d-4840-b719-206fffef0c27",
+                ShowToolbar = false,
+                LinkValidTill = DateTime.Now.AddDays(2),
+            };
+            var embeddedTemplatePreview = await this.templateApi.CreateEmbeddedPreviewUrlAsync(embeddedTemplatePreviewRequest).ConfigureAwait(false);
+            return embeddedTemplatePreview.TemplateUrl;
+        }
     }
 }

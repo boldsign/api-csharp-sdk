@@ -65,8 +65,9 @@ namespace BoldSign.Api
         /// <param name="startDate">Gets or sets the start date.</param>
         /// <param name="endDate">Gets or sets the end date.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>TemplateRecords</returns>
-        TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
+        TemplateRecords ListTemplates(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default);
 
         /// <summary>
         ///     List all the templates created.
@@ -83,8 +84,9 @@ namespace BoldSign.Api
         /// <param name="startDate">Gets or sets the start date.</param>
         /// <param name="endDate">Gets or sets the end date.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>ApiResponse of TemplateRecords</returns>
-        ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
+        ApiResponse<TemplateRecords> ListTemplatesWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default);
 
         /// <summary>
         ///     Send a document for signature using a Template.
@@ -278,8 +280,9 @@ namespace BoldSign.Api
         /// <param name="startDate">Gets or sets the start date.</param>
         /// <param name="endDate">Gets or sets the end date.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>Task of TemplateRecords</returns>
-        Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
+        Task<TemplateRecords> ListTemplatesAsync(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default, DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default);
 
         /// <summary>
         ///    List all the templates created.
@@ -296,8 +299,9 @@ namespace BoldSign.Api
         /// <param name="startDate">Gets or sets the start date.</param>
         /// <param name="endDate">Gets or sets the end date.</param>
         /// <param name="brandIds">Gets or sets the brandIds.</param>
+        /// <param name="sharedWithTeamId">Gets and sets the teams Ids.</param>
         /// <returns>Task of ApiResponse (TemplateRecords)</returns>
-        Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default);
+        Task<ApiResponse<TemplateRecords>> ListTemplatesAsyncWithHttpInfo(int page, int? pageSize = default, string searchKey = default, TemplateType? templateType = default, List<string> onBehalfOf = default, List<string> createdBy = default, List<string> templateLabels = default,  DateTime? startDate = default, DateTime? endDate = default, List<string> brandIds = default, List<string> sharedWithTeamId = default);
 
         /// <summary>
         ///     Send a document for signature using a Template.
@@ -434,6 +438,38 @@ namespace BoldSign.Api
         /// <param name="templateId">Template Id.</param>
         /// <returns>Task of ApiResponse (TemplateProperties).</returns>
         Task<ApiResponse<TemplateProperties>> GetPropertiesAsyncWithHttpInfo(string templateId);
+
+        /// <summary>
+        ///  Generates a preview embed URL using a template id which embeds template preview process into your application.
+        /// </summary>
+        /// <param name="embedTemplatePreview">The embed template preview request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplatePreview).</returns>
+        EmbeddedTemplatePreview CreateEmbeddedPreviewUrl(EmbeddedTemplatePreviewRequest embedTemplatePreview);
+
+        /// <summary>
+        ///  Generates a preview embed URL using a template id which embeds template preview process into your application.
+        /// </summary>
+        /// <param name="embeddedTemplatePreviewRequest">The embedded template preview request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplatePreview).</returns>
+        Task<EmbeddedTemplatePreview> CreateEmbeddedPreviewUrlAsync(EmbeddedTemplatePreviewRequest embeddedTemplatePreviewRequest);
+
+        /// <summary>
+        ///  Generates a preview embed URL using a template id which embeds template preview process into your application.
+        /// </summary>
+        /// <param name="embedTemplatePreview">The embed template preview request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplatePreview).</returns>
+        ApiResponse<EmbeddedTemplatePreview> CreateEmbeddedPreviewUrlWithHttpInfo(EmbeddedTemplatePreviewRequest embedTemplatePreview);
+
+        /// <summary>
+        ///  Generates a preview embed URL using a template id which embeds template preview process into your application.
+        /// </summary>
+        /// <param name="embeddedTemplatePreviewRequest">The embedded template preview request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>Task of ApiResponse (EmbeddedTemplatePreview).</returns>
+        Task<ApiResponse<EmbeddedTemplatePreview>> CreateEmbeddedPreviewUrlWithHttpInfoAsync(EmbeddedTemplatePreviewRequest embeddedTemplatePreviewRequest);
 
         #endregion Asynchronous Operations
     }
