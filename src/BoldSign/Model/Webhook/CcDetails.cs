@@ -29,7 +29,6 @@ namespace BoldSign.Model.Webhook
     [DataContract]
     public class CcDetails
     {
-
         /// <summary>
         /// Gets or sets the email address.
         /// </summary>
