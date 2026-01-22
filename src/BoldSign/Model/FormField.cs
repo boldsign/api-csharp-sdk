@@ -441,6 +441,12 @@ namespace BoldSign.Model
         public CollaborationSettings CollaborationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether is masked text value.
+        /// </summary>
+        [DataMember(Name = "isMasked", EmitDefaultValue = false)]
+        public bool? IsMasked { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

@@ -22,7 +22,8 @@ namespace BoldSign.Model
         /// <param name="dateFormat">Gets or sets the dateFormat.</param>
         /// <param name="minDate">Gets or sets the minDate.</param>
         /// <param name="maxDate">Gets or sets the maxDate.</param>
-        public EditableDateFieldSettings(string dateFormat = default, DateTime? minDate = default(DateTime?), DateTime? maxDate = default(DateTime?))
+        /// <param name="timeFormat">Gets or sets the timeFormat.</param>
+        public EditableDateFieldSettings(string dateFormat = default, DateTime? minDate = default(DateTime?), DateTime? maxDate = default(DateTime?), string timeFormat = null)
         {
             if (string.IsNullOrEmpty(dateFormat))
             {
@@ -41,6 +42,7 @@ namespace BoldSign.Model
             this.DateFormat = dateFormat;
             this.MinDate = minDate;
             this.MaxDate = maxDate;
+            this.TimeFormat = timeFormat;
         }
 
         /// <summary>
@@ -75,5 +77,16 @@ namespace BoldSign.Model
         /// <value>Gets the value of EditableDateFieldSettings.</value>
         [DataMember(Name = "maxDate", EmitDefaultValue = false)]
         public DateTime? MaxDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the timeFormat and it's only applicable for EditableDateFieldSettings field.
+        /// Please use the pre-defiened timeFormat.
+        /// <Example>Supported formats:
+        /// hh:mm tt, h:mm tt, HH:mm, H:mm, hh:mm:ss tt, h:mm:ss tt, HH:mm:ss, H:mm:ss, None.
+        /// </Example>
+        /// <value>Gets the value of EditableDateFieldSettings.</value>
+        /// </summary>
+        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
+        public string TimeFormat { get; set; }
     }
 }

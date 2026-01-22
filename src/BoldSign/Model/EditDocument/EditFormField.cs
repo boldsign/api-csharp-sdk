@@ -282,5 +282,11 @@ namespace BoldSign.Api.Model.EditDocument
         /// </summary>
         [DataMember(Name = "allowDeleteFormField", EmitDefaultValue = false)]
         public bool? AllowDeleteFormField { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is masked text value.
+        /// </summary>
+        [DataMember(Name = "isMasked", EmitDefaultValue = false)]
+        public bool? IsMasked { get; set; }
     }
 }

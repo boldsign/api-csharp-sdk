@@ -416,6 +416,17 @@ namespace BoldSign.Model
         public GroupSignerSettings GroupSignerSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to enable editing mode.
+        /// </summary>
+        [DataMember(Name = "inEditingMode", EmitDefaultValue = false)]
+        public bool InEditingMode { get; set; }
+        /// <summary>
+        /// Gets or sets the status of the document.
+        /// </summary>
+        [DataMember(Name = "displayStatus", EmitDefaultValue = false)]
+        public string DisplayStatus { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
