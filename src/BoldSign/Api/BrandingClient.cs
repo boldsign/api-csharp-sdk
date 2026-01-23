@@ -549,6 +549,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.ShowBuiltInFormFields), createBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ShowSharedCustomFields), createBrandData.ShowSharedCustomFields ? "true" : "false");
             AddDocumentExpirySettingsToFormParams(createBrandData, localVarFormParams);
+            AddSignatureFrameSettingsToFormParams(createBrandData, localVarFormParams);
             if (createBrandData.HideDecline != null)
             {
                 localVarFormParams.Add(nameof(createBrandData.HideDecline), createBrandData.HideDecline.Value ? "true" : "false");
@@ -663,6 +664,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(createBrandData.ShowBuiltInFormFields), createBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(createBrandData.ShowSharedCustomFields), createBrandData.ShowSharedCustomFields ? "true" : "false");
             AddDocumentExpirySettingsToFormParams(createBrandData, localVarFormParams);
+            AddSignatureFrameSettingsToFormParams(createBrandData, localVarFormParams);
 
             if (createBrandData.HideDecline != null)
             {
@@ -783,6 +785,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.ShowBuiltInFormFields), editBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ShowSharedCustomFields), editBrandData.ShowSharedCustomFields ? "true" : "false");
             AddDocumentExpirySettingsToFormParams(editBrandData, localVarFormParams);
+            AddSignatureFrameSettingsToFormParams(editBrandData, localVarFormParams);
             if (editBrandData.HideDecline != null)
             {
                 localVarFormParams.Add(nameof(editBrandData.HideDecline), editBrandData.HideDecline.Value ? "true" : "false");
@@ -903,6 +906,7 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(editBrandData.ShowBuiltInFormFields), editBrandData.ShowBuiltInFormFields ? "true" : "false");
             localVarFormParams.Add(nameof(editBrandData.ShowSharedCustomFields), editBrandData.ShowSharedCustomFields ? "true" : "false");
             AddDocumentExpirySettingsToFormParams(editBrandData, localVarFormParams);
+            AddSignatureFrameSettingsToFormParams(editBrandData, localVarFormParams);
             if (editBrandData.HideDecline != null)
             {
                 localVarFormParams.Add(nameof(editBrandData.HideDecline), editBrandData.HideDecline.Value ? "true" : "false");
@@ -1247,6 +1251,17 @@ namespace BoldSign.Api
 
                 localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.ReminderDays)}", brandSettings.DocumentExpirySettings.ReminderDays?.ToString());
                 localVarFormParams.Add($"{nameof(brandSettings.DocumentExpirySettings)}.{nameof(brandSettings.DocumentExpirySettings.ReminderCount)}", brandSettings.DocumentExpirySettings.ReminderCount?.ToString());
+            }
+        }
+
+        private static void AddSignatureFrameSettingsToFormParams(BrandSettings brandSettings, Dictionary<string, string> localVarFormParams)
+        {
+            if (brandSettings.SignatureFrameSettings != null)
+            {
+                localVarFormParams.Add($"{nameof(brandSettings.SignatureFrameSettings)}.{nameof(brandSettings.SignatureFrameSettings.EnableSignatureFrame)}", brandSettings.SignatureFrameSettings.EnableSignatureFrame ? "true" : "false");
+                localVarFormParams.Add($"{nameof(brandSettings.SignatureFrameSettings)}.{nameof(brandSettings.SignatureFrameSettings.ShowRecipientEmail)}", brandSettings.SignatureFrameSettings.ShowRecipientEmail ? "true" : "false");
+                localVarFormParams.Add($"{nameof(brandSettings.SignatureFrameSettings)}.{nameof(brandSettings.SignatureFrameSettings.ShowRecipientName)}", brandSettings.SignatureFrameSettings.ShowRecipientName ? "true" : "false");
+                localVarFormParams.Add($"{nameof(brandSettings.SignatureFrameSettings)}.{nameof(brandSettings.SignatureFrameSettings.ShowTimeStamp)}", brandSettings.SignatureFrameSettings.ShowTimeStamp ? "true" : "false");
             }
         }
 
