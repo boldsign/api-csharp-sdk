@@ -265,5 +265,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "resizeOption", EmitDefaultValue = true)]
         public ResizeOptions? ResizeOption { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is masked text value.
+        /// </summary>
+        [DataMember(Name = "isMasked", EmitDefaultValue = false)]
+        public bool? IsMasked { get; set; }
     }
 }

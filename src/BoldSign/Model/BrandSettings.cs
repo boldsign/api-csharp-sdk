@@ -165,6 +165,12 @@ namespace BoldSign.Model
         public DocumentExpirySettings DocumentExpirySettings { get; set; } = new DocumentExpirySettings();
 
         /// <summary>
+        /// Gets or sets the Signature Frame Settings.
+        /// </summary>
+        [DataMember(Name = "signatureFrameSettings", EmitDefaultValue = true)]
+        public SignatureFrameSettings SignatureFrameSettings { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>
