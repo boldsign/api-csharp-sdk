@@ -69,6 +69,25 @@ namespace BoldSign.Model
         public string Email { get; set; }
 
         /// <summary>
+        /// Gets or sets the from name.
+        /// </summary>
+        /// <value>Gets the value of from name.</value>
+        [DataMember(Name = "fromName", EmitDefaultValue = false)]
+        public string FromName { get; set; }
+        /// <summary>
+        /// Gets or sets the from email.
+        /// </summary>
+        /// <value>Gets the value of from email.</value>
+        [DataMember(Name = "fromEmail", EmitDefaultValue = false)]
+        public string FromEmail { get; set; }
+        /// <summary>
+        /// Gets or sets the from phoneNumber.
+        /// </summary>
+        /// <value>Gets the value of from phoneNumber.</value>
+        [DataMember(Name = "fromPhoneNumber", EmitDefaultValue = false)]
+        public string FromPhoneNumber { get; set; }
+
+        /// <summary>
         /// Gets or sets the to name.
         /// </summary>
         /// <value>Gets or sets the to name.</value>
@@ -81,6 +100,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets the to email.</value>
         [DataMember(Name = "toEmail", EmitDefaultValue = false)]
         public string ToEmail { get; set; }
+
+        /// <summary>
+        /// Gets or sets the from phoneNumber.
+        /// </summary>
+        /// <value>Gets the value of to phoneNumber.</value>
+        [DataMember(Name = "toPhoneNumber", EmitDefaultValue = false)]
+        public string ToPhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the IP address of the current request.
