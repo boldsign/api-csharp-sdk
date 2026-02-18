@@ -3,6 +3,7 @@ using BoldSign.Api.Model;
 namespace BoldSign.Examples
 {
     using BoldSign.Api;
+    using BoldSign.Api.Model.EditDocument;
     using BoldSign.Model;
     using System;
     using System.Collections.Generic;
@@ -1002,5 +1003,30 @@ namespace BoldSign.Examples
             return documentCreated;
         }
 
+        /// <summary>
+        /// Edit the document.
+        /// </summary>
+        /// <returns>DocumentEdited.</returns>
+        public DocumentEdited EditDocument()
+        {
+            var editDocumentRequest = new EditDocumentRequest()
+            {
+                DocumentId = "f3551f8f-xxxx-xxxx-xxxx-df3b38d58430",
+                Signers = new List<EditDocumentSigner>()
+                {
+                    new EditDocumentSigner()
+                    {
+                        Id = "e6adec52-xxxx-xxxx-xxxx-d8106f7def7f",
+                        EditAction = EditAction.Update,
+                        AuthenticationType = AuthenticationType.AccessCode,
+                        AuthenticationCode = "123"
+                    }
+                },
+            };
+
+            var documentEdited = this.DocumentClient.EditDocument(editDocumentRequest);
+
+            return documentEdited;
+        }
     }
 }

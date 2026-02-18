@@ -19,6 +19,7 @@ namespace BoldSign.Api
     using System.Net.Http;
     using System.Threading.Tasks;
     using BoldSign.Api.Model;
+    using BoldSign.Api.Model.EditDocument;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
 
@@ -5332,6 +5333,182 @@ namespace BoldSign.Api
                 (DocumentCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentCreated)));
         }
 
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
+        public DocumentEdited EditDocument(EditDocumentRequest editDocumentRequest)
+        {
+            var localVarResponse = this.EditDocumentWithHttpInfo(editDocumentRequest);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
+        public ApiResponse<DocumentEdited> EditDocumentWithHttpInfo(EditDocumentRequest editDocumentRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (editDocumentRequest == null || editDocumentRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->EditDocument");
+            }
+
+            var localVarPath = "/v1/document/edit";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<EditDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            //query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", editDocumentRequest.DocumentId));
+
+            if (editDocumentRequest.Files?.Count > 0)
+            {
+                localVarFileParams.Add("Files", editDocumentRequest.Files);
+            }
+
+            localVarFormParams = FromRequestHelper.ConvertToFormRequestForEditDocument(editDocumentRequest, localVarFormParams);
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApiForEdit(localVarPath, HttpMethod.Put,
+                localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarHttpContentType);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("EditDocument", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentEdited>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentEdited)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentEdited)));
+        }
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
+        public async Task<DocumentEdited> EditDocumentAsync(EditDocumentRequest editDocumentRequest)
+        {
+            var localVarResponse = await this.EditDocumentAsyncWithHttpInfo(editDocumentRequest);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
+        public async Task<ApiResponse<DocumentEdited>> EditDocumentAsyncWithHttpInfo(EditDocumentRequest editDocumentRequest)
+        {
+            // verify the required parameter 'documentId' is set
+            if (editDocumentRequest == null || editDocumentRequest.DocumentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->EditDocument");
+            }
+
+            var localVarPath = "/v1/document/edit";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<EditDocumentFile>>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new[]
+            {
+                "multipart/form-data",
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            //query parameter
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", editDocumentRequest.DocumentId));
+
+            if (editDocumentRequest.Files?.Count > 0)
+            {
+                localVarFileParams.Add("Files", editDocumentRequest.Files);
+            }
+
+            localVarFormParams = FromRequestHelper.ConvertToFormRequestForEditDocument(editDocumentRequest, localVarFormParams);
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiForEditAsync(localVarPath,
+                HttpMethod.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams, localVarHttpContentType).ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("EditDocument", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<DocumentEdited>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (DocumentEdited)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DocumentEdited)));
+        }
 
         private static void ValidateSendProperties(SendForSign sendRequest)
         {
