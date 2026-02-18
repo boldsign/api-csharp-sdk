@@ -25,6 +25,7 @@ namespace BoldSign.Api
     using System.Web;
     using BoldSign.Api.Extensions;
     using BoldSign.Api.Model;
+    using BoldSign.Api.Model.EditDocument;
     using BoldSign.Api.Resources;
     using BoldSign.Model;
     using Newtonsoft.Json;
@@ -270,6 +271,90 @@ namespace BoldSign.Api
             return request;
         }
 
+        // Creates and sets up a RestRequest prior to a call.
+        /// <summary>
+        ///  Creates and sets up a RestRequest prior to a call.
+        /// </summary>
+        /// <param name="path">Gets or sets a path.</param>
+        /// <param name="method">Gets or sets a method.</param>
+        /// <param name="queryParams">Gets or sets a queryParams.</param>
+        /// <param name="postBody">Gets or sets a postBody.</param>
+        /// <param name="headerParams">Gets or sets a headerParams.</param>
+        /// <param name="formParams">Gets or sets a formParams.</param>
+        /// <param name="fileParams">Gets or sets a fileParams.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <returns>request.</returns>
+        internal HttpRequestMessage PrepareRequestForEdit(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<EditDocumentFile>> fileParams, string contentType)
+        {
+            var pathUrl = BuildUri(path, queryParams);
+            var request = new HttpRequestMessage(method, pathUrl);
+            var form = new MultipartFormDataContent();
+
+            // add header parameter, if any
+            foreach (var param in headerParams)
+            {
+                request.Headers.Add(param.Key, param.Value);
+            }
+
+            // add form parameter, if any
+            foreach (var param in formParams)
+            {
+                form.AddFormParameter(param.Key, param.Value);
+            }
+
+            // add file parameter, if any
+            foreach (var param in fileParams)
+            {
+                var i = -1;
+                foreach (var file in param.Value)
+                {
+                    var index = ++i;
+                    form.AddFormParameter($"{param.Key}[{index}].{nameof(file.Id)}", file.Id);
+                    form.AddFormParameter($"{param.Key}[{index}].{nameof(file.EditAction)}", file.EditAction?.ToString());
+
+                    if (file.File != null)
+                    {
+                        if (file.File is DocumentFilePath documentFilePath)
+                        {
+                            var content = GetDocumentFromFilePath(documentFilePath);
+                            var fileContent = new ByteArrayContent(content);
+                            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFilePath.ContentType);
+                            var fileName = Path.GetFileName(documentFilePath.FilePath);
+                            form.Add(fileContent, $"{param.Key}[{index}].{nameof(file.File)}", fileName);
+                        }
+                        else
+                        {
+                            var documentFile = GetDocumentFileWithValidation(file.File);
+
+                            var byteArrayContent = new ByteArrayContent(documentFile.FileData);
+                            byteArrayContent.Headers.ContentType = MediaTypeHeaderValue.Parse(documentFile.ContentType);
+                            form.Add(byteArrayContent, $"{param.Key}[{index}].{nameof(file.File)}", documentFile.FileName);
+                        }
+                    }
+
+                    if (file.FileUrl != null)
+                    {
+                        form.AddFormParameter($"{param.Key}[{index}].{nameof(file.FileUrl)}", file.FileUrl?.AbsoluteUri); 
+                    }
+                }
+            }
+
+            // http body (model or byte[]) parameter
+            if (postBody != null)
+            {
+                var requestBodyContent = new StringContent(postBody.ToString(), Encoding.UTF8, contentType);
+                request.Content = requestBodyContent;
+                return request;
+            }
+
+            if (!this.noContentMethods.Contains(method) && form.Any())
+            {
+                request.Content = form;
+            }
+
+            return request;
+        }
+
         internal static byte[] GetDocumentFromFilePath(DocumentFilePath documentFilePath)
         {
             if (string.IsNullOrEmpty(documentFilePath.FilePath))
@@ -422,6 +507,62 @@ namespace BoldSign.Api
         internal async Task<HttpResponseMessage> CallApiAsync(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<IDocumentFile>> fileParams, string contentType, Dictionary<string, Uri> fileUrlsParams, KeyValuePair<string, IImageFile> singleFileParam = default)
         {
             using var request = this.PrepareRequest(path, method, queryParams, postBody, headerParams, formParams, fileParams, contentType, fileUrlsParams, singleFileParam);
+            if (this.HttpClient.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                this.HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(this.Configuration.UserAgent);
+            }
+
+            this.InterceptRequest();
+            var response = await this.HttpClient.SendAsync(request).ConfigureAwait(false);
+            this.InterceptResponse();
+
+            return response;
+        }
+
+        /// <summary>
+        /// Makes the HTTP request (Sync).
+        /// </summary>
+        /// <param name="path">URL path.</param>
+        /// <param name="method">HTTP method.</param>
+        /// <param name="queryParams">Query parameters.</param>
+        /// <param name="postBody">HTTP body (POST request).</param>
+        /// <param name="headerParams">Header parameters.</param>
+        /// <param name="formParams">Form parameters.</param>
+        /// <param name="fileParams">File parameters.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <returns>Object.</returns>
+        internal HttpResponseMessage CallApiForEdit(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<EditDocumentFile>> fileParams, string contentType)
+        {
+            using var request = this.PrepareRequestForEdit(path, method, queryParams, postBody, headerParams, formParams, fileParams, contentType);
+
+            // set user agent
+            if (this.HttpClient.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                this.HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(this.Configuration.UserAgent);
+            }
+
+            this.InterceptRequest();
+            var response = this.HttpClient.SendAsync(request).GetAwaiter().GetResult();
+            this.InterceptResponse();
+
+            return response;
+        }
+
+        /// <summary>
+        /// Makes the asynchronous HTTP request.
+        /// </summary>
+        /// <param name="path">URL path.</param>
+        /// <param name="method">HTTP method.</param>
+        /// <param name="queryParams">Query parameters.</param>
+        /// <param name="postBody">HTTP body (POST request).</param>
+        /// <param name="headerParams">Header parameters.</param>
+        /// <param name="formParams">Form parameters.</param>
+        /// <param name="fileParams">File parameters.</param>
+        /// <param name="contentType">Gets or sets a contentType.</param>
+        /// <returns>The Task instance.</returns>
+        internal async Task<HttpResponseMessage> CallApiForEditAsync(string path, HttpMethod method, List<KeyValuePair<string, string>> queryParams, object postBody, Dictionary<string, string> headerParams, Dictionary<string, string> formParams, Dictionary<string, List<EditDocumentFile>> fileParams, string contentType)
+        {
+            using var request = this.PrepareRequestForEdit(path, method, queryParams, postBody, headerParams, formParams, fileParams, contentType);
             if (this.HttpClient.DefaultRequestHeaders.UserAgent.Count == 0)
             {
                 this.HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(this.Configuration.UserAgent);

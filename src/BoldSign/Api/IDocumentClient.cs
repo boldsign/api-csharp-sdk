@@ -6,6 +6,7 @@ namespace BoldSign.Api
     using System.IO;
     using System.Threading.Tasks;
     using BoldSign.Api.Model;
+    using BoldSign.Api.Model.EditDocument;
     using BoldSign.Model;
 
     /// <summary>
@@ -579,6 +580,22 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of DocumentCreated</returns>
         ApiResponse<DocumentCreated> SendDocumentFromDraftWithHttpInfo(string  documentId);
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
+        DocumentEdited EditDocument(EditDocumentRequest editDocumentRequest);
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
+        ApiResponse<DocumentEdited> EditDocumentWithHttpInfo(EditDocumentRequest editDocumentRequest);
 
         #endregion Synchronous Operations
 
@@ -1247,6 +1264,22 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (DocumentCreated)</returns>
         Task<ApiResponse<DocumentCreated>> SendDocumentFromDraftAsyncWithHttpInfo(string  documentId);
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
+        Task<DocumentEdited> EditDocumentAsync(EditDocumentRequest editDocumentRequest);
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
+        Task<ApiResponse<DocumentEdited>> EditDocumentAsyncWithHttpInfo(EditDocumentRequest editDocumentRequest);
 
         #endregion Asynchronous Operations
     }

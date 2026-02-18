@@ -74,14 +74,12 @@ namespace BoldSign.Model
         /// <value>Gets the value of from name.</value>
         [DataMember(Name = "fromName", EmitDefaultValue = false)]
         public string FromName { get; set; }
-
         /// <summary>
         /// Gets or sets the from email.
         /// </summary>
         /// <value>Gets the value of from email.</value>
         [DataMember(Name = "fromEmail", EmitDefaultValue = false)]
         public string FromEmail { get; set; }
-
         /// <summary>
         /// Gets or sets the from phoneNumber.
         /// </summary>
