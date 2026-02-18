@@ -5335,8 +5335,9 @@ namespace BoldSign.Api
         /// <summary>
         /// Edit and updates an existing document.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <returns>DocumentEdited</returns>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
         public DocumentEdited EditDocument(EditDocumentRequest editDocumentRequest)
         {
             var localVarResponse = this.EditDocumentWithHttpInfo(editDocumentRequest);
@@ -5347,8 +5348,9 @@ namespace BoldSign.Api
         /// <summary>
         /// Edit and updates an existing document.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of DocumentCreated</returns>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
         public ApiResponse<DocumentEdited> EditDocumentWithHttpInfo(EditDocumentRequest editDocumentRequest)
         {
             // verify the required parameter 'documentId' is set
@@ -5422,8 +5424,9 @@ namespace BoldSign.Api
         /// <summary>
         /// Edit and updates an existing document.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of DocumentEdited</returns>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
         public async Task<DocumentEdited> EditDocumentAsync(EditDocumentRequest editDocumentRequest)
         {
             var localVarResponse = await this.EditDocumentAsyncWithHttpInfo(editDocumentRequest);
@@ -5434,8 +5437,9 @@ namespace BoldSign.Api
         /// <summary>
         /// Edit and updates an existing document.
         /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (DocumentEdited)</returns>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
         public async Task<ApiResponse<DocumentEdited>> EditDocumentAsyncWithHttpInfo(EditDocumentRequest editDocumentRequest)
         {
             // verify the required parameter 'documentId' is set
