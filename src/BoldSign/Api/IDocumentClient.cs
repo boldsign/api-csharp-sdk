@@ -554,6 +554,22 @@ namespace BoldSign.Api
         ApiResponse<DocumentCreated> SendDocumentFromDraftWithHttpInfo(string  documentId);
 
         /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
+        DocumentEdited EditDocument(EditDocumentRequest editDocumentRequest);
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
+        ApiResponse<DocumentEdited> EditDocumentWithHttpInfo(EditDocumentRequest editDocumentRequest);
+
+        /// <summary>
         /// Embedded edits the document and generates a URL to embedded that document into iframe.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
@@ -1250,6 +1266,22 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (DocumentCreated)</returns>
         Task<ApiResponse<DocumentCreated>> SendDocumentFromDraftAsyncWithHttpInfo(string  documentId);
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>DocumentEdited.</returns>
+        Task<DocumentEdited> EditDocumentAsync(EditDocumentRequest editDocumentRequest);
+
+        /// <summary>
+        /// Edit and updates an existing document.
+        /// </summary>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <returns>ApiResponse of DocumentEdited.</returns>
+        Task<ApiResponse<DocumentEdited>> EditDocumentAsyncWithHttpInfo(EditDocumentRequest editDocumentRequest);
 
         /// <summary>
         /// Embedded edits the document and generates a URL to embedded that document into iframe.
