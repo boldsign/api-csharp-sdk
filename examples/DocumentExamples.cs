@@ -844,6 +844,35 @@ namespace BoldSign.Examples
             return documentCreated;
         }
 
+        public async Task GetEmbeddedEditDocumentRequest()
+        {
+            var embeddedEditDocumentRequest = new EmbeddedDocumentEditRequest()
+            {
+                DocumentId = "4f217637-***b-4362-902a-0e***2245b46",
+                ShowToolbar = true,
+                SendViewOption = PageViewOption.FillingPage,
+                Locale = Locales.EN,
+                ShowSendButton = true,
+                ShowPreviewButton = true,
+                ShowNavigationButtons = true,
+            };
+            EmbeddedDocumentEditResponse documentEdited = await this.DocumentClient.CreateEmbeddedEditUrlAsync(embeddedEditDocumentRequest);
+
+            // url to send the document from your web application
+            var documentSendUrl = documentEdited.EditUrl;
+        }
+
+        public async Task CancelEditDocumentRequest()
+        {
+            var cancelEdit = new CancelDocumentEditingRequest()
+            {
+                DocumentId = "4f2****c-834f-****-88b8-3***e2d1**1e",
+                OnBehalfOf = "theoffice@example.com"
+            };
+            DocumentEditingCancellationResponse editCancelled = await this.DocumentClient.CancelEditingAsync(cancelEdit);
+            Console.WriteLine(editCancelled.Message);
+        }
+
         /// <summary>
         ///     Embedded sends the document and generates a URL to embedded that document into iframe.
         /// </summary>
