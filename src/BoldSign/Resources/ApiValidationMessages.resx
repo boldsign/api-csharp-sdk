@@ -468,4 +468,28 @@
   <data name="UserIdsLimit" xml:space="preserve">
       <value>Maximum of 100 userIds allowed per request.</value>
   </data>
+  <data name="DirectoriesCannotContainEmptyValues" xml:space="preserve">
+    <value>Directories cannot contain empty values.</value>
+  </data>
+  <data name="DirectoryMaxLengthAndNoSpaces" xml:space="preserve">
+    <value>Each directory must be less than 40 characters and cannot contain spaces.</value>
+  </data>
+  <data name="MaxFiveDirectoriesAllowed" xml:space="preserve">
+    <value>A maximum of five directories is allowed.</value>
+  </data>
+  <data name="DuplicateDirectoriesFound" xml:space="preserve">
+    <value>Duplicate directories are not allowed.</value>
+  </data>
+  <data name="DirectoriesInvalidSpecialCharacters" xml:space="preserve">
+    <value>Directories can only contain letters, digits, or underscores.</value>
+  </data>
+  <data name="GroupContactNameRequired" xml:space="preserve">
+    <value>Provide a valid Name</value>
+  </data>
+  <data name="GroupContactIdDelete" xml:space="preserve">
+    <value>Missing required parameter 'GroupContactId' when calling GroupContactingApi-&gt;DeleteGroupContact</value>
+  </data>
+  <data name="GroupContactIdMissing" xml:space="preserve">
+    <value>Missing required parameter 'id' when calling GroupContactingApi</value>
+  </data>
 </root>

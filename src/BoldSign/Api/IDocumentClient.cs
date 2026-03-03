@@ -597,6 +597,38 @@ namespace BoldSign.Api
         /// <returns>ApiResponse of DocumentEdited.</returns>
         ApiResponse<DocumentEdited> EditDocumentWithHttpInfo(EditDocumentRequest editDocumentRequest);
 
+        /// <summary>
+        /// Embedded edits the document and generates a URL to embedded that document into iframe.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <returns>EmbeddedDocumentEditResponse.</returns>
+        EmbeddedDocumentEditResponse CreateEmbeddedEditUrl(EmbeddedDocumentEditRequest editDocumentRequest);
+
+        /// <summary>
+        /// Embedded edits the document and generates a URL to embedded that document into iframe.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <returns>ApiResponse of EmbeddedDocumentEditResponse.</returns>
+        ApiResponse<EmbeddedDocumentEditResponse> CreateEmbeddedEditUrlWithHttpInfo(EmbeddedDocumentEditRequest editDocumentRequest);
+
+        /// <summary>
+        /// Cancels document editing.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="cancelDocumentEditingRequest">The cancel edit document request.</param>
+        /// <returns>DocumentEditingCancellationResponse.</returns>
+        DocumentEditingCancellationResponse CancelEditing(CancelDocumentEditingRequest cancelDocumentEditingRequest);
+
+        /// <summary>
+        /// Cancels document editing.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="cancelDocumentEditingRequest">The cancel edit document request.</param>
+        /// <returns>ApiResponse of DocumentEditingCancellationResponse.</returns>
+        ApiResponse<DocumentEditingCancellationResponse> CancelEditingWithHttpInfo(CancelDocumentEditingRequest cancelDocumentEditingRequest);
+
         #endregion Synchronous Operations
 
         #region Asynchronous Operations
@@ -1280,6 +1312,38 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <returns>ApiResponse of DocumentEdited.</returns>
         Task<ApiResponse<DocumentEdited>> EditDocumentAsyncWithHttpInfo(EditDocumentRequest editDocumentRequest);
+
+        /// <summary>
+        /// Embedded edits the document and generates a URL to embedded that document into iframe.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <returns>Task of EmbeddedDocumentEditResponse.</returns>
+        Task<EmbeddedDocumentEditResponse> CreateEmbeddedEditUrlAsync(EmbeddedDocumentEditRequest editDocumentRequest);
+
+        /// <summary>
+        /// Embedded edits the document and generates a URL to embedded that document into iframe.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="editDocumentRequest">The edit document request.</param>
+        /// <returns>Task of ApiResponse of EmbeddedDocumentEditResponse.</returns>
+        Task<ApiResponse<EmbeddedDocumentEditResponse>> CreateEmbeddedEditUrlAsyncWithHttpInfo(EmbeddedDocumentEditRequest editDocumentRequest);
+
+        /// <summary>
+        /// Cancels document editing.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="cancelDocumentEditingRequest">The cancel edit document request.</param>
+        /// <returns>Task of DocumentEditingCancellationResponse.</returns>
+        Task<DocumentEditingCancellationResponse> CancelEditingAsync(CancelDocumentEditingRequest cancelDocumentEditingRequest);
+
+        /// <summary>
+        /// Cancels document editing.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
+        /// <param name="cancelDocumentEditingRequest">The cancel edit document request.</param>
+        /// <returns>Task of ApiResponse of DocumentEditingCancellationResponse.</returns>
+        Task<ApiResponse<DocumentEditingCancellationResponse>> CancelEditingAsyncWithHttpInfo(CancelDocumentEditingRequest cancelDocumentEditingRequest);
 
         #endregion Asynchronous Operations
     }
