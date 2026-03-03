@@ -198,5 +198,11 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [EnumMember(Value = "TemplateEdited")]
         TemplateEdited = 30,
+
+        /// <summary>
+        /// Signer saved (explicit save) event type
+        /// </summary>
+        [EnumMember(Value = "SignerSaved")]
+        SignerSaved= 31,
     }
 }
