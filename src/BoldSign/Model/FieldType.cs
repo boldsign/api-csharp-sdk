@@ -110,5 +110,11 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "Formula")]
         Formula = 15,
+
+        /// <summary>
+        /// Enum Drawing for value: Drawing
+        /// </summary>
+        [EnumMember(Value = "Drawing")]
+        Drawing = 16,
     }
 }
