@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-        <FileVersion>6.2.23</FileVersion>
-        <ProductVersion>6.2.23</ProductVersion>
+        <FileVersion>6.2.3</FileVersion>
+        <ProductVersion>6.2.3</ProductVersion>
         <Copyright>Copyright 2001-2026 Syncfusion Inc</Copyright>
         <AssemblyName>BoldSign.Api</AssemblyName>
         <RootNamespace>BoldSign.Api</RootNamespace>
