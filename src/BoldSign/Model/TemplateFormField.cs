@@ -381,5 +381,12 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "isMasked", EmitDefaultValue = false)]
         public bool IsMasked { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether default value is required or not while sending document.
+        /// This setting is intended for use only with template creation and editing APIs.
+        /// </summary>
+        [DataMember(Name = "isDefaultValueRequired", EmitDefaultValue = false)]
+        public bool IsDefaultValueRequired { get; set; }
     }
 }
