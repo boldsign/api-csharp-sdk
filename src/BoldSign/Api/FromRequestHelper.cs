@@ -159,6 +159,11 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(signRequestDetails.EnableReassign), signRequestDetails.EnableReassign ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.AllowScheduledSend), signRequestDetails.AllowScheduledSend ? "true" : "false");
 
+            if (signRequestDetails.EnableAllowSignEverywhere != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.EnableAllowSignEverywhere), signRequestDetails.EnableAllowSignEverywhere == true ? "true" : "false");
+            }
+
             if (signRequestDetails.DocumentDownloadOption != null)
             {
                 localVarFormParams.Add(nameof(signRequestDetails.DocumentDownloadOption), signRequestDetails.DocumentDownloadOption.ToString());
@@ -243,6 +248,12 @@ namespace BoldSign.Api
             {
                 InitializeGroupSignerSettings(localVarFormParams, templateRequest.GroupSignerSettings);
             }
+
+            if (templateRequest.EnableAllowSignEverywhere != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.EnableAllowSignEverywhere), templateRequest.EnableAllowSignEverywhere == true ? "true" : "false");
+            }
+
 
             if (templateRequest.FormGroups != null)
             {
@@ -416,6 +427,11 @@ namespace BoldSign.Api
             if (editDocumentRequest.EnableSigningOrder != null)
             {
                 localVarFormParams.Add(nameof(editDocumentRequest.EnableSigningOrder), editDocumentRequest.EnableSigningOrder == true ? "true" : "false");
+            }
+
+            if (editDocumentRequest.EnableAllowSignEverywhere != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.EnableAllowSignEverywhere), editDocumentRequest.EnableAllowSignEverywhere == true ? "true" : "false");
             }
 
             localVarFormParams.Add(nameof(editDocumentRequest.UseTextTags), editDocumentRequest.UseTextTags ? "true" : "false");

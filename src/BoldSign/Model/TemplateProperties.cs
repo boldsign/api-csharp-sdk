@@ -317,6 +317,12 @@ namespace BoldSign.Model
         public TemplateSharing Sharing { get; set; }
 
         /// <summary>
+        /// Gets or sets  a value indicating whether to allow sign everywhere need to enable or not.
+        /// </summary>
+        [DataMember(Name = "enableAllowSignEverywhere", EmitDefaultValue = false)]
+        public bool EnableAllowSignEverywhere { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

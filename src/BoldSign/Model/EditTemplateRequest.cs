@@ -94,6 +94,12 @@ namespace BoldSign.Api.Model
         public bool? AllowNewFiles { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to allow senders to replace or delete files.
+        /// </summary>
+        [JsonProperty("allowModifyFiles")]
+        public bool? AllowModifyFiles { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the enable  reassign value option is enabled or disabled.
         /// </summary>
         [JsonProperty("enableReassign")]
@@ -165,5 +171,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [JsonProperty("groupSignerSettings")]
         public GroupSignerSettings GroupSignerSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets  a value indicating whether to allow sign everywhere need to enable or not.
+        /// </summary>
+        [DataMember(Name = "enableAllowSignEverywhere", EmitDefaultValue = false)]
+        public bool? EnableAllowSignEverywhere { get; set; }
     }
 }
