@@ -1041,7 +1041,7 @@ namespace BoldSign.Api.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unsupported file(s). Supported file formats are PDF, Word, PNG, JPEG, JPG and XLSX.
+        ///   Looks up a localized string similar to Unsupported file(s). Supported file formats are PDF, Word, PNG, JPEG, JPG, XLSX and PPTX.
         /// </summary>
         internal static string UnsupportedFileType {
             get {
