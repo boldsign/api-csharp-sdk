@@ -418,7 +418,7 @@
     <value>Field id is required</value>
   </data>
     <data name="UnsupportedFileType" xml:space="preserve">
-    <value>Unsupported file(s). Supported file formats are PDF, Word, PNG, JPEG, JPG and XLSX</value>
+    <value>Unsupported file(s). Supported file formats are PDF, Word, PNG, JPEG, JPG, XLSX and PPTX</value>
   </data>
     <data name="UnsupportedMediaType" xml:space="preserve">
     <value>Unsupported Media Type</value>
