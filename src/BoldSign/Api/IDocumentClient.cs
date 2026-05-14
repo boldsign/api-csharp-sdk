@@ -1315,6 +1315,34 @@ namespace BoldSign.Api
         /// <returns>Task of ApiResponse of DocumentEditingCancellationResponse.</returns>
         Task<ApiResponse<DocumentEditingCancellationResponse>> CancelEditingAsyncWithHttpInfo(CancelDocumentEditingRequest cancelDocumentEditingRequest);
 
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embedCloneDocument">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        EmbeddedClonedDocument GetEmbeddedClonedDocumentUrl(EmbeddedCloneDocumentRequest embedCloneDocument);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embeddedCloneDocumentRequest">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        Task<EmbeddedClonedDocument> GetEmbeddedClonedDocumentUrlAsync(EmbeddedCloneDocumentRequest embeddedCloneDocumentRequest);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embedCloneDocument">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        ApiResponse<EmbeddedClonedDocument> GetEmbeddedClonedDocumentUrlWithHttpInfo(EmbeddedCloneDocumentRequest embedCloneDocument);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embeddedCloneDocumentRequest">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        Task<ApiResponse<EmbeddedClonedDocument>> GetEmbeddedClonedDocumentUrlWithHttpInfoAsync(EmbeddedCloneDocumentRequest embeddedCloneDocumentRequest);
+
         #endregion Asynchronous Operations
     }
 }
