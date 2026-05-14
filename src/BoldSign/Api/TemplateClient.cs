@@ -2967,6 +2967,189 @@ namespace BoldSign.Api
                 (EmbeddedTemplatePreview)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedTemplatePreview)));
         }
 
+        /// <inheritdoc/>
+        public EmbeddedClonedTemplate GetEmbeddedClonedTemplateUrl(EmbeddedCloneTemplateRequest embedCloneTemplate)
+        {
+            var localVarResponse = this.GetEmbeddedClonedTemplateUrlWithHttpInfo(embedCloneTemplate);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public ApiResponse<EmbeddedClonedTemplate> GetEmbeddedClonedTemplateUrlWithHttpInfo(EmbeddedCloneTemplateRequest embedCloneTemplate)
+        {
+            if (embedCloneTemplate == null)
+            {
+                throw new ArgumentNullException(nameof(embedCloneTemplate));
+            }
+
+            // verify the required parameter 'templateId' is set
+            if (string.IsNullOrEmpty(embedCloneTemplate.TemplateId))
+            {
+                throw new ApiException(422, ApiValidationMessages.EmbeddedTemplateIdNull);
+            }
+
+            var localVarPath = "/v1-beta/template/createEmbeddedCloneUrl";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (embedCloneTemplate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(embedCloneTemplate);
+            }
+            else
+            {
+                localVarPostBody = embedCloneTemplate; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", embedCloneTemplate.TemplateId)); // query parameter
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                HttpMethod.Post,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("createEmbeddedCloneUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedClonedTemplate>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedClonedTemplate)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedClonedTemplate)));
+        }
+
+        /// <inheritdoc/>
+        public async Task<EmbeddedClonedTemplate> GetEmbeddedClonedTemplateUrlAsync(EmbeddedCloneTemplateRequest embeddedCloneTemplateRequest)
+        {
+            var localVarResponse = await this.GetEmbeddedClonedTemplateUrlWithHttpInfoAsync(embeddedCloneTemplateRequest).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<EmbeddedClonedTemplate>> GetEmbeddedClonedTemplateUrlWithHttpInfoAsync(EmbeddedCloneTemplateRequest embeddedCloneTemplateRequest)
+        {
+            if (embeddedCloneTemplateRequest == null)
+            {
+                throw new ArgumentNullException(nameof(embeddedCloneTemplateRequest));
+            }
+
+            // verify the required parameter 'templateId' is set
+            if (string.IsNullOrEmpty(embeddedCloneTemplateRequest.TemplateId))
+            {
+                throw new ApiException(422, ApiValidationMessages.EmbeddedTemplateIdNull);
+            }
+
+            var localVarPath = "/v1-beta/template/createEmbeddedCloneUrl";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (embeddedCloneTemplateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(embeddedCloneTemplateRequest);
+            }
+            else
+            {
+                localVarPostBody = embeddedCloneTemplateRequest; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", embeddedCloneTemplateRequest.TemplateId)); // query parameter
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                HttpMethod.Post,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams)
+                .ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("createEmbeddedCloneUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedClonedTemplate>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedClonedTemplate)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedClonedTemplate)));
+        }
+
         private static void ValidateCreateTemplateProperties(CreateTemplateRequest templateDetails)
         {
             // verify the only files or fileUrls is set.

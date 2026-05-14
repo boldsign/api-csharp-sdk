@@ -1201,5 +1201,34 @@ namespace BoldSign.Examples
             var embeddedTemplatePreview = await this.templateApi.CreateEmbeddedPreviewUrlAsync(embeddedTemplatePreviewRequest).ConfigureAwait(false);
             return embeddedTemplatePreview.TemplateUrl;
         }
+
+        /// <summary>
+        ///  Generates a URL to embeds cloned template process into your application.
+        /// </summary>
+        /// <returns>A Embedded Cloned Template.</returns>
+        public async Task<EmbeddedClonedTemplate> GetEmbeddedClonedTemplateUrl()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var templateId = "171652fa-ca88-46aa-aac7-d759dfbafa14";
+
+            var embeddedCloneTemplateRequest = new EmbeddedCloneTemplateRequest()
+            {
+                TemplateId = templateId,
+                ViewOption = PageViewOption.PreparePage,
+                ShowSaveButton = true,
+                ShowPreviewButton = true,
+                ShowNavigationButtons = true,
+                LinkValidTill = DateTime.Now.AddDays(1),
+                IncludeFormFieldValues = true,
+                Locale = Locales.EN,
+                ShowCreateButton = true,
+                ShowToolbar = false,
+                ShowTooltip = false,
+            };
+
+            var embeddedClonedTemplate = await this.templateApi.GetEmbeddedClonedTemplateUrlAsync(embeddedCloneTemplateRequest).ConfigureAwait(false);
+
+            return embeddedClonedTemplate;
+        }
     }
 }

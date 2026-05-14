@@ -1007,6 +1007,35 @@ namespace BoldSign.Examples
             return documentEdited;
         }
 
+        /// <summary>
+        ///  Generates a URL to embeds cloned document process into your application.
+        /// </summary>
+        /// <returns>A Embedded Cloned Document.</returns>
+        public async Task<EmbeddedClonedDocument> GetEmbeddedClonedDocumentUrl()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "9b7f5fca-a478-4c60-a0d3-da1d925d639f";
+
+            var embeddedCloneDocumentRequest = new EmbeddedCloneDocumentRequest()
+            {
+                DocumentId = documentId,
+                ViewOption = PageViewOption.PreparePage,
+                ShowSaveButton = true,
+                ShowPreviewButton = true,
+                ShowNavigationButtons = true,
+                LinkValidTill = DateTime.Now.AddDays(1),
+                IncludeFormFieldValues = true,
+                Locale = Locales.EN,
+                ShowSendButton = true,
+                ShowToolbar = false,
+                ShowTooltip = false,
+            };
+
+            var embeddedClonedDocument = await this.DocumentClient.GetEmbeddedClonedDocumentUrlAsync(embeddedCloneDocumentRequest).ConfigureAwait(false);
+
+            return embeddedClonedDocument;
+        }
+
         public async Task GetEmbeddedEditDocumentRequest()
         {
             var embeddedEditDocumentRequest = new EmbeddedDocumentEditRequest()
