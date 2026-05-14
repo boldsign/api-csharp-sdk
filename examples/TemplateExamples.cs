@@ -1208,7 +1208,7 @@ namespace BoldSign.Examples
         /// <returns>A Embedded Cloned Template.</returns>
         public async Task<EmbeddedClonedTemplate> GetEmbeddedClonedTemplateUrl()
         {
-            // This is an example document id, add your own document id upon usage.
+            // This is an example template id, add your own template id upon usage.
             var templateId = "171652fa-ca88-46aa-aac7-d759dfbafa14";
 
             var embeddedCloneTemplateRequest = new EmbeddedCloneTemplateRequest()
