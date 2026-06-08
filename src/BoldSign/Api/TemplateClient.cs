@@ -2783,6 +2783,186 @@ namespace BoldSign.Api
                 (EmbeddedTemplatePreview)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedTemplatePreview)));
         }
 
+        /// <inheritdoc />
+        public void ShareTemplate(string templateId, ShareTemplateRequest shareRequest)
+        {
+            this.ShareTemplateWithHttpInfo(templateId, shareRequest);
+        }
+
+        /// <inheritdoc />
+        public ApiResponse<object> ShareTemplateWithHttpInfo(string templateId, ShareTemplateRequest shareRequest)
+        {
+            if (string.IsNullOrEmpty(templateId))
+            {
+                throw new ApiException(400, ApiValidationMessages.TemplateIdRequired);
+            }
+
+            if (shareRequest == null)
+            {
+                throw new ArgumentNullException(nameof(shareRequest));
+            }
+
+            var localVarPath = "/v1/template/share";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+            string[] localVarHttpContentTypes =
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", templateId));
+            localVarPostBody = this.Configuration.ApiClient.Serialize(shareRequest);
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                PatchHttpMethod,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams);
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("ShareTemplate", localVarResponse);
+            if (exception != null)
+            {
+                var error = (ShareTemplateError)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ShareTemplateError));
+                error.Error ??= exception.Message;
+                throw new ShareTemplateException((int)localVarResponse.StatusCode, error);
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
+        }
+
+        /// <inheritdoc />
+        public async Task ShareTemplateAsync(string templateId, ShareTemplateRequest shareRequest)
+        {
+            await this.ShareTemplateWithHttpInfoAsync(templateId, shareRequest).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<ApiResponse<object>> ShareTemplateWithHttpInfoAsync(string templateId, ShareTemplateRequest shareRequest)
+        {
+            if (string.IsNullOrEmpty(templateId))
+            {
+                throw new ApiException(400, ApiValidationMessages.TemplateIdRequired);
+            }
+
+            if (shareRequest == null)
+            {
+                throw new ArgumentNullException(nameof(shareRequest));
+            }
+
+            var localVarPath = "/v1/template/share";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+            string[] localVarHttpContentTypes =
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/json",
+                "application/_*+json",
+            };
+
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string[] localVarHttpHeaderAccepts =
+            {
+                "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "templateId", templateId));
+            localVarPostBody = this.Configuration.ApiClient.Serialize(shareRequest);
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                PatchHttpMethod,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams).ConfigureAwait(false);
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+            var exception = this.ExceptionFactory?.Invoke("ShareTemplate", localVarResponse);
+            if (exception != null)
+            {
+                var error = (ShareTemplateError)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ShareTemplateError));
+                error.Error ??= exception.Message;
+                throw new ShareTemplateException((int)localVarResponse.StatusCode, error);
+            }
+
+            return new ApiResponse<object>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                null);
+        }
+
         private static void ValidateCreateTemplateProperties(CreateTemplateRequest templateDetails)
         {
             DocumentHelper.ValidateFiles(templateDetails);

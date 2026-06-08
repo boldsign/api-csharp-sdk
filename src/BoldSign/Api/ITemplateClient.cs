@@ -224,6 +224,22 @@ namespace BoldSign.Api
         /// <returns>Task of ApiResponse (EmbeddedTemplateEdited).</returns>
         Task<ApiResponse<EmbeddedTemplateEdited>> GetEmbeddedTemplateEditUrlWithHttpInfoAsync(EmbeddedTemplateEditRequest embeddedTemplateEditRequest);
 
+        /// <summary>
+        /// Share a template with teams and/or organization.
+        /// </summary>
+        /// <param name="templateId">Template Id.</param>
+        /// <param name="shareRequest">Share request containing teams and organization operations.</param>
+        /// <returns>ShareTemplateResponse</returns>
+        void ShareTemplate(string templateId, ShareTemplateRequest shareRequest);
+
+        /// <summary>
+        /// Share a template with teams and/or organization.
+        /// </summary>
+        /// <param name="templateId">Template Id.</param>
+        /// <param name="shareRequest">Share request containing teams and organization operations.</param>
+        /// <returns>ApiResponse of ShareTemplateResponse</returns>
+        ApiResponse<object> ShareTemplateWithHttpInfo(string templateId, ShareTemplateRequest shareRequest);
+
         #endregion Synchronous Operations
 
         #region Asynchronous Operations
@@ -470,6 +486,22 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <returns>Task of ApiResponse (EmbeddedTemplatePreview).</returns>
         Task<ApiResponse<EmbeddedTemplatePreview>> CreateEmbeddedPreviewUrlWithHttpInfoAsync(EmbeddedTemplatePreviewRequest embeddedTemplatePreviewRequest);
+
+        /// <summary>
+        /// Share a template with teams and/or organization.
+        /// </summary>
+        /// <param name="templateId">Template Id.</param>
+        /// <param name="shareRequest">Share request containing teams and organization operations.</param>
+        /// <returns>Task of ShareTemplateResponse</returns>
+        Task ShareTemplateAsync(string templateId, ShareTemplateRequest shareRequest);
+        
+        /// <summary>
+        /// Share a template with teams and/or organization.
+        /// </summary>
+        /// <param name="templateId">Template Id.</param>
+        /// <param name="shareRequest">Share request containing teams and organization operations.</param>
+        /// <returns>Task of ApiResponse (ShareTemplateResponse)</returns>
+        Task<ApiResponse<object>> ShareTemplateWithHttpInfoAsync(string templateId, ShareTemplateRequest shareRequest);
 
         #endregion Asynchronous Operations
     }
