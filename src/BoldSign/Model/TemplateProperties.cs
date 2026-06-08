@@ -310,6 +310,12 @@ namespace BoldSign.Model
         public GroupSignerSettings GroupSignerSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets the template sharing for teams.
+        /// </summary>
+        [DataMember(Name = "sharing", EmitDefaultValue = false)]
+        public TemplateSharing Sharing { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

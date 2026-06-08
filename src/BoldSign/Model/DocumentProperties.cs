@@ -428,6 +428,18 @@ namespace BoldSign.Model
         public string DisplayStatus { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to combine the audit trail into a single log.
+        /// </summary>
+        [DataMember(Name = "isCombinedAudit", EmitDefaultValue = false)]
+        public bool IsCombinedAudit { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether tha attachments should be combined to the document while downloading.
+        /// </summary>
+        [DataMember(Name = "isCombinedAttachment", EmitDefaultValue = false)]
+        public bool IsCombinedAttachment { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

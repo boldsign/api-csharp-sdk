@@ -1137,8 +1137,34 @@
         }
 
         /// <summary>
-        ///  Generates a embed tempalte preview URL..
+        /// Share a template with teams using ShareTemplateRequest/Response.
         /// </summary>
+        /// <returns>A ShareTemplateResponse.</returns>
+        public async Task ShareTemplate()
+        {
+            // Replace with your actual template id
+            var templateId = "eac94b7e-25ed-4fd3-bd42-bd7b86e17764";
+
+            // Build team share operations (Grant/Revoke with access level)
+            var teams = new List<TemplateTeamShareRequest>
+            {
+                new TemplateTeamShareRequest
+                {
+                    // use your own team ids.
+                    TeamId = "62e165d7-1baf-4224-9d40-894a34656ebc",
+                    Action = TemplateShareAction.Grant,
+                    AccessLevel = TemplateAccessType.Use,
+                }
+            };
+
+            var shareTemplate = new ShareTemplateRequest()
+            {
+                Teams = teams
+            };
+            
+            await this.templateApi.ShareTemplateAsync(templateId, shareTemplate).ConfigureAwait(false);
+        }
+
         /// <returns>A Embedded Template Preview.</returns>
         public async Task<Uri> CreateEmbeddedPreviewUrl()
         {
