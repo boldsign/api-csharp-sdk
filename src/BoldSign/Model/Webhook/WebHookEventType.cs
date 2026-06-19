@@ -191,5 +191,17 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [EnumMember(Value = "SignerSaved")]
         SignerSaved= 29,
+
+        /// <summary>
+        /// Document edited event.
+        /// </summary>
+        [EnumMember(Value = "Edited")]
+        Edited = 30,
+
+        /// <summary>
+        /// Document edit failed event.
+        /// </summary>
+        [EnumMember(Value = "EditFailed")]
+        EditFailed = 31,
     }
 }

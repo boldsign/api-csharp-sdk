@@ -428,6 +428,12 @@ namespace BoldSign.Model
         public string DisplayStatus { get; set; }
 
         /// <summary>
+        /// Gets or sets  a value indicating whether to allow sign everywhere need to enable or not.
+        /// </summary>
+        [DataMember(Name = "enableAllowSignEverywhere", EmitDefaultValue = false)]
+        public bool EnableAllowSignEverywhere { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether to combine the audit trail into a single log.
         /// </summary>
         [DataMember(Name = "isCombinedAudit", EmitDefaultValue = false)]

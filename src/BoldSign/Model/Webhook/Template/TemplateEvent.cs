@@ -162,5 +162,11 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("groupSignerSettings")]
         public GroupSignerSettings GroupSignerSettings  { get; set; }
+
+        /// <summary>
+        /// Gets or sets  a value indicating whether to allow sign everywhere need to enable or not.
+        /// </summary>
+        [JsonProperty("enableAllowSignEverywhere")]
+        public bool? EnableAllowSignEverywhere { get; set; }
     }
 }
