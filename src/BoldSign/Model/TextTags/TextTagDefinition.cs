@@ -271,5 +271,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "isMasked", EmitDefaultValue = false)]
         public bool? IsMasked { get; set; }
+
+        /// <summary>
+        /// Gets or sets the conditional rules value, this property helps to frame rules.
+        /// </summary>
+        [DataMember(Name = "conditionalRules", EmitDefaultValue = false)]
+        public IEnumerable<ConditionalRule> ConditionalRules { get; set; }
     }
 }
