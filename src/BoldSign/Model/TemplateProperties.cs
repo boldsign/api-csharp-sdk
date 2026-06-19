@@ -310,6 +310,12 @@ namespace BoldSign.Model
         public GroupSignerSettings GroupSignerSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets  a value indicating whether to allow sign everywhere need to enable or not.
+        /// </summary>
+        [DataMember(Name = "enableAllowSignEverywhere", EmitDefaultValue = false)]
+        public bool EnableAllowSignEverywhere { get; set; }
+
+        /// <summary>
         /// Gets or sets the template sharing for teams.
         /// </summary>
         [DataMember(Name = "sharing", EmitDefaultValue = false)]
