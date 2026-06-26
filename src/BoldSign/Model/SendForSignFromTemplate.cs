@@ -315,6 +315,12 @@ namespace BoldSign.Model
         public bool? EnableAllowSignEverywhere { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating time zone of the document.
+        /// </summary>
+        [JsonProperty("documentTimeZone")]
+        public string DocumentTimeZone { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

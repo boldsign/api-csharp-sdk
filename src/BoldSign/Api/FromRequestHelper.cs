@@ -35,6 +35,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(signRequestDetails.Message), signRequestDetails.Message);
             }
 
+            if (signRequestDetails.DocumentTimeZone != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.DocumentTimeZone), signRequestDetails.DocumentTimeZone);
+            }
+
             if (signRequestDetails.Signers != null)
             {
                 localVarFormParams = ToFormParameter(localVarFormParams, signRequestDetails.Signers.ToList(), nameof(signRequestDetails.Signers));
@@ -199,6 +204,11 @@ namespace BoldSign.Api
                 localVarFormParams = ToFormParameter(localVarFormParams, templateRequest.DocumentInfo.ToList(), nameof(templateRequest.DocumentInfo));
             }
 
+            if (templateRequest.DocumentTimeZone != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.DocumentTimeZone), templateRequest.DocumentTimeZone);
+            }
+
             if (templateRequest.Description != null)
             {
                 localVarFormParams.Add(nameof(templateRequest.Description), templateRequest.Description);
@@ -346,6 +356,11 @@ namespace BoldSign.Api
             if (editDocumentRequest.Message != null)
             {
                 localVarFormParams.Add(nameof(editDocumentRequest.Message), editDocumentRequest.Message);
+            }
+
+            if (editDocumentRequest.DocumentTimeZone != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.DocumentTimeZone), editDocumentRequest.DocumentTimeZone);
             }
 
             if (editDocumentRequest.Signers != null)
