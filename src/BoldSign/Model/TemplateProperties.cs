@@ -322,6 +322,12 @@ namespace BoldSign.Model
         public TemplateSharing Sharing { get; set; }
 
         /// <summary>
+        /// Gets or sets the documentTimeZone.
+        /// </summary>
+        [DataMember(Name = "documentTimeZone", EmitDefaultValue = false)]
+        public string DocumentTimeZone { get; set; }
+
+        /// <summary>
         /// Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

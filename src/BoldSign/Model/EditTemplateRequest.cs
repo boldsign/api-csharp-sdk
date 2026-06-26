@@ -173,6 +173,12 @@ namespace BoldSign.Api.Model
         public GroupSignerSettings GroupSignerSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating time zone of the document.
+        /// </summary>
+        [JsonProperty("documentTimeZone")]
+        public string DocumentTimeZone { get; set; }
+
+        /// <summary>
         /// Gets or sets  a value indicating whether to allow sign everywhere need to enable or not.
         /// </summary>
         [DataMember(Name = "enableAllowSignEverywhere", EmitDefaultValue = false)]

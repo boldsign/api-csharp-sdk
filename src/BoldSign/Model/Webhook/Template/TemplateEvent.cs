@@ -168,5 +168,11 @@ namespace BoldSign.Api.Model.Webhook.Template
         /// </summary>
         [JsonProperty("enableAllowSignEverywhere")]
         public bool? EnableAllowSignEverywhere { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating time zone of the document
+        /// </summary>
+        [JsonProperty("documentTimeZone")]
+        public string DocumentTimeZone { get; set; }
     }
 }

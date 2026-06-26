@@ -30,6 +30,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(signRequestDetails.ScheduledSendTime), signRequestDetails.ScheduledSendTime.Value.ToString(CultureInfo.CurrentCulture));
             }
 
+            if (signRequestDetails.DocumentTimeZone != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.DocumentTimeZone), signRequestDetails.DocumentTimeZone);
+            }
+
             if (signRequestDetails.Message != null)
             {
                 localVarFormParams.Add(nameof(signRequestDetails.Message), signRequestDetails.Message);
@@ -208,6 +213,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(templateRequest.DocumentTitle), templateRequest.DocumentTitle);
             }
 
+            if (templateRequest.DocumentTimeZone != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.DocumentTimeZone), templateRequest.DocumentTimeZone);
+            }
+
             if (templateRequest.DocumentMessage != null)
             {
                 localVarFormParams.Add(nameof(templateRequest.DocumentMessage), templateRequest.DocumentMessage);
@@ -247,7 +257,7 @@ namespace BoldSign.Api
             {
                 InitializeGroupSignerSettings(localVarFormParams, templateRequest.GroupSignerSettings);
             }
-     
+
             if (templateRequest.EnableAllowSignEverywhere != null)
             {
                 localVarFormParams.Add(nameof(templateRequest.EnableAllowSignEverywhere), templateRequest.EnableAllowSignEverywhere == true ? "true" : "false");
@@ -346,6 +356,11 @@ namespace BoldSign.Api
             if (editDocumentRequest.Message != null)
             {
                 localVarFormParams.Add(nameof(editDocumentRequest.Message), editDocumentRequest.Message);
+            }
+
+            if (editDocumentRequest.DocumentTimeZone != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.DocumentTimeZone), editDocumentRequest.DocumentTimeZone);
             }
 
             if (editDocumentRequest.Signers != null)

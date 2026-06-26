@@ -247,5 +247,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "enableAllowSignEverywhere", EmitDefaultValue = false)]
         public bool? EnableAllowSignEverywhere { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating time zone of the document.
+        /// </summary>
+        [JsonProperty("documentTimeZone")]
+        public string DocumentTimeZone { get; set; }
     }
 }
