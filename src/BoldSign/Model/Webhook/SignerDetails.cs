@@ -24,6 +24,7 @@ namespace BoldSign.Model.Webhook
     using System.ComponentModel.DataAnnotations;
     using BoldSign.Api.Model.Webhook;
     using BoldSign.Api.Model.Webhook.IdVerification;
+    using BoldSign.Api.Model.Webhook.Kba;
 
     /// <summary>
     /// The document signer.
@@ -192,6 +193,14 @@ namespace BoldSign.Model.Webhook
         [DataMember(Name = "idVerification", EmitDefaultValue = false)]
         [JsonProperty("idVerification")]
         public IdVerification IdVerification { get; set; }
+
+        /// <summary>
+        /// Gets or sets the KBA authentication details.
+        /// </summary>
+        /// <value>Gets or sets the KBA authentication details.</value>
+        [DataMember(Name = "kba", EmitDefaultValue = false)]
+        [JsonProperty("kba")]
+        public Kba Kba { get; set; }
 
         /// <summary>
         /// Gets or sets the authentication settings for the signer.

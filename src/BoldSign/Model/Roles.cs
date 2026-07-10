@@ -226,7 +226,7 @@ namespace BoldSign.Model
         /// <value>Gets or sets the Locale of the signer.</value>
         [DataMember(Name = "locale", EmitDefaultValue = true)]
         public Locales Locale { get; set; } = Locales.Default;
- 
+
         /// <summary>
         /// Gets or sets the sign type.
         /// </summary>
@@ -272,6 +272,13 @@ namespace BoldSign.Model
         /// <value>Gets the value of identity verification settings.</value>
         [DataMember(Name = "identityVerificationSettings", EmitDefaultValue = false)]
         public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the KBA settings.
+        /// </summary>
+        /// <value>Gets the value of KBA settings.</value>
+        [DataMember(Name = "kbaSettings", EmitDefaultValue = false)]
+        public KbaSettings KbaSettings { get; set; }
 
         /// <summary>
         /// Gets or sets a value for authentication settings.

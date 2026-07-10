@@ -4479,6 +4479,189 @@ namespace BoldSign.Api
                 (EmbeddedSendCreated)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedSendCreated)));
         }
 
+        /// <inheritdoc/>
+        public EmbeddedClonedDocument GetEmbeddedClonedDocumentUrl(EmbeddedCloneDocumentRequest embedCloneDocument)
+        {
+            var localVarResponse = this.GetEmbeddedClonedDocumentUrlWithHttpInfo(embedCloneDocument);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public ApiResponse<EmbeddedClonedDocument> GetEmbeddedClonedDocumentUrlWithHttpInfo(EmbeddedCloneDocumentRequest embedCloneDocument)
+        {
+            if (embedCloneDocument == null)
+            {
+                throw new ArgumentNullException(nameof(embedCloneDocument));
+            }
+
+            // verify the required parameter 'documentId' is set
+            if (string.IsNullOrEmpty(embedCloneDocument.DocumentId))
+            {
+                throw new ApiException(422, ApiValidationMessages.EmbeddedTemplateIdNull);
+            }
+
+            var localVarPath = "/v1/document/createEmbeddedCloneUrl";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (embedCloneDocument.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(embedCloneDocument);
+            }
+            else
+            {
+                localVarPostBody = embedCloneDocument; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", embedCloneDocument.DocumentId)); // query parameter
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                HttpMethod.Post,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("createEmbeddedCloneUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedClonedDocument>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedClonedDocument)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedClonedDocument)));
+        }
+
+        /// <inheritdoc/>
+        public async Task<EmbeddedClonedDocument> GetEmbeddedClonedDocumentUrlAsync(EmbeddedCloneDocumentRequest embeddedCloneDocumentRequest)
+        {
+            var localVarResponse = await this.GetEmbeddedClonedDocumentUrlWithHttpInfoAsync(embeddedCloneDocumentRequest).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <inheritdoc/>
+        public async Task<ApiResponse<EmbeddedClonedDocument>> GetEmbeddedClonedDocumentUrlWithHttpInfoAsync(EmbeddedCloneDocumentRequest embeddedCloneDocumentRequest)
+        {
+            if (embeddedCloneDocumentRequest == null)
+            {
+                throw new ArgumentNullException(nameof(embeddedCloneDocumentRequest));
+            }
+
+            // verify the required parameter 'documentId' is set
+            if (string.IsNullOrEmpty(embeddedCloneDocumentRequest.DocumentId))
+            {
+                throw new ApiException(422, ApiValidationMessages.EmbeddedTemplateIdNull);
+            }
+
+            var localVarPath = "/v1/document/createEmbeddedCloneUrl";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = Enumerable.Empty<string>().ToArray();
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                    "application/json",
+            };
+
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (embeddedCloneDocumentRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(embeddedCloneDocumentRequest);
+            }
+            else
+            {
+                localVarPostBody = embeddedCloneDocumentRequest; // byte array
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "documentId", embeddedCloneDocumentRequest.DocumentId)); // query parameter
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                HttpMethod.Post,
+                localVarQueryParams,
+                localVarPostBody,
+                localVarHeaderParams,
+                localVarFormParams,
+                localVarFileParams,
+                localVarHttpContentType,
+                localVarFileUrlParams)
+                .ConfigureAwait(false);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("createEmbeddedCloneUrl", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<EmbeddedClonedDocument>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (EmbeddedClonedDocument)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(EmbeddedClonedDocument)));
+        }
+
         /// <summary>
         ///     Sends the document for sign.
         /// </summary>
@@ -4576,6 +4759,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         public void AddAuthentication(
             string documentId,
             string emailId = default,
@@ -4586,9 +4770,10 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
-            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings);
+            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings, kbaSettings);
         }
 
         /// <summary>
@@ -4605,6 +4790,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
@@ -4616,7 +4802,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4651,7 +4838,8 @@ namespace BoldSign.Api
             var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber, identityVerificationSettings)
             {
                 AuthenticationRetryCount = authenticationRetryCount,
-                AuthenticationSettings = authenticationSettings
+                AuthenticationSettings = authenticationSettings,
+                KbaSettings = kbaSettings,
             };
 
             object localVarPostBody;
@@ -4754,6 +4942,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>AddAuthentication.</returns>
         public async Task AddAuthenticationAsync(
             string documentId,
@@ -4765,9 +4954,10 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
-            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings).ConfigureAwait(false);
+            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, authenticationRetryCount, identityVerificationSettings, authenticationSettings, kbaSettings).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -4784,6 +4974,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         public async Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
@@ -4795,7 +4986,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4830,7 +5022,8 @@ namespace BoldSign.Api
             var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber, identityVerificationSettings)
             {
                 AuthenticationRetryCount = authenticationRetryCount,
-                AuthenticationSettings = authenticationSettings
+                AuthenticationSettings = authenticationSettings,
+                KbaSettings = kbaSettings,
             };
             object localVarPostBody;
 

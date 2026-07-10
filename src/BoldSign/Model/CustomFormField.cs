@@ -251,6 +251,18 @@ namespace BoldSign.Model
         public TextAlign TextAlign { get; set; }
 
         /// <summary>
+        /// Gets or sets the group options.
+        /// </summary>
+        [DataMember(Name = "groupOptions", EmitDefaultValue = true)]
+        public List<GroupOption> GroupOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the checkbox validation settings.
+        /// </summary>
+        [DataMember(Name = "checkboxValidationSettings", EmitDefaultValue = true)]
+        public CheckboxValidationSettings CheckboxValidationSettings { get; set; }
+
+        /// <summary>
         /// Gets or sets the direction of the text.
         /// </summary>
         [DataMember(Name = "textDirection", EmitDefaultValue = true)]
