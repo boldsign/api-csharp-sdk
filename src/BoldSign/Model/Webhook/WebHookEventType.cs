@@ -204,5 +204,23 @@ namespace BoldSign.Model.Webhook
         /// </summary>
         [EnumMember(Value = "SignerSaved")]
         SignerSaved= 31,
+
+        /// <summary>
+        /// KBA initiated event.
+        /// </summary>
+        [EnumMember(Value = "KBAInitiated")]
+        KBAInitiated = 32,
+
+        /// <summary>
+        /// KBA succeeded event.
+        /// </summary>
+        [EnumMember(Value = "KBASucceeded")]
+        KBASucceeded = 33,
+
+        /// <summary>
+        /// KBA failed event.
+        /// </summary>
+        [EnumMember(Value = "KBAFailed")]
+        KBAFailed = 34,
     }
 }

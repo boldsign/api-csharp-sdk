@@ -42,10 +42,16 @@
                     var senderIdentityEvent = webhookEvent.Data as SenderIdentityEvent;
 
                     break;
-                
+
                 // if its a identity verification event, cast as IdentityVerificationEvent
                 case WebHookEventType.IdentityVerificationInitiated:
                     var identityVerificationEvent = webhookEvent.Data as IdentityVerificationEvent;
+
+                    break;
+
+                // if its a KBA event, cast as KbaAuthenticationEvent
+                case WebHookEventType.KBAInitiated:
+                    var kbaEvent = webhookEvent.Data as KbaAuthenticationEvent;
 
                     break;
             }

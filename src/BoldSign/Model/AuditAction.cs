@@ -499,5 +499,41 @@ namespace BoldSign.Model
         /// </summary>
         [EnumMember(Value = "DocumentFieldMarkup")]
         DocumentFieldMarkup = 80,
+
+        /// <summary>
+        /// KBA authentication initiated.
+        /// </summary>
+        [EnumMember(Value = "KBAInitiated")]
+        KBAInitiated = 81,
+
+        /// <summary>
+        /// KBA authentication completed.
+        /// </summary>
+        [EnumMember(Value = "KBACompleted")]
+        KBACompleted = 82,
+
+        /// <summary>
+        /// KBA authentication failed.
+        /// </summary>
+        [EnumMember(Value = "KBAFailed")]
+        KBAFailed = 83,
+
+        /// <summary>
+        /// KBA authentication reset.
+        /// </summary>
+        [EnumMember(Value = "KBAReset")]
+        KBAReset = 84,
+
+        /// <summary>
+        /// KBA authentication added.
+        /// </summary>
+        [EnumMember(Value = "KBAAdded")]
+        KBAAdded = 85,
+
+        /// <summary>
+        /// KBA authentication removed.
+        /// </summary>
+        [EnumMember(Value = "KBARemoved")]
+        KBARemoved = 86,
     }
 }
