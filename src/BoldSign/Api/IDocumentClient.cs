@@ -985,6 +985,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         void AddAuthentication(
             string documentId,
             string emailId = default,
@@ -995,7 +996,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -1011,6 +1013,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
@@ -1022,7 +1025,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -1038,6 +1042,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>AddAuthentication.</returns>
         Task AddAuthenticationAsync(
             string documentId,
@@ -1049,7 +1054,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -1065,6 +1071,7 @@ namespace BoldSign.Api
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
@@ -1076,7 +1083,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             int? authenticationRetryCount = default,
             IdentityVerificationSettings identityVerificationSettings = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         ///     Revoke the document with the given document ID.
@@ -1312,6 +1320,34 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
         /// <returns>ApiResponse of DocumentEdited.</returns>
         Task<ApiResponse<DocumentEdited>> EditDocumentAsyncWithHttpInfo(EditDocumentRequest editDocumentRequest);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embedCloneDocument">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        EmbeddedClonedDocument GetEmbeddedClonedDocumentUrl(EmbeddedCloneDocumentRequest embedCloneDocument);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embeddedCloneDocumentRequest">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        Task<EmbeddedClonedDocument> GetEmbeddedClonedDocumentUrlAsync(EmbeddedCloneDocumentRequest embeddedCloneDocumentRequest);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embedCloneDocument">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        ApiResponse<EmbeddedClonedDocument> GetEmbeddedClonedDocumentUrlWithHttpInfo(EmbeddedCloneDocumentRequest embedCloneDocument);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned document id which embeds document process into your application.
+        /// </summary>
+        /// <param name="embeddedCloneDocumentRequest">The embedded clone document request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedDocument).</returns>
+        Task<ApiResponse<EmbeddedClonedDocument>> GetEmbeddedClonedDocumentUrlWithHttpInfoAsync(EmbeddedCloneDocumentRequest embeddedCloneDocumentRequest);
 
         /// <summary>
         /// Embedded edits the document and generates a URL to embedded that document into iframe.

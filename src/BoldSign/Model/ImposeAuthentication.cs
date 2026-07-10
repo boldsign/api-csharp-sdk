@@ -46,5 +46,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [EnumMember(Value = "IdVerification")]
         IdVerification = 5,
+
+        /// <summary>
+        /// Represents KBA only.
+        /// </summary>
+        [EnumMember(Value = "KBA")]
+        KBA = 6,
     }
 }

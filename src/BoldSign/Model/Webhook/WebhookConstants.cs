@@ -33,5 +33,10 @@ namespace BoldSign.Model.Webhook
         /// The identity verification object type.
         /// </summary>
         public const string IdentityVerification = "identityVerification";
+
+        /// <summary>
+        /// The KBA object type.
+        /// </summary>
+        public const string KBA = "knowledgeBasedAuthentication";
     }
 }

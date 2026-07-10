@@ -121,6 +121,13 @@ namespace BoldSign.Model
         public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets the KBA settings.
+        /// </summary>
+        /// <value>Gets the value of KBA settings.</value>
+        [DataMember(Name = "kbaSettings", EmitDefaultValue = false)]
+        public KbaSettings KbaSettings { get; set; }
+
+        /// <summary>
         /// Gets or sets a value for authentication settings.
         /// </summary>
         [DataMember(Name = "authenticationSettings", EmitDefaultValue = false)]

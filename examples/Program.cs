@@ -47,6 +47,12 @@
                     var identityVerificationEvent = webhookEvent.Data as IdentityVerificationEvent;
 
                     break;
+
+                // if its a KBA event, cast as KbaAuthenticationEvent
+                case WebHookEventType.KBAInitiated:
+                    var kbaEvent = webhookEvent.Data as KbaAuthenticationEvent;
+
+                    break;
             }
         }
     }

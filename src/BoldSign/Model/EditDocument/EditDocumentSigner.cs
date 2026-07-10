@@ -90,6 +90,12 @@ namespace BoldSign.Api.Model.EditDocument
         public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets value for the KBA settings.
+        /// </summary>
+        [DataMember(Name = "kbaSettings", EmitDefaultValue = false)]
+        public KbaSettings KbaSettings { get; set; }
+
+        /// <summary>
         /// Gets or sets the signer order.
         /// </summary>
         [DataMember(Name = "signerOrder", EmitDefaultValue = false)]

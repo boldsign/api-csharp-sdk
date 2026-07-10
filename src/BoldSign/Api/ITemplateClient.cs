@@ -225,6 +225,34 @@ namespace BoldSign.Api
         Task<ApiResponse<EmbeddedTemplateEdited>> GetEmbeddedTemplateEditUrlWithHttpInfoAsync(EmbeddedTemplateEditRequest embeddedTemplateEditRequest);
 
         /// <summary>
+        /// Generates a embed URL using a cloned template id which embeds template process into your application.
+        /// </summary>
+        /// <param name="embedCloneTemplate">The embedded clone template request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedTemplate).</returns>
+        EmbeddedClonedTemplate GetEmbeddedClonedTemplateUrl(EmbeddedCloneTemplateRequest embedCloneTemplate);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned template id which embeds template process into your application.
+        /// </summary>
+        /// <param name="embeddedCloneTemplateRequest">The embedded clone template request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedTemplate).</returns>
+        Task<EmbeddedClonedTemplate> GetEmbeddedClonedTemplateUrlAsync(EmbeddedCloneTemplateRequest embeddedCloneTemplateRequest);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned template id which embeds template process into your application.
+        /// </summary>
+        /// <param name="embedCloneTemplate">The embedded clone template request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedTemplate).</returns>
+        ApiResponse<EmbeddedClonedTemplate> GetEmbeddedClonedTemplateUrlWithHttpInfo(EmbeddedCloneTemplateRequest embedCloneTemplate);
+
+        /// <summary>
+        /// Generates a embed URL using a cloned template id which embeds template process into your application.
+        /// </summary>
+        /// <param name="embeddedCloneTemplateRequest">The embedded clone template request.</param>
+        /// <returns>Task of ApiResponse (EmbeddedClonedTemplate).</returns>
+        Task<ApiResponse<EmbeddedClonedTemplate>> GetEmbeddedClonedTemplateUrlWithHttpInfoAsync(EmbeddedCloneTemplateRequest embeddedCloneTemplateRequest);
+
+        /// <summary>
         /// Share a template with teams and/or organization.
         /// </summary>
         /// <param name="templateId">Template Id.</param>

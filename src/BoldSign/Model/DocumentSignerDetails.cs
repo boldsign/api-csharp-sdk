@@ -16,6 +16,7 @@ namespace BoldSign.Model
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text;
+    using BoldSign.Api.Model.Kba;
     using BoldSign.Model.Webhook;
     using Newtonsoft.Json;
 
@@ -284,6 +285,13 @@ namespace BoldSign.Model
         /// <value>Gets or sets id verification details.</value>
         [DataMember(Name = "idVerification", EmitDefaultValue = false)]
         public IdVerification.IdVerification IdVerification { get; set; }
+
+        /// <summary>
+        /// Gets or sets the KBA authentication details.
+        /// </summary>
+        /// <value>Gets or sets the KBA authentication details.</value>
+        [DataMember(Name = "kba", EmitDefaultValue = false)]
+        public Kba Kba { get; set; }
 
         /// <summary>
         /// Gets or sets the enableQes.
