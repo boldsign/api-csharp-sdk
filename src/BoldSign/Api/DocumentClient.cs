@@ -4576,6 +4576,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         public void AddAuthentication(
             string documentId,
             string emailId = default,
@@ -4586,9 +4587,10 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
-            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, identityVerificationSettings, authenticationRetryCount, authenticationSettings);
+            this.AddAuthenticationWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, identityVerificationSettings, authenticationRetryCount, authenticationSettings, kbaSettings);
         }
 
         /// <summary>
@@ -4605,6 +4607,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         public ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
@@ -4616,7 +4619,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4651,7 +4655,8 @@ namespace BoldSign.Api
             var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber, identityVerificationSettings)
             {
                 AuthenticationRetryCount = authenticationRetryCount,
-                AuthenticationSettings = authenticationSettings
+                AuthenticationSettings = authenticationSettings,
+                KbaSettings = kbaSettings,
             };
             object localVarPostBody;
 
@@ -4753,6 +4758,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>AddAuthentication.</returns>
         public async Task AddAuthenticationAsync(
             string documentId,
@@ -4764,9 +4770,10 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
-            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, identityVerificationSettings, authenticationRetryCount, authenticationSettings).ConfigureAwait(false);
+            await this.AddAuthenticationAsyncWithHttpInfo(documentId, emailId, authenticationType, signerOrder, newAccessCode, onBehalfOf, phoneNumber, identityVerificationSettings, authenticationRetryCount, authenticationSettings, kbaSettings).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -4783,6 +4790,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         public async Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
@@ -4794,7 +4802,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default)
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -4829,7 +4838,8 @@ namespace BoldSign.Api
             var accessCodeDetails = new AddAuthenticationAccessCodeDetails(emailId, signerOrder, newAccessCode, authenticationType, onBehalfOf, phoneNumber, identityVerificationSettings)
             {
                 AuthenticationRetryCount = authenticationRetryCount,
-                AuthenticationSettings = authenticationSettings
+                AuthenticationSettings = authenticationSettings,
+                KbaSettings = kbaSettings,
             };
             object localVarPostBody;
 

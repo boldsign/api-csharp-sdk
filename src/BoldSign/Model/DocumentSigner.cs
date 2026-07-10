@@ -182,6 +182,13 @@ namespace BoldSign.Model
         public IdentityVerificationSettings IdentityVerificationSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets the KBA settings.
+        /// </summary>
+        /// <value>Gets the value of KBA settings.</value>
+        [DataMember(Name = "kbaSettings", EmitDefaultValue = false)]
+        public KbaSettings KbaSettings { get; set; }
+
+        /// <summary>
         ///     Gets or sets the order in which the signers needs to sign the document.
         /// </summary>
         /// <value>Gets or sets the signer order.</value>

@@ -923,6 +923,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         void AddAuthentication(
             string documentId,
             string emailId = default,
@@ -933,7 +934,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -949,6 +951,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(void).</returns>
         ApiResponse<object> AddAuthenticationWithHttpInfo(
             string documentId,
@@ -960,7 +963,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -976,6 +980,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>AddAuthentication.</returns>
         Task AddAuthenticationAsync(
             string documentId,
@@ -987,7 +992,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         /// Add Authentication to user.
@@ -1003,6 +1009,7 @@ namespace BoldSign.Api
         /// <param name="identityVerificationSettings">The identity verification settings.</param>
         /// <param name="authenticationRetryCount">The authentication retry count.</param>
         /// <param name="authenticationSettings">The authentication settings.</param>
+        /// <param name="kbaSettings">The KBA settings.</param>
         /// <returns>ApiResponse of Object(AddAuthentication).</returns>
         Task<ApiResponse<object>> AddAuthenticationAsyncWithHttpInfo(
             string documentId,
@@ -1014,7 +1021,8 @@ namespace BoldSign.Api
             PhoneNumber phoneNumber = default,
             IdentityVerificationSettings identityVerificationSettings = default,
             int? authenticationRetryCount = default,
-            AuthenticationSettings authenticationSettings = default);
+            AuthenticationSettings authenticationSettings = default,
+            KbaSettings kbaSettings = default);
 
         /// <summary>
         ///     Revoke the document with the given document ID.

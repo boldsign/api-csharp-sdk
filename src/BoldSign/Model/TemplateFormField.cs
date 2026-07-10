@@ -105,6 +105,12 @@ namespace BoldSign.Api.Model
         public string Id { get; set; }
 
         /// <summary>
+        ///     Gets or Sets formFieldId.
+        /// </summary>
+        [DataMember(Name = "formFieldId", EmitDefaultValue = true)]
+        public string FormFieldId { get; set; }
+
+        /// <summary>
         ///     Gets or Sets font name for the content in form field.
         /// </summary>
         [DataMember(Name = "font", EmitDefaultValue = true)]
