@@ -2084,10 +2084,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>System.IO.Stream</returns>
-        public Stream DownloadDocument(string documentId, string onBehalfOf = default)
+        public Stream DownloadDocument(string documentId, string onBehalfOf = default, Format? format = default)
         {
-            var localVarResponse = this.DownloadDocumentWithHttpInfo(documentId, onBehalfOf);
+            var localVarResponse = this.DownloadDocumentWithHttpInfo(documentId, onBehalfOf, format);
 
             return localVarResponse.Data;
         }
@@ -2098,8 +2099,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf = default)
+        public ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf = default, Format? format = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -2153,6 +2155,11 @@ namespace BoldSign.Api
             if (!string.IsNullOrEmpty(onBehalfOf))
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", onBehalfOf)); // query parameter
+            }
+
+            if (format != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "format", format)); // query parameter
             }
 
             // authentication (Bearer) required
@@ -2187,10 +2194,11 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>Task of System.IO.Stream</returns>
-        public async Task<Stream> DownloadDocumentAsync(string documentId, string onBehalfOf = default)
+        public async Task<Stream> DownloadDocumentAsync(string documentId, string onBehalfOf = default, Format? format = default)
         {
-            var localVarResponse = await this.DownloadDocumentAsyncWithHttpInfo(documentId, onBehalfOf).ConfigureAwait(false);
+            var localVarResponse = await this.DownloadDocumentAsyncWithHttpInfo(documentId, onBehalfOf, format).ConfigureAwait(false);
 
             return localVarResponse.Data;
         }
@@ -2201,8 +2209,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        public async Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId, string onBehalfOf = default)
+        public async Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId, string onBehalfOf = default, Format? format = default)
         {
             // verify the required parameter 'documentId' is set
             if (documentId == null)
@@ -2256,6 +2265,11 @@ namespace BoldSign.Api
             if (!string.IsNullOrEmpty(onBehalfOf))
             {
                 localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", onBehalfOf)); // query parameter
+            }
+
+            if (format != null)
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "format", format)); // query parameter
             }
 
             // authentication (Bearer) required
