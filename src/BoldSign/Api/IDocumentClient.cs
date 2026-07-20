@@ -312,8 +312,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>System.IO.Stream</returns>
-        Stream DownloadDocument(string documentId, string onBehalfOf = default);
+        Stream DownloadDocument(string documentId, string onBehalfOf = default, Format? format = default);
 
         /// <summary>
         ///    Download the document for given document ID.
@@ -323,8 +324,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf = default);
+        ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf = default, Format? format = default);
 
         /// <summary>
         ///    Download the attachment for given document ID and attachment ID.
@@ -761,8 +763,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>Task of System.IO.Stream</returns>
-        Task<Stream> DownloadDocumentAsync(string documentId, string onBehalfOf = default);
+        Task<Stream> DownloadDocumentAsync(string documentId, string onBehalfOf = default, Format? format = default);
 
         /// <summary>
         ///     Download the document for given document ID.
@@ -772,8 +775,9 @@ namespace BoldSign.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentId">Document Id.</param>
         /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <param name="format">The document format.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId, string onBehalfOf = default);
+        Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId, string onBehalfOf = default, Format? format = default);
 
         /// <summary>
         ///     Download the attachment for given document ID and attachment ID.

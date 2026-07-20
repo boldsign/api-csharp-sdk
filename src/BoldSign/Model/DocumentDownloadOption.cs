@@ -18,5 +18,10 @@ namespace BoldSign.Api.Model
         /// Represents Individually.
         /// </summary>
         Individually = 1,
+
+        /// <summary>
+        /// Represents user preference.
+        /// </summary>
+        UserPreference = 2,
     }
 }
