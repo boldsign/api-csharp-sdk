@@ -171,6 +171,12 @@ namespace BoldSign.Model
         public SignatureFrameSettings SignatureFrameSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to HideReassign.
+        /// </summary>
+        [DataMember(Name = "hideReassign", EmitDefaultValue = true)]
+        public bool? HideReassign { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>

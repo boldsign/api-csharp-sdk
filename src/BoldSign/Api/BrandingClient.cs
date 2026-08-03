@@ -560,6 +560,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(createBrandData.HideSave), createBrandData.HideSave.Value ? "true" : "false");
             }
 
+            if (createBrandData.HideReassign != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideReassign), createBrandData.HideReassign.Value ? "true" : "false");
+            }
+
             if (createBrandData.EmailSignedDocument != 0)
             {
                 localVarFormParams.Add(nameof(createBrandData.EmailSignedDocument), createBrandData.EmailSignedDocument.ToString());
@@ -674,6 +679,11 @@ namespace BoldSign.Api
             if (createBrandData.HideSave != null)
             {
                 localVarFormParams.Add(nameof(createBrandData.HideSave), createBrandData.HideSave.Value ? "true" : "false");
+            }
+
+            if (createBrandData.HideReassign != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideReassign), createBrandData.HideReassign.Value ? "true" : "false");
             }
 
             if (createBrandData.EmailSignedDocument != 0)
@@ -796,6 +806,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(editBrandData.HideSave), editBrandData.HideSave.Value ? "true" : "false");
             }
 
+            if (editBrandData.HideReassign != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideReassign), editBrandData.HideReassign.Value ? "true" : "false");
+            }
+
             if (editBrandData.EmailSignedDocument != 0)
             {
                 localVarFormParams.Add(nameof(editBrandData.EmailSignedDocument), editBrandData.EmailSignedDocument.ToString());
@@ -915,6 +930,11 @@ namespace BoldSign.Api
             if (editBrandData.HideSave != null)
             {
                 localVarFormParams.Add(nameof(editBrandData.HideSave), editBrandData.HideSave.Value ? "true" : "false");
+            }
+
+            if (editBrandData.HideReassign != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideReassign), editBrandData.HideReassign.Value ? "true" : "false");
             }
 
             if (editBrandData.EmailSignedDocument != 0)

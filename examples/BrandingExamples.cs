@@ -149,5 +149,44 @@ namespace BoldSign.Examples
             var brandSettings = this.BrandingClient.GetBrandDetails(brandId);
             return brandSettings;
         }
+
+        /// <summary>
+        /// Create the brand.
+        /// </summary>
+        public BrandingData CreateBrandWithReassignOption()
+        {
+            var fileBytes = File.ReadAllBytes("assets/sample.jpg");
+            var stream = new MemoryStream(fileBytes);
+
+            var createBrandData = new BrandSettings()
+            {
+                // This is an example brand settings data to create, add your own brand settings upon usage.
+                BrandName = "Brand from SDK",
+                BrandLogo = new ImageFilePath()
+                {
+                  FilePath  = "assets/sample.jpg",
+                  ContentType = "image/jpeg",
+                },
+                HideReassign = true,
+                CombineAuditTrail = false,
+                CombineAttachments = false,
+                IsDefault = false,
+                CanHideTagLine = false,
+                DisclaimerDescription = "Consumer disclosure regarding conducting business electronically, receiving electronic notices, disclosures and other documents and to electronically sign documents.",
+                DisclaimerTitle = "Classic Company Policy",
+                EmailDisplayName = "{SenderName} via Your company name",
+                BackgroundColor = "#EEF4F8",
+                ButtonColor = "#00BDD4",
+                ButtonTextColor = "#FFFFFF",
+                RedirectUrl = "https://app.boldsign.com/dashboard",
+                AllowCustomFieldCreation = false,
+                ShowBuiltInFormFields = true,
+                ShowSharedCustomFields = false,
+                HideDecline = false,
+                HideSave = false,
+            };
+            var result = this.BrandingClient.CreateBrand(createBrandData);
+            return result;
+        }
     }
 }

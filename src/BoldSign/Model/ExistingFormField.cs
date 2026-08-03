@@ -96,6 +96,12 @@ namespace BoldSign.Model
         public bool IsReadOnly { get; set; }
 
         /// <summary>
+        /// Used to apply a prefilled form field value to a specific occurrence of a template when the same template is included multiple times. Values start at 1. Supported only by the Merge and Send API.
+        /// </summary>
+        [DataMember(Name = "templateOrder", EmitDefaultValue = true)]
+        public int? TemplateOrder { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
