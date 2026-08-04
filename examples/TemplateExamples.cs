@@ -1012,6 +1012,85 @@ namespace BoldSign.Examples
 
             await this.templateApi.EditTemplateAsync(editTemplateRequest).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// <para>
+        /// Creates a document by merging the same template multiple times. Each template
+        /// instance in <c>templateIds</c> is assigned a 1-based order. The
+        /// <see cref="ExistingFormField.TemplateOrder"/> property is used to map a prefill
+        /// value to the corresponding template instance, so different values can be applied
+        /// to each occurrence of the same field (for example, the <c>customername</c>
+        /// field).
+        /// </para>
+        /// <para>
+        /// In the sample below, the template <c>yourTemplateId</c> is added three times.
+        /// Without <c>TemplateOrder</c>, the last <c>customername</c> value would be
+        /// applied to all three template instances. By setting <c>TemplateOrder = 1</c>,
+        /// <c>2</c> and <c>3</c> respectively, each instance receives its own value
+        /// (<c>ABC Pharmacy</c>, <c>XYZ Pharmacy</c>, <c>PQR Pharmacy</c>).
+        /// </para>
+        /// </summary>
+        /// <returns>A DocumentCreated.</returns>
+        public DocumentCreated MergeAndSendWithTemplateOrder()
+        {
+            // The same template id is added multiple times to demonstrate prefill
+            // values being mapped to each instance independently.
+            const string sharedTemplateId = "43707a56-e2e1-4bde-9ce1-1b2958fcc015";
+            string[] templateIds = { sharedTemplateId, sharedTemplateId, sharedTemplateId };
+
+            // Use the 'index' overload to prefill existing form fields defined in the
+            // template. TemplateOrder is 1-based and refers to the position of the
+            var existingFormElement1 = new ExistingFormField
+            {
+                Id = "TextBox1",
+                Value = "ABC Pharmacy",
+                TemplateOrder = 1
+            };
+
+            var existingFormElement2 = new ExistingFormField
+            {
+                Id = "TextBox1",
+                Value = "XYZ Pharmacy",
+                TemplateOrder = 2
+            };
+
+            var existingFormElement3 = new ExistingFormField
+            {
+                Id = "TextBox1",
+                Value = "PQR Pharmacy",
+                TemplateOrder = 3
+            };
+
+            // template in the 'templateIds' array above.
+            var existingFormFields = new List<ExistingFormField>
+            {
+                existingFormElement1,
+                existingFormElement2,
+                existingFormElement3
+            };
+
+            var roles = new List<Roles>
+            {
+                new Roles(
+                    roleSignerName: "signer",
+                    roleSignerEmailAddress: "signer@example.com",
+                    roleSignerIndex: 1,
+                    signerOrder: 1,
+                    signerType: SignerType.Signer,
+                    existingFormFields: existingFormFields,
+                    locale: Locales.EN)
+            };
+
+            var templateDetails = new MergeAndSendForSign(
+                templateIds: templateIds,
+                title: "Create Document from Merged Templates with per-instance prefills",
+                message: "Demonstrates per-template-instance prefill values using ExistingFormField.TemplateOrder.",
+                roles: roles);
+
+            var documentCreated = this.templateApi.MergeAndSend(templateDetails);
+
+            return documentCreated;
+        }
         
         /// <summary>
         ///     Remove the fields via send document using template.
