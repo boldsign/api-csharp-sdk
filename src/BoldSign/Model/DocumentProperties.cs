@@ -326,6 +326,12 @@ namespace BoldSign.Model
         public bool DisableEmails { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether enable sms notification or not.
+        /// </summary>
+        [DataMember(Name = "disableSMS", EmitDefaultValue = false)]
+        public bool DisableSMS { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether Disableexpiryalert is true or false.
         /// </summary>
         /// <value>This property will send the expiry alert email before the day of expiry for the pending signers.If the document expires in one day, the email will be sent before 2 hours of the expiry.</value>

@@ -43,7 +43,7 @@ namespace BoldSign.Model
         /// <param name="authenticationType">Gets or sets the authentication Type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
         [Obsolete("The language-based constructor is deprecated. Please use the new constructor: Roles(string roleSignerName = default, string roleSignerEmailAddress = default, int roleSignerIndex = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Locales locale = Locales.EN)")]
-        public Roles(int roleIndex = default, string signerName = default, string signerEmail = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Languages language = Languages.None, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
+        public Roles(int roleIndex = default, string signerName = default, string signerEmail = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool? enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Languages language = Languages.None, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default)
         {
             this.SignerName = signerName;
             this.SignerEmail = signerEmail;
@@ -81,7 +81,7 @@ namespace BoldSign.Model
         /// <param name="authenticationType">Gets or sets the authentication Type.</param>
         /// <param name="phoneNumber">Gets or sets the phone number.</param>
         /// <param name="identityVerificationSettings">Gets or sets the identity verification settings.</param>
-        public Roles(string roleSignerName = default, string roleSignerEmailAddress = default, int roleSignerIndex = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Locales locale = Locales.Default, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdentityVerificationSettings identityVerificationSettings = default)
+        public Roles(string roleSignerName = default, string roleSignerEmailAddress = default, int roleSignerIndex = default, int signerOrder = default(int), string signerRole = default, string privateMessage = default, string authenticationCode = default, SignerType? signerType = default, string hostEmail = default, bool? enableEmailOTP = default, List<FormField> formFields = default(List<FormField>), List<ExistingFormField> existingFormFields = default(List<ExistingFormField>), Locales locale = Locales.Default, AuthenticationType authenticationType = AuthenticationType.None, PhoneNumber phoneNumber = default, IdentityVerificationSettings identityVerificationSettings = default)
         {
             this.SignerName = roleSignerName;
             this.SignerEmail = roleSignerEmailAddress;
@@ -183,7 +183,7 @@ namespace BoldSign.Model
         /// </summary>
         /// <value>Gets or sets the signerEmail.</value>
         [DataMember(Name = "enableEmailOTP", EmitDefaultValue = true)]
-        public bool EnableEmailOTP { get; set; }
+        public bool? EnableEmailOTP { get; set; }
 
         /// <summary>
         ///    Gets or sets the signer role in the document.
