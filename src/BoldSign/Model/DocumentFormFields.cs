@@ -105,6 +105,12 @@ namespace BoldSign.Model
         public string Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the form field id.
+        /// </summary>
+        [DataMember(Name = "formFieldId", EmitDefaultValue = false)]
+        public string FormFieldId { get; set; }
+
+        /// <summary>
         /// Gets or sets the element type.
         /// </summary>
         /// <value>Gets or sets the element type.</value>
