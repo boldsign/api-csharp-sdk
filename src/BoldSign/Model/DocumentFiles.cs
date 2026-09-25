@@ -37,6 +37,12 @@ namespace BoldSign.Model
         }
 
         /// <summary>
+        /// Gets or sets the file id.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Gets or Sets DocumentName.
         /// </summary>
         /// <value>Gets or Sets DocumentName.</value>

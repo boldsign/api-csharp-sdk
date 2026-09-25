@@ -108,6 +108,12 @@ namespace BoldSign.Model
         }
 
         /// <summary>
+        /// Gets or sets the signer id.
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the signer name.
         /// </summary>
         /// <value>Gets or sets the signer name.</value>
