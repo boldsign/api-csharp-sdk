@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-        <FileVersion>6.3.3</FileVersion>
-        <ProductVersion>6.3.3</ProductVersion>
+        <FileVersion>6.4.0</FileVersion>
+        <ProductVersion>6.4.0</ProductVersion>
         <Copyright>Copyright 2001-2026 Syncfusion Inc</Copyright>
         <AssemblyName>BoldSign.Api</AssemblyName>
         <RootNamespace>BoldSign.Api</RootNamespace>
@@ -21,6 +21,7 @@
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
         <Reference Include="System.Net.Http" />
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
