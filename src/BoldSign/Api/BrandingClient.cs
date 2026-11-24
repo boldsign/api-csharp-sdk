@@ -565,6 +565,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(createBrandData.HideReassign), createBrandData.HideReassign.Value ? "true" : "false");
             }
 
+            if (createBrandData.HideCommenting != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideCommenting), createBrandData.HideCommenting.Value ? "true" : "false");
+            }
+
             if (createBrandData.EmailSignedDocument != 0)
             {
                 localVarFormParams.Add(nameof(createBrandData.EmailSignedDocument), createBrandData.EmailSignedDocument.ToString());
@@ -683,6 +688,11 @@ namespace BoldSign.Api
             if (createBrandData.HideReassign != null)
             {
                 localVarFormParams.Add(nameof(createBrandData.HideReassign), createBrandData.HideReassign.Value ? "true" : "false");
+            }
+
+            if (createBrandData.HideCommenting != null)
+            {
+                localVarFormParams.Add(nameof(createBrandData.HideCommenting), createBrandData.HideCommenting.Value ? "true" : "false");
             }
 
             if (createBrandData.EmailSignedDocument != 0)
@@ -811,6 +821,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(editBrandData.HideReassign), editBrandData.HideReassign.Value ? "true" : "false");
             }
 
+            if (editBrandData.HideCommenting != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideCommenting), editBrandData.HideCommenting.Value ? "true" : "false");
+            }
+
             if (editBrandData.EmailSignedDocument != 0)
             {
                 localVarFormParams.Add(nameof(editBrandData.EmailSignedDocument), editBrandData.EmailSignedDocument.ToString());
@@ -936,6 +951,11 @@ namespace BoldSign.Api
             if (editBrandData.HideReassign != null)
             {
                 localVarFormParams.Add(nameof(editBrandData.HideReassign), editBrandData.HideReassign.Value ? "true" : "false");
+            }
+
+            if (editBrandData.HideCommenting != null)
+            {
+                localVarFormParams.Add(nameof(editBrandData.HideCommenting), editBrandData.HideCommenting.Value ? "true" : "false");
             }
 
             if (editBrandData.EmailSignedDocument != 0)

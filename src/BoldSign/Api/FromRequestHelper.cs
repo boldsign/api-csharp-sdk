@@ -161,6 +161,11 @@ namespace BoldSign.Api
             }
 
             localVarFormParams.Add(nameof(signRequestDetails.EnablePrintAndSign), signRequestDetails.EnablePrintAndSign ? "true" : "false");
+            if (signRequestDetails.AllowCommenting != null)
+            {
+                localVarFormParams.Add(nameof(signRequestDetails.AllowCommenting), signRequestDetails.AllowCommenting == true ? "true" : "false");
+            }
+
             localVarFormParams.Add(nameof(signRequestDetails.EnableReassign), signRequestDetails.EnableReassign ? "true" : "false");
             localVarFormParams.Add(nameof(signRequestDetails.AllowScheduledSend), signRequestDetails.AllowScheduledSend ? "true" : "false");
 
@@ -308,6 +313,11 @@ namespace BoldSign.Api
             localVarFormParams.Add(nameof(templateRequest.EnableSigningOrder), templateRequest.EnableSigningOrder ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.EnablePrintAndSign), templateRequest.EnablePrintAndSign ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.EnableReassign), templateRequest.EnableReassign ? "true" : "false");
+            if (templateRequest.AllowCommenting != null)
+            {
+                localVarFormParams.Add(nameof(templateRequest.AllowCommenting), templateRequest.AllowCommenting == true ? "true" : "false");
+            }
+
             localVarFormParams.Add(nameof(templateRequest.AllowNewRoles), templateRequest.AllowNewRoles ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.AllowNewFiles), templateRequest.AllowNewFiles ? "true" : "false");
             localVarFormParams.Add(nameof(templateRequest.AllowModifyFiles), templateRequest.AllowModifyFiles ? "true" : "false");
@@ -476,6 +486,11 @@ namespace BoldSign.Api
                 localVarFormParams.Add(nameof(editDocumentRequest.EnablePrintAndSign), editDocumentRequest.EnablePrintAndSign == true ? "true" : "false");
             }
 
+            if (editDocumentRequest.AllowCommenting != null)
+            {
+                localVarFormParams.Add(nameof(editDocumentRequest.AllowCommenting), editDocumentRequest.AllowCommenting == true ? "true" : "false");
+            }
+
             if (editDocumentRequest.EnableReassign != null)
             {
                 localVarFormParams.Add(nameof(editDocumentRequest.EnableReassign), editDocumentRequest.EnableReassign == true ? "true" : "false");
@@ -537,6 +552,7 @@ namespace BoldSign.Api
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditRecipient)}", recipientNotificationSettings.EditRecipient ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.EditDocument)}", recipientNotificationSettings.EditDocument ? "true" : "false");
             localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.Viewed)}", recipientNotificationSettings.Viewed ? "true" : "false");
+            localVarFormParams.Add($"{baseKey}.{nameof(recipientNotificationSettings.CommentOnDocument)}", recipientNotificationSettings.CommentOnDocument ? "true" : "false");
         }
 
         /// <summary>

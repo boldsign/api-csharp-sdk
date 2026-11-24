@@ -16,5 +16,9 @@ namespace BoldSign.Api.Model
         /// <inheritdoc />
         [JsonProperty("files")]
         public new List<string> Files { get; set; }
+
+        /// <summary>Gets or sets the converted file operations.</summary>
+        [JsonProperty("fileChanges", NullValueHandling = NullValueHandling.Ignore)]
+        public new List<TemplateFileChangeJson> FileChanges { get; set; }
     }
 }

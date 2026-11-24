@@ -220,5 +220,10 @@ namespace BoldSign.Model.Webhook
         [JsonProperty("documentTimeZone")]
         public string DocumentTimeZone { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the document allows comments.
+        /// </summary>
+        [JsonProperty("allowCommenting")]
+        public bool AllowCommenting { get; set; }
     }
 }

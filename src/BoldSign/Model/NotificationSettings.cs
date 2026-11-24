@@ -123,5 +123,12 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "attachSignedDocument", EmitDefaultValue = true)]
         public bool AttachSignedDocument { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the sender identity gets an email when a comment
+        /// is added to a document sent on their behalf.
+        /// </summary>
+        [DataMember(Name = "commentOnDocument", EmitDefaultValue = true)]
+        public bool CommentOnDocument { get; set; } = true;
     }
 }

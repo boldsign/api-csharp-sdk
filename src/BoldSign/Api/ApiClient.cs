@@ -334,7 +334,7 @@ namespace BoldSign.Api
 
                     if (file.FileUrl != null)
                     {
-                        form.AddFormParameter($"{param.Key}[{index}].{nameof(file.FileUrl)}", file.FileUrl?.AbsoluteUri); 
+                        form.AddFormParameter($"{param.Key}[{index}].{nameof(file.FileUrl)}", file.FileUrl?.AbsoluteUri);
                     }
                 }
             }
@@ -386,6 +386,31 @@ namespace BoldSign.Api
             }
 
             return documentFile;
+        }
+
+        /// <summary>Converts an SDK file to the JSON upload format using the existing file validation.</summary>
+        /// <param name="file">The uploaded file.</param>
+        /// <param name="fileName">The original file name.</param>
+        /// <returns>The file data URI.</returns>
+        internal static string GetJsonFile(IDocumentFile file, out string fileName)
+        {
+            byte[] content;
+            string contentType;
+            if (file is DocumentFilePath documentFilePath)
+            {
+                content = GetDocumentFromFilePath(documentFilePath);
+                contentType = documentFilePath.ContentType;
+                fileName = Path.GetFileName(documentFilePath.FilePath);
+            }
+            else
+            {
+                var documentFile = GetDocumentFileWithValidation(file);
+                content = documentFile.FileData;
+                contentType = documentFile.ContentType;
+                fileName = documentFile.FileName;
+            }
+
+            return $"data:{contentType};base64,{Convert.ToBase64String(content)}";
         }
 
         internal static T HandleJsonFileParams<T>(IDocumentUpload documentUpload, T documentUploadJson)

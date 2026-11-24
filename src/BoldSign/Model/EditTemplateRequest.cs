@@ -183,5 +183,11 @@ namespace BoldSign.Api.Model
         /// </summary>
         [DataMember(Name = "documentTimeZone", EmitDefaultValue = false)]
         public string DocumentTimeZone { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the enable comment option is enabled or disabled.
+        /// </summary>
+        [JsonProperty("allowCommenting")]
+        public bool? AllowCommenting { get; set; }
     }
 }

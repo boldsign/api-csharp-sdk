@@ -301,6 +301,28 @@ namespace BoldSign.Api
         ApiResponse<Stream> DownloadDocumentWithHttpInfo(string documentId, string onBehalfOf = default, Format? format = default);
 
         /// <summary>
+        ///     Download the document comments for given document ID.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>System.IO.Stream</returns>
+        Stream DownloadComments(string documentId, string onBehalfOf = default);
+
+        /// <summary>
+        ///    Download the document comments for given document ID.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        ApiResponse<Stream> DownloadCommentsWithHttpInfo(string documentId, string onBehalfOf = default);
+
+        /// <summary>
         ///    Download the attachment for given document ID and attachment ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>
@@ -716,6 +738,28 @@ namespace BoldSign.Api
         /// <param name="format">The document format.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
         Task<ApiResponse<Stream>> DownloadDocumentAsyncWithHttpInfo(string documentId, string onBehalfOf = default, Format? format = default);
+
+        /// <summary>
+        ///    Download the document comments for given document ID.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>Task of System.IO.Stream</returns>
+        Task<Stream> DownloadCommentsAsync(string documentId, string onBehalfOf = default);
+
+        /// <summary>
+        ///     Download the document comments for given document ID.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        Task<ApiResponse<Stream>> DownloadCommentsAsyncWithHttpInfo(string documentId, string onBehalfOf = default);
 
         /// <summary>
         ///     Download the attachment for given document ID and attachment ID.
