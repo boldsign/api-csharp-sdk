@@ -220,6 +220,12 @@ namespace BoldSign.Model
         public string BrandId { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether recipients can add comments to documents sent from the template.
+        /// </summary>
+        [DataMember(Name = "allowCommenting", EmitDefaultValue = false)]
+        public bool AllowCommenting { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

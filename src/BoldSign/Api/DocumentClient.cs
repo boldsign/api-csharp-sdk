@@ -2299,6 +2299,212 @@ namespace BoldSign.Api
         }
 
         /// <summary>
+        ///    Download the document comments for given document ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>System.IO.Stream</returns>
+        public Stream DownloadComments(string documentId, string onBehalfOf = default)
+        {
+            var localVarResponse = this.DownloadCommentsWithHttpInfo(documentId, onBehalfOf);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Download the document comments for given document ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalf of email.</param>
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        public ApiResponse<Stream> DownloadCommentsWithHttpInfo(string documentId, string onBehalfOf = default)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->DownloadComments");
+            }
+
+            var localVarPath = "/v1-beta/document/downloadComments";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new string[]
+            {
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "documentId", documentId)); // query parameter
+
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", onBehalfOf)); // query parameter
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = this.Configuration.ApiClient.CallApi(
+                localVarPath,
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("DownloadComments", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<Stream>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
+        }
+
+        /// <summary>
+        ///     Download the document comments for given document ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>Task of System.IO.Stream</returns>
+        public async Task<Stream> DownloadCommentsAsync(string documentId, string onBehalfOf = default)
+        {
+            var localVarResponse = await this.DownloadCommentsAsyncWithHttpInfo(documentId, onBehalfOf).ConfigureAwait(false);
+
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///     Download the document comments for given document ID.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="documentId">Document Id.</param>
+        /// <param name="onBehalfOf">The on behalfof email.</param>
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        public async Task<ApiResponse<Stream>> DownloadCommentsAsyncWithHttpInfo(string documentId, string onBehalfOf = default)
+        {
+            // verify the required parameter 'documentId' is set
+            if (documentId == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'documentId' when calling DocumentApi->DownloadComments");
+            }
+
+            var localVarPath = "/v1-beta/document/downloadComments";
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, List<IDocumentFile>>();
+            var localVarFileUrlParams = new Dictionary<string, Uri>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            var localVarHttpContentTypes = new string[]
+            {
+            };
+            var localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            var localVarHttpHeaderAccepts = new[]
+            {
+                "application/json;odata.metadata=minimal;odata.streaming=true",
+                "application/json;odata.metadata=minimal;odata.streaming=false",
+                "application/json;odata.metadata=minimal",
+                "application/json;odata.metadata=full;odata.streaming=true",
+                "application/json;odata.metadata=full;odata.streaming=false",
+                "application/json;odata.metadata=full",
+                "application/json;odata.metadata=none;odata.streaming=true",
+                "application/json;odata.metadata=none;odata.streaming=false",
+                "application/json;odata.metadata=none",
+                "application/json;odata.streaming=true",
+                "application/json;odata.streaming=false",
+                "application/json",
+                "application/xml",
+                "application/prs.odatatestxx-odata",
+                "text/plain",
+                "text/json",
+            };
+            var localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "documentId", documentId)); // query parameter
+
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs(string.Empty, "onBehalfOf", onBehalfOf)); // query parameter
+            }
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarHeaderParams["Authorization"] = this.Configuration.GetApiKeyWithPrefix("Authorization");
+            }
+
+            // make the HTTP request
+            using var localVarResponse = await this.Configuration.ApiClient.CallApiAsync(
+                localVarPath,
+                HttpMethod.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams, localVarHttpContentType, localVarFileUrlParams);
+
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            var exception = this.ExceptionFactory?.Invoke("DownloadComments", localVarResponse);
+
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return new ApiResponse<Stream>(
+                localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Key, x => string.Join(",", x.Value)),
+                (Stream)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stream)));
+        }
+
+        /// <summary>
         ///    Download the attachment for given document ID and attachment ID.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call.</exception>

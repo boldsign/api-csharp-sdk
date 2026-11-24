@@ -180,6 +180,12 @@ namespace BoldSign.Model
         public string DisplayStatus { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the document allows comments.
+        /// </summary>
+        [DataMember(Name = "allowCommenting", EmitDefaultValue = false)]
+        public bool AllowCommenting { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>

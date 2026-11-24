@@ -253,5 +253,11 @@ namespace BoldSign.Model
         /// </summary>
         [JsonProperty("documentTimeZone")]
         public string DocumentTimeZone { get; set; }
+
+        /// <summary>
+        ///  Gets or sets a value indicating whether to enable comment mode.
+        /// </summary>
+        [JsonProperty("allowCommenting")]
+        public bool? AllowCommenting { get; set; }
     }
 }

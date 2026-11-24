@@ -180,6 +180,20 @@ namespace BoldSign.Examples
         }
 
         /// <summary>
+        ///     Downloads the document comments.
+        /// </summary>
+        /// <returns>A Stream.</returns>
+        public Stream DownloadComments()
+        {
+            // This is an example document id, add your own document id upon usage.
+            var documentId = "949ebf20-45a8-4a3e-91a9-68e9540e0020";
+
+            var documentStream = this.DocumentClient.DownloadComments(documentId);
+
+            return documentStream;
+        }
+
+        /// <summary>
         ///     Downloads the Attachment.
         /// </summary>
         /// <returns>A Stream.</returns>

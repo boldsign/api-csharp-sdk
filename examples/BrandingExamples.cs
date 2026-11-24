@@ -168,6 +168,7 @@ namespace BoldSign.Examples
                   ContentType = "image/jpeg",
                 },
                 HideReassign = true,
+                HideCommenting = true,
                 CombineAuditTrail = false,
                 CombineAttachments = false,
                 IsDefault = false,

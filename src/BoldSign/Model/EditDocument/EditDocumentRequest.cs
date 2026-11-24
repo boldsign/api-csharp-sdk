@@ -229,5 +229,10 @@ namespace BoldSign.Api.Model.EditDocument
         [DataMember(Name = "documentTimeZone", EmitDefaultValue = false)]
         public string DocumentTimeZone { get; set; }
 
+        /// <summary>
+        ///  Gets or sets a value indicating whether to enable comment mode.
+        /// </summary>
+        [DataMember(Name = "allowCommenting", EmitDefaultValue = false)]
+        public bool? AllowCommenting { get; set; }
     }
 }

@@ -96,5 +96,11 @@ namespace BoldSign.Model
         /// </summary>
         [DataMember(Name = "viewed", EmitDefaultValue = true)]
         public bool Viewed { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the recipient gets a notification when a comment is added to the document.
+        /// </summary>
+        [DataMember(Name = "commentOnDocument", EmitDefaultValue = true)]
+        public bool CommentOnDocument { get; set; } = true;
     }
 }

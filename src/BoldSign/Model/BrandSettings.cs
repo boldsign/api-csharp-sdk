@@ -177,6 +177,12 @@ namespace BoldSign.Model
         public bool? HideReassign { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to hideCommenting.
+        /// </summary>
+        [DataMember(Name = "hideCommenting", EmitDefaultValue = true)]
+        public bool? HideCommenting { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object.</returns>
