@@ -3585,7 +3585,8 @@ namespace BoldSign.Api
             var hasFiles = documentUpload?.Files?.Count > 0;
             var hasFileUrls = documentUpload?.FileUrls?.Count > 0;
 
-            if (!hasFiles && !hasFileUrls)
+            var fileChanges = (documentUpload as SendForSignFromTemplate)?.FileChanges;
+            if (!hasFiles && !hasFileUrls && fileChanges == null)
             {
                 return body;
             }
@@ -3594,7 +3595,39 @@ namespace BoldSign.Api
 
             withFiles = ApiClient.HandleJsonFileParams(documentUpload, withFiles);
 
+            if (fileChanges != null)
+            {
+                var changes = fileChanges.Select(change => new TemplateFileChangeJson
+                {
+                    EditAction = change.EditAction,
+                    Id = change.Id,
+                    FileOrder = change.FileOrder,
+                    FileUrl = change.FileUrl,
+                    File = ConvertTemplateFile(change.File),
+                }).ToList();
+
+                if (withFiles is SendForSignFromTemplateWithFiles template)
+                {
+                    template.FileChanges = changes;
+                }
+                else if (withFiles is EmbeddedTemplateRequestWithFiles embeddedTemplate)
+                {
+                    embeddedTemplate.FileChanges = changes;
+                }
+            }
+
             return this.Configuration.ApiClient.Serialize(withFiles);
+        }
+
+        private static TemplateFileContent ConvertTemplateFile(IDocumentFile file)
+        {
+            if (file == null)
+            {
+                return null;
+            }
+
+            var base64 = ApiClient.GetJsonFile(file, out var fileName);
+            return new TemplateFileContent { Base64 = base64, FileName = fileName };
         }
 
         private void PrepareEmbeddedTemplatePreview(

@@ -321,6 +321,12 @@ namespace BoldSign.Model
         public string DocumentTimeZone { get; set; }
 
         /// <summary>
+        /// Gets or sets optional file operations for this send. Supported by normal and embedded template sends only.
+        /// </summary>
+        [DataMember(Name = "fileChanges", EmitDefaultValue = true)]
+        public List<TemplateFileChange> FileChanges { get; set; }
+
+        /// <summary>
         ///     Returns the JSON string presentation of the object.
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
